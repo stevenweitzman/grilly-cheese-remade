@@ -17,50 +17,61 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10 pt-20">
-        <div className="max-w-3xl animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
-            The Ultimate Food Truck in NJ, PA, & NYC
+        <div className="max-w-4xl animate-fade-in">
+          <div className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30">
+            <p className="text-accent font-semibold text-sm">🏆 Top 6 Grilled Cheese in the Nation - GrubHub</p>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 leading-tight">
+            Gourmet Grilled Cheese
+            <span className="block text-accent">On Wheels</span>
           </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-4">
-            Your go-to <span className="text-accent font-semibold">grilled cheese food truck</span> for events of all sizes.
+          
+          <p className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 mb-4 font-medium">
+            The ultimate food truck experience for NJ, PA, & NYC
           </p>
-          <p className="text-lg md:text-xl text-primary-foreground/80 mb-8">
-            Grilled cheese, soup, hot dogs, and more! Delivery to your door or catering for your special event.
+          
+          <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl">
+            From intimate gatherings to corporate events, weddings to festivals - we bring award-winning grilled cheese, soups, and sides straight to your door.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 mb-10">
             <Button 
               size="lg" 
-              className="text-lg px-8 py-6 shadow-warm hover:shadow-xl transition-all"
+              className="text-lg px-10 py-7 shadow-warm hover:shadow-xl transition-all hover:scale-105 animate-pulse"
               asChild
             >
               <a href="#contact" className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
-                Book the Food Truck
+                <Calendar className="h-6 w-6" />
+                Get Your Free Quote
               </a>
             </Button>
             <Button 
               size="lg" 
               variant="secondary"
-              className="text-lg px-8 py-6"
+              className="text-lg px-10 py-7 hover:scale-105 transition-all"
               asChild
             >
               <a href="https://grillycheese.dine.online/" target="_blank" rel="noopener noreferrer">
-                Order Online
+                Order Delivery Now
               </a>
             </Button>
           </div>
 
-          <div className="flex items-center gap-3 text-primary-foreground/90">
-            <Phone className="h-6 w-6 text-accent" />
-            <div>
-              <p className="text-sm font-medium">Food Truck Booking:</p>
-              <a 
-                href="tel:8444745591" 
-                className="text-2xl font-bold hover:text-accent transition-colors"
-              >
-                844-474-5591
-              </a>
+          <div className="bg-background/10 backdrop-blur-md p-6 rounded-xl border border-primary-foreground/20 inline-block">
+            <div className="flex items-center gap-4">
+              <div className="bg-accent rounded-full p-3">
+                <Phone className="h-7 w-7 text-background" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-primary-foreground/80">Ready to Book? Call Now:</p>
+                <a 
+                  href="tel:8444745591" 
+                  className="text-3xl font-bold text-accent hover:text-accent/80 transition-colors block"
+                >
+                  844-474-5591
+                </a>
+              </div>
             </div>
           </div>
         </div>

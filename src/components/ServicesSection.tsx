@@ -1,5 +1,6 @@
 import { Truck, Home, PartyPopper, ShoppingBag } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const ServicesSection = () => {
   const services = [
@@ -41,12 +42,12 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className="border-2 hover:border-primary hover:shadow-warm transition-all duration-300 animate-scale-in"
+              className="border-2 hover:border-primary hover:shadow-warm transition-all duration-300 animate-scale-in hover:scale-105 cursor-pointer group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center mb-4">
-                  <service.icon className="h-6 w-6 text-primary-foreground" />
+                <div className="w-16 h-16 bg-gradient-hero rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <service.icon className="h-8 w-8 text-primary-foreground" />
                 </div>
                 <CardTitle className="text-xl">{service.title}</CardTitle>
               </CardHeader>
@@ -55,6 +56,14 @@ const ServicesSection = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="text-center mt-12">
+          <a href="#contact">
+            <Button size="lg" className="text-lg px-8 py-6">
+              Book Your Event Now
+            </Button>
+          </a>
         </div>
       </div>
     </section>
