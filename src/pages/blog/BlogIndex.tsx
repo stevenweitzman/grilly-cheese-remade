@@ -9,6 +9,14 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "The Ultimate Guide to Booking Food Trucks in New Jersey",
+      slug: "booking-food-trucks-in-new-jersey",
+      excerpt: "Everything you need to know about booking food trucks for your NJ event: permits, regulations, logistics, and how to choose the perfect vendor.",
+      date: "September 13, 2023",
+      category: "Food Truck Booking",
+      readTime: "10 min read"
+    },
+    {
       title: "Ultimate Guide to Food Truck Catering in New Jersey [2025]",
       slug: "food-truck-catering-nj-guide",
       excerpt: "Everything you need to know about booking a food truck for your NJ event: costs, logistics, best practices, and insider tips.",
@@ -17,20 +25,36 @@ const BlogIndex = () => {
       readTime: "12 min read"
     },
     {
-      title: "10 Reasons Food Trucks Are Perfect for Weddings (+ Real Examples)",
-      slug: "food-trucks-perfect-for-weddings",
-      excerpt: "Discover why couples are choosing food trucks over traditional catering, with real wedding examples and photos.",
-      date: "January 10, 2025",
-      category: "Weddings",
+      title: "Elevating Corporate Events: The Advantages of Hiring a Food Truck",
+      slug: "corporate-event-advantages",
+      excerpt: "Discover how food trucks can transform your corporate events with unique benefits, branding opportunities, and memorable experiences.",
+      date: "June 28, 2023",
+      category: "Corporate",
       readTime: "8 min read"
     },
     {
-      title: "How Much Does Food Truck Catering Cost? [Complete Price Guide 2025]",
-      slug: "food-truck-catering-cost-guide",
-      excerpt: "Transparent pricing breakdown for food truck catering: what affects costs, average prices, and how to budget for your event.",
-      date: "January 5, 2025",
+      title: "What Are the Costs for Booking A Food Truck?",
+      slug: "food-truck-costs",
+      excerpt: "Understand all the costs involved in booking a food truck: base costs, travel fees, service charges, and more for transparent event budgeting.",
+      date: "March 27, 2023",
       category: "Event Planning",
-      readTime: "10 min read"
+      readTime: "6 min read"
+    },
+    {
+      title: "Food Trucks vs. Full-service Catering",
+      slug: "food-trucks-vs-catering",
+      excerpt: "Compare food trucks to traditional catering and discover why food trucks are becoming the preferred choice for events of all types.",
+      date: "March 27, 2023",
+      category: "Event Planning",
+      readTime: "7 min read"
+    },
+    {
+      title: "Questions to Ask When Booking A Food Truck",
+      slug: "questions-to-ask",
+      excerpt: "Essential questions to ask before booking a food truck for your event. Make sure you cover all bases and choose the perfect vendor.",
+      date: "March 27, 2023",
+      category: "Food Truck Booking",
+      readTime: "5 min read"
     }
   ];
 
@@ -116,7 +140,7 @@ const BlogIndex = () => {
               <h2 className="text-2xl font-bold mb-8 text-center">Browse by Category</h2>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {["Event Planning", "Weddings", "Corporate", "Menu Guides"].map((category, i) => (
+                {["Event Planning", "Food Truck Booking", "Corporate", "Weddings"].map((category, i) => (
                   <Button 
                     key={i}
                     variant="outline" 

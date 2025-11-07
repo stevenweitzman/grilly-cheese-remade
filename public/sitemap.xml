@@ -55,4 +55,34 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://grillycheese.net/blog/booking-food-trucks-in-new-jersey</loc>
+    <lastmod>2023-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/blog/corporate-event-advantages</loc>
+    <lastmod>2023-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/blog/food-truck-costs</loc>
+    <lastmod>2023-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/blog/food-trucks-vs-catering</loc>
+    <lastmod>2023-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/blog/questions-to-ask</loc>
+    <lastmod>2023-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
