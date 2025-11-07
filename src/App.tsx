@@ -10,6 +10,7 @@ import CorporateCatering from "./pages/services/CorporateCatering";
 import BabyShowers from "./pages/services/BabyShowers";
 import RetirementParties from "./pages/services/RetirementParties";
 import FilmSetCatering from "./pages/services/FilmSetCatering";
+import ServicesOverview from "./pages/services/ServicesOverview";
 import NewJersey from "./pages/locations/NewJersey";
 import Pennsylvania from "./pages/locations/Pennsylvania";
 import NewYorkCity from "./pages/locations/NewYorkCity";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           
           {/* Service Pages */}
+          <Route path="/services" element={<ServicesOverview />} />
           <Route path="/services/wedding-catering" element={<WeddingCatering />} />
           <Route path="/services/corporate-catering" element={<CorporateCatering />} />
           <Route path="/services/baby-showers" element={<BabyShowers />} />

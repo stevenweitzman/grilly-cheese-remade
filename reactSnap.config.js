@@ -2,6 +2,7 @@ module.exports = {
   // Routes to pre-render
   include: [
     "/",
+    "/services",
     "/services/wedding-catering",
     "/services/corporate-catering",
     "/locations/new-jersey",

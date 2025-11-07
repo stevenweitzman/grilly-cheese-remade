@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -41,7 +42,7 @@ const Navigation = () => {
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
                 Services <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background z-50 max-h-[500px] overflow-y-auto">
+              <DropdownMenuContent className="bg-background z-50">
                 <DropdownMenuItem asChild>
                   <Link to="/services/wedding-catering" className="cursor-pointer">
                     Wedding Catering
@@ -67,80 +68,11 @@ const Navigation = () => {
                     Film/TV Set Catering
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Bar/Bat Mitzvahs
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Bridal Showers
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Anniversary Parties
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Engagement Parties
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Sweet 16 & Quinceañeras
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Reunions
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Graduation Parties
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Holiday Parties
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Fundraisers
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    School & Church Events
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Block Parties
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Company Picnics
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Grand Openings
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Sports Events
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/#contact" className="cursor-pointer">
-                    Festivals
-                  </a>
+                  <Link to="/services" className="cursor-pointer font-semibold">
+                    View All Services
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -339,111 +271,14 @@ const Navigation = () => {
               >
                 Film/TV Set Catering
               </Link>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+              <div className="border-t border-border my-2" />
+              <Link
+                to="/services"
+                className="block py-2 text-foreground hover:text-primary transition-colors text-sm font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Bar/Bat Mitzvahs
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Bridal Showers
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Anniversary Parties
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Engagement Parties
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sweet 16 & Quinceañeras
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Reunions
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Graduation Parties
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Holiday Parties
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Fundraisers
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                School & Church Events
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Block Parties
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Company Picnics
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Grand Openings
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sports Events
-              </a>
-              <a
-                href="/#contact"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Festivals
-              </a>
+                View All Services
+              </Link>
             </div>
 
             {/* Locations Submenu */}
