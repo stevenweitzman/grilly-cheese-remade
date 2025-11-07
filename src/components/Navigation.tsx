@@ -2,7 +2,7 @@ import { Phone, Menu, X, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/grilly-cheese-logo.png";
+import logo from "@/assets/grilly-cheese-logo.webp";
 import {
   DropdownMenu,
   DropdownMenuContent,

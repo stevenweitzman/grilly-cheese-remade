@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
-import logo from "@/assets/grilly-cheese-logo.png";
+import logo from "@/assets/grilly-cheese-logo.webp";
 
 const Footer = () => {
   return (
