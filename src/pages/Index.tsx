@@ -8,11 +8,13 @@ import ClientsSection from "@/components/ClientsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { ChatAssistant } from "@/components/ChatAssistant";
+import StickyCTABar from "@/components/StickyCTABar";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
+      <StickyCTABar />
       <Hero />
       <PressSection />
       <ServicesSection />

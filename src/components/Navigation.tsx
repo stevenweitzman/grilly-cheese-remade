@@ -1,4 +1,4 @@
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
             <a href="#about" className="text-foreground hover:text-primary transition-colors">
               About
             </a>
@@ -32,7 +32,25 @@ const Navigation = () => {
             <a href="#contact" className="text-foreground hover:text-primary transition-colors">
               Contact
             </a>
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-background">
+              <a 
+                href="#contact"
+                className="flex items-center gap-2"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'cta_click',
+                      'cta_location': 'Navigation',
+                      'cta_text': 'Get Free Quote'
+                    });
+                  }
+                }}
+              >
+                <Calendar className="h-4 w-4" />
+                Get Free Quote
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
               <a 
                 href="tel:8444745591" 
                 className="flex items-center gap-2"
@@ -65,6 +83,25 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 space-y-4 animate-fade-in">
+            <Button asChild className="w-full bg-accent hover:bg-accent/90 text-background mb-2">
+              <a 
+                href="#contact"
+                className="flex items-center justify-center gap-2"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'cta_click',
+                      'cta_location': 'Navigation Mobile',
+                      'cta_text': 'Get Free Quote'
+                    });
+                  }
+                }}
+              >
+                <Calendar className="h-4 w-4" />
+                Get Free Quote
+              </a>
+            </Button>
             <a
               href="#about"
               className="block py-2 text-foreground hover:text-primary transition-colors"

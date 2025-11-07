@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Calendar } from "lucide-react";
 import heroImage from "@/assets/hero-grilled-cheese.jpg";
+import QuickQuoteForm from "@/components/QuickQuoteForm";
 
 const Hero = () => {
   return (
@@ -17,7 +18,8 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-20 pb-32 relative z-10">
-        <div className="max-w-4xl animate-fade-in">
+        <div className="grid lg:grid-cols-2 gap-8 items-center max-w-7xl">
+          <div className="max-w-4xl animate-fade-in">
           <div className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30">
             <p className="text-accent font-semibold text-sm">🏆 Top 6 Grilled Cheese in the Nation - GrubHub</p>
           </div>
@@ -85,6 +87,12 @@ const Hero = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Quick Quote Form - Desktop Only */}
+        <div className="hidden lg:block animate-fade-in">
+          <QuickQuoteForm />
+        </div>
         </div>
       </div>
 
