@@ -150,16 +150,16 @@ export const ChatAssistant = () => {
               window.dataLayer.push({ event: 'chat_opened' });
             }
           }}
-          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg hover:scale-110 transition-transform z-50"
+          className="fixed bottom-20 md:bottom-6 right-4 md:right-6 h-12 w-12 md:h-14 md:w-14 rounded-full shadow-lg hover:scale-110 transition-transform z-50"
           size="icon"
         >
-          <MessageSquare className="h-6 w-6" />
+          <MessageSquare className="h-5 w-5 md:h-6 md:w-6" />
         </Button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-background border-2 border-primary rounded-lg shadow-2xl flex flex-col z-50">
+        <div className="fixed inset-x-4 bottom-20 md:bottom-6 md:inset-x-auto md:right-6 md:w-96 h-[500px] md:h-[600px] bg-background border-2 border-primary rounded-lg shadow-2xl flex flex-col z-50">
           {/* Header */}
           <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-2">

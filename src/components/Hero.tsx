@@ -157,25 +157,25 @@ const Hero = () => {
             </motion.div>
 
             <motion.div 
-              className="bg-background/10 backdrop-blur-md p-6 rounded-xl border border-primary-foreground/20 inline-block"
+              className="bg-background/10 backdrop-blur-md p-4 md:p-6 rounded-xl border border-primary-foreground/20 inline-block w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.3 }}
               whileHover={{ scale: 1.02, borderColor: "hsl(var(--accent))" }}
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 md:gap-4">
                 <motion.div 
-                  className="bg-accent rounded-full p-3"
+                  className="bg-accent rounded-full p-2 md:p-3"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Phone className="h-7 w-7 text-background" />
+                  <Phone className="h-5 w-5 md:h-7 md:w-7 text-background" />
                 </motion.div>
                 <div>
-                  <p className="text-sm font-medium text-primary-foreground/80">Ready to Book? Call Now:</p>
+                  <p className="text-xs md:text-sm font-medium text-primary-foreground/80">Ready to Book? Call Now:</p>
                   <a 
                     href="tel:8444745591" 
-                    className="text-3xl font-bold text-accent hover:text-accent/80 transition-colors block"
+                    className="text-2xl md:text-3xl font-bold text-accent hover:text-accent/80 transition-colors block"
                     onClick={() => {
                       if (typeof window !== 'undefined' && (window as any).dataLayer) {
                         (window as any).dataLayer.push({

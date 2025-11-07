@@ -3,11 +3,11 @@ import { MapPin, Phone, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground py-12">
+    <footer className="bg-foreground text-primary-foreground py-12 mt-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
-          <div>
+          <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <h3 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-3">
               Grilly Cheese
             </h3>

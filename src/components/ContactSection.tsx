@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 const ContactSection = () => {
 
   return (
-    <section id="contact" className="py-20 bg-gradient-warm">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-16 md:py-20 bg-gradient-warm">
+      <div className="container mx-auto px-4 pb-24 md:pb-8">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -23,7 +23,7 @@ const ContactSection = () => {
         </motion.div>
 
         <motion.div 
-          className="max-w-4xl mx-auto mb-16"
+          className="max-w-4xl mx-auto mb-12 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -39,11 +39,11 @@ const ContactSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="bg-card p-8 rounded-lg shadow-warm border-2 border-border">
-            <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
+          <div className="bg-card dark:bg-card/90 p-6 md:p-8 rounded-lg shadow-warm border-2 border-border">
+            <h3 className="text-xl md:text-2xl font-bold text-foreground mb-6 text-center">
               Contact Information
             </h3>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               <motion.div 
                 className="flex flex-col items-center text-center"
                 whileHover={{ scale: 1.05, y: -5 }}

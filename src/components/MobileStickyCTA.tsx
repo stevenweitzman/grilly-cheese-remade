@@ -32,8 +32,8 @@ const MobileStickyCTA = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 animate-fade-in">
-      <div className="bg-background/95 backdrop-blur-md border-t-2 border-accent shadow-warm p-3">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 animate-fade-in">
+      <div className="bg-background/95 dark:bg-background/98 backdrop-blur-md border-t-2 border-accent shadow-warm p-3">
         <div className="flex gap-2">
           <Button
             asChild
@@ -61,7 +61,7 @@ const MobileStickyCTA = () => {
             asChild
             variant="outline"
             size="lg"
-            className="flex-1"
+            className="flex-1 border-accent/50 hover:border-accent hover:bg-accent/10"
           >
             <a
               href="tel:8444745591"

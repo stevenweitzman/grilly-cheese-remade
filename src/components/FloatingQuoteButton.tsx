@@ -32,7 +32,7 @@ const FloatingQuoteButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="hidden md:block fixed right-6 bottom-6 z-50 animate-fade-in">
+    <div className="hidden md:block fixed right-6 bottom-6 z-40 animate-fade-in">
       <Button
         asChild
         size="lg"
