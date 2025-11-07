@@ -1,100 +1,242 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Calendar } from "lucide-react";
+import { Phone, Calendar, ChevronDown } from "lucide-react";
 import heroImage from "@/assets/hero-grilled-cheese.jpg";
 import QuickQuoteForm from "@/components/QuickQuoteForm";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  // Parallax effects
+  const imageY = useTransform(scrollY, [0, 500], [0, 150]);
+  const contentY = useTransform(scrollY, [0, 500], [0, -50]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      setMousePosition({ x, y });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Image with Parallax */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        style={{ y: imageY }}
+      >
+        <div className="absolute inset-0 scale-110">
           <img
             src={heroImage}
             alt="Golden, buttery grilled cheese sandwich with melted American cheese on thick-cut white bread - award-winning food truck catering in New Jersey"
             className="w-full h-full object-cover"
           />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
-      </div>
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/10"
+          animate={{
+            backgroundPosition: ["0% 0%", "100% 100%"],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      </motion.div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 py-20 pb-32 relative z-10">
+      {/* Content with Parallax */}
+      <motion.div 
+        className="container mx-auto px-4 py-20 pb-32 relative z-10"
+        style={{ y: contentY, opacity }}
+      >
         <div className="grid lg:grid-cols-2 gap-8 items-center max-w-7xl">
-          <div className="max-w-4xl animate-fade-in">
-          <div className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30">
-            <p className="text-accent font-semibold text-sm">🏆 Top 6 Grilled Cheese in the Nation - GrubHub</p>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 leading-tight">
-            Gourmet Grilled Cheese
-            <span className="block text-accent">On Wheels</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 mb-4 font-medium">
-            The ultimate food truck experience for NJ, PA, & NYC
-          </p>
-          
-          <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl">
-            From intimate gatherings to corporate events, weddings to festivals - we bring award-winning grilled cheese, soups, and sides straight to your door.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 mb-10">
-            <Button 
-              size="lg" 
-              className="text-lg px-10 py-7 shadow-warm hover:shadow-xl transition-all hover:scale-105 animate-pulse"
-              asChild
+          <motion.div 
+            className="max-w-4xl"
+            style={{
+              x: mousePosition.x * 0.5,
+              y: mousePosition.y * 0.5,
+            }}
+          >
+            <motion.div 
+              className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <a 
-                href="#contact" 
-                className="flex items-center gap-2"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                    (window as any).dataLayer.push({
-                      'event': 'cta_click',
-                      'cta_location': 'Hero',
-                      'cta_text': 'Get Your Free Quote'
-                    });
-                  }
-                }}
+              <p className="text-accent font-semibold text-sm">🏆 Top 6 Grilled Cheese in the Nation - GrubHub</p>
+            </motion.div>
+          
+            <motion.h1 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <Calendar className="h-6 w-6" />
-                Get Your Free Quote
-              </a>
-            </Button>
-          </div>
+                Gourmet Grilled Cheese
+              </motion.span>
+              <motion.span 
+                className="block text-accent"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                On Wheels
+              </motion.span>
+            </motion.h1>
+          
+            <motion.p 
+              className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 mb-4 font-medium"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+            >
+              The ultimate food truck experience for NJ, PA, & NYC
+            </motion.p>
+          
+            <motion.p 
+              className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              From intimate gatherings to corporate events, weddings to festivals - we bring award-winning grilled cheese, soups, and sides straight to your door.
+            </motion.p>
 
-          <div className="bg-background/10 backdrop-blur-md p-6 rounded-xl border border-primary-foreground/20 inline-block">
-            <div className="flex items-center gap-4">
-              <div className="bg-accent rounded-full p-3">
-                <Phone className="h-7 w-7 text-background" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-primary-foreground/80">Ready to Book? Call Now:</p>
-                <a 
-                  href="tel:8444745591" 
-                  className="text-3xl font-bold text-accent hover:text-accent/80 transition-colors block"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                      (window as any).dataLayer.push({
-                        'event': 'phone_click',
-                        'phone_location': 'Hero',
-                        'phone_number': '844-474-5591'
-                      });
-                    }
-                  }}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  size="lg" 
+                  className="text-lg px-10 py-7 shadow-warm hover:shadow-xl transition-all relative overflow-hidden group"
+                  asChild
                 >
-                  844-474-5591
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+                  <a 
+                    href="#contact" 
+                    className="flex items-center gap-2"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                        (window as any).dataLayer.push({
+                          'event': 'cta_click',
+                          'cta_location': 'Hero',
+                          'cta_text': 'Get Your Quote'
+                        });
+                      }
+                    }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-accent/20"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "100%" }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <Calendar className="h-6 w-6 relative z-10" />
+                    <span className="relative z-10">Get Your Quote</span>
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
 
-        {/* Quick Quote Form - Desktop Only */}
-        <div className="hidden lg:block animate-fade-in">
-          <QuickQuoteForm />
+            <motion.div 
+              className="bg-background/10 backdrop-blur-md p-6 rounded-xl border border-primary-foreground/20 inline-block"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.3 }}
+              whileHover={{ scale: 1.02, borderColor: "hsl(var(--accent))" }}
+            >
+              <div className="flex items-center gap-4">
+                <motion.div 
+                  className="bg-accent rounded-full p-3"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Phone className="h-7 w-7 text-background" />
+                </motion.div>
+                <div>
+                  <p className="text-sm font-medium text-primary-foreground/80">Ready to Book? Call Now:</p>
+                  <a 
+                    href="tel:8444745591" 
+                    className="text-3xl font-bold text-accent hover:text-accent/80 transition-colors block"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                        (window as any).dataLayer.push({
+                          'event': 'phone_click',
+                          'phone_location': 'Hero',
+                          'phone_number': '844-474-5591'
+                        });
+                      }
+                    }}
+                  >
+                    844-474-5591
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Quick Quote Form - Desktop Only */}
+          <motion.div 
+            className="hidden lg:block"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            style={{
+              x: mousePosition.x * -0.3,
+              y: mousePosition.y * -0.3,
+            }}
+          >
+            <QuickQuoteForm />
+          </motion.div>
         </div>
-        </div>
-      </div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 hidden md:block"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ 
+          opacity: 1, 
+          y: 0,
+        }}
+        transition={{ 
+          duration: 0.8, 
+          delay: 2,
+        }}
+        style={{ opacity }}
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="flex flex-col items-center gap-2 text-primary-foreground/60 cursor-pointer"
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+        >
+          <span className="text-sm font-medium">Scroll to explore</span>
+          <ChevronDown className="h-6 w-6" />
+        </motion.div>
+      </motion.div>
 
       {/* Bottom Wave */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
