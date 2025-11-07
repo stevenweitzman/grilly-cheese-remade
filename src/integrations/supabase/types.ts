@@ -46,10 +46,26 @@ export type Database = {
           },
         ]
       }
+      conversation_rate_limit: {
+        Row: {
+          created_at: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       conversations: {
         Row: {
           ended_at: string | null
           id: string
+          message_count: number
           started_at: string
           transcript_sent: boolean | null
           visitor_email: string | null
@@ -59,6 +75,7 @@ export type Database = {
         Insert: {
           ended_at?: string | null
           id?: string
+          message_count?: number
           started_at?: string
           transcript_sent?: boolean | null
           visitor_email?: string | null
@@ -68,6 +85,7 @@ export type Database = {
         Update: {
           ended_at?: string | null
           id?: string
+          message_count?: number
           started_at?: string
           transcript_sent?: boolean | null
           visitor_email?: string | null
