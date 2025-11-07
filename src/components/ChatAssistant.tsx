@@ -105,35 +105,28 @@ export const ChatAssistant = () => {
     if (!conversationId || !visitorInfo) return;
 
     try {
-      await supabase
-        .from('conversations')
-        .update({ ended_at: new Date().toISOString() })
-        .eq('id', conversationId);
+      // Send transcript via edge function
+      // The edge function handles updating the conversation and retrieving messages using service role
+      await supabase.functions.invoke('send-transcript', {
+        body: {
+          conversationId,
+          visitorName: visitorInfo.name,
+          visitorEmail: visitorInfo.email,
+          visitorPhone: visitorInfo.phone,
+        }
+      });
 
-      const { data: messagesData } = await supabase
-        .from('chat_messages')
-        .select('*')
-        .eq('conversation_id', conversationId)
-        .order('created_at', { ascending: true });
-
-      if (messagesData && messagesData.length > 0) {
-        await supabase.functions.invoke('send-transcript', {
-          body: {
-            conversationId,
-            visitorName: visitorInfo.name,
-            visitorEmail: visitorInfo.email,
-            visitorPhone: visitorInfo.phone,
-            messages: messagesData,
-          },
-        });
-
-        await supabase
-          .from('conversations')
-          .update({ transcript_sent: true })
-          .eq('id', conversationId);
-      }
+      toast({
+        title: "Chat ended",
+        description: "A transcript has been sent to your email.",
+      });
     } catch (error) {
       console.error('Error ending conversation:', error);
+      toast({
+        title: "Error",
+        description: "Failed to end conversation. Please try again.",
+        variant: "destructive"
+      });
     }
   };
 
