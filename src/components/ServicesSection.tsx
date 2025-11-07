@@ -2,6 +2,7 @@ import { Truck, Home, PartyPopper, ShoppingBag } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ServicesSection = () => {
   const services = [
@@ -31,46 +32,102 @@ const ServicesSection = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.6,
+      }
+    }
+  };
+
   return (
     <section id="services" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Our Services
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             From <Link to="/services/wedding-catering" className="text-accent hover:underline">wedding catering</Link> to <Link to="/services/corporate-catering" className="text-accent hover:underline">corporate events</Link>, we serve all of <Link to="/locations/new-jersey" className="text-accent hover:underline">NJ</Link>, <Link to="/locations/pennsylvania" className="text-accent hover:underline">PA</Link>, and <Link to="/locations/new-york-city" className="text-accent hover:underline">NYC</Link>
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {services.map((service, index) => (
-            <Link key={index} to={service.link}>
-              <Card 
-                className="border-2 hover:border-primary hover:shadow-warm transition-all duration-300 animate-scale-in hover:scale-105 cursor-pointer group h-full"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardHeader>
-                  <div className="w-16 h-16 bg-gradient-hero rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <service.icon className="h-8 w-8 text-primary-foreground" />
-                  </div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">{service.description}</CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
+            <motion.div key={index} variants={itemVariants}>
+              <Link to={service.link}>
+                <Card 
+                  className="border-2 border-border transition-all duration-300 cursor-pointer group h-full overflow-hidden"
+                >
+                  <motion.div
+                    whileHover={{ 
+                      scale: 1.03,
+                      borderColor: "hsl(var(--primary))",
+                      boxShadow: "var(--shadow-warm)"
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="h-full"
+                  >
+                    <CardHeader>
+                      <motion.div 
+                        className="w-16 h-16 bg-gradient-hero rounded-lg flex items-center justify-center mb-4"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <service.icon className="h-8 w-8 text-primary-foreground" />
+                      </motion.div>
+                      <CardTitle className="text-xl">{service.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base">{service.description}</CardDescription>
+                    </CardContent>
+                  </motion.div>
+                </Card>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
         
-        <div className="text-center mt-12">
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        >
           <a href="#contact">
-            <Button size="lg" className="text-lg px-8 py-6">
-              Book Your Event Now
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="lg" className="text-lg px-8 py-6">
+                Book Your Event Now
+              </Button>
+            </motion.div>
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import PressSection from "@/components/PressSection";
 import ServicesSection from "@/components/ServicesSection";
 import PackagesSection from "@/components/PackagesSection";
 import FAQSection from "@/components/FAQSection";
-import ClientsSection from "@/components/ClientsSection";
+import EnhancedClientsSection from "@/components/EnhancedClientsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { ChatAssistant } from "@/components/ChatAssistant";
@@ -13,7 +13,9 @@ import SocialProofBanner from "@/components/SocialProofBanner";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
-import MenuGallery from "@/components/MenuGallery";
+import HorizontalMenuGallery from "@/components/HorizontalMenuGallery";
+import StatisticsSection from "@/components/StatisticsSection";
+import CustomCursor from "@/components/CustomCursor";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
 
@@ -29,15 +31,17 @@ const Index = () => {
       <SEOSchema type="homepage" />
       
       <div className="min-h-screen">
+        <CustomCursor />
         <Navigation />
         <StickyCTABar />
         <Hero />
         <SocialProofBanner />
+        <StatisticsSection />
         <PressSection />
         <ServicesSection />
-        <MenuGallery />
+        <HorizontalMenuGallery />
         <PackagesSection />
-        <ClientsSection />
+        <EnhancedClientsSection />
         <FAQSection />
         <ContactSection />
         <Footer />
