@@ -39,6 +39,12 @@ const PackagesSection = () => {
     { name: "Kids", description: "A smaller grilled cheese sandwich with white bread and American cheeses" }
   ];
 
+  const brunchItems = [
+    { name: "Morning Melt", description: "Scrambled eggs with melted American cheese on buttered grilled bread" },
+    { name: "Bacon & Egg Classic", description: "Crispy bacon and scrambled eggs with American cheese on white bread" },
+    { name: "Veggie Brunch", description: "Eggs, tomatoes, and cheese on sourdough bread" }
+  ];
+
   const sides = [
     "Hand-cut, Homemade Fries",
     "Hand-cut Cheese Fries",
@@ -256,13 +262,23 @@ const PackagesSection = () => {
 
             <div>
               <h4 className="text-xl font-bold text-foreground mb-4 opacity-0">Even More</h4>
-              <div className="space-y-3">
+              <div className="space-y-3 mb-6">
                 {fullMenuFavorites.slice(16).map((item, index) => (
                   <div key={index} className="border-b border-border pb-3 last:border-0">
                     <div className="font-semibold text-foreground flex items-center gap-2">
                       {item.name}
                       {item.favorite && <Star className="h-4 w-4 text-accent fill-accent" />}
                     </div>
+                    <div className="text-sm text-muted-foreground mt-1">{item.description}</div>
+                  </div>
+                ))}
+              </div>
+
+              <h4 className="text-xl font-bold text-foreground mb-4">🥐 Brunch</h4>
+              <div className="space-y-3">
+                {brunchItems.map((item, index) => (
+                  <div key={index} className="border-b border-border pb-3 last:border-0">
+                    <div className="font-semibold text-foreground">{item.name}</div>
                     <div className="text-sm text-muted-foreground mt-1">{item.description}</div>
                   </div>
                 ))}

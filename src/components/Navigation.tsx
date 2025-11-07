@@ -52,12 +52,13 @@ const Navigation = () => {
               </Link>
             )}
             
-            {/* Services Dropdown */}
+            {/* Combined Menu Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
-                Services <ChevronDown className="h-4 w-4" />
+                Menu <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background z-50">
+              <DropdownMenuContent className="bg-background border border-border shadow-lg z-[60]">
+                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Services</div>
                 <DropdownMenuItem asChild>
                   <Link to="/services/food-truck-catering" className="cursor-pointer">
                     Food Truck Catering
@@ -73,15 +74,8 @@ const Navigation = () => {
                     Pop-Up Events
                   </Link>
                 </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Event Types Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
-                Events <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background z-50">
+                <DropdownMenuSeparator />
+                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Event Types</div>
                 <DropdownMenuItem asChild>
                   <Link to="/events/wedding-catering" className="cursor-pointer">
                     Weddings
@@ -95,16 +89,6 @@ const Navigation = () => {
                 <DropdownMenuItem asChild>
                   <Link to="/events/baby-showers" className="cursor-pointer">
                     Baby Showers
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/events/retirement-parties" className="cursor-pointer">
-                    Retirement Parties
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/events/film-set-catering" className="cursor-pointer">
-                    Film/TV Production
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -121,7 +105,7 @@ const Navigation = () => {
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
                 Locations <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background z-50">
+              <DropdownMenuContent className="bg-background border border-border shadow-lg z-[60]">
                 <DropdownMenuItem asChild>
                   <Link to="/locations/new-jersey" className="cursor-pointer">
                     New Jersey
@@ -273,13 +257,14 @@ const Navigation = () => {
             )}
 
             <Accordion type="single" collapsible className="w-full">
-              {/* Services Accordion */}
-              <AccordionItem value="services">
+              {/* Combined Menu Accordion */}
+              <AccordionItem value="menu">
                 <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
-                  Services
+                  Menu
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-1 pl-4">
+                    <div className="text-xs font-semibold text-muted-foreground mb-1 mt-2">Services</div>
                     <Link
                       to="/services/food-truck-catering"
                       className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
@@ -301,17 +286,8 @@ const Navigation = () => {
                     >
                       Pop-Up Events
                     </Link>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              {/* Event Types Accordion */}
-              <AccordionItem value="events">
-                <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
-                  Event Types
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="space-y-1 pl-4">
+                    <div className="border-t border-border my-2" />
+                    <div className="text-xs font-semibold text-muted-foreground mb-1">Event Types</div>
                     <Link
                       to="/events/wedding-catering"
                       className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
@@ -332,20 +308,6 @@ const Navigation = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Baby Showers
-                    </Link>
-                    <Link
-                      to="/events/retirement-parties"
-                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Retirement Parties
-                    </Link>
-                    <Link
-                      to="/events/film-set-catering"
-                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Film/TV Production
                     </Link>
                     <div className="border-t border-border my-2" />
                     <Link
