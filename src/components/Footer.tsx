@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
 import logo from "@/assets/grilly-cheese-logo.webp";
+import logoWhite from "@/assets/grilly-cheese-logo-white.webp";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <img 
-              src={logo} 
+              src={logoWhite} 
               alt="Grilly Cheese Logo" 
               className="h-12 w-auto mb-3"
             />

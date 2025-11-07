@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/grilly-cheese-logo.webp";
+import logoWhite from "@/assets/grilly-cheese-logo-white.webp";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +25,12 @@ const Navigation = () => {
             <img 
               src={logo} 
               alt="Grilly Cheese - Award-winning food truck catering" 
-              className="h-12 md:h-14 w-auto"
+              className="h-12 md:h-14 w-auto dark:hidden"
+            />
+            <img 
+              src={logoWhite} 
+              alt="Grilly Cheese - Award-winning food truck catering" 
+              className="h-12 md:h-14 w-auto hidden dark:block"
             />
           </Link>
 
