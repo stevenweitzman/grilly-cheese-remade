@@ -195,7 +195,10 @@ export const ChatAssistant = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        body: JSON.stringify({ 
+          messages: [...messages, userMessage],
+          conversationId: conversationId 
+        }),
       });
 
       if (!resp.ok) {

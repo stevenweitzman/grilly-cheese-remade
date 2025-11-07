@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,7 +12,95 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const { messages, conversationId } = await req.json();
+    
+    // Validate required fields
+    if (!conversationId) {
+      return new Response(
+        JSON.stringify({ error: "conversation_id is required" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+    
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "messages array is required" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+    
+    // Validate message content and length
+    for (const msg of messages) {
+      if (!msg.role || !msg.content) {
+        return new Response(
+          JSON.stringify({ error: "Each message must have role and content" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+      
+      if (msg.content.length > 2000) {
+        return new Response(
+          JSON.stringify({ error: "Message content too long (max 2000 chars)" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+    
+    // Validate conversation exists and hasn't exceeded message limit
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    const { data: conversation, error: convError } = await supabase
+      .from("conversations")
+      .select("id, message_count, ended_at")
+      .eq("id", conversationId)
+      .single();
+    
+    if (convError || !conversation) {
+      console.error("Conversation validation error:", convError);
+      return new Response(
+        JSON.stringify({ error: "Invalid conversation_id" }),
+        {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+    
+    // Check if conversation has ended
+    if (conversation.ended_at) {
+      return new Response(
+        JSON.stringify({ error: "This conversation has ended" }),
+        {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+    
+    // Check message limit (enforced at DB level but check here too)
+    if (conversation.message_count >= 50) {
+      return new Response(
+        JSON.stringify({ error: "Message limit reached for this conversation" }),
+        {
+          status: 429,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
