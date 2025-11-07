@@ -43,13 +43,18 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/#packages" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Our Packages
+                <Link to="/services/baby-showers" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Baby Showers
                 </Link>
               </li>
               <li>
-                <Link to="/#contact" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Get Quote
+                <Link to="/services/retirement-parties" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Retirement Parties
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/film-set-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Film/TV Set Catering
                 </Link>
               </li>
             </ul>
@@ -72,6 +77,26 @@ const Footer = () => {
               <li>
                 <Link to="/locations/new-york-city" className="text-primary-foreground/70 hover:text-accent transition-colors">
                   New York City
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/maryland" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Maryland
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/delaware" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Delaware
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/washington-dc" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Washington DC
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/long-island" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Long Island
                 </Link>
               </li>
             </ul>

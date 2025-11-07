@@ -7,9 +7,16 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import WeddingCatering from "./pages/services/WeddingCatering";
 import CorporateCatering from "./pages/services/CorporateCatering";
+import BabyShowers from "./pages/services/BabyShowers";
+import RetirementParties from "./pages/services/RetirementParties";
+import FilmSetCatering from "./pages/services/FilmSetCatering";
 import NewJersey from "./pages/locations/NewJersey";
 import Pennsylvania from "./pages/locations/Pennsylvania";
 import NewYorkCity from "./pages/locations/NewYorkCity";
+import Maryland from "./pages/locations/Maryland";
+import Delaware from "./pages/locations/Delaware";
+import WashingtonDC from "./pages/locations/WashingtonDC";
+import LongIsland from "./pages/locations/LongIsland";
 import BlogIndex from "./pages/blog/BlogIndex";
 import FoodTruckCateringNJGuide from "./pages/blog/FoodTruckCateringNJGuide";
 import BookingFoodTrucksNJ from "./pages/blog/BookingFoodTrucksNJ";
@@ -32,11 +39,18 @@ const App = () => (
           {/* Service Pages */}
           <Route path="/services/wedding-catering" element={<WeddingCatering />} />
           <Route path="/services/corporate-catering" element={<CorporateCatering />} />
+          <Route path="/services/baby-showers" element={<BabyShowers />} />
+          <Route path="/services/retirement-parties" element={<RetirementParties />} />
+          <Route path="/services/film-set-catering" element={<FilmSetCatering />} />
           
           {/* Location Pages */}
           <Route path="/locations/new-jersey" element={<NewJersey />} />
           <Route path="/locations/pennsylvania" element={<Pennsylvania />} />
           <Route path="/locations/new-york-city" element={<NewYorkCity />} />
+          <Route path="/locations/maryland" element={<Maryland />} />
+          <Route path="/locations/delaware" element={<Delaware />} />
+          <Route path="/locations/washington-dc" element={<WashingtonDC />} />
+          <Route path="/locations/long-island" element={<LongIsland />} />
           
           {/* Blog Pages */}
           <Route path="/blog" element={<BlogIndex />} />

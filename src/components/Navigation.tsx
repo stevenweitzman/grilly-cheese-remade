@@ -41,7 +41,7 @@ const Navigation = () => {
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
                 Services <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="bg-background z-50">
                 <DropdownMenuItem asChild>
                   <Link to="/services/wedding-catering" className="cursor-pointer">
                     Wedding Catering
@@ -52,6 +52,21 @@ const Navigation = () => {
                     Corporate Events
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/services/baby-showers" className="cursor-pointer">
+                    Baby Showers
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/services/retirement-parties" className="cursor-pointer">
+                    Retirement Parties
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/services/film-set-catering" className="cursor-pointer">
+                    Film/TV Set Catering
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -60,7 +75,7 @@ const Navigation = () => {
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
                 Locations <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="bg-background z-50">
                 <DropdownMenuItem asChild>
                   <Link to="/locations/new-jersey" className="cursor-pointer">
                     New Jersey
@@ -74,6 +89,26 @@ const Navigation = () => {
                 <DropdownMenuItem asChild>
                   <Link to="/locations/new-york-city" className="cursor-pointer">
                     New York City
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/locations/maryland" className="cursor-pointer">
+                    Maryland
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/locations/delaware" className="cursor-pointer">
+                    Delaware
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/locations/washington-dc" className="cursor-pointer">
+                    Washington DC
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/locations/long-island" className="cursor-pointer">
+                    Long Island
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -208,6 +243,27 @@ const Navigation = () => {
               >
                 Corporate Events
               </Link>
+              <Link
+                to="/services/baby-showers"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Baby Showers
+              </Link>
+              <Link
+                to="/services/retirement-parties"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Retirement Parties
+              </Link>
+              <Link
+                to="/services/film-set-catering"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Film/TV Set Catering
+              </Link>
             </div>
 
             {/* Locations Submenu */}
@@ -233,6 +289,34 @@ const Navigation = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 New York City
+              </Link>
+              <Link
+                to="/locations/maryland"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Maryland
+              </Link>
+              <Link
+                to="/locations/delaware"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Delaware
+              </Link>
+              <Link
+                to="/locations/washington-dc"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Washington DC
+              </Link>
+              <Link
+                to="/locations/long-island"
+                className="block py-2 text-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Long Island
               </Link>
             </div>
 
