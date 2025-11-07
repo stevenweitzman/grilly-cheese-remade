@@ -13,6 +13,17 @@ interface TranscriptRequest {
   messages: Array<{ role: string; content: string; created_at: string }>;
 }
 
+// HTML escape function to prevent XSS attacks
+const escapeHtml = (str: string): string => {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -26,18 +37,18 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("RESEND_API_KEY is not configured");
     }
 
-    // Format the transcript
+    // Format the transcript with HTML escaping to prevent XSS
     const transcriptHtml = `
       <h2>Chat Transcript</h2>
-      <p><strong>Visitor:</strong> ${visitorName}</p>
-      <p><strong>Email:</strong> ${visitorEmail}</p>
-      <p><strong>Phone:</strong> ${visitorPhone || 'Not provided'}</p>
-      <p><strong>Conversation ID:</strong> ${conversationId}</p>
+      <p><strong>Visitor:</strong> ${escapeHtml(visitorName)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(visitorEmail)}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(visitorPhone) || 'Not provided'}</p>
+      <p><strong>Conversation ID:</strong> ${escapeHtml(conversationId)}</p>
       <hr>
       ${messages.map(msg => `
         <div style="margin: 15px 0; padding: 10px; background: ${msg.role === 'user' ? '#f0f0f0' : '#e3f2fd'}; border-radius: 5px;">
           <strong>${msg.role === 'user' ? 'Visitor' : 'Assistant'}:</strong>
-          <p>${msg.content}</p>
+          <p>${escapeHtml(msg.content)}</p>
           <small style="color: #666;">${new Date(msg.created_at).toLocaleString()}</small>
         </div>
       `).join('')}
@@ -53,7 +64,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Grilly Cheese Chat <onboarding@resend.dev>",
         to: ["grillycheese@grillycheese.net"],
-        subject: `New Lead: ${visitorName} - Chat Transcript`,
+        subject: `New Lead: ${escapeHtml(visitorName)} - Chat Transcript`,
         html: transcriptHtml,
       }),
     });
