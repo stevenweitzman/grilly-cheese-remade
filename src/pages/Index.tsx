@@ -23,7 +23,7 @@ const Index = () => {
     <>
       <SEOHead
         title="Food Truck Catering NJ, PA & NYC | Grilly Cheese | Top 6 in Nation"
-        description="Award-winning food truck catering for weddings, corporate events & parties in NJ, PA & NYC. 4.9★ rated. Gourmet grilled cheese made fresh on-site. 10,000+ events catered. Get your quote in 2 hours!"
+        description="Award-winning food truck catering for weddings, corporate events & parties in NJ, PA & NYC. 4.9★ rated. Gourmet grilled cheese made fresh on-site. 2,500+ events catered. Get your quote in 2 hours!"
         canonical="https://grillycheese.net"
         keywords="food truck catering, grilled cheese catering, wedding food truck NJ, corporate catering, event catering New Jersey, mobile catering NYC"
       />

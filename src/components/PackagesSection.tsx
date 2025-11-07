@@ -17,15 +17,31 @@ const PackagesSection = () => {
 
   const fullMenuFavorites = [
     { name: "The Grilly Cheese", description: "A double decker with three thick slices of white bread, buttered and grilled with American cheese, topped with crisp bacon", favorite: true },
+    { name: "Just the Cheese", description: "Two hearty slices of white bread buttered and grilled with white American cheeses" },
     { name: "The Grilly Cheesesteak", description: "The real deal Philly cheesesteak beef cooked fresh under melted American cheeses loaded onto thick slices of white bread", favorite: true },
-    { name: "The Cluck Norris", description: "Buffalo chicken on sourdough, loaded with mozzarella, tomato, hot sauce, Russian dressing and basil", favorite: true },
     { name: "The Margherita", description: "Sourdough bread filled with mozzarella cheese, tomatoes and basil, buttered and grilled" },
-    { name: "The Reuben Steiner", description: "Sauerkraut and Swiss cheese melted onto rye bread, topped with Russian dressing and thin-shaved corned beef" },
-    { name: "Chicken Pickin'", description: "Thin slices of white buffalo chicken breast on sourdough with bacon, tomatoes, lettuce, American cheese & mayo" },
-    { name: "The Swiss Pig", description: "Two fat slices of white bread loaded with ham & Swiss cheese, topped with mustard" },
-    { name: "BLTMACD", description: "Two fat slices of white bread loaded with bacon, lettuce, tomatoes, mayo, and American cheese" },
-    { name: "The Russian Around", description: "Russian dressing drizzled onto Philly cheesesteak meat under melted American cheeses on sourdough" },
-    { name: "Pleasin' Vegan", description: "Dairy-free 'cheese' made in-house loaded on vegan, gluten-free bread" }
+    { name: "Joel's 2nd Favorite", description: "Two pieces of white bread buttered and grilled with yellow cheddar cheese and slices of ham" },
+    { name: "Just The Mozzarella", description: "Two thick & hearty slices of white bread, buttered & grilled with mozzarella cheese" },
+    { name: "The Reuben Steiner", description: "Sauerkraut and Swiss cheese melted onto rye bread, topped with Russian dressing and thin-shaved corned beef slices" },
+    { name: "The Canoe In the Pines", description: "American cheeses melted onto one fat slice of white bread, buttered and grilled, then folded into a canoe-shaped sandwich" },
+    { name: "Chicken Pickin'", description: "Thin slices of white buffalo chicken breast meat on buttered and grilled sourdough bread with bacon, tomatoes, lettuce, American cheese & mayo" },
+    { name: "The Cluck Norris", description: "Buffalo chicken on sourdough, loaded with mozzarella, a slice of tomato, hot sauce, Russian dressing and basil. Buttered & grilled to a perfect crisp", favorite: true },
+    { name: "Bacon American Classic", description: "Two thick & hearty slices of white bread, loaded with crispy bacon, buttered and grilled with American cheese" },
+    { name: "Just The Cheddar", description: "Two thick & hearty slices of white bread, buttered & grilled with cheddar cheeses" },
+    { name: "Three Cheese Please", description: "3-cheese sandwich with cheddar, American, & mozzarella on thick & hearty slices of white bread, buttered and grilled to a crisp" },
+    { name: "The Swiss Pig", description: "Two fat slices of white bread loaded with ham & Swiss cheese, topped off with mustard, then buttered and grilled to a crisp" },
+    { name: "Chickens, Pigs, & American Ranchers", description: "Buffalo chicken loaded with bacon melted under American cheese on white bread, grilled and buttered, topped with ranch dressing" },
+    { name: "The American Dream", description: "2x American cheeses loaded on top of thick-cut bacon strips, topped with fresh sliced tomatoes, then grilled between two big slices of white bread" },
+    { name: "Grilled Caprese", description: "Two slices of white bread loaded with mozzarella cheese, fresh sliced tomatoes, basil and balsamic vinegar" },
+    { name: "BLTMACD", description: "Two fat slices of white bread grilled in butter and loaded with bacon, lettuce, tomatoes and a bit of mayo, American cheese" },
+    { name: "The Russian Around", description: "Russian dressing drizzled onto Philly cheesesteak meat under melted American cheeses, grilled onto huge slices of sourdough bread" },
+    { name: "Pleasin' Vegan", description: "Dairy-free 'cheese' made in-house loaded on vegan, gluten-free bread. Grilled in olive oil or imitation butter" },
+    { name: "Kids", description: "A smaller grilled cheese sandwich with white bread and American cheeses" }
+  ];
+
+  const breakfastItems = [
+    { name: "Breakfast Sandwich", description: "Eggs, cheese, and your choice of bacon or sausage on grilled bread" },
+    { name: "Morning Melt", description: "Scrambled eggs with melted cheese on buttered toast" }
   ];
 
   const sides = [
@@ -63,7 +79,7 @@ const PackagesSection = () => {
               <span className="text-muted-foreground">Grilled Cheese in Nation</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-accent font-bold">🎉 10,000+</span>
+              <span className="text-accent font-bold">🎉 2,500+</span>
               <span className="text-muted-foreground">Events Catered</span>
             </div>
           </div>
@@ -212,11 +228,11 @@ const PackagesSection = () => {
             Explore Our Full Menu
           </h3>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-xl font-bold text-foreground mb-4">Signature Sandwiches</h4>
+              <h4 className="text-xl font-bold text-foreground mb-4">🧀 All Sandwiches</h4>
               <div className="space-y-3">
-                {fullMenuFavorites.map((item, index) => (
+                {fullMenuFavorites.slice(0, 8).map((item, index) => (
                   <div key={index} className="border-b border-border pb-3 last:border-0">
                     <div className="font-semibold text-foreground flex items-center gap-2">
                       {item.name}
@@ -228,6 +244,48 @@ const PackagesSection = () => {
               </div>
             </div>
 
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4 opacity-0">More</h4>
+              <div className="space-y-3">
+                {fullMenuFavorites.slice(8, 16).map((item, index) => (
+                  <div key={index} className="border-b border-border pb-3 last:border-0">
+                    <div className="font-semibold text-foreground flex items-center gap-2">
+                      {item.name}
+                      {item.favorite && <Star className="h-4 w-4 text-accent fill-accent" />}
+                    </div>
+                    <div className="text-sm text-muted-foreground mt-1">{item.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4 opacity-0">Even More</h4>
+              <div className="space-y-3 mb-6">
+                {fullMenuFavorites.slice(16).map((item, index) => (
+                  <div key={index} className="border-b border-border pb-3 last:border-0">
+                    <div className="font-semibold text-foreground flex items-center gap-2">
+                      {item.name}
+                      {item.favorite && <Star className="h-4 w-4 text-accent fill-accent" />}
+                    </div>
+                    <div className="text-sm text-muted-foreground mt-1">{item.description}</div>
+                  </div>
+                ))}
+              </div>
+
+              <h4 className="text-xl font-bold text-foreground mb-4">🍳 Breakfast</h4>
+              <div className="space-y-3">
+                {breakfastItems.map((item, index) => (
+                  <div key={index} className="border-b border-border pb-3 last:border-0">
+                    <div className="font-semibold text-foreground">{item.name}</div>
+                    <div className="text-sm text-muted-foreground mt-1">{item.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mt-8">
             <div>
               <h4 className="text-xl font-bold text-foreground mb-4">Hot Dogs</h4>
               <div className="space-y-2 mb-6">
@@ -249,7 +307,7 @@ const PackagesSection = () => {
                 </div>
               </div>
 
-              <h4 className="text-xl font-bold text-foreground mb-4">Sides & Beverages</h4>
+              <h4 className="text-xl font-bold text-foreground mb-4">🍟 Sides</h4>
               <div className="space-y-2 mb-6">
                 {sides.map((side, index) => (
                   <div key={index} className="flex items-start gap-2">
@@ -257,6 +315,26 @@ const PackagesSection = () => {
                     <span className="text-foreground">{side}</span>
                   </div>
                 ))}
+              </div>
+
+              <h4 className="text-xl font-bold text-foreground mb-4">🥤 Beverages</h4>
+              <div className="space-y-2 mb-6">
+                <div className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                  <span className="text-foreground">Coke</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                  <span className="text-foreground">Diet Coke</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                  <span className="text-foreground">Sprite</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                  <span className="text-foreground">Water</span>
+                </div>
               </div>
 
               <h4 className="text-xl font-bold text-foreground mb-4">Desserts</h4>

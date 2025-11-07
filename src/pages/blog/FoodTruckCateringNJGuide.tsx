@@ -12,7 +12,7 @@ const FoodTruckCateringNJGuide = () => {
     <>
       <SEOHead
         title="Ultimate Guide to Food Truck Catering in New Jersey [2025]"
-        description="Complete guide to booking food truck catering in NJ: costs, logistics, best practices, venue requirements, and insider tips. Learn from experts who've catered 10,000+ events."
+        description="Complete guide to booking food truck catering in NJ: costs, logistics, best practices, venue requirements, and insider tips. Learn from experts who've catered 2,500+ events."
         canonical="https://grillycheese.net/blog/food-truck-catering-nj-guide"
         keywords="food truck catering NJ, how to book food truck New Jersey, food truck catering cost, NJ event catering, mobile catering guide"
       />
@@ -52,7 +52,7 @@ const FoodTruckCateringNJGuide = () => {
                 </h1>
 
                 <p className="text-xl text-muted-foreground">
-                  Everything you need to know about booking a food truck for your New Jersey event: costs, logistics, best practices, and insider tips from experts who&apos;ve catered over 10,000 events.
+                  Everything you need to know about booking a food truck for your New Jersey event: costs, logistics, best practices, and insider tips from experts who&apos;ve catered over 2,500 events.
                 </p>
               </div>
 
@@ -268,7 +268,7 @@ const FoodTruckCateringNJGuide = () => {
                 <div className="bg-gradient-to-r from-accent/10 to-primary/10 border-2 border-accent/30 rounded-xl p-8 text-center mt-12">
                   <h3 className="text-2xl font-bold mb-4">Ready to Book Your NJ Event?</h3>
                   <p className="text-muted-foreground mb-6">
-                    We&apos;ve catered over 10,000 events in New Jersey. Let us make your event unforgettable.
+                    We&apos;ve catered over 2,500 events in New Jersey. Let us make your event unforgettable.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>

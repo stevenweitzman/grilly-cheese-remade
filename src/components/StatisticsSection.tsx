@@ -41,7 +41,7 @@ const StatisticsSection = () => {
         <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
           <StatCard
             icon={Users}
-            end={10000}
+            end={2500}
             suffix="+"
             label="Events Catered"
             delay={0}

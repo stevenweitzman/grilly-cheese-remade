@@ -82,7 +82,7 @@ const NewJersey = () => {
             
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
               <div className="text-center">
-                <div className="text-4xl font-bold text-accent mb-2">10,000+</div>
+                <div className="text-4xl font-bold text-accent mb-2">2,500+</div>
                 <div className="text-muted-foreground">NJ Events Catered</div>
               </div>
               <div className="text-center">

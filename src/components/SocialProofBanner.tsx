@@ -41,7 +41,7 @@ const SocialProofBanner = () => {
               <Users className="h-6 w-6 text-accent" />
             </div>
             <div>
-              <div className="text-lg font-bold text-foreground">10,000+ Events</div>
+              <div className="text-lg font-bold text-foreground">2,500+ Events</div>
               <p className="text-sm text-muted-foreground">Trusted by Target, Princeton & more</p>
             </div>
           </div>
