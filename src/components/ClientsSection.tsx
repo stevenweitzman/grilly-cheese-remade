@@ -2,51 +2,51 @@ const ClientsSection = () => {
   const clients = [
     {
       name: "The Children's Hospital of Philadelphia",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/CHOP_logo.svg/320px-CHOP_logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2021/11/CHOP-Logo.png",
     },
     {
       name: "Target",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Target_logo.svg/320px-Target_logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/04/Target-Logo.png",
     },
     {
       name: "The College of New Jersey",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/The_College_of_New_Jersey_seal.svg/240px-The_College_of_New_Jersey_seal.svg.png",
+      logo: "https://www.tcnj.edu/wp-content/uploads/2023/09/lion-logo-header.png",
     },
     {
       name: "Hallmark Channel",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Hallmark_Channel.svg/320px-Hallmark_Channel.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2022/01/Hallmark-Channel-Logo.png",
     },
     {
       name: "Planet Fitness",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Planet_Fitness_logo.svg/320px-Planet_Fitness_logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2021/03/Planet-Fitness-Logo.png",
     },
     {
       name: "Rutgers University",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Rutgers_Scarlet_Knights_logo.svg/240px-Rutgers_Scarlet_Knights_logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2022/11/Rutgers-University-Logo.png",
     },
     {
       name: "Princeton University",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Princeton_seal.svg/240px-Princeton_seal.svg.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Princeton_seal.svg",
     },
     {
       name: "Johnson & Johnson",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Johnson_and_Johnson_Logo.svg/320px-Johnson_and_Johnson_Logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Johnson-Johnson-Logo.png",
     },
     {
       name: "Merck",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Merck_Logo.svg/320px-Merck_Logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/11/Merck-Logo.png",
     },
     {
       name: "Comcast",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Comcast-logo.svg/320px-Comcast-logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/11/Comcast-Logo.png",
     },
     {
       name: "Wells Fargo",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wells_Fargo_Bank.svg/320px-Wells_Fargo_Bank.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/11/Wells-Fargo-Logo.png",
     },
     {
       name: "TD Bank",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Toronto-Dominion_Bank_logo.svg/320px-Toronto-Dominion_Bank_logo.svg.png",
+      logo: "https://logos-world.net/wp-content/uploads/2022/04/TD-Bank-Logo.png",
     },
   ];
 
@@ -75,6 +75,17 @@ const ClientsSection = () => {
                 alt={`${client.name} logo`}
                 className="max-w-full h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300"
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    const fallback = document.createElement('div');
+                    fallback.className = 'text-center font-semibold text-muted-foreground text-sm';
+                    fallback.textContent = client.name;
+                    parent.appendChild(fallback);
+                  }
+                }}
               />
             </div>
           ))}
