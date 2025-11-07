@@ -169,7 +169,7 @@ const CorporateCatering = () => {
                 <a href="tel:8444745591">Call: 844-474-5591</a>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="/#contact">Get Free Quote</a>
+                <a href="/#contact">Get Your Quote</a>
               </Button>
             </div>
           </div>

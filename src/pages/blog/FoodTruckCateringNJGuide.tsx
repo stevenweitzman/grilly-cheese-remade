@@ -272,7 +272,7 @@ const FoodTruckCateringNJGuide = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
-                      <a href="/#contact">Get Free Quote</a>
+                      <a href="/#contact">Get Your Quote</a>
                     </Button>
                     <Button size="lg" variant="outline" asChild>
                       <a href="tel:8444745591">Call: 844-474-5591</a>

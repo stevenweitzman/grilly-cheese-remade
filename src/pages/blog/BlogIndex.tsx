@@ -143,7 +143,7 @@ const BlogIndex = () => {
               Let&apos;s discuss your catering needs
             </p>
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
-              <a href="/#contact">Get Free Quote</a>
+              <a href="/#contact">Get Your Quote</a>
             </Button>
           </div>
         </section>

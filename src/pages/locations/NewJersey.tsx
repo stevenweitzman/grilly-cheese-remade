@@ -10,9 +10,16 @@ import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 
 const NewJersey = () => {
   const cities = [
-    "Princeton", "Trenton", "Cherry Hill", "Camden", "Burlington",
-    "Mount Laurel", "Voorhees", "Marlton", "Moorestown", "Medford",
-    "Haddonfield", "Collingswood", "Pennsauken", "Deptford", "Gloucester",
+    // Northern NJ (Near NYC)
+    "Alpine", "Saddle River", "Short Hills", "Millburn", "Summit", "Ridgewood",
+    "Montclair", "Glen Ridge", "Chatham", "Tenafly", "Englewood Cliffs", "Franklin Lakes",
+    "Ho-Ho-Kus", "Bernardsville", "Far Hills",
+    // Central NJ
+    "Princeton", "Basking Ridge", "Rumson", "Colts Neck", "Holmdel",
+    "Trenton", "Cherry Hill", "Camden", "Burlington", "Mount Laurel",
+    "Voorhees", "Marlton", "Moorestown", "Medford", "Haddonfield",
+    "Collingswood", "Pennsauken", "Deptford", "Gloucester",
+    // Shore & South
     "Egg Harbor", "Atlantic City", "Vineland", "Millville", "Bridgeton",
     "Hamilton", "Ewing", "Lawrence", "Hopewell", "Pennington"
   ];
@@ -55,9 +62,9 @@ const NewJersey = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
-                  <a href="#contact">Get Free NJ Quote</a>
-                </Button>
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
+                <a href="#contact">Get Your NJ Quote</a>
+              </Button>
                 <Button size="lg" variant="outline" asChild>
                   <a href="tel:8444745591">Call: 844-474-5591</a>
                 </Button>
@@ -96,7 +103,7 @@ const NewJersey = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <span className="text-lg"><strong>Licensed & Insured:</strong> Fully certified with all NJ health department approvals</span>
+                  <span className="text-lg"><strong>Licensed & Insured:</strong> COI's available</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
@@ -203,7 +210,7 @@ const NewJersey = () => {
                 <a href="tel:8444745591">Call: 844-474-5591</a>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="/#contact">Get Free Quote</a>
+                <a href="/#contact">Get Your Quote</a>
               </Button>
             </div>
           </div>

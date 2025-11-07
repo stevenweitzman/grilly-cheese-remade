@@ -117,7 +117,7 @@ const Navigation = () => {
                 }}
               >
                 <Calendar className="h-4 w-4" />
-                Get Free Quote
+                Get Your Quote
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
@@ -169,7 +169,7 @@ const Navigation = () => {
                 }}
               >
                 <Calendar className="h-4 w-4" />
-                Get Free Quote
+                Get Your Quote
               </a>
             </Button>
 
