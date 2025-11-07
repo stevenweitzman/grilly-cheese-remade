@@ -46,16 +46,6 @@ const Hero = () => {
                 Get Your Free Quote
               </a>
             </Button>
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="text-lg px-10 py-7 hover:scale-105 transition-all"
-              asChild
-            >
-              <a href="https://grillycheese.dine.online/" target="_blank" rel="noopener noreferrer">
-                Order Delivery Now
-              </a>
-            </Button>
           </div>
 
           <div className="bg-background/10 backdrop-blur-md p-6 rounded-xl border border-primary-foreground/20 inline-block">
