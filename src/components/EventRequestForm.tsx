@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, Users, MapPin, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const EventRequestForm = () => {
   const { toast } = useToast();
@@ -91,7 +92,7 @@ const EventRequestForm = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateStep(5)) {
@@ -123,31 +124,64 @@ const EventRequestForm = () => {
       });
     }
 
-    toast({
-      title: "Event Request Submitted!",
-      description: "We'll contact you shortly to discuss your event details.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      guests: "",
-      dietaryRestrictions: "",
-      drinks: "",
-      eventDate: "",
-      eventTime: "",
-      propertyType: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      additionalInfo: "",
-      mathAnswer: "",
-      agreeToTerms: false,
-    });
-    setCurrentStep(1);
+    try {
+      const { error } = await supabase.functions.invoke('send-quote-email', {
+        body: {
+          formType: 'event',
+          formData: {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            guests: formData.guests,
+            dietaryRestrictions: formData.dietaryRestrictions,
+            drinks: formData.drinks,
+            eventDate: formData.eventDate,
+            eventTime: formData.eventTime,
+            propertyType: formData.propertyType,
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+            zip: formData.zip,
+            additionalInfo: formData.additionalInfo,
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Event Request Submitted!",
+        description: "We'll contact you shortly to discuss your event details.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        guests: "",
+        dietaryRestrictions: "",
+        drinks: "",
+        eventDate: "",
+        eventTime: "",
+        propertyType: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        additionalInfo: "",
+        mathAnswer: "",
+        agreeToTerms: false,
+      });
+      setCurrentStep(1);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Submission Error",
+        description: "Something went wrong. Please call us at (267) 687-9090.",
+        variant: "destructive",
+      });
+    }
   };
 
   const renderStepIndicator = () => (

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar, Users, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const QuickQuoteForm = () => {
   const [step, setStep] = useState(1);
@@ -32,7 +33,7 @@ const QuickQuoteForm = () => {
     setStep(step + 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Track form submission
@@ -44,18 +45,39 @@ const QuickQuoteForm = () => {
       });
     }
 
-    toast.success("Quote request received! We'll contact you within 2 hours during business hours.");
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      eventDate: "",
-      guestCount: "",
-      eventType: "",
-    });
-    setStep(1);
+    try {
+      const { error } = await supabase.functions.invoke('send-quote-email', {
+        body: {
+          formType: 'quick',
+          formData: {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            eventDate: formData.eventDate,
+            guestCount: formData.guestCount,
+            eventType: formData.eventType,
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      toast.success("Quote request received! We'll contact you within 2 hours during business hours.");
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        eventDate: "",
+        guestCount: "",
+        eventType: "",
+      });
+      setStep(1);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error("Something went wrong. Please call us at (267) 687-9090.");
+    }
   };
 
   const totalSteps = 3;
