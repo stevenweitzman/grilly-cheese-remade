@@ -27,7 +27,7 @@ const ServicesSection = () => {
     {
       icon: PartyPopper,
       title: "All Events",
-      description: "Festivals, birthday parties, graduations, and any celebration. All events, all sizes, all delicious!",
+      description: "Baby showers, retirement parties, film set catering, festivals, birthday parties, graduations, bar/bat mitzvahs, bridal showers, and more!",
       link: "/#packages"
     },
   ];
@@ -67,7 +67,7 @@ const ServicesSection = () => {
             Our Services
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            From <Link to="/services/wedding-catering" className="text-accent hover:underline">wedding catering</Link> to <Link to="/services/corporate-catering" className="text-accent hover:underline">corporate events</Link>, we serve all of <Link to="/locations/new-jersey" className="text-accent hover:underline">NJ</Link>, <Link to="/locations/pennsylvania" className="text-accent hover:underline">PA</Link>, and <Link to="/locations/new-york-city" className="text-accent hover:underline">NYC</Link>
+            From <Link to="/services/wedding-catering" className="text-accent hover:underline">wedding catering</Link> to <Link to="/services/corporate-catering" className="text-accent hover:underline">corporate events</Link>, baby showers to film set catering, we serve <Link to="/locations/new-jersey" className="text-accent hover:underline">NJ</Link>, <Link to="/locations/pennsylvania" className="text-accent hover:underline">PA</Link>, <Link to="/locations/new-york-city" className="text-accent hover:underline">NYC</Link>, MD, DE, DC & Long Island - including Philadelphia, Baltimore, Princeton, Queens & Brooklyn
           </p>
         </motion.div>
 

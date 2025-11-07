@@ -198,8 +198,14 @@ const QuickQuoteForm = () => {
                 <option value="wedding">Wedding</option>
                 <option value="corporate">Corporate Event</option>
                 <option value="birthday">Birthday Party</option>
+                <option value="baby-shower">Baby Shower</option>
+                <option value="retirement">Retirement Party</option>
+                <option value="film-set">Film/TV Set Catering</option>
                 <option value="festival">Festival</option>
                 <option value="graduation">Graduation</option>
+                <option value="bar-mitzvah">Bar/Bat Mitzvah</option>
+                <option value="bridal-shower">Bridal Shower</option>
+                <option value="holiday">Holiday Party</option>
                 <option value="other">Other</option>
               </select>
             </div>

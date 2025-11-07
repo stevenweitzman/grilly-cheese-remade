@@ -103,7 +103,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              The ultimate food truck experience for NJ, PA, & NYC
+              Serving NJ, PA, NYC, MD, DE, DC & Long Island
             </motion.p>
           
             <motion.p 
@@ -112,7 +112,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.9 }}
             >
-              From intimate gatherings to corporate events, weddings to festivals - we bring award-winning grilled cheese, soups, and sides straight to your door.
+              From baby showers to retirement parties, corporate events to film set catering, weddings to festivals - we bring award-winning grilled cheese to Baltimore, Philly, Queens, Brooklyn, Princeton & beyond.
             </motion.p>
 
             <motion.div 
@@ -193,9 +193,9 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Quick Quote Form - Desktop Only */}
+          {/* Quick Quote Form - Visible on larger tablets and desktop */}
           <motion.div 
-            className="hidden lg:block"
+            className="hidden md:block"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.5 }}

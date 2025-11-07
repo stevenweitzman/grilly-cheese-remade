@@ -79,7 +79,8 @@ const ContactSection = () => {
                   <MapPin className="h-8 w-8 text-primary-foreground" />
                 </motion.div>
                 <p className="font-semibold text-foreground mb-2">Service Areas</p>
-                <p className="text-muted-foreground">New Jersey, Pennsylvania, & New York City</p>
+                <p className="text-muted-foreground">New Jersey • Pennsylvania • New York City • Maryland • Delaware • DC • Long Island</p>
+                <p className="text-sm text-muted-foreground mt-1">Major metros: Philadelphia, Baltimore, Princeton, Trenton, Queens, Brooklyn, Manhattan, Wilmington & more</p>
               </motion.div>
 
               <motion.div 
