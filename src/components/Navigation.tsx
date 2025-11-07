@@ -23,11 +23,29 @@ const Navigation = () => {
             <a href="#services" className="text-foreground hover:text-primary transition-colors">
               Services
             </a>
+            <a href="#packages" className="text-foreground hover:text-primary transition-colors">
+              Packages
+            </a>
+            <a href="#faq" className="text-foreground hover:text-primary transition-colors">
+              FAQ
+            </a>
             <a href="#contact" className="text-foreground hover:text-primary transition-colors">
               Contact
             </a>
             <Button asChild size="lg">
-              <a href="tel:8444745591" className="flex items-center gap-2">
+              <a 
+                href="tel:8444745591" 
+                className="flex items-center gap-2"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'phone_click',
+                      'phone_location': 'Navigation',
+                      'phone_number': '844-474-5591'
+                    });
+                  }
+                }}
+              >
                 <Phone className="h-4 w-4" />
                 844-474-5591
               </a>
@@ -62,6 +80,20 @@ const Navigation = () => {
               Services
             </a>
             <a
+              href="#packages"
+              className="block py-2 text-foreground hover:text-primary transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Packages
+            </a>
+            <a
+              href="#faq"
+              className="block py-2 text-foreground hover:text-primary transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              FAQ
+            </a>
+            <a
               href="#contact"
               className="block py-2 text-foreground hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
@@ -69,7 +101,19 @@ const Navigation = () => {
               Contact
             </a>
             <Button asChild className="w-full">
-              <a href="tel:8444745591" className="flex items-center justify-center gap-2">
+              <a 
+                href="tel:8444745591" 
+                className="flex items-center justify-center gap-2"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'phone_click',
+                      'phone_location': 'Navigation Mobile',
+                      'phone_number': '844-474-5591'
+                    });
+                  }
+                }}
+              >
                 <Phone className="h-4 w-4" />
                 844-474-5591
               </a>

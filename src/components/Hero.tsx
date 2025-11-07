@@ -41,7 +41,19 @@ const Hero = () => {
               className="text-lg px-10 py-7 shadow-warm hover:shadow-xl transition-all hover:scale-105 animate-pulse"
               asChild
             >
-              <a href="#contact" className="flex items-center gap-2">
+              <a 
+                href="#contact" 
+                className="flex items-center gap-2"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'cta_click',
+                      'cta_location': 'Hero',
+                      'cta_text': 'Get Your Free Quote'
+                    });
+                  }
+                }}
+              >
                 <Calendar className="h-6 w-6" />
                 Get Your Free Quote
               </a>
@@ -58,6 +70,15 @@ const Hero = () => {
                 <a 
                   href="tel:8444745591" 
                   className="text-3xl font-bold text-accent hover:text-accent/80 transition-colors block"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                      (window as any).dataLayer.push({
+                        'event': 'phone_click',
+                        'phone_location': 'Hero',
+                        'phone_number': '844-474-5591'
+                      });
+                    }
+                  }}
                 >
                   844-474-5591
                 </a>

@@ -57,6 +57,15 @@ const EventRequestForm = () => {
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
+      // Track step progression in GTM
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          'event': 'form_step_completed',
+          'form_name': 'Event Request Form',
+          'step_number': currentStep,
+          'step_name': getStepName(currentStep)
+        });
+      }
       setCurrentStep(prev => Math.min(prev + 1, totalSteps));
     } else {
       toast({
@@ -64,6 +73,17 @@ const EventRequestForm = () => {
         description: "Please fill in all required fields before continuing.",
         variant: "destructive",
       });
+    }
+  };
+
+  const getStepName = (step: number) => {
+    switch (step) {
+      case 1: return "Contact Info";
+      case 2: return "Event Details";
+      case 3: return "When & Where";
+      case 4: return "Location";
+      case 5: return "Final Details";
+      default: return "";
     }
   };
 
@@ -91,6 +111,16 @@ const EventRequestForm = () => {
         });
         return;
       }
+    }
+
+    // Track form submission in GTM
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        'event': 'form_submission',
+        'form_name': 'Event Request Form',
+        'guest_count': formData.guests,
+        'event_date': formData.eventDate
+      });
     }
 
     toast({
