@@ -2,9 +2,12 @@ module.exports = {
   // Routes to pre-render
   include: [
     "/",
-    "/services",
-    "/services/wedding-catering",
-    "/services/corporate-catering",
+    "/services/food-truck-catering",
+    "/services/drop-off-catering",
+    "/services/pop-up-events",
+    "/events",
+    "/events/wedding-catering",
+    "/events/corporate-catering",
     "/locations/new-jersey",
     "/locations/pennsylvania",
     "/locations/new-york-city",

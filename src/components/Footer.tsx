@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground py-12 mt-16">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Brand Column */}
-          <div className="col-span-1 sm:col-span-2 md:col-span-1">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
             <img 
               src={logoWhite} 
               alt="Grilly Cheese Logo" 
@@ -37,28 +37,55 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-3">Services</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/services/wedding-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Wedding Catering
+                <Link to="/services/food-truck-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Food Truck Catering
                 </Link>
               </li>
               <li>
-                <Link to="/services/corporate-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                <Link to="/services/drop-off-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Drop-Off Catering
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/pop-up-events" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Pop-Up Events
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Event Types Column */}
+          <div>
+            <h4 className="font-bold text-lg mb-3">Event Types</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/events/wedding-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Weddings
+                </Link>
+              </li>
+              <li>
+                <Link to="/events/corporate-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
                   Corporate Events
                 </Link>
               </li>
               <li>
-                <Link to="/services/baby-showers" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                <Link to="/events/baby-showers" className="text-primary-foreground/70 hover:text-accent transition-colors">
                   Baby Showers
                 </Link>
               </li>
               <li>
-                <Link to="/services/retirement-parties" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                <Link to="/events/retirement-parties" className="text-primary-foreground/70 hover:text-accent transition-colors">
                   Retirement Parties
                 </Link>
               </li>
               <li>
-                <Link to="/services/film-set-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Film/TV Set Catering
+                <Link to="/events/film-set-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Film/TV Production
+                </Link>
+              </li>
+              <li>
+                <Link to="/events" className="text-primary-foreground/70 hover:text-accent transition-colors font-semibold">
+                  View All Events
                 </Link>
               </li>
             </ul>

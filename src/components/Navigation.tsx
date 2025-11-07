@@ -53,34 +53,58 @@ const Navigation = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background z-50">
                 <DropdownMenuItem asChild>
-                  <Link to="/services/wedding-catering" className="cursor-pointer">
-                    Wedding Catering
+                  <Link to="/services/food-truck-catering" className="cursor-pointer">
+                    Food Truck Catering
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/corporate-catering" className="cursor-pointer">
+                  <Link to="/services/drop-off-catering" className="cursor-pointer">
+                    Drop-Off Catering
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/services/pop-up-events" className="cursor-pointer">
+                    Pop-Up Events
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Event Types Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
+                Events <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-background z-50">
+                <DropdownMenuItem asChild>
+                  <Link to="/events/wedding-catering" className="cursor-pointer">
+                    Weddings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/events/corporate-catering" className="cursor-pointer">
                     Corporate Events
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/baby-showers" className="cursor-pointer">
+                  <Link to="/events/baby-showers" className="cursor-pointer">
                     Baby Showers
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/retirement-parties" className="cursor-pointer">
+                  <Link to="/events/retirement-parties" className="cursor-pointer">
                     Retirement Parties
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/film-set-catering" className="cursor-pointer">
-                    Film/TV Set Catering
+                  <Link to="/events/film-set-catering" className="cursor-pointer">
+                    Film/TV Production
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/services" className="cursor-pointer font-semibold">
-                    View All Services
+                  <Link to="/events" className="cursor-pointer font-semibold">
+                    View All Events
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -246,47 +270,73 @@ const Navigation = () => {
             <div className="border-l-2 border-accent/30 pl-3">
               <p className="text-sm font-semibold text-muted-foreground mb-2">Services</p>
               <Link
-                to="/services/wedding-catering"
+                to="/services/food-truck-catering"
                 className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Wedding Catering
+                Food Truck Catering
               </Link>
               <Link
-                to="/services/corporate-catering"
+                to="/services/drop-off-catering"
+                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Drop-Off Catering
+              </Link>
+              <Link
+                to="/services/pop-up-events"
+                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Pop-Up Events
+              </Link>
+            </div>
+
+            {/* Event Types Submenu */}
+            <div className="border-l-2 border-accent/30 pl-3">
+              <p className="text-sm font-semibold text-muted-foreground mb-2">Event Types</p>
+              <Link
+                to="/events/wedding-catering"
+                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Weddings
+              </Link>
+              <Link
+                to="/events/corporate-catering"
                 className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Corporate Events
               </Link>
               <Link
-                to="/services/baby-showers"
+                to="/events/baby-showers"
                 className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Baby Showers
               </Link>
               <Link
-                to="/services/retirement-parties"
+                to="/events/retirement-parties"
                 className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Retirement Parties
               </Link>
               <Link
-                to="/services/film-set-catering"
+                to="/events/film-set-catering"
                 className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Film/TV Set Catering
+                Film/TV Production
               </Link>
               <div className="border-t border-border my-2" />
               <Link
-                to="/services"
+                to="/events"
                 className="block py-2 text-foreground hover:text-primary transition-colors text-sm font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                View All Services
+                View All Events
               </Link>
             </div>
 

@@ -10,7 +10,10 @@ import CorporateCatering from "./pages/services/CorporateCatering";
 import BabyShowers from "./pages/services/BabyShowers";
 import RetirementParties from "./pages/services/RetirementParties";
 import FilmSetCatering from "./pages/services/FilmSetCatering";
-import ServicesOverview from "./pages/services/ServicesOverview";
+import FoodTruckCatering from "./pages/services/FoodTruckCatering";
+import DropOffCatering from "./pages/services/DropOffCatering";
+import PopUpEvents from "./pages/services/PopUpEvents";
+import EventTypesOverview from "./pages/events/EventTypesOverview";
 import NewJersey from "./pages/locations/NewJersey";
 import Pennsylvania from "./pages/locations/Pennsylvania";
 import NewYorkCity from "./pages/locations/NewYorkCity";
@@ -37,8 +40,21 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           
-          {/* Service Pages */}
-          <Route path="/services" element={<ServicesOverview />} />
+          {/* Service Type Pages */}
+          <Route path="/services/food-truck-catering" element={<FoodTruckCatering />} />
+          <Route path="/services/drop-off-catering" element={<DropOffCatering />} />
+          <Route path="/services/pop-up-events" element={<PopUpEvents />} />
+          
+          {/* Event Type Pages */}
+          <Route path="/events" element={<EventTypesOverview />} />
+          <Route path="/events/wedding-catering" element={<WeddingCatering />} />
+          <Route path="/events/corporate-catering" element={<CorporateCatering />} />
+          <Route path="/events/baby-showers" element={<BabyShowers />} />
+          <Route path="/events/retirement-parties" element={<RetirementParties />} />
+          <Route path="/events/film-set-catering" element={<FilmSetCatering />} />
+          
+          {/* Legacy redirects - keep old URLs working */}
+          <Route path="/services" element={<EventTypesOverview />} />
           <Route path="/services/wedding-catering" element={<WeddingCatering />} />
           <Route path="/services/corporate-catering" element={<CorporateCatering />} />
           <Route path="/services/baby-showers" element={<BabyShowers />} />

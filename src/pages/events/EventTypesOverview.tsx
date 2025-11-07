@@ -15,7 +15,7 @@ const ServicesOverview = () => {
           name: "Wedding Catering",
           icon: "💍",
           description: "Make your special day unforgettable with our gourmet grilled cheese catering. Customizable menus and elegant presentation.",
-          link: "/services/wedding-catering",
+          link: "/events/wedding-catering",
           eventType: "wedding"
         },
         {
@@ -74,7 +74,7 @@ const ServicesOverview = () => {
           name: "Corporate Catering",
           icon: "🏢",
           description: "Elevate your business events with professional food truck catering. Perfect for meetings, conferences, and team building.",
-          link: "/services/corporate-catering",
+          link: "/events/corporate-catering",
           eventType: "corporate-event"
         },
         {
@@ -98,14 +98,14 @@ const ServicesOverview = () => {
           name: "Baby Showers",
           icon: "👶",
           description: "Welcome the new arrival with comfort food that makes everyone feel at home.",
-          link: "/services/baby-showers",
+          link: "/events/baby-showers",
           eventType: "baby-shower"
         },
         {
           name: "Retirement Parties",
           icon: "🎈",
           description: "Honor years of dedication with a memorable celebration featuring everyone's favorite comfort food.",
-          link: "/services/retirement-parties",
+          link: "/events/retirement-parties",
           eventType: "retirement-party"
         },
         {
@@ -135,7 +135,7 @@ const ServicesOverview = () => {
           name: "Film & TV Set Catering",
           icon: "🎬",
           description: "Keep your cast and crew fueled with reliable, delicious catering for long production days.",
-          link: "/services/film-set-catering",
+          link: "/events/film-set-catering",
           eventType: "film-tv-catering"
         },
         {
@@ -183,14 +183,14 @@ const ServicesOverview = () => {
       <SEOHead
         title="All Events We Cater - Weddings, Corporate, Parties & More"
         description="Discover all the events Grilly Cheese caters throughout NJ, PA, NY, MD, DE, and DC. From weddings and corporate events to bar mitzvahs and fundraisers - we do it all."
-        canonical="https://grillycheese.net/services"
+        canonical="https://grillycheese.net/events"
         keywords="food truck catering services, event catering, wedding catering, corporate catering, party catering, bar mitzvah catering, NJ catering services"
       />
       <SEOSchema
         type="service"
         title="Complete Event Catering Services"
         description="Professional food truck catering for all types of events including weddings, corporate functions, private parties, and community gatherings."
-        url="https://grillycheese.net/services"
+        url="https://grillycheese.net/events"
       />
       
       <div className="min-h-screen bg-background">
