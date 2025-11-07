@@ -15,7 +15,6 @@ import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 import HorizontalMenuGallery from "@/components/HorizontalMenuGallery";
 import StatisticsSection from "@/components/StatisticsSection";
-import CustomCursor from "@/components/CustomCursor";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
 
@@ -31,7 +30,6 @@ const Index = () => {
       <SEOSchema type="homepage" />
       
       <div className="min-h-screen">
-        <CustomCursor />
         <Navigation />
         <StickyCTABar />
         <Hero />

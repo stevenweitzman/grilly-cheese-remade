@@ -3,26 +3,13 @@ import { Phone, Calendar, ChevronDown } from "lucide-react";
 import heroImage from "@/assets/hero-grilled-cheese.jpg";
 import QuickQuoteForm from "@/components/QuickQuoteForm";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
 
 const Hero = () => {
   const { scrollY } = useScroll();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  // Parallax effects
-  const imageY = useTransform(scrollY, [0, 500], [0, 150]);
-  const contentY = useTransform(scrollY, [0, 500], [0, -50]);
+  // Simplified parallax effects
+  const imageY = useTransform(scrollY, [0, 500], [0, 100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      setMousePosition({ x, y });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -39,32 +26,16 @@ const Hero = () => {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/10"
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/10" />
       </motion.div>
 
-      {/* Content with Parallax */}
+      {/* Content */}
       <motion.div 
         className="container mx-auto px-4 py-20 pb-32 relative z-10"
-        style={{ y: contentY, opacity }}
+        style={{ opacity }}
       >
         <div className="grid lg:grid-cols-2 gap-8 items-center max-w-7xl">
-          <motion.div 
-            className="max-w-4xl"
-            style={{
-              x: mousePosition.x * 0.5,
-              y: mousePosition.y * 0.5,
-            }}
-          >
+          <div className="max-w-4xl">
             <motion.div 
               className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -191,7 +162,7 @@ const Hero = () => {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Quick Quote Form - Visible on larger tablets and desktop */}
           <motion.div 
@@ -199,10 +170,6 @@ const Hero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.5 }}
-            style={{
-              x: mousePosition.x * -0.3,
-              y: mousePosition.y * -0.3,
-            }}
           >
             <QuickQuoteForm />
           </motion.div>
