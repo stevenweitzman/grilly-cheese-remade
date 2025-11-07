@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import WeddingCatering from "./pages/services/WeddingCatering";
 import CorporateCatering from "./pages/services/CorporateCatering";
 import NewJersey from "./pages/locations/NewJersey";
+import Pennsylvania from "./pages/locations/Pennsylvania";
+import NewYorkCity from "./pages/locations/NewYorkCity";
 import BlogIndex from "./pages/blog/BlogIndex";
 import FoodTruckCateringNJGuide from "./pages/blog/FoodTruckCateringNJGuide";
 
@@ -28,6 +30,8 @@ const App = () => (
           
           {/* Location Pages */}
           <Route path="/locations/new-jersey" element={<NewJersey />} />
+          <Route path="/locations/pennsylvania" element={<Pennsylvania />} />
+          <Route path="/locations/new-york-city" element={<NewYorkCity />} />
           
           {/* Blog Pages */}
           <Route path="/blog" element={<BlogIndex />} />

@@ -1,17 +1,115 @@
+import { Link } from "react-router-dom";
+import { MapPin, Phone, Mail } from "lucide-react";
+
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground py-8">
+    <footer className="bg-foreground text-primary-foreground py-12">
       <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h3 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-2">
-            Grilly Cheese
-          </h3>
-          <p className="text-primary-foreground/80 mb-4">
-            The Ultimate Food Truck in NJ, PA, & NYC
-          </p>
-          <p className="text-sm text-primary-foreground/60">
-            © {new Date().getFullYear()} Grilly Cheese Food Trucks. All rights reserved.
-          </p>
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
+          {/* Brand Column */}
+          <div>
+            <h3 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-3">
+              Grilly Cheese
+            </h3>
+            <p className="text-primary-foreground/80 text-sm mb-4">
+              Award-winning food truck catering for NJ, PA, & NYC
+            </p>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center gap-2 text-primary-foreground/70">
+                <MapPin className="h-4 w-4" />
+                <span>Chesilhurst, NJ</span>
+              </div>
+              <div className="flex items-center gap-2 text-primary-foreground/70">
+                <Phone className="h-4 w-4" />
+                <a href="tel:8444745591" className="hover:text-accent transition-colors">
+                  844-474-5591
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Services Column */}
+          <div>
+            <h4 className="font-bold text-lg mb-3">Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/services/wedding-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Wedding Catering
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/corporate-catering" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Corporate Events
+                </Link>
+              </li>
+              <li>
+                <Link to="/#packages" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Our Packages
+                </Link>
+              </li>
+              <li>
+                <Link to="/#contact" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Get Quote
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Locations Column */}
+          <div>
+            <h4 className="font-bold text-lg mb-3">Areas We Serve</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/locations/new-jersey" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  New Jersey
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/pennsylvania" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Pennsylvania
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/new-york-city" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  New York City
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources Column */}
+          <div>
+            <h4 className="font-bold text-lg mb-3">Resources</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/blog" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Blog & Guides
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/food-truck-catering-nj-guide" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  NJ Catering Guide
+                </Link>
+              </li>
+              <li>
+                <Link to="/#faq" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-primary-foreground/20 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/60">
+            <p>
+              © {new Date().getFullYear()} Grilly Cheese Food Trucks. All rights reserved.
+            </p>
+            <p>
+              Top 6 Grilled Cheese in the Nation - GrubHub 2024
+            </p>
+          </div>
         </div>
       </div>
     </footer>

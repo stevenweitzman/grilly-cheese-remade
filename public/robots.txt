@@ -1,3 +1,7 @@
+# Robots.txt for Grilly Cheese Food Truck Catering
+# Updated: January 2025
+
+# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +16,15 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemaps
+Sitemap: https://grillycheese.net/sitemap.xml
+
+# Crawl-delay (optional - prevents server overload)
+User-agent: *
+Crawl-delay: 0
+
+# Disallow private or admin areas (if any in future)
+# User-agent: *
+# Disallow: /admin/
+# Disallow: /private/
