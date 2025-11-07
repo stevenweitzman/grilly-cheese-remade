@@ -6,6 +6,7 @@ import PackagesSection from "@/components/PackagesSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import { ChatAssistant } from "@/components/ChatAssistant";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <FAQSection />
       <ContactSection />
       <Footer />
+      <ChatAssistant />
     </div>
   );
 };
