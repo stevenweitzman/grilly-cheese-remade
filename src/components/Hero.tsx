@@ -16,7 +16,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 pt-20">
+      <div className="container mx-auto px-4 py-20 pb-32 relative z-10">
         <div className="max-w-4xl animate-fade-in">
           <div className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30">
             <p className="text-accent font-semibold text-sm">🏆 Top 6 Grilled Cheese in the Nation - GrubHub</p>
