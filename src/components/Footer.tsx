@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
+import logo from "@/assets/grilly-cheese-logo.png";
 
 const Footer = () => {
   return (
@@ -8,9 +9,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
           <div className="col-span-1 sm:col-span-2 md:col-span-1">
-            <h3 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-3">
-              Grilly Cheese
-            </h3>
+            <img 
+              src={logo} 
+              alt="Grilly Cheese Logo" 
+              className="h-12 w-auto mb-3"
+            />
             <p className="text-primary-foreground/80 text-sm mb-4">
               Award-winning food truck catering for NJ, PA, & NYC
             </p>

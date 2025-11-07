@@ -2,6 +2,7 @@ import { Phone, Menu, X, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/grilly-cheese-logo.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,9 +21,11 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-2">
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              Grilly Cheese
-            </h1>
+            <img 
+              src={logo} 
+              alt="Grilly Cheese - Award-winning food truck catering" 
+              className="h-12 md:h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
