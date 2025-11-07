@@ -19,20 +19,21 @@ interface QuickQuoteRequest {
 }
 
 interface EventRequest {
-  name: string;
-  email: string;
-  phone: string;
+  eventType: string;
   guests: string;
   dietaryRestrictions: string;
   drinks: string;
   eventDate: string;
-  eventTime?: string;
+  eventTime: string;
   propertyType: string;
   address: string;
   city: string;
   state: string;
   zip: string;
   additionalInfo?: string;
+  name: string;
+  email: string;
+  phone: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -180,6 +181,10 @@ function generateEventRequestNotification(data: EventRequest): string {
             <div class="section">
               <div class="section-title">Event Details</div>
               <div class="field">
+                <div class="label">Event Type:</div>
+                <div>${data.eventType}</div>
+              </div>
+              <div class="field">
                 <div class="label">Guest Count:</div>
                 <div>${data.guests}</div>
               </div>
@@ -199,12 +204,10 @@ function generateEventRequestNotification(data: EventRequest): string {
                 <div class="label">Event Date:</div>
                 <div>${data.eventDate}</div>
               </div>
-              ${data.eventTime ? `
               <div class="field">
-                <div class="label">Event Time:</div>
+                <div class="label">Event Start Time:</div>
                 <div>${data.eventTime}</div>
               </div>
-              ` : ''}
               <div class="field">
                 <div class="label">Property Type:</div>
                 <div>${data.propertyType}</div>

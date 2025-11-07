@@ -15,9 +15,7 @@ const EventRequestForm = () => {
   const totalSteps = 5;
   
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    eventType: "",
     guests: "",
     dietaryRestrictions: "",
     drinks: "",
@@ -29,6 +27,9 @@ const EventRequestForm = () => {
     state: "",
     zip: "",
     additionalInfo: "",
+    name: "",
+    email: "",
+    phone: "",
     mathAnswer: "",
     agreeToTerms: false,
   });
@@ -42,15 +43,15 @@ const EventRequestForm = () => {
   const validateStep = (step: number) => {
     switch (step) {
       case 1:
-        return formData.name && formData.email && formData.phone;
+        return formData.eventType && formData.guests && formData.dietaryRestrictions && formData.drinks;
       case 2:
-        return formData.guests && formData.dietaryRestrictions && formData.drinks;
+        return formData.eventDate && formData.eventTime && formData.propertyType;
       case 3:
-        return formData.eventDate && formData.propertyType;
-      case 4:
         return formData.address && formData.city && formData.state && formData.zip;
+      case 4:
+        return true; // Additional info is optional
       case 5:
-        return formData.mathAnswer === "2" && formData.agreeToTerms;
+        return formData.name && formData.email && formData.phone && formData.mathAnswer === "2" && formData.agreeToTerms;
       default:
         return false;
     }
@@ -79,11 +80,11 @@ const EventRequestForm = () => {
 
   const getStepName = (step: number) => {
     switch (step) {
-      case 1: return "Contact Info";
-      case 2: return "Event Details";
-      case 3: return "When & Where";
-      case 4: return "Location";
-      case 5: return "Final Details";
+      case 1: return "Event Details";
+      case 2: return "When & Where";
+      case 3: return "Location";
+      case 4: return "Additional Info";
+      case 5: return "Contact Info";
       default: return "";
     }
   };
@@ -129,9 +130,7 @@ const EventRequestForm = () => {
         body: {
           formType: 'event',
           formData: {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
+            eventType: formData.eventType,
             guests: formData.guests,
             dietaryRestrictions: formData.dietaryRestrictions,
             drinks: formData.drinks,
@@ -143,6 +142,9 @@ const EventRequestForm = () => {
             state: formData.state,
             zip: formData.zip,
             additionalInfo: formData.additionalInfo,
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
           }
         }
       });
@@ -156,9 +158,7 @@ const EventRequestForm = () => {
       
       // Reset form
       setFormData({
-        name: "",
-        email: "",
-        phone: "",
+        eventType: "",
         guests: "",
         dietaryRestrictions: "",
         drinks: "",
@@ -170,6 +170,9 @@ const EventRequestForm = () => {
         state: "",
         zip: "",
         additionalInfo: "",
+        name: "",
+        email: "",
+        phone: "",
         mathAnswer: "",
         agreeToTerms: false,
       });
@@ -221,61 +224,37 @@ const EventRequestForm = () => {
         return (
           <div className="space-y-6 animate-fade-in">
             <div className="text-center mb-6">
-              <h3 className="text-3xl font-bold text-foreground mb-2">
-                Let's Get Started
-              </h3>
-              <p className="text-muted-foreground">Tell us how to reach you</p>
-            </div>
-
-            <div>
-              <Label htmlFor="name" className="text-base">Your Name *</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-                className="mt-2 h-12 text-base"
-                placeholder="John Doe"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="email" className="text-base">Email *</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                className="mt-2 h-12 text-base"
-                placeholder="john@example.com"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="phone" className="text-base">Phone *</Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                required
-                className="mt-2 h-12 text-base"
-                placeholder="(555) 123-4567"
-              />
-            </div>
-          </div>
-        );
-
-      case 2:
-        return (
-          <div className="space-y-6 animate-fade-in">
-            <div className="text-center mb-6">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Users className="h-8 w-8 text-primary" />
-                <h3 className="text-3xl font-bold text-foreground">Event Details</h3>
+                <h3 className="text-3xl font-bold text-foreground">Tell Us About Your Event</h3>
               </div>
-              <p className="text-muted-foreground">Help us understand your event</p>
+              <p className="text-muted-foreground">Help us understand your event needs</p>
+            </div>
+
+            <div>
+              <Label htmlFor="eventType" className="text-base">What type of event? *</Label>
+              <Select
+                value={formData.eventType}
+                onValueChange={(value) => setFormData({ ...formData, eventType: value })}
+                required
+              >
+                <SelectTrigger className="mt-2 h-12 text-base">
+                  <SelectValue placeholder="Select event type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="wedding">Wedding</SelectItem>
+                  <SelectItem value="corporate">Corporate Event</SelectItem>
+                  <SelectItem value="birthday">Birthday Party</SelectItem>
+                  <SelectItem value="baby-shower">Baby Shower</SelectItem>
+                  <SelectItem value="retirement">Retirement Party</SelectItem>
+                  <SelectItem value="bar-mitzvah">Bar/Bat Mitzvah</SelectItem>
+                  <SelectItem value="bridal-shower">Bridal Shower</SelectItem>
+                  <SelectItem value="anniversary">Anniversary Party</SelectItem>
+                  <SelectItem value="engagement">Engagement Party</SelectItem>
+                  <SelectItem value="graduation">Graduation</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
@@ -332,7 +311,7 @@ const EventRequestForm = () => {
           </div>
         );
 
-      case 3:
+      case 2:
         return (
           <div className="space-y-6 animate-fade-in">
             <div className="text-center mb-6">
@@ -356,12 +335,13 @@ const EventRequestForm = () => {
             </div>
 
             <div>
-              <Label htmlFor="eventTime" className="text-base">What time is your event?</Label>
+              <Label htmlFor="eventTime" className="text-base">Event Start Time *</Label>
               <Input
                 id="eventTime"
                 type="time"
                 value={formData.eventTime}
                 onChange={(e) => setFormData({ ...formData, eventTime: e.target.value })}
+                required
                 className="mt-2 h-12 text-base"
               />
             </div>
@@ -386,7 +366,7 @@ const EventRequestForm = () => {
           </div>
         );
 
-      case 4:
+      case 3:
         return (
           <div className="space-y-6 animate-fade-in">
             <div className="text-center mb-6">
@@ -457,19 +437,19 @@ const EventRequestForm = () => {
           </div>
         );
 
-      case 5:
+      case 4:
         return (
           <div className="space-y-6 animate-fade-in">
             <div className="text-center mb-6">
               <h3 className="text-3xl font-bold text-foreground mb-2">
-                Almost Done!
+                Anything Else?
               </h3>
-              <p className="text-muted-foreground">Just a few final details</p>
+              <p className="text-muted-foreground">Share any additional details</p>
             </div>
 
             <div>
               <Label htmlFor="additionalInfo" className="text-base">
-                Any additional info about your event?
+                Additional Comments (Optional)
               </Label>
               <Textarea
                 id="additionalInfo"
@@ -477,6 +457,56 @@ const EventRequestForm = () => {
                 onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
                 className="mt-2 min-h-[120px] text-base"
                 placeholder="Tell us more about your event..."
+              />
+            </div>
+          </div>
+        );
+
+      case 5:
+        return (
+          <div className="space-y-6 animate-fade-in">
+            <div className="text-center mb-6">
+              <h3 className="text-3xl font-bold text-foreground mb-2">
+                How Can We Reach You?
+              </h3>
+              <p className="text-muted-foreground">Just need your contact information</p>
+            </div>
+
+            <div>
+              <Label htmlFor="name" className="text-base">Your Name *</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                className="mt-2 h-12 text-base"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="email" className="text-base">Email *</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                className="mt-2 h-12 text-base"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="phone" className="text-base">Phone *</Label>
+              <Input
+                id="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                required
+                className="mt-2 h-12 text-base"
+                placeholder="(555) 123-4567"
               />
             </div>
 
