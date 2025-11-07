@@ -30,11 +30,8 @@ const Hero = () => {
       </motion.div>
 
       {/* Content */}
-      <motion.div 
-        className="container mx-auto px-4 py-20 pb-32 relative z-10"
-        style={{ opacity }}
-      >
-        <div className="grid lg:grid-cols-2 gap-8 items-center max-w-7xl">
+      <div className="container mx-auto px-4 py-20 pb-32 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-7xl">
           <div className="max-w-4xl">
             <motion.div 
               className="inline-block bg-accent/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-accent/30"
@@ -164,17 +161,17 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Quick Quote Form - Visible on larger tablets and desktop */}
-          <motion.div 
-            className="hidden md:block"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+          {/* Quick Quote Form - Always visible on all devices */}
+          <motion.div
+            className="w-full"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.5 }}
           >
             <QuickQuoteForm />
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div 
