@@ -38,9 +38,51 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { conversationId, visitorName, visitorEmail, visitorPhone }: TranscriptRequest = await req.json();
 
+    // Validate conversation ID is provided
+    if (!conversationId || typeof conversationId !== 'string') {
+      console.error('Invalid conversation ID');
+      return new Response(
+        JSON.stringify({ error: 'Invalid conversation ID' }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (!RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not configured");
+    }
+
+    // Check if conversation exists and hasn't already sent transcript
+    const { data: existingConversation, error: fetchError } = await supabaseAdmin
+      .from('conversations')
+      .select('id, transcript_sent, ended_at')
+      .eq('id', conversationId)
+      .single();
+
+    if (fetchError || !existingConversation) {
+      console.error('Conversation not found:', fetchError);
+      return new Response(
+        JSON.stringify({ error: 'Conversation not found' }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Prevent duplicate transcript sends (spam protection)
+    if (existingConversation.transcript_sent) {
+      console.warn('Transcript already sent for conversation:', conversationId);
+      return new Response(
+        JSON.stringify({ error: 'Transcript already sent for this conversation' }),
+        {
+          status: 409,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     // Mark conversation as ended using service role
@@ -50,7 +92,8 @@ const handler = async (req: Request): Promise<Response> => {
         ended_at: new Date().toISOString(),
         transcript_sent: true 
       })
-      .eq('id', conversationId);
+      .eq('id', conversationId)
+      .eq('transcript_sent', false); // Double-check to prevent race conditions
 
     if (updateError) {
       console.error('Error updating conversation:', updateError);

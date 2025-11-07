@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { MessageSquare, Send, X, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { z } from 'zod';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -18,6 +19,17 @@ type VisitorInfo = {
   phone: string;
 };
 
+// Input validation schemas
+const visitorInfoSchema = z.object({
+  name: z.string().trim().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
+  email: z.string().trim().email('Invalid email address').max(255, 'Email must be less than 255 characters'),
+  phone: z.string().trim().max(20, 'Phone must be less than 20 characters').optional().or(z.literal('')),
+  // Honeypot field to detect bots
+  website: z.string().max(0).optional()
+});
+
+const messageSchema = z.string().trim().min(1, 'Message cannot be empty').max(2000, 'Message must be less than 2000 characters');
+
 export const ChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -26,7 +38,8 @@ export const ChatAssistant = () => {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [visitorInfo, setVisitorInfo] = useState<VisitorInfo | null>(null);
   const [showInfoForm, setShowInfoForm] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', website: '' });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-assistant`;
@@ -45,12 +58,35 @@ export const ChatAssistant = () => {
 
   const startConversation = async () => {
     try {
+      // Validate input data
+      const validation = visitorInfoSchema.safeParse(formData);
+      
+      if (!validation.success) {
+        const errors: Record<string, string> = {};
+        validation.error.errors.forEach((err) => {
+          if (err.path[0]) {
+            errors[err.path[0].toString()] = err.message;
+          }
+        });
+        setFormErrors(errors);
+        return;
+      }
+
+      // Honeypot check - if website field is filled, it's likely a bot
+      if (formData.website) {
+        console.warn('Bot detected via honeypot field');
+        // Silently fail for bots
+        return;
+      }
+
+      setFormErrors({});
+
       const { data, error } = await supabase
         .from('conversations')
         .insert({
-          visitor_name: formData.name,
-          visitor_email: formData.email,
-          visitor_phone: formData.phone,
+          visitor_name: validation.data.name,
+          visitor_email: validation.data.email,
+          visitor_phone: validation.data.phone || null,
         })
         .select()
         .single();
@@ -58,12 +94,12 @@ export const ChatAssistant = () => {
       if (error) throw error;
 
       setConversationId(data.id);
-      setVisitorInfo(formData);
+      setVisitorInfo({ name: validation.data.name, email: validation.data.email, phone: validation.data.phone || '' });
       setShowInfoForm(false);
 
       const welcomeMessage: Message = {
         role: 'assistant',
-        content: `Hi ${formData.name}! I'm here to help you plan the perfect grilled cheese catering for your event. How can I assist you today?`,
+        content: `Hi ${validation.data.name}! I'm here to help you plan the perfect grilled cheese catering for your event. How can I assist you today?`,
       };
       setMessages([welcomeMessage]);
 
@@ -243,9 +279,20 @@ export const ChatAssistant = () => {
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { role: 'user', content: input };
+    // Validate message length
+    const messageValidation = messageSchema.safeParse(input);
+    if (!messageValidation.success) {
+      toast({
+        title: 'Invalid message',
+        description: messageValidation.error.errors[0]?.message || 'Message is invalid',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const userMessage: Message = { role: 'user', content: messageValidation.data };
     setMessages((prev) => [...prev, userMessage]);
-    await saveMessage('user', input);
+    await saveMessage('user', messageValidation.data);
     setInput('');
     setIsLoading(true);
 
@@ -253,7 +300,7 @@ export const ChatAssistant = () => {
     if (window.dataLayer) {
       window.dataLayer.push({
         event: 'chat_message_sent',
-        chat_message: input,
+        chat_message: messageValidation.data,
       });
     }
 
@@ -328,10 +375,17 @@ export const ChatAssistant = () => {
                     <Input
                       id="name"
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        setFormErrors({ ...formErrors, name: '' });
+                      }}
                       placeholder="Your name"
                       required
+                      maxLength={100}
                     />
+                    {formErrors.name && (
+                      <p className="text-sm text-destructive mt-1">{formErrors.name}</p>
+                    )}
                   </div>
 
                   <div>
@@ -340,10 +394,17 @@ export const ChatAssistant = () => {
                       id="email"
                       type="email"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                        setFormErrors({ ...formErrors, email: '' });
+                      }}
                       placeholder="your@email.com"
                       required
+                      maxLength={255}
                     />
+                    {formErrors.email && (
+                      <p className="text-sm text-destructive mt-1">{formErrors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -352,10 +413,28 @@ export const ChatAssistant = () => {
                       id="phone"
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, phone: e.target.value });
+                        setFormErrors({ ...formErrors, phone: '' });
+                      }}
                       placeholder="(555) 123-4567"
+                      maxLength={20}
                     />
+                    {formErrors.phone && (
+                      <p className="text-sm text-destructive mt-1">{formErrors.phone}</p>
+                    )}
                   </div>
+
+                  {/* Honeypot field - hidden from users */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
 
                   <Button
                     onClick={startConversation}
@@ -408,6 +487,7 @@ export const ChatAssistant = () => {
                     placeholder="Ask about our catering packages..."
                     disabled={isLoading}
                     className="flex-1"
+                    maxLength={2000}
                   />
                   <Button onClick={handleSend} disabled={isLoading || !input.trim()} size="icon">
                     <Send className="h-4 w-4" />
