@@ -14,27 +14,39 @@ import MobileStickyCTA from "@/components/MobileStickyCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 import MenuGallery from "@/components/MenuGallery";
+import SEOHead from "@/components/SEOHead";
+import SEOSchema from "@/components/SEOSchema";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      <StickyCTABar />
-      <Hero />
-      <SocialProofBanner />
-      <PressSection />
-      <ServicesSection />
-      <MenuGallery />
-      <PackagesSection />
-      <ClientsSection />
-      <FAQSection />
-      <ContactSection />
-      <Footer />
-      <ChatAssistant />
-      <MobileStickyCTA />
-      <FloatingQuoteButton />
-      <ExitIntentPopup />
-    </div>
+    <>
+      <SEOHead
+        title="Food Truck Catering NJ, PA & NYC | Grilly Cheese | Top 6 in Nation"
+        description="Award-winning food truck catering for weddings, corporate events & parties in NJ, PA & NYC. 4.9★ rated. Gourmet grilled cheese made fresh on-site. 10,000+ events catered. Get free quote in 2 hours!"
+        canonical="https://grillycheese.net"
+        keywords="food truck catering, grilled cheese catering, wedding food truck NJ, corporate catering, event catering New Jersey, mobile catering NYC"
+      />
+      <SEOSchema type="homepage" />
+      
+      <div className="min-h-screen">
+        <Navigation />
+        <StickyCTABar />
+        <Hero />
+        <SocialProofBanner />
+        <PressSection />
+        <ServicesSection />
+        <MenuGallery />
+        <PackagesSection />
+        <ClientsSection />
+        <FAQSection />
+        <ContactSection />
+        <Footer />
+        <ChatAssistant />
+        <MobileStickyCTA />
+        <FloatingQuoteButton />
+        <ExitIntentPopup />
+      </div>
+    </>
   );
 };
 
