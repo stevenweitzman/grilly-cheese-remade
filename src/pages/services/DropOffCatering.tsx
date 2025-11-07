@@ -131,7 +131,7 @@ const DropOffCatering = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 rounded-full bg-accent text-background flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-                <h3 className="text-xl font-semibold mb-2">Order Online</h3>
+                <h3 className="text-xl font-semibold mb-2">Contact Us</h3>
                 <p className="text-muted-foreground">Choose your sandwiches, sides, and quantities. Tell us your delivery time.</p>
               </div>
               <div className="text-center">

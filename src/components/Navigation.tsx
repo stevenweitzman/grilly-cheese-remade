@@ -11,6 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -227,8 +233,8 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-3 animate-fade-in">
-            <Button asChild className="w-full bg-accent hover:bg-accent/90 text-background">
+          <div className="md:hidden pb-4 max-h-[calc(100vh-5rem)] overflow-y-auto animate-fade-in">
+            <Button asChild className="w-full bg-accent hover:bg-accent/90 text-background mb-3">
               <a 
                 href={isHomePage ? "#contact" : "/#contact"}
                 className="flex items-center justify-center gap-2"
@@ -266,133 +272,153 @@ const Navigation = () => {
               </Link>
             )}
 
-            {/* Services Submenu */}
-            <div className="border-l-2 border-accent/30 pl-3">
-              <p className="text-sm font-semibold text-muted-foreground mb-2">Services</p>
-              <Link
-                to="/services/food-truck-catering"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Food Truck Catering
-              </Link>
-              <Link
-                to="/services/drop-off-catering"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Drop-Off Catering
-              </Link>
-              <Link
-                to="/services/pop-up-events"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pop-Up Events
-              </Link>
-            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {/* Services Accordion */}
+              <AccordionItem value="services">
+                <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
+                  Services
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-1 pl-4">
+                    <Link
+                      to="/services/food-truck-catering"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Food Truck Catering
+                    </Link>
+                    <Link
+                      to="/services/drop-off-catering"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Drop-Off Catering
+                    </Link>
+                    <Link
+                      to="/services/pop-up-events"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Pop-Up Events
+                    </Link>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
 
-            {/* Event Types Submenu */}
-            <div className="border-l-2 border-accent/30 pl-3">
-              <p className="text-sm font-semibold text-muted-foreground mb-2">Event Types</p>
-              <Link
-                to="/events/wedding-catering"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Weddings
-              </Link>
-              <Link
-                to="/events/corporate-catering"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Corporate Events
-              </Link>
-              <Link
-                to="/events/baby-showers"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Baby Showers
-              </Link>
-              <Link
-                to="/events/retirement-parties"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Retirement Parties
-              </Link>
-              <Link
-                to="/events/film-set-catering"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Film/TV Production
-              </Link>
-              <div className="border-t border-border my-2" />
-              <Link
-                to="/events"
-                className="block py-2 text-foreground hover:text-primary transition-colors text-sm font-semibold"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                View All Events
-              </Link>
-            </div>
+              {/* Event Types Accordion */}
+              <AccordionItem value="events">
+                <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
+                  Event Types
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-1 pl-4">
+                    <Link
+                      to="/events/wedding-catering"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Weddings
+                    </Link>
+                    <Link
+                      to="/events/corporate-catering"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Corporate Events
+                    </Link>
+                    <Link
+                      to="/events/baby-showers"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Baby Showers
+                    </Link>
+                    <Link
+                      to="/events/retirement-parties"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Retirement Parties
+                    </Link>
+                    <Link
+                      to="/events/film-set-catering"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Film/TV Production
+                    </Link>
+                    <div className="border-t border-border my-2" />
+                    <Link
+                      to="/events"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm font-semibold"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      View All Events
+                    </Link>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
 
-            {/* Locations Submenu */}
-            <div className="border-l-2 border-accent/30 pl-3">
-              <p className="text-sm font-semibold text-muted-foreground mb-2">Locations</p>
-              <Link
-                to="/locations/new-jersey"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                New Jersey
-              </Link>
-              <Link
-                to="/locations/pennsylvania"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pennsylvania
-              </Link>
-              <Link
-                to="/locations/new-york-city"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                New York City
-              </Link>
-              <Link
-                to="/locations/maryland"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Maryland
-              </Link>
-              <Link
-                to="/locations/delaware"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Delaware
-              </Link>
-              <Link
-                to="/locations/washington-dc"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Washington DC
-              </Link>
-              <Link
-                to="/locations/long-island"
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Long Island
-              </Link>
-            </div>
+              {/* Locations Accordion */}
+              <AccordionItem value="locations">
+                <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
+                  Locations
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-1 pl-4">
+                    <Link
+                      to="/locations/new-jersey"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      New Jersey
+                    </Link>
+                    <Link
+                      to="/locations/pennsylvania"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Pennsylvania
+                    </Link>
+                    <Link
+                      to="/locations/new-york-city"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      New York City
+                    </Link>
+                    <Link
+                      to="/locations/maryland"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Maryland
+                    </Link>
+                    <Link
+                      to="/locations/delaware"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Delaware
+                    </Link>
+                    <Link
+                      to="/locations/washington-dc"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Washington DC
+                    </Link>
+                    <Link
+                      to="/locations/long-island"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Long Island
+                    </Link>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
             <Link
               to="/blog"
