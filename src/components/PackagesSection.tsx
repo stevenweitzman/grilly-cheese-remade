@@ -52,6 +52,25 @@ const PackagesSection = () => {
     { name: "Mini Individual Pies", description: "Seasonal varieties including cherry, blueberry, peach, apple, and pecan" }
   ];
 
+  const breakfastMenuItems = [
+    { name: "The Grilly Morning", description: "A double decker with three thick slices of white bread, buttered and grilled, loaded with three eggs, scrambled Texas-style under melted American cheeses, plastered with fat & crispy bacon" },
+    { name: "The Early Bird", description: "Two hearty slices of white bread, buttered and grilled with American cheeses melted on top of Texas-style scrambled eggs and thick bacon strips" },
+    { name: "The Philly Breakfast", description: "The real deal Philly cheesesteak with Texas-style scrambled eggs under melted American cheeses, loaded onto thick slices of white bread" },
+    { name: "An Egg & Cheese Sammy", description: "White bread loaded with American cheeses melted over eggs, scrambled Texas-style" },
+    { name: "Egg 'Em", description: "Two pieces of thick white bread buttered and grilled, then loaded with Texas-style scrambled eggs" },
+    { name: "The Grilly Chomelette", description: "A hearty blend of eggs, tomatoes, & bacon under melted cheddar cheeses loaded between thick white bread, buttered & grilled" },
+    { name: "Sausage Sunrise", description: "Two hearty slices of white bread, buttered and grilled with American cheeses melted on top of Texas-style scrambled eggs and a sausage patty" },
+    { name: "Vegan Sausage Sunrise", description: "Two hearty slices of white bread, grilled with imitation butter, loaded with Vegan cheeses melted on a sausage patty" }
+  ];
+
+  const bagelBrunchItems = {
+    bagels: ["Plain", "Sesame", "Everything"],
+    creamCheeses: ["Classic", "Herb & garlic", "Scallion/Veggie"],
+    addIns: ["Lox", "Herring", "Capers", "Red onion", "Lettuce", "Tomatoes"],
+    sides: ["Hummus & veggies (Cucumbers, Baby carrots, Celery, Grape tomatoes)"],
+    beverages: ["Orange juice", "Coffee", "Bottled Waters"]
+  };
+
   return (
     <section id="packages" className="py-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
@@ -87,7 +106,7 @@ const PackagesSection = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-7xl mx-auto">
           {/* Simple Menu */}
           <div className="bg-card rounded-xl shadow-warm border-2 border-border p-8 hover:shadow-xl transition-all hover:-translate-y-1">
             <div className="mb-6">
@@ -212,6 +231,85 @@ const PackagesSection = () => {
                 }}
               >
                 Request Full Menu Quote
+              </a>
+            </Button>
+          </div>
+
+          {/* Brunch Package */}
+          <div className="bg-card rounded-xl shadow-warm border-2 border-border p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+            <div className="mb-6">
+              <h3 className="text-3xl font-bold text-foreground mb-2">Brunch Package</h3>
+              <p className="text-muted-foreground mb-3">
+                Start your day right with our breakfast sandwiches or bagel bar. Perfect for morning events, brunches, and early gatherings. All items made fresh on-site with quality ingredients.
+              </p>
+              <p className="text-sm text-accent font-semibold">
+                ✓ Fresh breakfast items • Bagel bar available • Coffee & OJ included
+              </p>
+            </div>
+
+            <div className="mb-6">
+              <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <span className="text-accent">🍳</span> Breakfast Sandwiches:
+              </h4>
+              <div className="space-y-2 max-h-64 overflow-y-auto pr-2">
+                {breakfastMenuItems.map((item, index) => (
+                  <div key={index} className="bg-muted/30 rounded-lg p-3 hover:bg-muted/50 transition-colors">
+                    <div className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="text-foreground font-semibold text-sm">{item.name}</span>
+                        <p className="text-xs text-muted-foreground">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-border pt-6 mb-6">
+              <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                <span className="text-accent">🥯</span> Bagels & Brunch Bar:
+              </h4>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <span className="font-semibold text-foreground">Bagel Assortment:</span>
+                  <p className="text-muted-foreground">{bagelBrunchItems.bagels.join(", ")}</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-foreground">Cream Cheeses:</span>
+                  <p className="text-muted-foreground">{bagelBrunchItems.creamCheeses.join(", ")}</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-foreground">Add-ins:</span>
+                  <p className="text-muted-foreground">{bagelBrunchItems.addIns.join(", ")}</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-foreground">Beverages:</span>
+                  <p className="text-muted-foreground">{bagelBrunchItems.beverages.join(", ")}</p>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground mt-3 italic">
+                "Perfect for our morning corporate event. Guests loved the variety!" - Lisa K., Google
+              </p>
+            </div>
+
+            <Button 
+              className="w-full" 
+              size="lg"
+              asChild
+            >
+              <a 
+                href="#contact"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'package_interest',
+                      'package_type': 'Brunch Package'
+                    });
+                  }
+                }}
+              >
+                Request Brunch Quote
               </a>
             </Button>
           </div>
