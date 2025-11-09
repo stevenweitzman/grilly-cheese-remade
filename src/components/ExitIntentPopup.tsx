@@ -25,12 +25,12 @@ const ExitIntentPopup = () => {
         setIsOpen(true);
         setHasShown(true);
         sessionStorage.setItem("exitIntentShown", "true");
-        
+
         // Track popup view
-        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        if (typeof window !== "undefined" && (window as any).dataLayer) {
           (window as any).dataLayer.push({
-            'event': 'exit_intent_popup',
-            'popup_action': 'shown'
+            event: "exit_intent_popup",
+            popup_action: "shown",
           });
         }
       }
@@ -42,12 +42,12 @@ const ExitIntentPopup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Track conversion
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+    if (typeof window !== "undefined" && (window as any).dataLayer) {
       (window as any).dataLayer.push({
-        'event': 'exit_intent_conversion',
-        'conversion_type': 'email_capture'
+        event: "exit_intent_conversion",
+        conversion_type: "email_capture",
       });
     }
 
@@ -73,11 +73,10 @@ const ExitIntentPopup = () => {
               <Gift className="h-12 w-12 text-accent" />
             </div>
           </div>
-          <DialogTitle className="text-2xl text-center">
-            Wait! Get 10% Off Your First Event
-          </DialogTitle>
+          <DialogTitle className="text-2xl text-center">Wait! Get $100 Off Your First Event</DialogTitle>
           <DialogDescription className="text-center text-base">
-            Join 500+ happy customers who've saved on their event catering. Enter your email to receive your exclusive discount code.
+            Join 500+ happy food truck clients who've saved on their event catering. Enter your email to receive your
+            exclusive discount code.
           </DialogDescription>
         </DialogHeader>
 
@@ -96,7 +95,7 @@ const ExitIntentPopup = () => {
           </div>
 
           <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-background" size="lg">
-            Get My 10% Discount Code
+            Get My $100 Discount
           </Button>
 
           <p className="text-xs text-muted-foreground text-center">
@@ -106,7 +105,8 @@ const ExitIntentPopup = () => {
 
         <div className="mt-4 pt-4 border-t border-border">
           <p className="text-sm text-center text-muted-foreground">
-            🎉 <strong className="text-foreground">Bonus:</strong> Get our free Event Planning Guide with menu recommendations & timeline tips
+            🎉 <strong className="text-foreground">Bonus:</strong> Get our free Food Truck Booking guide with menu
+            recommendations & timeline tips
           </p>
         </div>
       </DialogContent>
