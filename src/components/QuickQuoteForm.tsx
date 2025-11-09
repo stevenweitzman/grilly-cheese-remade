@@ -6,82 +6,98 @@ import { Calendar, Users, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  eventDate: string;
+  eventStartTime: string;
+  guests: string;
+  eventType: string;
+  propertyType: string;
+  comments: string;
+}
+
 const QuickQuoteForm = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
     eventDate: "",
-    guestCount: "",
+    eventStartTime: "",
+    guests: "",
     eventType: "",
+    propertyType: "",
+    comments: "",
   });
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const getStepName = (stepNumber: number): string => {
+    const stepNames: { [key: number]: string } = {
+      1: "Event Details",
+      2: "Event Type",
+      3: "Personal Information",
+    };
+    return stepNames[stepNumber] || `Step ${stepNumber}`;
   };
 
   const handleNext = () => {
-    // Track step completion
+    setStep(step + 1);
+    
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
       (window as any).dataLayer.push({
-        'event': 'quick_quote_step',
-        'step_number': step,
-        'step_completed': true
+        'event': 'form_step_completed',
+        'form_type': 'quick_quote',
+        'step': step,
+        'step_name': getStepName(step)
       });
     }
-    setStep(step + 1);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Track form submission
     if (typeof window !== 'undefined' && (window as any).dataLayer) {
       (window as any).dataLayer.push({
-        'event': 'quick_quote_submit',
-        'event_type': formData.eventType,
-        'guest_count': formData.guestCount
+        'event': 'form_submit',
+        'form_type': 'quick_quote'
       });
     }
 
     try {
-      const { error } = await supabase.functions.invoke('send-quote-email', {
+      const { error } = await supabase.functions.invoke("send-quote-email", {
         body: {
-          formType: 'quick',
-          formData: {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            eventDate: formData.eventDate,
-            guestCount: formData.guestCount,
-            eventType: formData.eventType,
-          }
-        }
+          formType: "quick",
+          ...formData,
+        },
       });
 
       if (error) throw error;
 
-      toast.success("Quote request received! We'll contact you within 2 hours during business hours.");
-      
-      // Reset form
+      toast.success("Quote Request Sent! We'll get back to you within 24 hours.");
+
       setFormData({
         name: "",
         email: "",
         phone: "",
         eventDate: "",
-        guestCount: "",
+        eventStartTime: "",
+        guests: "",
         eventType: "",
+        propertyType: "",
+        comments: "",
       });
       setStep(1);
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error("Something went wrong. Please call us at (267) 687-9090.");
+      console.error("Error submitting form:", error);
+      toast.error("Failed to send quote request. Please try again.");
     }
   };
-
-  const totalSteps = 3;
-  const progressPercentage = (step / totalSteps) * 100;
 
   return (
     <div className="bg-background/95 backdrop-blur-md border-2 border-accent/30 rounded-xl p-6 shadow-warm">
@@ -90,95 +106,139 @@ const QuickQuoteForm = () => {
         <p className="text-sm text-muted-foreground">30 seconds • Response in 2 hours</p>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mb-6">
-        <div className="flex justify-between mb-2">
-          {[1, 2, 3].map((num) => (
-            <div
-              key={num}
-              className={`h-2 w-full mx-1 rounded-full transition-all ${
-                num <= step ? 'bg-accent' : 'bg-muted'
-              }`}
-            />
-          ))}
-        </div>
-        <p className="text-xs text-muted-foreground text-center">Step {step} of {totalSteps}</p>
-      </div>
-
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Progress Bar */}
+        <div className="mb-6">
+          <div className="flex justify-between mb-2">
+            <span className="text-sm text-muted-foreground">Step {step} of 3</span>
+            <span className="text-sm text-muted-foreground">{Math.round((step / 3) * 100)}%</span>
+          </div>
+          <div className="h-2 bg-muted rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-gradient-hero transition-all duration-300 ease-out"
+              style={{ width: `${(step / 3) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Step 1: Event Details */}
         {step === 1 && (
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-4 animate-in fade-in-0 slide-in-from-right-1">
             <div>
-              <Label htmlFor="quick-name">Name *</Label>
+              <Label htmlFor="eventDate" className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Event Date *
+              </Label>
               <Input
-                id="quick-name"
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
+                id="eventDate"
+                name="eventDate"
+                type="date"
+                value={formData.eventDate}
+                onChange={handleInputChange}
                 required
-                placeholder="Your name"
+                className="bg-background/50"
               />
             </div>
             <div>
-              <Label htmlFor="quick-email">Email *</Label>
+              <Label htmlFor="eventStartTime">
+                Event Start Time *
+              </Label>
               <Input
-                id="quick-email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
+                id="eventStartTime"
+                name="eventStartTime"
+                type="time"
+                value={formData.eventStartTime}
+                onChange={handleInputChange}
                 required
-                placeholder="your@email.com"
+                className="bg-background/50"
               />
             </div>
             <div>
-              <Label htmlFor="quick-phone">Phone *</Label>
+              <Label htmlFor="guests" className="flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Number of Guests *
+              </Label>
               <Input
-                id="quick-phone"
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => handleInputChange("phone", e.target.value)}
+                id="guests"
+                name="guests"
+                type="number"
+                placeholder="50"
+                value={formData.guests}
+                onChange={handleInputChange}
                 required
-                placeholder="(555) 555-5555"
+                className="bg-background/50"
               />
             </div>
             <Button
               type="button"
               onClick={handleNext}
+              disabled={!formData.eventDate || !formData.eventStartTime || !formData.guests}
               className="w-full"
-              disabled={!formData.name || !formData.email || !formData.phone}
             >
               Continue
             </Button>
           </div>
         )}
 
+        {/* Step 2: Event Type & Property */}
         {step === 2 && (
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-4 animate-in fade-in-0 slide-in-from-right-1">
             <div>
-              <Label htmlFor="quick-date" className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                Event Date *
+              <Label htmlFor="eventType" className="flex items-center gap-2">
+                <PartyPopper className="h-4 w-4" />
+                Event Type *
               </Label>
-              <Input
-                id="quick-date"
-                type="date"
-                value={formData.eventDate}
-                onChange={(e) => handleInputChange("eventDate", e.target.value)}
+              <select
+                id="eventType"
+                name="eventType"
+                value={formData.eventType}
+                onChange={handleInputChange}
                 required
-              />
+                className="w-full px-3 py-2 bg-background/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="">Select event type</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Corporate Event">Corporate Event</option>
+                <option value="Birthday Party">Birthday Party</option>
+                <option value="Baby Shower">Baby Shower</option>
+                <option value="Retirement Party">Retirement Party</option>
+                <option value="Film Set Catering">Film Set Catering</option>
+                <option value="Festival/Pop-Up">Festival/Pop-Up Event</option>
+                <option value="Fundraiser">Fundraiser</option>
+                <option value="School Event">School Event</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
             <div>
-              <Label htmlFor="quick-guests" className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                Number of Guests *
+              <Label htmlFor="propertyType">
+                Property Type *
               </Label>
-              <Input
-                id="quick-guests"
-                type="number"
-                value={formData.guestCount}
-                onChange={(e) => handleInputChange("guestCount", e.target.value)}
+              <select
+                id="propertyType"
+                name="propertyType"
+                value={formData.propertyType}
+                onChange={handleInputChange}
                 required
-                placeholder="e.g., 50"
-                min="1"
+                className="w-full px-3 py-2 bg-background/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="">Select property type</option>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+                <option value="Not Sure">Not Sure</option>
+              </select>
+            </div>
+            <div>
+              <Label htmlFor="comments">
+                Additional Comments
+              </Label>
+              <textarea
+                id="comments"
+                name="comments"
+                value={formData.comments}
+                onChange={handleInputChange}
+                placeholder="Any special requests or additional information..."
+                rows={4}
+                className="w-full px-3 py-2 bg-background/50 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring resize-none"
               />
             </div>
             <div className="flex gap-2">
@@ -186,15 +246,15 @@ const QuickQuoteForm = () => {
                 type="button"
                 variant="outline"
                 onClick={() => setStep(1)}
-                className="w-full"
+                className="w-1/3"
               >
                 Back
               </Button>
               <Button
                 type="button"
                 onClick={handleNext}
-                className="w-full"
-                disabled={!formData.eventDate || !formData.guestCount}
+                disabled={!formData.eventType || !formData.propertyType}
+                className="w-2/3"
               >
                 Continue
               </Button>
@@ -202,46 +262,52 @@ const QuickQuoteForm = () => {
           </div>
         )}
 
+        {/* Step 3: Personal Information */}
         {step === 3 && (
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-4 animate-in fade-in-0 slide-in-from-right-1">
             <div>
-              <Label htmlFor="quick-type" className="flex items-center gap-2">
-                <PartyPopper className="h-4 w-4" />
-                Event Type *
+              <Label htmlFor="name">
+                Name *
               </Label>
-              <select
-                id="quick-type"
-                value={formData.eventType}
-                onChange={(e) => handleInputChange("eventType", e.target.value)}
+              <Input
+                id="name"
+                name="name"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleInputChange}
                 required
-                className="w-full h-10 px-3 rounded-md border border-input bg-background"
-              >
-                <option value="">Select event type</option>
-                <option value="wedding">Wedding</option>
-                <option value="corporate">Corporate Event</option>
-                <option value="birthday">Birthday Party</option>
-                <option value="baby-shower">Baby Shower</option>
-                <option value="retirement">Retirement Party</option>
-                <option value="bar-mitzvah">Bar/Bat Mitzvah</option>
-                <option value="bridal-shower">Bridal Shower</option>
-                <option value="anniversary">Anniversary Party</option>
-                <option value="engagement">Engagement Party</option>
-                <option value="sweet-16">Sweet 16</option>
-                <option value="quinceanera">Quinceañera</option>
-                <option value="reunion">Family/Class Reunion</option>
-                <option value="graduation">Graduation</option>
-                <option value="holiday">Holiday Party</option>
-                <option value="fundraiser">Fundraiser/Charity Event</option>
-                <option value="school-event">School Event</option>
-                <option value="church-event">Church/Religious Event</option>
-                <option value="block-party">Block Party</option>
-                <option value="company-picnic">Company Picnic</option>
-                <option value="grand-opening">Grand Opening</option>
-                <option value="sports-event">Sports Event/Tournament</option>
-                <option value="film-set">Film/TV Set Catering</option>
-                <option value="festival">Festival</option>
-                <option value="other">Other</option>
-              </select>
+                className="bg-background/50"
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">
+                Email *
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="bg-background/50"
+              />
+            </div>
+            <div>
+              <Label htmlFor="phone">
+                Phone *
+              </Label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="(555) 555-5555"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                className="bg-background/50"
+              />
             </div>
 
             <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
@@ -256,25 +322,25 @@ const QuickQuoteForm = () => {
                 type="button"
                 variant="outline"
                 onClick={() => setStep(2)}
-                className="w-full"
+                className="w-1/3"
               >
                 Back
               </Button>
               <Button
                 type="submit"
-                className="w-full bg-accent hover:bg-accent/90 text-background"
-                disabled={!formData.eventType}
+                disabled={!formData.name || !formData.email || !formData.phone}
+                className="w-2/3"
               >
                 Get My Free Quote
               </Button>
             </div>
           </div>
         )}
-      </form>
 
-      <p className="text-xs text-muted-foreground text-center mt-4">
-        🔒 Your information is secure and will never be shared
-      </p>
+        <p className="text-xs text-muted-foreground text-center">
+          🔒 Your information is secure and will never be shared
+        </p>
+      </form>
     </div>
   );
 };
