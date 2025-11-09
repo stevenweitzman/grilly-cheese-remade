@@ -5,6 +5,7 @@ import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { Phone, MessageSquare } from "lucide-react";
 
 const ServicesOverview = () => {
   const eventCategories = [
@@ -211,7 +212,16 @@ const ServicesOverview = () => {
                 Get Your Free Quote
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="tel:8566665161">(856) 666-5161</a>
+                <a href="tel:8444745591" className="flex items-center gap-2">
+                  <Phone className="h-5 w-5" />
+                  844-474-5591
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a href="sms:8444745591" className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Text Us
+                </a>
               </Button>
             </div>
           </div>
