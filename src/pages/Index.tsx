@@ -22,13 +22,13 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="Food Truck Catering NJ, PA & NYC | Grilly Cheese | Top 6 in Nation"
+        title="Food Truck Catering NJ, PA & NYC | Grilly Cheese | Book the Food Truck"
         description="Award-winning food truck catering for weddings, corporate events & parties in NJ, PA & NYC. 4.9★ rated. Gourmet grilled cheese made fresh on-site. 2,500+ events catered. Get your quote in 2 hours!"
         canonical="https://grillycheese.net"
-        keywords="food truck catering, grilled cheese catering, wedding food truck NJ, corporate catering, event catering New Jersey, mobile catering NYC"
+        keywords="food truck, philadelphia food trucks, philly food trucks, food truck catering, grilled cheese catering, wedding food truck NJ, corporate catering, event catering New Jersey, mobile catering NYC"
       />
       <SEOSchema type="homepage" />
-      
+
       <div className="min-h-screen">
         <Navigation />
         <StickyCTABar />
