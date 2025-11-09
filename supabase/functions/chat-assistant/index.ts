@@ -196,7 +196,7 @@ Our premium offering with expanded options. Includes everything from Simple Menu
 - Do you need the truck to stay longer than the standard time?
 - Offer the customer to speak directly with a teammate from Grilly Cheese when appropriate
 
-Keep your responses friendly, helpful, and focused on creating an amazing event experience!`;
+Keep your responses concise yet friendly, helpful, and focused on creating an amazing event experience!`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
