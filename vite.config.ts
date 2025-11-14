@@ -16,6 +16,8 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    // CSS code splitting - inline small CSS to reduce network chains
+    cssCodeSplit: false,
     // Ensure proper chunking for pre-rendering
     rollupOptions: {
       output: {
