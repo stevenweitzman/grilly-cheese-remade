@@ -24,6 +24,8 @@ const SEOSchema = ({
     "@context": "https://schema.org",
     "@type": "FoodEstablishment",
     "name": "Grilly Cheese",
+    "alternateName": "Grilly Cheese Food Truck",
+    "description": "Award-winning gourmet grilled cheese food truck catering for weddings, corporate events, and private parties across NJ, PA, NYC, and beyond",
     "image": `${baseUrl}/assets/hero-grilled-cheese.jpg`,
     "@id": baseUrl,
     "url": baseUrl,
@@ -51,11 +53,14 @@ const SEOSchema = ({
       }
     ],
     "servesCuisine": ["American", "Comfort Food", "Grilled Cheese"],
+    "paymentAccepted": "Cash, Credit Card, Debit Card",
+    "currenciesAccepted": "USD",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
       "reviewCount": "500",
-      "bestRating": "5"
+      "bestRating": "5",
+      "worstRating": "1"
     },
     "areaServed": [
       {
@@ -67,36 +72,74 @@ const SEOSchema = ({
         "name": "Pennsylvania"
       },
       {
-        "@type": "City",
-        "name": "New York City"
+        "@type": "State",
+        "name": "New York"
+      },
+      {
+        "@type": "State",
+        "name": "Maryland"
+      },
+      {
+        "@type": "State",
+        "name": "Delaware"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Washington DC"
       }
-    ]
+    ],
+    "hasMenu": {
+      "@type": "Menu",
+      "name": "Catering Menu",
+      "description": "Gourmet grilled cheese sandwiches, hot dogs, and sides"
+    }
   };
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": serviceName || "Food Truck Catering",
+    "name": serviceName || "Food Truck Catering Services",
+    "description": "Professional food truck catering for corporate events, weddings, festivals, and private parties with award-winning gourmet grilled cheese",
     "provider": {
       "@type": "Organization",
       "name": "Grilly Cheese",
       "telephone": "844-474-5591",
-      "url": baseUrl
+      "url": baseUrl,
+      "logo": `${baseUrl}/assets/grilly-cheese-logo.png`
     },
-    "areaServed": {
-      "@type": "State",
-      "name": ["New Jersey", "Pennsylvania", "New York"]
-    },
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "New Jersey"
+      },
+      {
+        "@type": "State",
+        "name": "Pennsylvania"
+      },
+      {
+        "@type": "State",
+        "name": "New York"
+      },
+      {
+        "@type": "State",
+        "name": "Maryland"
+      },
+      {
+        "@type": "State",
+        "name": "Delaware"
+      }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Catering Services",
+      "name": "Catering Packages",
       "itemListElement": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Simple Menu Package",
-            "description": "Classic grilled cheese and hot dogs with hand-cut fries and beverages"
+            "description": "Classic grilled cheese sandwiches and hot dogs with hand-cut fries, beverages, and all serving equipment"
           }
         },
         {
@@ -104,15 +147,30 @@ const SEOSchema = ({
           "itemOffered": {
             "@type": "Service",
             "name": "Full Menu Package",
-            "description": "Gourmet sandwiches with premium ingredients including The Grilly Cheese and The Cluck Norris"
+            "description": "Gourmet grilled cheese menu featuring The Grilly Cheese, The Cluck Norris, and specialty sandwiches with premium sides"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Brunch Package",
+            "description": "Breakfast sandwiches and bagel bar with cream cheese spreads, perfect for morning events"
           }
         }
       ]
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "500",
+      "bestRating": "5"
+    },
     "offers": {
       "@type": "AggregateOffer",
       "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "priceRange": "$$"
     }
   };
 

@@ -6,6 +6,10 @@ interface SEOHeadProps {
   canonical?: string;
   keywords?: string;
   ogImage?: string;
+  ogType?: "website" | "article" | "business.business";
+  articleAuthor?: string;
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
 }
 
 const SEOHead = ({ 
@@ -13,7 +17,11 @@ const SEOHead = ({
   description, 
   canonical,
   keywords,
-  ogImage = "https://grillycheese.net/assets/hero-grilled-cheese.jpg"
+  ogImage = "https://grillycheese.net/assets/hero-grilled-cheese.jpg",
+  ogType = "website",
+  articleAuthor,
+  articlePublishedTime,
+  articleModifiedTime
 }: SEOHeadProps) => {
   const baseUrl = "https://grillycheese.net";
   const fullTitle = title.includes("Grilly Cheese") ? title : `${title} | Grilly Cheese`;
@@ -29,11 +37,17 @@ const SEOHead = ({
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:alt" content="Grilly Cheese Food Truck Catering" />
+      <meta property="og:site_name" content="Grilly Cheese" />
+      <meta property="og:locale" content="en_US" />
+      {articleAuthor && <meta property="article:author" content={articleAuthor} />}
+      {articlePublishedTime && <meta property="article:published_time" content={articlePublishedTime} />}
+      {articleModifiedTime && <meta property="article:modified_time" content={articleModifiedTime} />}
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
@@ -43,10 +57,14 @@ const SEOHead = ({
       <meta property="twitter:image" content={ogImage} />
 
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
       <meta name="author" content="Grilly Cheese" />
+      <meta name="geo.region" content="US-NJ" />
+      <meta name="geo.placename" content="New Jersey, Pennsylvania, New York" />
+      <meta name="geo.position" content="39.7324;-74.8807" />
+      <meta name="ICBM" content="39.7324, -74.8807" />
     </Helmet>
   );
 };
