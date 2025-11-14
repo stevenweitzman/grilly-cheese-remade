@@ -141,6 +141,21 @@ export const ChatAssistant = () => {
         content: welcomeMessage.content,
       });
 
+      // Send immediate notification to business
+      try {
+        await supabase.functions.invoke('send-contact-notification', {
+          body: {
+            conversationId: data.id,
+            visitorName: validation.data.name,
+            visitorEmail: validation.data.email,
+            visitorPhone: validation.data.phone || null,
+          }
+        });
+      } catch (notificationError) {
+        // Don't block the chat from starting if notification fails
+        console.error('Failed to send contact notification:', notificationError);
+      }
+
       // Start inactivity timer after conversation starts
       resetInactivityTimer();
 
