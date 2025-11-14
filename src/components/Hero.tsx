@@ -16,17 +16,13 @@ const Hero = () => {
       {/* Background Image with Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
-        style={{ y: imageY, willChange: 'transform' }}
+        style={{ y: imageY }}
       >
         <div className="absolute inset-0 scale-110">
           <img
             src={heroImage}
             alt="Golden, buttery grilled cheese sandwich with melted American cheese on thick-cut white bread - award-winning food truck catering in New Jersey"
             className="w-full h-full object-cover"
-            width="1920"
-            height="1080"
-            fetchPriority="high"
-            loading="eager"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
@@ -189,7 +185,7 @@ const Hero = () => {
           duration: 0.8, 
           delay: 2,
         }}
-        style={{ opacity, willChange: 'opacity, transform' }}
+        style={{ opacity }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

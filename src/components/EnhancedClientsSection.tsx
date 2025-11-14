@@ -182,8 +182,6 @@ const EnhancedClientsSection = () => {
                 src={client.logo}
                 alt={`${client.name} logo`}
                 className="max-w-full h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                width="200"
-                height="64"
                 loading="lazy"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;

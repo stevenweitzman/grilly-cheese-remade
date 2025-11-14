@@ -14,8 +14,6 @@ const Footer = () => {
               src={logoWhite} 
               alt="Grilly Cheese Logo" 
               className="h-12 w-auto mb-3"
-              width="120"
-              height="84"
             />
             <p className="text-primary-foreground/80 text-sm mb-4">
               Award-winning food truck catering for NJ, PA, & NYC

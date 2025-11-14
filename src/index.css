@@ -115,24 +115,3 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
-
-/* Performance optimizations for animations and scroll effects */
-@layer utilities {
-  /* Promote elements with motion to their own compositing layer */
-  [data-framer-motion-id],
-  .motion-element {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-  
-  /* Optimize parallax scrolling elements */
-  [style*="translateY"],
-  [style*="transform"] {
-    will-change: transform;
-  }
-  
-  /* Batch paint operations for better performance */
-  img[loading="eager"] {
-    content-visibility: auto;
-  }
-}
