@@ -53,7 +53,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                Gourmet Grilled Cheese
+                Food Truck Catering
               </motion.span>
               <motion.span 
                 className="block text-accent"
@@ -61,7 +61,7 @@ const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                On Wheels
+                NJ, PA & NYC
               </motion.span>
             </motion.h1>
           
@@ -71,7 +71,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Serving NJ, PA, NYC, MD, DE, DC & Long Island
+              Award-Winning Gourmet Grilled Cheese for Your Event
             </motion.p>
           
             <motion.p 
@@ -80,7 +80,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.9 }}
             >
-              From baby showers to retirement parties, corporate events to film set catering, weddings to festivals - we bring award-winning grilled cheese to Baltimore, Philly, Queens, Brooklyn, Princeton & beyond.
+              Professional food truck catering for weddings, corporate events, baby showers, and parties across New Jersey, Pennsylvania, New York City, Maryland, Delaware, DC & Long Island. Serving Philadelphia, Baltimore, Princeton, Queens, Brooklyn and beyond. 2,500+ events catered with 4.9★ ratings.
             </motion.p>
 
             <motion.div 
