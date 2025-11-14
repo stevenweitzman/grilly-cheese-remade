@@ -118,19 +118,37 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Format the transcript with HTML escaping to prevent XSS
     const transcriptHtml = `
-      <h2>Chat Transcript</h2>
-      <p><strong>Visitor:</strong> ${escapeHtml(visitorName)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(visitorEmail)}</p>
-      <p><strong>Phone:</strong> ${visitorPhone ? escapeHtml(visitorPhone) : 'Not provided'}</p>
-      <p><strong>Conversation ID:</strong> ${escapeHtml(conversationId)}</p>
-      <hr>
-      ${messages.map(msg => `
-        <div style="margin: 15px 0; padding: 10px; background: ${msg.role === 'user' ? '#f0f0f0' : '#e3f2fd'}; border-radius: 5px;">
-          <strong>${msg.role === 'user' ? 'Visitor' : 'Assistant'}:</strong>
-          <p>${escapeHtml(msg.content)}</p>
-          <small style="color: #666;">${new Date(msg.created_at).toLocaleString()}</small>
+      <div style="background: #f9fafb; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="background: white; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <h1 style="color: #ea384c; margin: 0 0 20px 0; font-size: 24px;">New Chat Transcript</h1>
+          
+          <!-- Visitor Contact Info Box -->
+          <div style="background: #fef2f2; border-left: 4px solid #ea384c; padding: 15px; margin-bottom: 25px; border-radius: 4px;">
+            <h3 style="margin: 0 0 12px 0; font-size: 16px; color: #333;">Visitor Information</h3>
+            <p style="margin: 5px 0; color: #555;"><strong>Name:</strong> ${escapeHtml(visitorName)}</p>
+            <p style="margin: 5px 0; color: #555;"><strong>Email:</strong> <a href="mailto:${escapeHtml(visitorEmail)}" style="color: #ea384c;">${escapeHtml(visitorEmail)}</a></p>
+            <p style="margin: 5px 0; color: #555;"><strong>Phone:</strong> ${visitorPhone ? `<a href="tel:${escapeHtml(visitorPhone)}" style="color: #ea384c;">${escapeHtml(visitorPhone)}</a>` : 'Not provided'}</p>
+            <p style="margin: 5px 0; color: #555;"><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+            <p style="margin: 5px 0; color: #999; font-size: 12px;"><strong>Conversation ID:</strong> ${escapeHtml(conversationId)}</p>
+          </div>
+          
+          <!-- Chat Transcript -->
+          <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #333;">Conversation Transcript</h3>
+          <div style="border-top: 1px solid #e5e7eb; padding-top: 15px;">
+            ${messages.map(msg => `
+              <div style="margin: 15px 0; padding: 12px; background: ${msg.role === 'user' ? '#f3f4f6' : '#e0f2fe'}; border-radius: 6px; border-left: 3px solid ${msg.role === 'user' ? '#6b7280' : '#0ea5e9'};">
+                <strong style="color: ${msg.role === 'user' ? '#374151' : '#0369a1'}; font-size: 14px;">${msg.role === 'user' ? '👤 Visitor' : '🤖 Assistant'}:</strong>
+                <p style="margin: 8px 0 4px 0; color: #1f2937; white-space: pre-wrap;">${escapeHtml(msg.content)}</p>
+                <small style="color: #6b7280; font-size: 11px;">${new Date(msg.created_at).toLocaleString()}</small>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #6b7280; font-size: 12px;">
+            <p style="margin: 0;">This chat transcript was automatically sent from your Grilly Cheese website.</p>
+          </div>
         </div>
-      `).join('')}
+      </div>
     `;
 
     // Send email using Resend API
@@ -143,7 +161,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "Grilly Cheese Chat <onboarding@resend.dev>",
         to: ["grillycheese@grillycheese.net"],
-        subject: `New Lead: ${escapeHtml(visitorName)} - Chat Transcript`,
+        subject: `New Chat Lead: ${escapeHtml(visitorName)}`,
         html: transcriptHtml,
       }),
     });

@@ -40,9 +40,11 @@ export const ChatAssistant = () => {
   const [showInfoForm, setShowInfoForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', website: '' });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [inactivityTimer, setInactivityTimer] = useState<NodeJS.Timeout | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-assistant`;
+  const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -55,6 +57,36 @@ export const ChatAssistant = () => {
       setShowInfoForm(true);
     }
   }, [isOpen, conversationId, showInfoForm]);
+
+  // Cleanup inactivity timer on unmount
+  useEffect(() => {
+    return () => {
+      if (inactivityTimer) {
+        clearTimeout(inactivityTimer);
+      }
+    };
+  }, [inactivityTimer]);
+
+  const resetInactivityTimer = () => {
+    // Clear existing timer
+    if (inactivityTimer) {
+      clearTimeout(inactivityTimer);
+    }
+    
+    // Set new timer
+    const timer = setTimeout(() => {
+      if (conversationId && visitorInfo && messages.length > 1) {
+        // Send transcript for inactive conversation
+        endConversation();
+        toast({
+          title: "Chat ended due to inactivity",
+          description: "A transcript has been sent.",
+        });
+      }
+    }, INACTIVITY_TIMEOUT);
+    
+    setInactivityTimer(timer);
+  };
 
   const startConversation = async () => {
     try {
@@ -109,6 +141,9 @@ export const ChatAssistant = () => {
         content: welcomeMessage.content,
       });
 
+      // Start inactivity timer after conversation starts
+      resetInactivityTimer();
+
       toast({
         title: 'Welcome!',
         description: "Your conversation has started. Feel free to ask me anything!",
@@ -140,6 +175,12 @@ export const ChatAssistant = () => {
   const endConversation = async () => {
     if (!conversationId || !visitorInfo) return;
 
+    // Clear inactivity timer
+    if (inactivityTimer) {
+      clearTimeout(inactivityTimer);
+      setInactivityTimer(null);
+    }
+
     try {
       // Send transcript via edge function
       // The edge function handles updating the conversation and retrieving messages using service role
@@ -154,7 +195,7 @@ export const ChatAssistant = () => {
 
       toast({
         title: "Chat ended",
-        description: "A transcript has been sent to your email.",
+        description: "A transcript has been sent.",
       });
     } catch (error) {
       console.error('Error ending conversation:', error);
@@ -186,6 +227,7 @@ export const ChatAssistant = () => {
         setMessages((prev) => [...prev, assistantMessage]);
         await saveMessage('assistant', contactResponse);
         setIsLoading(false);
+        resetInactivityTimer(); // Reset timer after assistant responds
         return;
       }
 
@@ -276,6 +318,7 @@ export const ChatAssistant = () => {
       ]);
     } finally {
       setIsLoading(false);
+      resetInactivityTimer(); // Reset timer after assistant responds
     }
   };
 
@@ -298,6 +341,9 @@ export const ChatAssistant = () => {
     await saveMessage('user', messageValidation.data);
     setInput('');
     setIsLoading(true);
+
+    // Reset inactivity timer when user sends a message
+    resetInactivityTimer();
 
     // Track in GTM
     if (window.dataLayer) {
