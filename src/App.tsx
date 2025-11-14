@@ -1,33 +1,38 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Eager load: Critical for initial page load
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import WeddingCatering from "./pages/services/WeddingCatering";
-import CorporateCatering from "./pages/services/CorporateCatering";
-import BabyShowers from "./pages/services/BabyShowers";
-import RetirementParties from "./pages/services/RetirementParties";
-import FilmSetCatering from "./pages/services/FilmSetCatering";
-import FoodTruckCatering from "./pages/services/FoodTruckCatering";
-import DropOffCatering from "./pages/services/DropOffCatering";
-import PopUpEvents from "./pages/services/PopUpEvents";
-import EventTypesOverview from "./pages/events/EventTypesOverview";
-import NewJersey from "./pages/locations/NewJersey";
-import Pennsylvania from "./pages/locations/Pennsylvania";
-import NewYorkCity from "./pages/locations/NewYorkCity";
-import Maryland from "./pages/locations/Maryland";
-import Delaware from "./pages/locations/Delaware";
-import WashingtonDC from "./pages/locations/WashingtonDC";
-import LongIsland from "./pages/locations/LongIsland";
-import BlogIndex from "./pages/blog/BlogIndex";
-import FoodTruckCateringNJGuide from "./pages/blog/FoodTruckCateringNJGuide";
-import BookingFoodTrucksNJ from "./pages/blog/BookingFoodTrucksNJ";
-import FoodTruckCosts from "./pages/blog/FoodTruckCosts";
-import QuestionsToAsk from "./pages/blog/QuestionsToAsk";
-import FoodTruckVsCatering from "./pages/blog/FoodTruckVsCatering";
-import CorporateEventAdvantages from "./pages/blog/CorporateEventAdvantages";
+
+// Lazy load: All other pages to reduce initial bundle
+const NotFound = lazy(() => import("./pages/NotFound"));
+const WeddingCatering = lazy(() => import("./pages/services/WeddingCatering"));
+const CorporateCatering = lazy(() => import("./pages/services/CorporateCatering"));
+const BabyShowers = lazy(() => import("./pages/services/BabyShowers"));
+const RetirementParties = lazy(() => import("./pages/services/RetirementParties"));
+const FilmSetCatering = lazy(() => import("./pages/services/FilmSetCatering"));
+const FoodTruckCatering = lazy(() => import("./pages/services/FoodTruckCatering"));
+const DropOffCatering = lazy(() => import("./pages/services/DropOffCatering"));
+const PopUpEvents = lazy(() => import("./pages/services/PopUpEvents"));
+const EventTypesOverview = lazy(() => import("./pages/events/EventTypesOverview"));
+const NewJersey = lazy(() => import("./pages/locations/NewJersey"));
+const Pennsylvania = lazy(() => import("./pages/locations/Pennsylvania"));
+const NewYorkCity = lazy(() => import("./pages/locations/NewYorkCity"));
+const Maryland = lazy(() => import("./pages/locations/Maryland"));
+const Delaware = lazy(() => import("./pages/locations/Delaware"));
+const WashingtonDC = lazy(() => import("./pages/locations/WashingtonDC"));
+const LongIsland = lazy(() => import("./pages/locations/LongIsland"));
+const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
+const FoodTruckCateringNJGuide = lazy(() => import("./pages/blog/FoodTruckCateringNJGuide"));
+const BookingFoodTrucksNJ = lazy(() => import("./pages/blog/BookingFoodTrucksNJ"));
+const FoodTruckCosts = lazy(() => import("./pages/blog/FoodTruckCosts"));
+const QuestionsToAsk = lazy(() => import("./pages/blog/QuestionsToAsk"));
+const FoodTruckVsCatering = lazy(() => import("./pages/blog/FoodTruckVsCatering"));
+const CorporateEventAdvantages = lazy(() => import("./pages/blog/CorporateEventAdvantages"));
 
 const queryClient = new QueryClient();
 
@@ -37,8 +42,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Index />} />
           
           {/* Service Type Pages */}
           <Route path="/services/food-truck-catering" element={<FoodTruckCatering />} />
@@ -82,6 +88,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
