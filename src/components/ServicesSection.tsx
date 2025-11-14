@@ -10,19 +10,19 @@ const ServicesSection = () => {
       icon: Truck,
       title: "Food Truck Catering",
       description: "Book our food truck for weddings, corporate events, festivals, and private parties. We bring the cheese to you!",
-      link: "/services/wedding-catering"
+      link: "/services/food-truck-catering"
     },
     {
       icon: Home,
       title: "Corporate Events",
       description: "Professional catering for office meetings, team events, and company celebrations. Trusted by Fortune 500 companies.",
-      link: "/services/corporate-catering"
+      link: "/events/corporate-catering"
     },
     {
       icon: ShoppingBag,
       title: "Wedding Catering",
       description: "Make your wedding unforgettable with unique, Instagram-worthy food truck catering that guests will love.",
-      link: "/services/wedding-catering"
+      link: "/events/wedding-catering"
     },
     {
       icon: PartyPopper,
