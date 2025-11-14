@@ -32,11 +32,15 @@ const Navigation = () => {
               src={logo} 
               alt="Grilly Cheese - Award-winning food truck catering" 
               className="h-12 md:h-14 w-auto dark:hidden"
+              width="120"
+              height="84"
             />
             <img 
               src={logoWhite} 
               alt="Grilly Cheese - Award-winning food truck catering" 
               className="h-12 md:h-14 w-auto hidden dark:block"
+              width="120"
+              height="84"
             />
           </Link>
 
