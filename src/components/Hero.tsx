@@ -16,7 +16,7 @@ const Hero = () => {
       {/* Background Image with Parallax */}
       <motion.div 
         className="absolute inset-0 z-0"
-        style={{ y: imageY }}
+        style={{ y: imageY, willChange: 'transform' }}
       >
         <div className="absolute inset-0 scale-110">
           <img
@@ -189,7 +189,7 @@ const Hero = () => {
           duration: 0.8, 
           delay: 2,
         }}
-        style={{ opacity }}
+        style={{ opacity, willChange: 'opacity, transform' }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
