@@ -52,6 +52,10 @@ const Navigation = () => {
               </Link>
             )}
             
+            <Link to="/auth" className="text-foreground hover:text-primary transition-colors">
+              Client Portal
+            </Link>
+            
             {/* Combined Menu Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
@@ -255,6 +259,14 @@ const Navigation = () => {
                 About
               </Link>
             )}
+
+            <Link
+              to="/auth"
+              className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Client Portal
+            </Link>
 
             <Accordion type="single" collapsible className="w-full">
               {/* Combined Menu Accordion */}
