@@ -22,6 +22,7 @@ import Settings from "./pages/portal/Settings";
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminClients from "./pages/admin/AdminClients";
+import AdminClientDetail from "./pages/admin/AdminClientDetail";
 import AdminQuotes from "./pages/admin/AdminQuotes";
 import AdminQuoteEdit from "./pages/admin/AdminQuoteEdit";
 import WeddingCatering from "./pages/services/WeddingCatering";
@@ -58,6 +59,23 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/auth" element={<Auth />} />
+          
+          {/* Client Portal Routes */}
+          <Route path="/portal/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/portal/quotes" element={<ProtectedRoute><Quotes /></ProtectedRoute>} />
+          <Route path="/portal/quotes/:id" element={<ProtectedRoute><QuoteDetail /></ProtectedRoute>} />
+          <Route path="/portal/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+          <Route path="/portal/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
+          <Route path="/portal/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
+          <Route path="/portal/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/dashboard" element={<AdminRoute><AdminLayout><AdminDashboard /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/clients" element={<AdminRoute><AdminLayout><AdminClients /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/clients/:id" element={<AdminRoute><AdminLayout><AdminClientDetail /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/quotes" element={<AdminRoute><AdminLayout><AdminQuotes /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/quotes/:id" element={<AdminRoute><AdminLayout><AdminQuoteEdit /></AdminLayout></AdminRoute>} />
           
           {/* Service Type Pages */}
           <Route path="/services/food-truck-catering" element={<FoodTruckCatering />} />
