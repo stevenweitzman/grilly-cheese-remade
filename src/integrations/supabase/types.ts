@@ -46,6 +46,61 @@ export type Database = {
           },
         ]
       }
+      communications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          quote_request_id: string
+          read_at: string | null
+          recipient_id: string | null
+          sender_id: string
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          quote_request_id: string
+          read_at?: string | null
+          recipient_id?: string | null
+          sender_id: string
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          quote_request_id?: string
+          read_at?: string | null
+          recipient_id?: string | null
+          sender_id?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communications_quote_request_id_fkey"
+            columns: ["quote_request_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communications_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communications_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conversation_rate_limit: {
         Row: {
           created_at: string
@@ -94,15 +149,292 @@ export type Database = {
         }
         Relationships: []
       }
+      documents: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_name: string
+          file_path: string
+          file_size: number
+          file_type: string
+          id: string
+          quote_request_id: string
+          uploaded_by: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_name: string
+          file_path: string
+          file_size: number
+          file_type: string
+          id?: string
+          quote_request_id: string
+          uploaded_by: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          file_type?: string
+          id?: string
+          quote_request_id?: string
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documents_quote_request_id_fkey"
+            columns: ["quote_request_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoices: {
+        Row: {
+          amount: number
+          amount_paid: number
+          created_at: string
+          due_date: string | null
+          id: string
+          invoice_number: string
+          notes: string | null
+          paid_at: string | null
+          quote_request_id: string
+          status: Database["public"]["Enums"]["invoice_status"]
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          amount_paid?: number
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number: string
+          notes?: string | null
+          paid_at?: string | null
+          quote_request_id: string
+          status?: Database["public"]["Enums"]["invoice_status"]
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          amount_paid?: number
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          notes?: string | null
+          paid_at?: string | null
+          quote_request_id?: string
+          status?: Database["public"]["Enums"]["invoice_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_quote_request_id_fkey"
+            columns: ["quote_request_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          invoice_id: string
+          notes: string | null
+          payment_date: string
+          payment_method: string | null
+          transaction_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          invoice_id: string
+          notes?: string | null
+          payment_date: string
+          payment_method?: string | null
+          transaction_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          invoice_id?: string
+          notes?: string | null
+          payment_date?: string
+          payment_method?: string | null
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          company_name: string | null
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string
+          full_name: string
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      quote_requests: {
+        Row: {
+          address: string | null
+          admin_notes: string | null
+          city: string | null
+          client_id: string
+          created_at: string
+          dietary_restrictions: string | null
+          event_date: string
+          event_time: string | null
+          event_type: string
+          final_amount: number | null
+          guests: number
+          id: string
+          notes: string | null
+          property_type: string | null
+          quoted_amount: number | null
+          state: string | null
+          status: Database["public"]["Enums"]["quote_status"]
+          updated_at: string
+          zip: string | null
+        }
+        Insert: {
+          address?: string | null
+          admin_notes?: string | null
+          city?: string | null
+          client_id: string
+          created_at?: string
+          dietary_restrictions?: string | null
+          event_date: string
+          event_time?: string | null
+          event_type: string
+          final_amount?: number | null
+          guests: number
+          id?: string
+          notes?: string | null
+          property_type?: string | null
+          quoted_amount?: number | null
+          state?: string | null
+          status?: Database["public"]["Enums"]["quote_status"]
+          updated_at?: string
+          zip?: string | null
+        }
+        Update: {
+          address?: string | null
+          admin_notes?: string | null
+          city?: string | null
+          client_id?: string
+          created_at?: string
+          dietary_restrictions?: string | null
+          event_date?: string
+          event_time?: string | null
+          event_type?: string
+          final_amount?: number | null
+          guests?: number
+          id?: string
+          notes?: string | null
+          property_type?: string | null
+          quoted_amount?: number | null
+          state?: string | null
+          status?: Database["public"]["Enums"]["quote_status"]
+          updated_at?: string
+          zip?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quote_requests_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "client"
+      invoice_status: "draft" | "sent" | "paid" | "overdue"
+      quote_status:
+        | "pending"
+        | "quoted"
+        | "approved"
+        | "completed"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -229,6 +561,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "client"],
+      invoice_status: ["draft", "sent", "paid", "overdue"],
+      quote_status: ["pending", "quoted", "approved", "completed", "cancelled"],
+    },
   },
 } as const
