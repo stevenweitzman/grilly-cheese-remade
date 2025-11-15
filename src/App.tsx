@@ -5,6 +5,25 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
+import AdminLayout from "./components/AdminLayout";
+
+// Portal Pages
+import Dashboard from "./pages/portal/Dashboard";
+import Quotes from "./pages/portal/Quotes";
+import QuoteDetail from "./pages/portal/QuoteDetail";
+import Messages from "./pages/portal/Messages";
+import Documents from "./pages/portal/Documents";
+import Billing from "./pages/portal/Billing";
+import Settings from "./pages/portal/Settings";
+
+// Admin Pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminClients from "./pages/admin/AdminClients";
+import AdminQuotes from "./pages/admin/AdminQuotes";
+import AdminQuoteEdit from "./pages/admin/AdminQuoteEdit";
 import WeddingCatering from "./pages/services/WeddingCatering";
 import CorporateCatering from "./pages/services/CorporateCatering";
 import BabyShowers from "./pages/services/BabyShowers";
