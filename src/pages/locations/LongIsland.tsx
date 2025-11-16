@@ -7,6 +7,7 @@ import { MapPin, Check } from "lucide-react";
 import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
+import { Helmet } from "react-helmet";
 
 const LongIsland = () => {
   const areas = [
@@ -30,6 +31,46 @@ const LongIsland = () => {
         title="Food Truck Catering Long Island"
         url="https://grillycheese.net/locations/long-island"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "@id": "https://grillycheese.net/locations/long-island",
+            "name": "Grilly Cheese - Long Island Food Truck Catering",
+            "image": "https://grillycheese.net/og-image.jpg",
+            "description": "Top-rated food truck catering on Long Island. Serving Hamptons weddings, corporate events, and celebrations across Nassau and Suffolk Counties.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "NY",
+              "addressCountry": "US"
+            },
+            "areaServed": areas.map(area => ({
+              "@type": "Place",
+              "name": area,
+              "addressRegion": "NY"
+            })),
+            "telephone": "+1-844-474-5591",
+            "url": "https://grillycheese.net/locations/long-island",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "$$$",
+            "servesCuisine": "American, Comfort Food, Grilled Cheese",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "250",
+              "bestRating": "5"
+            }
+          })}
+        </script>
+      </Helmet>
       
       <div className="min-h-screen">
         <Navigation />

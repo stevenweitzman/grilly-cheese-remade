@@ -7,6 +7,7 @@ import { MapPin, Check } from "lucide-react";
 import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
+import { Helmet } from "react-helmet";
 
 const Pennsylvania = () => {
   const cities = [
@@ -30,6 +31,47 @@ const Pennsylvania = () => {
         title="Food Truck Catering Pennsylvania"
         url="https://grillycheese.net/locations/pennsylvania"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "@id": "https://grillycheese.net/locations/pennsylvania",
+            "name": "Grilly Cheese - Pennsylvania Food Truck Catering",
+            "image": "https://grillycheese.net/og-image.jpg",
+            "description": "Award-winning food truck catering throughout Pennsylvania. Serving weddings, corporate events, and celebrations from Philadelphia to Pittsburgh.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "PA",
+              "addressCountry": "US"
+            },
+            "areaServed": cities.map(city => ({
+              "@type": "City",
+              "name": city,
+              "addressRegion": "PA",
+              "addressCountry": "US"
+            })),
+            "telephone": "+1-844-474-5591",
+            "url": "https://grillycheese.net/locations/pennsylvania",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "$$",
+            "servesCuisine": "American, Comfort Food, Grilled Cheese",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "450",
+              "bestRating": "5"
+            }
+          })}
+        </script>
+      </Helmet>
       
       <div className="min-h-screen">
         <Navigation />

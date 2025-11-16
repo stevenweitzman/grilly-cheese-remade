@@ -7,6 +7,7 @@ import { MapPin, Check } from "lucide-react";
 import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
+import { Helmet } from "react-helmet";
 
 const Maryland = () => {
   const cities = [
@@ -30,6 +31,47 @@ const Maryland = () => {
         title="Food Truck Catering Maryland"
         url="https://grillycheese.net/locations/maryland"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "@id": "https://grillycheese.net/locations/maryland",
+            "name": "Grilly Cheese - Maryland Food Truck Catering",
+            "image": "https://grillycheese.net/og-image.jpg",
+            "description": "Premier food truck catering throughout Maryland. Serving weddings, corporate events, and celebrations across Baltimore, Annapolis, and all MD metro areas.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "MD",
+              "addressCountry": "US"
+            },
+            "areaServed": cities.map(city => ({
+              "@type": "City",
+              "name": city,
+              "addressRegion": "MD",
+              "addressCountry": "US"
+            })),
+            "telephone": "+1-844-474-5591",
+            "url": "https://grillycheese.net/locations/maryland",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "$$",
+            "servesCuisine": "American, Comfort Food, Grilled Cheese",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "300",
+              "bestRating": "5"
+            }
+          })}
+        </script>
+      </Helmet>
       
       <div className="min-h-screen">
         <Navigation />
