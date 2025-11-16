@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://grillycheese.net/</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,19 +11,19 @@
   <!-- Service Type Pages -->
   <url>
     <loc>https://grillycheese.net/services/food-truck-catering</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/services/drop-off-catering</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/services/pop-up-events</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -31,19 +31,37 @@
   <!-- Event Type Pages -->
   <url>
     <loc>https://grillycheese.net/events</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/events/wedding-catering</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/events/corporate-catering</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/events/baby-showers</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/events/retirement-parties</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/events/film-set-catering</loc>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -51,19 +69,43 @@
   <!-- Location Pages -->
   <url>
     <loc>https://grillycheese.net/locations/new-jersey</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/locations/pennsylvania</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/locations/new-york-city</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/locations/maryland</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/locations/delaware</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/locations/washington-dc</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://grillycheese.net/locations/long-island</loc>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -71,43 +113,43 @@
   <!-- Blog -->
   <url>
     <loc>https://grillycheese.net/blog</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/blog/food-truck-catering-nj-guide</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/blog/booking-food-trucks-in-new-jersey</loc>
-    <lastmod>2023-09-13</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/blog/corporate-event-advantages</loc>
-    <lastmod>2023-06-28</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/blog/food-truck-costs</loc>
-    <lastmod>2023-03-27</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/blog/food-trucks-vs-catering</loc>
-    <lastmod>2023-03-27</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://grillycheese.net/blog/questions-to-ask</loc>
-    <lastmod>2023-03-27</lastmod>
+    <lastmod>2025-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
