@@ -7,6 +7,7 @@ import { MapPin, Check, Building2 } from "lucide-react";
 import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
+import { Helmet } from "react-helmet";
 
 const NewYorkCity = () => {
   const boroughs = [
@@ -31,6 +32,48 @@ const NewYorkCity = () => {
         title="Food Truck Catering New York City"
         url="https://grillycheese.net/locations/new-york-city"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "@id": "https://grillycheese.net/locations/new-york-city",
+            "name": "Grilly Cheese - New York City Food Truck Catering",
+            "image": "https://grillycheese.net/og-image.jpg",
+            "description": "Award-winning food truck catering across all five NYC boroughs. Serving weddings, corporate events, and celebrations throughout New York City.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "New York City",
+              "addressRegion": "NY",
+              "addressCountry": "US"
+            },
+            "areaServed": boroughs.map(borough => ({
+              "@type": "City",
+              "name": borough.name,
+              "addressRegion": "NY",
+              "addressCountry": "US"
+            })),
+            "telephone": "+1-844-474-5591",
+            "url": "https://grillycheese.net/locations/new-york-city",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "$$$",
+            "servesCuisine": "American, Comfort Food, Grilled Cheese",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "350",
+              "bestRating": "5"
+            }
+          })}
+        </script>
+      </Helmet>
       
       <div className="min-h-screen">
         <Navigation />

@@ -7,6 +7,7 @@ import { MapPin, Check } from "lucide-react";
 import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
+import { Helmet } from "react-helmet";
 
 const NewJersey = () => {
   const cities = [
@@ -38,6 +39,47 @@ const NewJersey = () => {
         title="Food Truck Catering New Jersey"
         url="https://grillycheese.net/locations/new-jersey"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "@id": "https://grillycheese.net/locations/new-jersey",
+            "name": "Grilly Cheese - New Jersey Food Truck Catering",
+            "image": "https://grillycheese.net/og-image.jpg",
+            "description": "Award-winning food truck catering throughout New Jersey. Serving weddings, corporate events, and celebrations across all NJ counties.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "NJ",
+              "addressCountry": "US"
+            },
+            "areaServed": cities.map(city => ({
+              "@type": "City",
+              "name": city,
+              "addressRegion": "NJ",
+              "addressCountry": "US"
+            })),
+            "telephone": "+1-844-474-5591",
+            "url": "https://grillycheese.net/locations/new-jersey",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "$$",
+            "servesCuisine": "American, Comfort Food, Grilled Cheese",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "500",
+              "bestRating": "5"
+            }
+          })}
+        </script>
+      </Helmet>
       
       <div className="min-h-screen">
         <Navigation />
