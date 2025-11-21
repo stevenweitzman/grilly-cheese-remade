@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "lucide-react";
 import PortalHeader from "@/components/PortalHeader";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 export default function Quotes() {
   const [quotes, setQuotes] = useState<any[]>([]);
@@ -40,8 +41,10 @@ export default function Quotes() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <PortalHeader />
+    <>
+      <ProtectedSEO title="Quotes" />
+      <div className="min-h-screen bg-background">
+        <PortalHeader />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -99,10 +102,11 @@ export default function Quotes() {
                   )}
                 </Card>
               </Link>
-            ))}
-          </div>
-        )}
-      </main>
-    </div>
+          ))}
+        </div>
+      )}
+    </main>
+  </div>
+  </>
   );
 }

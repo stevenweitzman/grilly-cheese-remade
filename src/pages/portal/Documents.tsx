@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { FileText, Upload, Download } from "lucide-react";
 import PortalHeader from "@/components/PortalHeader";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 export default function Documents() {
   const { toast } = useToast();
@@ -143,8 +144,10 @@ export default function Documents() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <PortalHeader />
+    <>
+      <ProtectedSEO title="Documents" />
+      <div className="min-h-screen bg-background">
+        <PortalHeader />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -256,10 +259,11 @@ export default function Documents() {
                   </div>
                 )}
               </CardContent>
-            </Card>
-          </div>
+          </Card>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
+  </>
   );
 }

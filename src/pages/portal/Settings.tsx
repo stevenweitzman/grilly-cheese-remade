@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Settings as SettingsIcon } from "lucide-react";
 import PortalHeader from "@/components/PortalHeader";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 export default function Settings() {
   const { toast } = useToast();
@@ -84,8 +85,10 @@ export default function Settings() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <PortalHeader />
+    <>
+      <ProtectedSEO title="Settings" />
+      <div className="min-h-screen bg-background">
+        <PortalHeader />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -137,10 +140,11 @@ export default function Settings() {
                   {saving ? "Saving..." : "Save Changes"}
                 </Button>
               </form>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-    </div>
+          </CardContent>
+        </Card>
+      </div>
+    </main>
+  </div>
+  </>
   );
 }

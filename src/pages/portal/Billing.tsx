@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DollarSign, FileText } from "lucide-react";
 import PortalHeader from "@/components/PortalHeader";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 export default function Billing() {
   const [invoices, setInvoices] = useState<any[]>([]);
@@ -51,8 +52,10 @@ export default function Billing() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <PortalHeader />
+    <>
+      <ProtectedSEO title="Billing" />
+      <div className="min-h-screen bg-background">
+        <PortalHeader />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -162,10 +165,11 @@ export default function Billing() {
                   </div>
                 ))}
               </div>
-            )}
-          </CardContent>
-        </Card>
-      </main>
-    </div>
+          )}
+        </CardContent>
+      </Card>
+    </main>
+  </div>
+  </>
   );
 }

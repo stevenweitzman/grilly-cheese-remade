@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { MessageSquare, Send } from "lucide-react";
 import PortalHeader from "@/components/PortalHeader";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 export default function Messages() {
   const { toast } = useToast();
@@ -105,8 +106,10 @@ export default function Messages() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <PortalHeader />
+    <>
+      <ProtectedSEO title="Messages" />
+      <div className="min-h-screen bg-background">
+        <PortalHeader />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -192,10 +195,11 @@ export default function Messages() {
                   </div>
                 )}
               </CardContent>
-            </Card>
-          </div>
+          </Card>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
+  </>
   );
 }

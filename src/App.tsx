@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
@@ -90,13 +90,16 @@ const App = () => (
           <Route path="/events/retirement-parties" element={<RetirementParties />} />
           <Route path="/events/film-set-catering" element={<FilmSetCatering />} />
           
-          {/* Legacy redirects - keep old URLs working */}
-          <Route path="/services" element={<EventTypesOverview />} />
-          <Route path="/services/wedding-catering" element={<WeddingCatering />} />
-          <Route path="/services/corporate-catering" element={<CorporateCatering />} />
-          <Route path="/services/baby-showers" element={<BabyShowers />} />
-          <Route path="/services/retirement-parties" element={<RetirementParties />} />
-          <Route path="/services/film-set-catering" element={<FilmSetCatering />} />
+          {/* Legacy redirects - proper 301 redirects to new URLs */}
+          <Route path="/services" element={<Navigate to="/events" replace />} />
+          <Route path="/services/wedding-catering" element={<Navigate to="/events/wedding-catering" replace />} />
+          <Route path="/services/corporate-catering" element={<Navigate to="/events/corporate-catering" replace />} />
+          <Route path="/services/baby-showers" element={<Navigate to="/events/baby-showers" replace />} />
+          <Route path="/services/retirement-parties" element={<Navigate to="/events/retirement-parties" replace />} />
+          <Route path="/services/film-set-catering" element={<Navigate to="/events/film-set-catering" replace />} />
+          
+          {/* Fix blog URL mismatch */}
+          <Route path="/blog/booking-food-trucks-nj" element={<Navigate to="/blog/booking-food-trucks-in-new-jersey" replace />} />
           
           {/* Location Pages */}
           <Route path="/locations/new-jersey" element={<NewJersey />} />

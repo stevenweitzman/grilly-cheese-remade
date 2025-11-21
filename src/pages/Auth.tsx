@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -136,8 +137,10 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-      <Card className="w-full max-w-md">
+    <>
+      <ProtectedSEO title="Sign In" />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+        <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Grilly Cheese Client Portal</CardTitle>
           <CardDescription>
@@ -241,5 +244,6 @@ export default function Auth() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

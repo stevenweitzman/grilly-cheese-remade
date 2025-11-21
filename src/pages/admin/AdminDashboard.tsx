@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, FileText, DollarSign, MessageSquare } from "lucide-react";
+import ProtectedSEO from "@/components/ProtectedSEO";
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -71,8 +72,10 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
+    <>
+      <ProtectedSEO title="Admin Dashboard" />
+      <div className="p-8">
+        <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
         <p className="text-muted-foreground">Overview of your business</p>
       </div>
@@ -154,11 +157,12 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                 </Link>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+          ))}
+        </div>
+      )}
+    </CardContent>
+  </Card>
+</div>
+</>
   );
 }
