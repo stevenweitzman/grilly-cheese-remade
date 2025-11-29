@@ -15,6 +15,7 @@ import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 import HorizontalMenuGallery from "@/components/HorizontalMenuGallery";
 import StatisticsSection from "@/components/StatisticsSection";
+import FoodTruckShowcase from "@/components/FoodTruckShowcase";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
 
@@ -38,6 +39,7 @@ const Index = () => {
         <PressSection />
         <ServicesSection />
         <HorizontalMenuGallery />
+        <FoodTruckShowcase />
         <PackagesSection />
         <EnhancedClientsSection />
         <FAQSection />
