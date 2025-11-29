@@ -9,6 +9,14 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "How Much Does It Cost To Book A Food Truck? (2025 Guide)",
+      slug: "how-much-does-it-cost-to-book-a-food-truck",
+      excerpt: "Get clear per-person pricing, average food truck rental costs, and real examples by cuisine type for catered events. Complete breakdown of what affects food truck pricing.",
+      date: "January 15, 2025",
+      category: "Event Planning",
+      readTime: "12 min read"
+    },
+    {
       title: "The Ultimate Guide to Booking Food Trucks in New Jersey",
       slug: "booking-food-trucks-in-new-jersey",
       excerpt: "Everything you need to know about booking food trucks for your NJ event: permits, regulations, logistics, and how to choose the perfect vendor.",
