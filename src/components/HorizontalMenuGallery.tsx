@@ -1,12 +1,8 @@
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import sandwichClassic from "@/assets/sandwich-classic.jpg";
-import sandwichBbq from "@/assets/sandwich-bbq.jpg";
-import sandwichSpicy from "@/assets/sandwich-spicy.jpg";
-import sandwichBuffalo from "@/assets/sandwich-buffalo.jpg";
 
 const HorizontalMenuGallery = () => {
   const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -19,42 +15,42 @@ const HorizontalMenuGallery = () => {
       description: "A double decker with three thick slices of white bread, buttered and grilled with American cheese, topped with crisp bacon",
       ingredients: ["American Cheese", "Crispy Bacon", "White Bread", "Butter"],
       tags: ["Signature", "Most Popular"],
-      image: sandwichSpicy
+      imagePlaceholder: "🧀🥓"
     },
     {
       name: "The Cluck Norris",
       description: "Buffalo chicken on sourdough, loaded with mozzarella, tomato, hot sauce, Russian dressing and basil",
       ingredients: ["Buffalo Chicken", "Mozzarella", "Sourdough", "Hot Sauce"],
       tags: ["Spicy", "Fan Favorite"],
-      image: sandwichBuffalo
+      imagePlaceholder: "🐔🌶️"
     },
     {
       name: "The Grilly Cheesesteak",
       description: "The real deal Philly cheesesteak beef cooked fresh under melted American cheeses loaded onto thick slices of white bread",
       ingredients: ["Philly Beef", "American Cheese", "White Bread", "Grilled Fresh"],
       tags: ["Signature", "Hearty"],
-      image: sandwichBbq
+      imagePlaceholder: "🥩🧀"
     },
     {
       name: "The Margherita",
       description: "Sourdough bread filled with mozzarella cheese, tomatoes and basil, buttered and grilled",
       ingredients: ["Fresh Mozzarella", "Tomatoes", "Basil", "Sourdough"],
       tags: ["Vegetarian", "Light"],
-      image: sandwichClassic
+      imagePlaceholder: "🍅🌿"
     },
     {
       name: "Pleasin' Vegan",
       description: "Dairy-free 'cheese' made in-house loaded on vegan, gluten-free bread",
       ingredients: ["House-Made Vegan Cheese", "GF Bread", "Plant-Based"],
       tags: ["Vegan", "Gluten-Free"],
-      image: sandwichClassic
+      imagePlaceholder: "🌱💚"
     },
     {
       name: "Hand-Cut Fries",
       description: "Crispy golden fries, hand-cut daily and cooked to perfection",
       ingredients: ["Fresh Potatoes", "Sea Salt", "Hand-Cut"],
       tags: ["Side", "Classic"],
-      image: sandwichClassic
+      imagePlaceholder: "🍟"
     }
   ];
 
@@ -139,13 +135,15 @@ const HorizontalMenuGallery = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div 
-                    className="relative h-64 overflow-hidden"
+                    className="relative h-64 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center overflow-hidden"
                   >
-                    <img 
-                      src={item.image} 
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                    />
+                    <motion.span 
+                      className="text-7xl"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {item.imagePlaceholder}
+                    </motion.span>
                     <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
                     <div className="absolute top-3 right-3 flex flex-wrap gap-2 justify-end">
                       {item.tags.map((tag, i) => (
@@ -208,12 +206,8 @@ const HorizontalMenuGallery = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="relative h-48 overflow-hidden rounded-lg mb-4">
-                <img 
-                  src={selectedItem.image} 
-                  alt={selectedItem.name}
-                  className="w-full h-full object-cover"
-                />
+              <div className="relative h-32 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center rounded-lg mb-4">
+                <span className="text-6xl">{selectedItem.imagePlaceholder}</span>
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-2">{selectedItem.name}</h3>
               <p className="text-muted-foreground mb-4">{selectedItem.description}</p>
