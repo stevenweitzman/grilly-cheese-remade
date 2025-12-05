@@ -162,7 +162,8 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 function generateQuickQuoteNotification(data: QuickQuoteRequest, quoteId?: string | null): string {
-  const portalLink = quoteId ? `https://${Deno.env.get('SUPABASE_URL')?.split('//')[1]?.split('.')[0]}.lovable.app/admin/quotes/${quoteId}` : '';
+  const siteUrl = Deno.env.get('SITE_URL') || 'https://grillycheese.net';
+  const portalLink = quoteId ? `${siteUrl}/admin/quotes/${quoteId}` : '';
   
   return `
     <!DOCTYPE html>
@@ -221,7 +222,8 @@ function generateQuickQuoteNotification(data: QuickQuoteRequest, quoteId?: strin
 }
 
 function generateEventRequestNotification(data: EventRequest, quoteId?: string | null): string {
-  const portalLink = quoteId ? `https://${Deno.env.get('SUPABASE_URL')?.split('//')[1]?.split('.')[0]}.lovable.app/admin/quotes/${quoteId}` : '';
+  const siteUrl = Deno.env.get('SITE_URL') || 'https://grillycheese.net';
+  const portalLink = quoteId ? `${siteUrl}/admin/quotes/${quoteId}` : '';
   
   return `
     <!DOCTYPE html>
@@ -324,7 +326,8 @@ function generateEventRequestNotification(data: EventRequest, quoteId?: string |
 }
 
 function generateConfirmationEmail(name: string, quoteId?: string | null): string {
-  const portalLink = `https://${Deno.env.get('SUPABASE_URL')?.split('//')[1]?.split('.')[0]}.lovable.app/auth`;
+  const siteUrl = Deno.env.get('SITE_URL') || 'https://grillycheese.net';
+  const portalLink = `${siteUrl}/auth`;
   
   return `
     <!DOCTYPE html>

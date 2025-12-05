@@ -33,7 +33,8 @@ const handler = async (req: Request): Promise<Response> => {
     
     console.log("Sending status change notification:", { quoteId, newStatus, clientEmail });
 
-    const portalLink = `https://${supabaseUrl.split('//')[1]?.split('.')[0]}.lovable.app/portal/quotes/${quoteId}`;
+    const siteUrl = Deno.env.get('SITE_URL') || 'https://grillycheese.net';
+    const portalLink = `${siteUrl}/portal/quotes/${quoteId}`;
 
     const emailHtml = generateStatusChangeEmail(clientName, eventType, newStatus, quotedAmount, portalLink);
 
