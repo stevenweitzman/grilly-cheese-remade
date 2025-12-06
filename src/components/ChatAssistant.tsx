@@ -113,6 +113,7 @@ export const ChatAssistant = () => {
 
       setFormErrors({});
 
+      // Insert conversation without selecting (no SELECT access via RLS)
       const { data, error } = await supabase
         .from('conversations')
         .insert({
@@ -120,7 +121,7 @@ export const ChatAssistant = () => {
           visitor_email: validation.data.email,
           visitor_phone: validation.data.phone || null,
         })
-        .select()
+        .select('id')
         .single();
 
       if (error) throw error;
