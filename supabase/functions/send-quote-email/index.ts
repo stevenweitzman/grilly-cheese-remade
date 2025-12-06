@@ -14,6 +14,168 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+// HTML escaping to prevent XSS in email templates
+const escapeHtml = (str: string): string => {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
+// Input validation schemas (manual validation for Deno edge functions)
+const validateQuickQuoteData = (data: unknown): { valid: boolean; errors: string[]; data?: QuickQuoteRequest } => {
+  const errors: string[] = [];
+  
+  if (!data || typeof data !== 'object') {
+    return { valid: false, errors: ['Invalid form data'] };
+  }
+  
+  const d = data as Record<string, unknown>;
+  
+  // Validate name
+  if (typeof d.name !== 'string' || d.name.trim().length === 0) {
+    errors.push('Name is required');
+  } else if (d.name.length > 100) {
+    errors.push('Name must be less than 100 characters');
+  }
+  
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (typeof d.email !== 'string' || !emailRegex.test(d.email.trim())) {
+    errors.push('Valid email is required');
+  } else if (d.email.length > 255) {
+    errors.push('Email must be less than 255 characters');
+  }
+  
+  // Validate phone (optional but max length)
+  if (d.phone && typeof d.phone === 'string' && d.phone.length > 30) {
+    errors.push('Phone must be less than 30 characters');
+  }
+  
+  // Validate eventDate
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (typeof d.eventDate !== 'string' || !dateRegex.test(d.eventDate)) {
+    errors.push('Valid event date is required (YYYY-MM-DD format)');
+  }
+  
+  // Validate guestCount/guests
+  const guestCount = d.guestCount || d.guests;
+  if (guestCount !== undefined && guestCount !== '') {
+    const parsed = parseInt(String(guestCount), 10);
+    if (isNaN(parsed) || parsed < 0 || parsed > 10000) {
+      errors.push('Guest count must be a valid number between 0 and 10000');
+    }
+  }
+  
+  // Validate eventType
+  if (d.eventType && typeof d.eventType === 'string' && d.eventType.length > 200) {
+    errors.push('Event type must be less than 200 characters');
+  }
+  
+  if (errors.length > 0) {
+    return { valid: false, errors };
+  }
+  
+  return {
+    valid: true,
+    errors: [],
+    data: {
+      name: String(d.name).trim(),
+      email: String(d.email).trim().toLowerCase(),
+      phone: d.phone ? String(d.phone).trim() : '',
+      eventDate: String(d.eventDate).trim(),
+      guestCount: String(guestCount || '0'),
+      eventType: d.eventType ? String(d.eventType).trim() : 'Quick Quote',
+    }
+  };
+};
+
+const validateEventRequestData = (data: unknown): { valid: boolean; errors: string[]; data?: EventRequest } => {
+  const errors: string[] = [];
+  
+  if (!data || typeof data !== 'object') {
+    return { valid: false, errors: ['Invalid form data'] };
+  }
+  
+  const d = data as Record<string, unknown>;
+  
+  // Validate name
+  if (typeof d.name !== 'string' || d.name.trim().length === 0) {
+    errors.push('Name is required');
+  } else if (d.name.length > 100) {
+    errors.push('Name must be less than 100 characters');
+  }
+  
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (typeof d.email !== 'string' || !emailRegex.test(d.email.trim())) {
+    errors.push('Valid email is required');
+  } else if (d.email.length > 255) {
+    errors.push('Email must be less than 255 characters');
+  }
+  
+  // Validate phone
+  if (d.phone && typeof d.phone === 'string' && d.phone.length > 30) {
+    errors.push('Phone must be less than 30 characters');
+  }
+  
+  // Validate eventDate
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (typeof d.eventDate !== 'string' || !dateRegex.test(d.eventDate)) {
+    errors.push('Valid event date is required (YYYY-MM-DD format)');
+  }
+  
+  // Validate guests
+  if (d.guests !== undefined && d.guests !== '') {
+    const parsed = parseInt(String(d.guests), 10);
+    if (isNaN(parsed) || parsed < 0 || parsed > 10000) {
+      errors.push('Guest count must be a valid number between 0 and 10000');
+    }
+  }
+  
+  // Validate text fields max length
+  const textFields = ['eventType', 'dietaryRestrictions', 'drinks', 'eventTime', 'propertyType', 'address', 'city', 'state', 'zip'];
+  for (const field of textFields) {
+    if (d[field] && typeof d[field] === 'string' && (d[field] as string).length > 500) {
+      errors.push(`${field} must be less than 500 characters`);
+    }
+  }
+  
+  // Validate additionalInfo (can be longer)
+  if (d.additionalInfo && typeof d.additionalInfo === 'string' && d.additionalInfo.length > 5000) {
+    errors.push('Additional info must be less than 5000 characters');
+  }
+  
+  if (errors.length > 0) {
+    return { valid: false, errors };
+  }
+  
+  return {
+    valid: true,
+    errors: [],
+    data: {
+      name: String(d.name).trim(),
+      email: String(d.email).trim().toLowerCase(),
+      phone: d.phone ? String(d.phone).trim() : '',
+      eventType: d.eventType ? String(d.eventType).trim() : '',
+      guests: d.guests ? String(d.guests).trim() : '0',
+      dietaryRestrictions: d.dietaryRestrictions ? String(d.dietaryRestrictions).trim() : '',
+      drinks: d.drinks ? String(d.drinks).trim() : '',
+      eventDate: String(d.eventDate).trim(),
+      eventTime: d.eventTime ? String(d.eventTime).trim() : '',
+      propertyType: d.propertyType ? String(d.propertyType).trim() : '',
+      address: d.address ? String(d.address).trim() : '',
+      city: d.city ? String(d.city).trim() : '',
+      state: d.state ? String(d.state).trim() : '',
+      zip: d.zip ? String(d.zip).trim() : '',
+      additionalInfo: d.additionalInfo ? String(d.additionalInfo).trim() : '',
+    }
+  };
+};
+
 interface QuickQuoteRequest {
   name: string;
   email: string;
@@ -47,16 +209,50 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { formType, formData } = await req.json();
+    const body = await req.json();
+    const { formType, formData } = body;
     
-    console.log("Processing quote request:", { formType, email: formData.email });
+    // Validate form type
+    if (!formType || !['quick', 'event'].includes(formType)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid form type' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    
+    // Validate input data based on form type
+    let validatedData: QuickQuoteRequest | EventRequest;
+    
+    if (formType === 'quick') {
+      const validation = validateQuickQuoteData(formData);
+      if (!validation.valid || !validation.data) {
+        console.log("Quick quote validation failed:", validation.errors);
+        return new Response(
+          JSON.stringify({ error: 'Validation failed', details: validation.errors }),
+          { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+      validatedData = validation.data;
+    } else {
+      const validation = validateEventRequestData(formData);
+      if (!validation.valid || !validation.data) {
+        console.log("Event request validation failed:", validation.errors);
+        return new Response(
+          JSON.stringify({ error: 'Validation failed', details: validation.errors }),
+          { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+      validatedData = validation.data;
+    }
+    
+    console.log("Processing quote request:", { formType, email: validatedData.email });
 
     // Check if user exists with this email, create profile if not
     let clientId: string | null = null;
     
     // First check if auth user exists
     const { data: existingUsers } = await supabase.auth.admin.listUsers();
-    const existingUser = existingUsers?.users.find(u => u.email === formData.email);
+    const existingUser = existingUsers?.users.find(u => u.email === validatedData.email);
     
     if (existingUser) {
       clientId = existingUser.id;
@@ -65,8 +261,8 @@ const handler = async (req: Request): Promise<Response> => {
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .insert({
-          full_name: formData.name,
-          phone: formData.phone || formData.phone,
+          full_name: validatedData.name,
+          phone: validatedData.phone,
         })
         .select()
         .single();
@@ -81,26 +277,26 @@ const handler = async (req: Request): Promise<Response> => {
     if (clientId) {
       const quoteData = formType === "quick" ? {
         client_id: clientId,
-        event_type: formData.eventType || "Quick Quote",
-        event_date: formData.eventDate,
-        event_time: formData.eventStartTime || null,
-        guests: parseInt(formData.guests || formData.guestCount) || 0,
-        property_type: formData.propertyType || null,
-        notes: formData.comments || null,
+        event_type: (validatedData as QuickQuoteRequest).eventType || "Quick Quote",
+        event_date: validatedData.eventDate,
+        event_time: (formData.eventStartTime as string) || null,
+        guests: parseInt((validatedData as QuickQuoteRequest).guestCount) || 0,
+        property_type: (formData.propertyType as string) || null,
+        notes: (formData.comments as string) || null,
         status: 'pending',
       } : {
         client_id: clientId,
-        event_type: formData.eventType,
-        event_date: formData.eventDate,
-        event_time: formData.eventTime,
-        guests: parseInt(formData.guests) || 0,
-        dietary_restrictions: formData.dietaryRestrictions,
-        property_type: formData.propertyType,
-        address: formData.address,
-        city: formData.city,
-        state: formData.state,
-        zip: formData.zip,
-        notes: formData.additionalInfo || null,
+        event_type: (validatedData as EventRequest).eventType,
+        event_date: validatedData.eventDate,
+        event_time: (validatedData as EventRequest).eventTime,
+        guests: parseInt((validatedData as EventRequest).guests) || 0,
+        dietary_restrictions: (validatedData as EventRequest).dietaryRestrictions,
+        property_type: (validatedData as EventRequest).propertyType,
+        address: (validatedData as EventRequest).address,
+        city: (validatedData as EventRequest).city,
+        state: (validatedData as EventRequest).state,
+        zip: (validatedData as EventRequest).zip,
+        notes: (validatedData as EventRequest).additionalInfo || null,
         status: 'pending',
       };
 
@@ -120,13 +316,13 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to Grilly Cheese
     const notificationHtml = formType === "quick" 
-      ? generateQuickQuoteNotification(formData as QuickQuoteRequest, quoteId)
-      : generateEventRequestNotification(formData as EventRequest, quoteId);
+      ? generateQuickQuoteNotification(validatedData as QuickQuoteRequest, quoteId)
+      : generateEventRequestNotification(validatedData as EventRequest, quoteId);
 
     const notificationResponse = await resend.emails.send({
       from: "Grilly Cheese Quotes <grillycheese@grillycheese.net>",
       to: ["grillycheese@grillycheese.net"],
-      subject: `New ${formType === "quick" ? "Quick Quote" : "Event"} Request from ${formData.name}`,
+      subject: `New ${formType === "quick" ? "Quick Quote" : "Event"} Request from ${escapeHtml(validatedData.name)}`,
       html: notificationHtml,
     });
 
@@ -135,9 +331,9 @@ const handler = async (req: Request): Promise<Response> => {
     // Send confirmation email to customer
     const confirmationResponse = await resend.emails.send({
       from: "Grilly Cheese <grillycheese@grillycheese.net>",
-      to: [formData.email],
+      to: [validatedData.email],
       subject: "We received your quote request!",
-      html: generateConfirmationEmail(formData.name, quoteId),
+      html: generateConfirmationEmail(validatedData.name, quoteId),
     });
 
     console.log("Confirmation email sent:", confirmationResponse);
@@ -149,10 +345,11 @@ const handler = async (req: Request): Promise<Response> => {
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-  } catch (error: any) {
-    console.error("Error processing quote request:", error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("Error processing quote request:", errorMessage);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: 'An error occurred processing your request' }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -186,27 +383,27 @@ function generateQuickQuoteNotification(data: QuickQuoteRequest, quoteId?: strin
           <div class="content">
             <div class="field">
               <div class="label">Name:</div>
-              <div>${data.name}</div>
+              <div>${escapeHtml(data.name)}</div>
             </div>
             <div class="field">
               <div class="label">Email:</div>
-              <div><a href="mailto:${data.email}">${data.email}</a></div>
+              <div><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
             </div>
             <div class="field">
               <div class="label">Phone:</div>
-              <div><a href="tel:${data.phone}">${data.phone}</a></div>
+              <div><a href="tel:${escapeHtml(data.phone)}">${escapeHtml(data.phone)}</a></div>
             </div>
             <div class="field">
               <div class="label">Event Date:</div>
-              <div>${data.eventDate}</div>
+              <div>${escapeHtml(data.eventDate)}</div>
             </div>
             <div class="field">
               <div class="label">Guest Count:</div>
-              <div>${data.guestCount}</div>
+              <div>${escapeHtml(data.guestCount)}</div>
             </div>
             <div class="field">
               <div class="label">Event Type:</div>
-              <div>${data.eventType}</div>
+              <div>${escapeHtml(data.eventType)}</div>
             </div>
             ${portalLink ? `
               <div style="margin-top: 30px; text-align: center; padding: 20px; background: #e6f7ff; border-radius: 6px;">
@@ -250,15 +447,15 @@ function generateEventRequestNotification(data: EventRequest, quoteId?: string |
               <div class="section-title">Contact Information</div>
               <div class="field">
                 <div class="label">Name:</div>
-                <div>${data.name}</div>
+                <div>${escapeHtml(data.name)}</div>
               </div>
               <div class="field">
                 <div class="label">Email:</div>
-                <div><a href="mailto:${data.email}">${data.email}</a></div>
+                <div><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
               </div>
               <div class="field">
                 <div class="label">Phone:</div>
-                <div><a href="tel:${data.phone}">${data.phone}</a></div>
+                <div><a href="tel:${escapeHtml(data.phone)}">${escapeHtml(data.phone)}</a></div>
               </div>
             </div>
 
@@ -266,19 +463,19 @@ function generateEventRequestNotification(data: EventRequest, quoteId?: string |
               <div class="section-title">Event Details</div>
               <div class="field">
                 <div class="label">Event Type:</div>
-                <div>${data.eventType}</div>
+                <div>${escapeHtml(data.eventType)}</div>
               </div>
               <div class="field">
                 <div class="label">Guest Count:</div>
-                <div>${data.guests}</div>
+                <div>${escapeHtml(data.guests)}</div>
               </div>
               <div class="field">
                 <div class="label">Dietary Restrictions:</div>
-                <div>${data.dietaryRestrictions}</div>
+                <div>${escapeHtml(data.dietaryRestrictions)}</div>
               </div>
               <div class="field">
                 <div class="label">Drinks Needed:</div>
-                <div>${data.drinks}</div>
+                <div>${escapeHtml(data.drinks)}</div>
               </div>
             </div>
 
@@ -286,19 +483,19 @@ function generateEventRequestNotification(data: EventRequest, quoteId?: string |
               <div class="section-title">Date & Location</div>
               <div class="field">
                 <div class="label">Event Date:</div>
-                <div>${data.eventDate}</div>
+                <div>${escapeHtml(data.eventDate)}</div>
               </div>
               <div class="field">
                 <div class="label">Event Start Time:</div>
-                <div>${data.eventTime}</div>
+                <div>${escapeHtml(data.eventTime)}</div>
               </div>
               <div class="field">
                 <div class="label">Property Type:</div>
-                <div>${data.propertyType}</div>
+                <div>${escapeHtml(data.propertyType)}</div>
               </div>
               <div class="field">
                 <div class="label">Address:</div>
-                <div>${data.address}<br>${data.city}, ${data.state} ${data.zip}</div>
+                <div>${escapeHtml(data.address)}<br>${escapeHtml(data.city)}, ${escapeHtml(data.state)} ${escapeHtml(data.zip)}</div>
               </div>
             </div>
 
@@ -306,7 +503,7 @@ function generateEventRequestNotification(data: EventRequest, quoteId?: string |
             <div class="section">
               <div class="section-title">Additional Information</div>
               <div class="field">
-                <div>${data.additionalInfo}</div>
+                <div>${escapeHtml(data.additionalInfo)}</div>
               </div>
             </div>
             ` : ''}
@@ -353,7 +550,7 @@ function generateConfirmationEmail(name: string, quoteId?: string | null): strin
       <body>
         <div class="container">
           <div class="header">
-            <h1>🧀 Thank You, ${name}!</h1>
+            <h1>🧀 Thank You, ${escapeHtml(name)}!</h1>
           </div>
           <div class="content">
             <p>We've received your quote request and our team is excited to help make your event amazing!</p>
