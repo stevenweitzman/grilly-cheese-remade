@@ -19,6 +19,17 @@ interface MessageNotificationRequest {
   isAdminRecipient: boolean;
 }
 
+// HTML escape function to prevent XSS
+const escapeHtml = (str: string): string => {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -37,23 +48,24 @@ const handler = async (req: Request): Promise<Response> => {
     
     console.log("Sending new message notification:", { recipientEmail, isAdminRecipient });
 
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    // Use SITE_URL for correct portal links
+    const siteUrl = Deno.env.get('SITE_URL') || 'https://grillycheese.net';
     const portalLink = isAdminRecipient 
-      ? `https://${supabaseUrl.split('//')[1]?.split('.')[0]}.lovable.app/admin/quotes/${quoteId}`
-      : `https://${supabaseUrl.split('//')[1]?.split('.')[0]}.lovable.app/portal/messages`;
+      ? `${siteUrl}/admin/quotes/${escapeHtml(quoteId)}`
+      : `${siteUrl}/portal/messages`;
 
     const emailHtml = generateMessageNotificationEmail(
-      recipientName, 
-      senderName, 
-      subject, 
-      messagePreview, 
+      escapeHtml(recipientName), 
+      escapeHtml(senderName), 
+      escapeHtml(subject), 
+      escapeHtml(messagePreview), 
       portalLink
     );
 
     const emailResponse = await resend.emails.send({
       from: "Grilly Cheese <grillycheese@grillycheese.net>",
       to: [recipientEmail],
-      subject: `New Message: ${subject}`,
+      subject: `New Message: ${escapeHtml(subject)}`,
       html: emailHtml,
     });
 
