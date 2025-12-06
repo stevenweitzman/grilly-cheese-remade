@@ -23,6 +23,17 @@ interface StatusChangeRequest {
   quotedAmount?: number;
 }
 
+// HTML escape function to prevent XSS
+const escapeHtml = (str: string): string => {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -34,14 +45,18 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Sending status change notification:", { quoteId, newStatus, clientEmail });
 
     const siteUrl = Deno.env.get('SITE_URL') || 'https://grillycheese.net';
-    const portalLink = `${siteUrl}/portal/quotes/${quoteId}`;
+    const portalLink = `${siteUrl}/portal/quotes/${escapeHtml(quoteId)}`;
 
-    const emailHtml = generateStatusChangeEmail(clientName, eventType, newStatus, quotedAmount, portalLink);
+    // Escape user-provided values before using in email
+    const safeClientName = escapeHtml(clientName);
+    const safeEventType = escapeHtml(eventType);
+
+    const emailHtml = generateStatusChangeEmail(safeClientName, safeEventType, newStatus, quotedAmount, portalLink);
 
     const emailResponse = await resend.emails.send({
       from: "Grilly Cheese <grillycheese@grillycheese.net>",
       to: [clientEmail],
-      subject: `Quote Update: ${eventType} - ${formatStatus(newStatus)}`,
+      subject: `Quote Update: ${safeEventType} - ${formatStatus(newStatus)}`,
       html: emailHtml,
     });
 
