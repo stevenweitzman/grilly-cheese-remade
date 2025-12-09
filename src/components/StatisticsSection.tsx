@@ -1,6 +1,7 @@
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { TrendingUp, Award, Users, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const StatisticsSection = () => {
   return (
@@ -75,6 +76,30 @@ const StatisticsSection = () => {
             color="accent"
           />
         </div>
+
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          <a 
+            href="#contact"
+            onClick={() => {
+              if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                  'event': 'cta_click',
+                  'cta_location': 'statistics_section'
+                });
+              }
+            }}
+          >
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-background text-lg px-8 py-6">
+              Get Your Free Quote Today
+            </Button>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

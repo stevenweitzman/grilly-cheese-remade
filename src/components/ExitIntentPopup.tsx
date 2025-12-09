@@ -3,13 +3,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { X, Gift } from "lucide-react";
+import { X, Gift, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const ExitIntentPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [hasShown, setHasShown] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     // Check if already shown in this session
@@ -40,20 +42,54 @@ const ExitIntentPopup = () => {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [hasShown]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    // Track conversion
-    if (typeof window !== "undefined" && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: "exit_intent_conversion",
-        conversion_type: "email_capture",
+    try {
+      // Send email notification to grillycheese@grillycheese.net
+      const { error } = await supabase.functions.invoke("send-quote-email", {
+        body: {
+          name: "Exit Intent Lead",
+          email: email,
+          phone: "",
+          eventType: "Discount Request",
+          eventDate: "",
+          eventTime: "",
+          guests: "",
+          address: "",
+          city: "",
+          state: "",
+          zip: "",
+          propertyType: "",
+          dietaryRestrictions: "",
+          comments: "User signed up for $100 discount via exit intent popup",
+        },
       });
-    }
 
-    toast.success("Success! Check your email for your 10% discount code.");
-    setIsOpen(false);
-    setEmail("");
+      if (error) {
+        console.error("Error sending exit intent email:", error);
+        toast.error("Something went wrong. Please try again.");
+        return;
+      }
+
+      // Track conversion
+      if (typeof window !== "undefined" && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: "exit_intent_conversion",
+          conversion_type: "email_capture",
+        });
+      }
+
+      toast.success("Success! Check your email for your $100 discount code.");
+      setIsOpen(false);
+      setEmail("");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -91,11 +127,24 @@ const ExitIntentPopup = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="mt-1"
+              disabled={isSubmitting}
             />
           </div>
 
-          <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-background" size="lg">
-            Get My $100 Discount
+          <Button 
+            type="submit" 
+            className="w-full bg-accent hover:bg-accent/90 text-background" 
+            size="lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              "Get My $100 Discount"
+            )}
           </Button>
 
           <p className="text-xs text-muted-foreground text-center">
