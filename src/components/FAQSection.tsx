@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const FAQSection = () => {
@@ -96,12 +97,29 @@ const FAQSection = () => {
             <p className="text-muted-foreground mb-4">
               We're here to help! Give us a call or submit an event request.
             </p>
-            <a 
-              href="tel:8444745591" 
-              className="text-2xl font-bold text-accent hover:text-accent/80 transition-colors"
-            >
-              844-474-5591
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="tel:8444745591" 
+                className="text-2xl font-bold text-accent hover:text-accent/80 transition-colors"
+              >
+                844-474-5591
+              </a>
+              <a 
+                href="#contact"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'cta_click',
+                      'cta_location': 'faq_section'
+                    });
+                  }
+                }}
+              >
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-background">
+                  Request a Quote
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
