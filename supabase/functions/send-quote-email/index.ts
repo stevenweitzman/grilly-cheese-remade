@@ -328,16 +328,6 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Notification email sent:", notificationResponse);
 
-    // Send confirmation email to customer
-    const confirmationResponse = await resend.emails.send({
-      from: "Grilly Cheese <grillycheese@grillycheese.net>",
-      to: [validatedData.email],
-      subject: "We received your quote request!",
-      html: generateConfirmationEmail(validatedData.name, quoteId),
-    });
-
-    console.log("Confirmation email sent:", confirmationResponse);
-
     return new Response(
       JSON.stringify({ success: true, quoteId }),
       {
