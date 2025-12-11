@@ -109,7 +109,7 @@ export default function Auth() {
         email: signupData.email,
         password: signupData.password,
         options: {
-          emailRedirectTo: `${window.location.origin}/portal/dashboard`,
+          emailRedirectTo: 'https://grillycheese.net/portal/dashboard',
           data: {
             full_name: signupData.fullName,
             phone: signupData.phone,
@@ -151,7 +151,7 @@ export default function Auth() {
       resetSchema.parse({ email: resetEmail });
 
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: 'https://grillycheese.net/auth',
       });
 
       if (error) throw error;
