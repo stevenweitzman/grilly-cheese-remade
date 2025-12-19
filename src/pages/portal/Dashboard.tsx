@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, MessageSquare, Upload, DollarSign, Calendar } from "lucide-react";
+import { FileText, MessageSquare, Upload, DollarSign, Calendar, UtensilsCrossed } from "lucide-react";
 import PortalHeader from "@/components/PortalHeader";
 import ProtectedSEO from "@/components/ProtectedSEO";
 
@@ -133,11 +133,17 @@ export default function Dashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid gap-4 md:grid-cols-4 mb-8">
+        <div className="grid gap-4 md:grid-cols-5 mb-8">
           <Button asChild variant="outline" className="h-auto flex-col gap-2 py-4">
             <Link to="/portal/quotes">
               <FileText className="h-8 w-8" />
               <span>View Quotes</span>
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="h-auto flex-col gap-2 py-4">
+            <Link to="/portal/catering-orders">
+              <UtensilsCrossed className="h-8 w-8" />
+              <span>Catering Orders</span>
             </Link>
           </Button>
           <Button asChild variant="outline" className="h-auto flex-col gap-2 py-4">
