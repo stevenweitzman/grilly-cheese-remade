@@ -64,7 +64,10 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
   const travelFee = calculateTravelFee(estimatedDistance);
 
   useEffect(() => {
-    onUpdate({ distanceMiles: estimatedDistance });
+    if (estimatedDistance !== formData.distanceMiles) {
+      onUpdate({ distanceMiles: estimatedDistance });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [estimatedDistance]);
 
   const validateForm = (): boolean => {
