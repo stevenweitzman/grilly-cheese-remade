@@ -6,15 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { CalendarIcon, MapPin, User, Phone, Mail, Truck } from "lucide-react";
 import { format } from "date-fns";
-import { CateringOrderFormData } from "@/types/cateringOrder";
-import { calculateTravelFee, formatCurrency, ORIGIN_ZIP, BASE_TRAVEL_MILES } from "@/lib/pricing";
+import { DropoffOrderFormData } from "@/types/cateringOrder";
+import { calculateDeliveryFee, formatCurrency, ORIGIN_ZIP, FREE_DELIVERY_MILES, DELIVERY_PER_MILE_RATE } from "@/lib/dropoff-pricing";
 import { cn } from "@/lib/utils";
 
 interface EventDetailsProps {
-  formData: CateringOrderFormData;
-  onUpdate: (data: Partial<CateringOrderFormData>) => void;
+  formData: DropoffOrderFormData;
+  onUpdate: (data: Partial<DropoffOrderFormData>) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -61,7 +62,7 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
   const [errors, setErrors] = useState<Record<string, string>>({});
   
   const estimatedDistance = estimateDistance(formData.deliveryAddress.zip);
-  const travelFee = calculateTravelFee(estimatedDistance);
+  const { fee: deliveryFee, milesOver10 } = calculateDeliveryFee(estimatedDistance);
 
   useEffect(() => {
     if (estimatedDistance !== formData.distanceMiles) {
@@ -312,19 +313,21 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
         </CardContent>
       </Card>
 
-      {/* Travel Fee Info */}
+      {/* Delivery Fee Info (shown but without full pricing breakdown) */}
       {formData.deliveryAddress.zip.length >= 5 && (
         <Card className="bg-muted/50">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <Truck className="w-8 h-8 text-primary" />
               <div>
-                <p className="font-medium">Estimated Travel Fee: {formatCurrency(travelFee)}</p>
+                <p className="font-medium">
+                  Estimated Delivery: ~{estimatedDistance} miles from {ORIGIN_ZIP}
+                </p>
                 <p className="text-sm text-muted-foreground">
-                  ~{estimatedDistance} miles from our kitchen in {ORIGIN_ZIP}
-                  {estimatedDistance > BASE_TRAVEL_MILES && (
-                    <> (includes ${((estimatedDistance - BASE_TRAVEL_MILES) * 2 * 1.5).toFixed(2)} for extra miles)</>
-                  )}
+                  {milesOver10 > 0 
+                    ? `First ${FREE_DELIVERY_MILES} miles free, then ${formatCurrency(DELIVERY_PER_MILE_RATE)}/mile for additional distance`
+                    : `Within our free ${FREE_DELIVERY_MILES}-mile delivery zone!`
+                  }
                 </p>
               </div>
             </div>
@@ -332,13 +335,29 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
         </Card>
       )}
 
+      {/* Special Notes */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Special Requests</CardTitle>
+          <CardDescription>Any dietary restrictions or special instructions?</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Textarea
+            placeholder="Let us know about any allergies, dietary needs, or special requests..."
+            value={formData.specialNotes}
+            onChange={(e) => onUpdate({ specialNotes: e.target.value })}
+            rows={3}
+          />
+        </CardContent>
+      </Card>
+
       {/* Navigation */}
       <div className="flex justify-between">
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
         <Button onClick={handleNext} size="lg">
-          Continue to Menu Selection
+          Continue to Review
         </Button>
       </div>
     </div>

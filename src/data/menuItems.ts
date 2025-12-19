@@ -1,24 +1,33 @@
-// Menu items for Drop-Off Catering based on Grilly Cheese Event Packages
+// Menu items for Drop-Off Catering based on Grilly Cheese Menu
+// All items available to everyone (no package restrictions)
+
+import { PricingTier, ITEM_PRICING } from "@/lib/dropoff-pricing";
 
 export interface MenuItem {
   id: string;
   name: string;
   description: string;
   category: 'sandwich' | 'hotdog' | 'side' | 'beverage' | 'dessert';
-  availableIn: ('simple' | 'full')[];
+  pricingTier: PricingTier;
+  unitPrice: number;
+  unitLabel: string;
+  isEntree: boolean;
   isVegetarian?: boolean;
   isVegan?: boolean;
   hasGlutenFreeOption?: boolean;
 }
 
-// Simple Menu Sandwiches
-export const simpleMenuSandwiches: MenuItem[] = [
+// Standard Sandwiches ($8 each)
+export const standardSandwiches: MenuItem[] = [
   {
     id: 'just-the-cheese',
     name: 'Just the Cheese',
     description: 'Classic American cheese on buttery grilled bread',
     category: 'sandwich',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -27,16 +36,11 @@ export const simpleMenuSandwiches: MenuItem[] = [
     name: 'Just The Mozz',
     description: 'Fresh mozzarella cheese on buttery grilled bread',
     category: 'sandwich',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
-    hasGlutenFreeOption: true,
-  },
-  {
-    id: 'bacon-american-classic',
-    name: 'Bacon American Classic',
-    description: 'Crispy bacon with American cheese on buttery grilled bread',
-    category: 'sandwich',
-    availableIn: ['simple', 'full'],
     hasGlutenFreeOption: true,
   },
   {
@@ -44,7 +48,10 @@ export const simpleMenuSandwiches: MenuItem[] = [
     name: 'Just The Cheddar',
     description: 'Sharp cheddar cheese on buttery grilled bread',
     category: 'sandwich',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -53,7 +60,10 @@ export const simpleMenuSandwiches: MenuItem[] = [
     name: '3 Cheese Please',
     description: 'American, cheddar, and mozzarella cheese blend',
     category: 'sandwich',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -62,8 +72,22 @@ export const simpleMenuSandwiches: MenuItem[] = [
     name: 'The American Dream',
     description: 'American cheese with our special seasoning blend',
     category: 'sandwich',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
+    hasGlutenFreeOption: true,
+  },
+  {
+    id: 'bacon-american-classic',
+    name: 'Bacon American Classic',
+    description: 'Crispy bacon with American cheese on buttery grilled bread',
+    category: 'sandwich',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -71,20 +95,26 @@ export const simpleMenuSandwiches: MenuItem[] = [
     name: 'Kids Grilled Cheese',
     description: 'Smaller portion perfect for little ones',
     category: 'sandwich',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
 ];
 
-// Full Menu Exclusive Sandwiches
-export const fullMenuSandwiches: MenuItem[] = [
+// Premium Sandwiches ($12 each)
+export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilly-cheese',
     name: 'Grilly Cheese',
     description: 'Our signature sandwich with a special cheese blend and secret sauce',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -93,7 +123,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Grilly Cheesesteak',
     description: 'Philly-style cheesesteak with grilled onions and melted cheese',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -101,7 +134,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Margherita',
     description: 'Fresh mozzarella, tomato, and basil with balsamic glaze',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -110,7 +146,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: "Joel's 2nd Favorite",
     description: 'A house favorite with bacon, tomato, and special sauce',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -118,7 +157,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Reuben Steiner',
     description: 'Corned beef, Swiss cheese, sauerkraut, and Russian dressing',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -126,7 +168,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Canoe In The Pines',
     description: 'Pine Barrens inspired with cranberry and brie',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -135,7 +180,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Chicken Pickin',
     description: 'Grilled chicken with melted cheese and special seasoning',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -143,7 +191,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Cluck Norris',
     description: 'Spicy buffalo chicken with blue cheese crumbles',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -151,7 +202,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Swiss Pig',
     description: 'Ham and Swiss cheese with honey mustard',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -159,7 +213,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Grilled Caprese',
     description: 'Fresh mozzarella, tomato, basil, and olive oil',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     isVegetarian: true,
     hasGlutenFreeOption: true,
   },
@@ -168,7 +225,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'BLTMACD',
     description: 'Bacon, lettuce, tomato, mac and cheese all grilled together',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -176,7 +236,10 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'The Russian Around',
     description: 'Russian dressing with turkey and Swiss',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     hasGlutenFreeOption: true,
   },
   {
@@ -184,101 +247,134 @@ export const fullMenuSandwiches: MenuItem[] = [
     name: 'Pleasin Vegan',
     description: 'Vegan cheese with grilled vegetables',
     category: 'sandwich',
-    availableIn: ['full'],
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
     isVegan: true,
     hasGlutenFreeOption: true,
   },
 ];
 
 // All sandwiches combined
-export const allSandwiches: MenuItem[] = [...simpleMenuSandwiches, ...fullMenuSandwiches];
+export const allSandwiches: MenuItem[] = [...standardSandwiches, ...premiumSandwiches];
 
-// Hot Dogs (available in both menus)
+// Hot Dogs ($6 each)
 export const hotDogs: MenuItem[] = [
   {
     id: 'hot-pig-dog',
     name: 'Hot Pig Dog',
     description: 'All-beef hot dog wrapped in bacon',
     category: 'hotdog',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'HOT_DOG',
+    unitPrice: ITEM_PRICING.HOT_DOG,
+    unitLabel: 'each',
+    isEntree: true,
   },
   {
     id: 'just-the-dog',
     name: 'Just The Dog',
     description: 'Classic all-beef hot dog',
     category: 'hotdog',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'HOT_DOG',
+    unitPrice: ITEM_PRICING.HOT_DOG,
+    unitLabel: 'each',
+    isEntree: true,
   },
   {
     id: 'just-the-cheese-dog',
     name: 'Just The Cheese Dog',
     description: 'All-beef hot dog with melted cheese',
     category: 'hotdog',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'HOT_DOG',
+    unitPrice: ITEM_PRICING.HOT_DOG,
+    unitLabel: 'each',
+    isEntree: true,
   },
   {
     id: 'grilly-dog',
     name: 'Grilly Dog',
     description: 'Our signature hot dog with all the fixings',
     category: 'hotdog',
-    availableIn: ['full'],
+    pricingTier: 'HOT_DOG',
+    unitPrice: ITEM_PRICING.HOT_DOG,
+    unitLabel: 'each',
+    isEntree: true,
   },
 ];
 
-// Sides
+// Sides ($45 per tray)
 export const sides: MenuItem[] = [
   {
     id: 'hand-cut-fries',
     name: 'Hand-Cut Homemade Fries',
-    description: 'Fresh-cut and fried to golden perfection',
+    description: 'Fresh-cut and fried to golden perfection (serves ~15)',
     category: 'side',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SIDE_PER_TRAY',
+    unitPrice: ITEM_PRICING.SIDE_PER_TRAY,
+    unitLabel: 'per tray',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
   {
     id: 'cheese-fries',
     name: 'Hand-Cut Cheese Fries',
-    description: 'Fresh-cut fries topped with melted cheese',
+    description: 'Fresh-cut fries topped with melted cheese (serves ~15)',
     category: 'side',
-    availableIn: ['full'],
+    pricingTier: 'SIDE_PER_TRAY',
+    unitPrice: ITEM_PRICING.SIDE_PER_TRAY,
+    unitLabel: 'per tray',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'tomato-soup',
     name: 'Homemade Tomato Soup',
-    description: 'Creamy homemade tomato soup (upon request)',
+    description: 'Creamy homemade tomato soup (serves ~15)',
     category: 'side',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'SIDE_PER_TRAY',
+    unitPrice: ITEM_PRICING.SIDE_PER_TRAY,
+    unitLabel: 'per tray',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'kettle-chips',
     name: 'Homemade Kettle Chips',
-    description: 'Crispy kettle-cooked chips',
+    description: 'Crispy kettle-cooked chips (serves ~15)',
     category: 'side',
-    availableIn: ['full'],
+    pricingTier: 'SIDE_PER_TRAY',
+    unitPrice: ITEM_PRICING.SIDE_PER_TRAY,
+    unitLabel: 'per tray',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
   {
     id: 'side-salad',
     name: 'Side Salad',
-    description: 'Fresh mixed greens with house dressing',
+    description: 'Fresh mixed greens with house dressing (serves ~15)',
     category: 'side',
-    availableIn: ['full'],
+    pricingTier: 'SIDE_PER_TRAY',
+    unitPrice: ITEM_PRICING.SIDE_PER_TRAY,
+    unitLabel: 'per tray',
+    isEntree: false,
     isVegetarian: true,
   },
 ];
 
-// Beverages
+// Beverages ($2.50 each)
 export const beverages: MenuItem[] = [
   {
     id: 'coke',
     name: 'Coke',
     description: 'Classic Coca-Cola',
     category: 'beverage',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'BEVERAGE_UNIT',
+    unitPrice: ITEM_PRICING.BEVERAGE_UNIT,
+    unitLabel: 'each',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
@@ -287,7 +383,10 @@ export const beverages: MenuItem[] = [
     name: 'Sprite',
     description: 'Lemon-lime soda',
     category: 'beverage',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'BEVERAGE_UNIT',
+    unitPrice: ITEM_PRICING.BEVERAGE_UNIT,
+    unitLabel: 'each',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
@@ -296,7 +395,10 @@ export const beverages: MenuItem[] = [
     name: 'Diet Coke',
     description: 'Diet Coca-Cola',
     category: 'beverage',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'BEVERAGE_UNIT',
+    unitPrice: ITEM_PRICING.BEVERAGE_UNIT,
+    unitLabel: 'each',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
@@ -305,7 +407,10 @@ export const beverages: MenuItem[] = [
     name: 'Bottled Water',
     description: 'Refreshing bottled water',
     category: 'beverage',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'BEVERAGE_UNIT',
+    unitPrice: ITEM_PRICING.BEVERAGE_UNIT,
+    unitLabel: 'each',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
@@ -314,7 +419,10 @@ export const beverages: MenuItem[] = [
     name: 'Iced Tea',
     description: 'Fresh brewed iced tea',
     category: 'beverage',
-    availableIn: ['full'],
+    pricingTier: 'BEVERAGE_UNIT',
+    unitPrice: ITEM_PRICING.BEVERAGE_UNIT,
+    unitLabel: 'each',
+    isEntree: false,
     isVegetarian: true,
     isVegan: true,
   },
@@ -323,70 +431,99 @@ export const beverages: MenuItem[] = [
     name: 'Hot Chocolate',
     description: 'Rich and creamy hot chocolate',
     category: 'beverage',
-    availableIn: ['full'],
+    pricingTier: 'BEVERAGE_UNIT',
+    unitPrice: ITEM_PRICING.BEVERAGE_UNIT,
+    unitLabel: 'each',
+    isEntree: false,
     isVegetarian: true,
   },
 ];
 
-// Desserts (Add-ons only)
+// Desserts ($24 per dozen)
 export const desserts: MenuItem[] = [
   {
     id: 'chocolate-chip-cookies',
     name: 'Homemade Chocolate Chip Cookies',
-    description: 'Fresh-baked chocolate chip cookies',
+    description: 'Fresh-baked chocolate chip cookies (dozen)',
     category: 'dessert',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'DESSERT_PER_DOZEN',
+    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
+    unitLabel: 'per dozen',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'mini-cherry-pie',
-    name: 'Mini Cherry Pie',
-    description: 'Individual cherry pie (seasonal)',
+    name: 'Mini Cherry Pies',
+    description: 'Individual cherry pies (dozen, seasonal)',
     category: 'dessert',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'DESSERT_PER_DOZEN',
+    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
+    unitLabel: 'per dozen',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'mini-blueberry-pie',
-    name: 'Mini Blueberry Pie',
-    description: 'Individual blueberry pie (seasonal)',
+    name: 'Mini Blueberry Pies',
+    description: 'Individual blueberry pies (dozen, seasonal)',
     category: 'dessert',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'DESSERT_PER_DOZEN',
+    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
+    unitLabel: 'per dozen',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'mini-peach-pie',
-    name: 'Mini Peach Pie',
-    description: 'Individual peach pie (seasonal)',
+    name: 'Mini Peach Pies',
+    description: 'Individual peach pies (dozen, seasonal)',
     category: 'dessert',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'DESSERT_PER_DOZEN',
+    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
+    unitLabel: 'per dozen',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'mini-apple-pie',
-    name: 'Mini Apple Pie',
-    description: 'Individual apple pie (seasonal)',
+    name: 'Mini Apple Pies',
+    description: 'Individual apple pies (dozen, seasonal)',
     category: 'dessert',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'DESSERT_PER_DOZEN',
+    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
+    unitLabel: 'per dozen',
+    isEntree: false,
     isVegetarian: true,
   },
   {
     id: 'mini-pecan-pie',
-    name: 'Mini Pecan Pie',
-    description: 'Individual pecan pie (seasonal)',
+    name: 'Mini Pecan Pies',
+    description: 'Individual pecan pies (dozen, seasonal)',
     category: 'dessert',
-    availableIn: ['simple', 'full'],
+    pricingTier: 'DESSERT_PER_DOZEN',
+    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
+    unitLabel: 'per dozen',
+    isEntree: false,
     isVegetarian: true,
   },
 ];
 
-// Get available items by package type
-export const getMenuItemsByPackage = (packageType: 'simple' | 'full') => {
-  return {
-    sandwiches: allSandwiches.filter(item => item.availableIn.includes(packageType)),
-    hotDogs: hotDogs.filter(item => item.availableIn.includes(packageType)),
-    sides: sides.filter(item => item.availableIn.includes(packageType)),
-    beverages: beverages.filter(item => item.availableIn.includes(packageType)),
-    desserts: desserts.filter(item => item.availableIn.includes(packageType)),
-  };
+// All menu items grouped by category
+export const allMenuItems = {
+  sandwiches: allSandwiches,
+  hotDogs,
+  sides,
+  beverages,
+  desserts,
+};
+
+// Get all menu items as flat array
+export const getAllMenuItemsFlat = (): MenuItem[] => {
+  return [...allSandwiches, ...hotDogs, ...sides, ...beverages, ...desserts];
+};
+
+// Find menu item by ID
+export const getMenuItemById = (id: string): MenuItem | undefined => {
+  return getAllMenuItemsFlat().find(item => item.id === id);
 };

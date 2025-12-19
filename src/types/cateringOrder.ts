@@ -1,4 +1,69 @@
-// Types for catering order flow
+// Types for catering order flow (Drop-Off Catering - Item-Based Pricing)
+
+import { PricingTier, DropoffPricingBreakdown, CartItem } from "@/lib/dropoff-pricing";
+
+// Re-export for convenience
+export type { CartItem, DropoffPricingBreakdown, PricingTier };
+
+export interface DeliveryAddress {
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+}
+
+// Drop-Off Order Form Data (Cart-Based Model)
+export interface DropoffOrderFormData {
+  // Cart (replaces package + menu selection)
+  cart: CartItem[];
+  
+  // Event Details
+  eventName: string;
+  eventDate: Date | null;
+  eventTime: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  deliveryAddress: DeliveryAddress;
+  distanceMiles: number;
+  
+  // Special requests
+  specialNotes: string;
+  
+  // Calculated at final step only
+  pricingBreakdown: DropoffPricingBreakdown | null;
+}
+
+export const initialDropoffFormData: DropoffOrderFormData = {
+  cart: [],
+  eventName: '',
+  eventDate: null,
+  eventTime: '',
+  contactName: '',
+  contactEmail: '',
+  contactPhone: '',
+  deliveryAddress: {
+    street: '',
+    city: '',
+    state: 'NJ',
+    zip: '',
+  },
+  distanceMiles: 0,
+  specialNotes: '',
+  pricingBreakdown: null,
+};
+
+// 4-step order flow
+export type OrderStep = 1 | 2 | 3 | 4;
+
+export const ORDER_STEPS = [
+  { step: 1, label: 'Menu', description: 'Build your order' },
+  { step: 2, label: 'Event Details', description: 'Event information' },
+  { step: 3, label: 'Review', description: 'Review your order' },
+  { step: 4, label: 'Payment', description: 'Complete payment' },
+] as const;
+
+// ============= LEGACY TYPES (for backward compatibility with old orders) =============
 
 export interface MenuSelection {
   itemId: string;
@@ -12,19 +77,10 @@ export interface DietaryOptions {
   specialNotes: string;
 }
 
-export interface DeliveryAddress {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
+// Old package-based form data (kept for backward compatibility)
 export interface CateringOrderFormData {
-  // Step 1: Package Selection
   packageType: 'simple' | 'full';
   guestCount: number;
-  
-  // Step 2: Event Details
   eventName: string;
   eventDate: Date | null;
   eventTime: string;
@@ -33,15 +89,11 @@ export interface CateringOrderFormData {
   contactPhone: string;
   deliveryAddress: DeliveryAddress;
   distanceMiles: number;
-  
-  // Step 3: Menu Options
   selectedSandwiches: MenuSelection[];
   selectedHotDogs: MenuSelection[];
   dietaryOptions: DietaryOptions;
   includeDesserts: boolean;
   selectedDesserts: MenuSelection[];
-  
-  // Calculated values
   pricingBreakdown: {
     cateringSubtotal: number;
     dessertCost: number;
@@ -78,13 +130,3 @@ export const initialFormData: CateringOrderFormData = {
   selectedDesserts: [],
   pricingBreakdown: null,
 };
-
-export type OrderStep = 1 | 2 | 3 | 4 | 5;
-
-export const ORDER_STEPS = [
-  { step: 1, label: 'Package', description: 'Choose your package' },
-  { step: 2, label: 'Event Details', description: 'Event information' },
-  { step: 3, label: 'Menu', description: 'Select menu items' },
-  { step: 4, label: 'Review', description: 'Review your order' },
-  { step: 5, label: 'Payment', description: 'Complete payment' },
-] as const;
