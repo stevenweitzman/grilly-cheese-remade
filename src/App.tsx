@@ -32,6 +32,7 @@ import RetirementParties from "./pages/services/RetirementParties";
 import FilmSetCatering from "./pages/services/FilmSetCatering";
 import FoodTruckCatering from "./pages/services/FoodTruckCatering";
 import DropOffCatering from "./pages/services/DropOffCatering";
+import DropOffOrder from "./pages/order/DropOffOrder";
 import PopUpEvents from "./pages/services/PopUpEvents";
 import EventTypesOverview from "./pages/events/EventTypesOverview";
 import NewJersey from "./pages/locations/NewJersey";
@@ -81,6 +82,7 @@ const App = () => (
           {/* Service Type Pages */}
           <Route path="/services/food-truck-catering" element={<FoodTruckCatering />} />
           <Route path="/services/drop-off-catering" element={<DropOffCatering />} />
+          <Route path="/order/drop-off" element={<DropOffOrder />} />
           <Route path="/services/pop-up-events" element={<PopUpEvents />} />
           
           {/* Event Type Pages */}
