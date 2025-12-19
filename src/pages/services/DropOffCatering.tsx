@@ -5,6 +5,7 @@ import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Package, Clock, DollarSign, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const DropOffCatering = () => {
   const benefits = [
@@ -79,8 +80,8 @@ const DropOffCatering = () => {
               Get award-winning grilled cheese delivered directly to your door. Perfect for corporate events, office lunches, and gatherings where you want great food without the fuss.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" onClick={() => window.location.href = '/#contact'}>
-                Get Your Free Quote
+              <Button size="lg" asChild>
+                <Link to="/order/drop-off">Order Now</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="tel:8444745591">844-474-5591</a>
@@ -190,10 +191,10 @@ const DropOffCatering = () => {
           <div className="container max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Place Your Order?</h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Get a free quote for drop-off catering and simplify your next event!
+              Order drop-off catering online and simplify your next event!
             </p>
-            <Button size="lg" onClick={() => window.location.href = '/#contact'}>
-              Request Your Free Quote
+            <Button size="lg" asChild>
+              <Link to="/order/drop-off">Start Your Order</Link>
             </Button>
           </div>
         </section>
