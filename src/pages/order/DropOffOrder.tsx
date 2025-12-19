@@ -101,7 +101,6 @@ const DropOffOrder = () => {
       <SEOHead
         title="Order Drop-Off Catering | Grilly Cheese"
         description="Order delicious grilled cheese catering delivered to your event. Choose your package, customize your menu, and complete your order online."
-        canonicalUrl="https://grillycheese.com/order/drop-off"
       />
       <Navigation />
       <main className="min-h-screen bg-background pt-20">
