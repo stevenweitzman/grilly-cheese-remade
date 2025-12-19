@@ -1,4 +1,4 @@
-import { Phone, Menu, X, Calendar, ChevronDown } from "lucide-react";
+import { Phone, Menu, X, Calendar, ChevronDown, UtensilsCrossed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -189,6 +189,24 @@ const Navigation = () => {
                 Get Your Quote
               </a>
             </Button>
+            <Button asChild size="lg" variant="secondary">
+              <Link 
+                to="/order/drop-off"
+                className="flex items-center gap-2"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                      'event': 'cta_click',
+                      'cta_location': 'Navigation',
+                      'cta_text': 'Order Catering'
+                    });
+                  }
+                }}
+              >
+                <UtensilsCrossed className="h-4 w-4" />
+                Order Catering
+              </Link>
+            </Button>
             <Button asChild size="lg" variant="outline">
               <a 
                 href="tel:8444745591" 
@@ -222,25 +240,46 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden pb-4 max-h-[calc(100vh-5rem)] overflow-y-auto animate-fade-in">
-            <Button asChild className="w-full bg-accent hover:bg-accent/90 text-background mb-3">
-              <a 
-                href={isHomePage ? "#contact" : "/#contact"}
-                className="flex items-center justify-center gap-2"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                    (window as any).dataLayer.push({
-                      'event': 'cta_click',
-                      'cta_location': 'Navigation Mobile',
-                      'cta_text': 'Get Free Quote'
-                    });
-                  }
-                }}
-              >
-                <Calendar className="h-4 w-4" />
-                Get Your Quote
-              </a>
-            </Button>
+            <div className="flex gap-2 mb-3">
+              <Button asChild className="flex-1 bg-accent hover:bg-accent/90 text-background">
+                <a 
+                  href={isHomePage ? "#contact" : "/#contact"}
+                  className="flex items-center justify-center gap-2"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                      (window as any).dataLayer.push({
+                        'event': 'cta_click',
+                        'cta_location': 'Navigation Mobile',
+                        'cta_text': 'Get Free Quote'
+                      });
+                    }
+                  }}
+                >
+                  <Calendar className="h-4 w-4" />
+                  Get Quote
+                </a>
+              </Button>
+              <Button asChild variant="secondary" className="flex-1">
+                <Link 
+                  to="/order/drop-off"
+                  className="flex items-center justify-center gap-2"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                      (window as any).dataLayer.push({
+                        'event': 'cta_click',
+                        'cta_location': 'Navigation Mobile',
+                        'cta_text': 'Order Catering'
+                      });
+                    }
+                  }}
+                >
+                  <UtensilsCrossed className="h-4 w-4" />
+                  Order
+                </Link>
+              </Button>
+            </div>
 
             {isHomePage ? (
               <a
