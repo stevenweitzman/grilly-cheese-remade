@@ -40,7 +40,10 @@ export const PackageSelection = ({ formData, onUpdate, onNext }: PackageSelectio
   const minimumGuests = getMinimumGuestCount(selectedPackage);
 
   useEffect(() => {
-    onUpdate({ guestCount });
+    if (guestCount !== formData.guestCount) {
+      onUpdate({ guestCount });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guestCount]);
 
   const handlePackageSelect = (packageType: PackageType) => {
