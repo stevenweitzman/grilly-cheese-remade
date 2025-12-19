@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Phone } from "lucide-react";
+import { Calendar, UtensilsCrossed } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MobileStickyCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -59,26 +60,26 @@ const MobileStickyCTA = () => {
           </Button>
           <Button
             asChild
-            variant="outline"
+            variant="secondary"
             size="lg"
-            className="flex-1 border-accent/50 hover:border-accent hover:bg-accent/10"
+            className="flex-1"
           >
-            <a
-              href="tel:8444745591"
+            <Link
+              to="/order/drop-off"
               className="flex items-center justify-center gap-2"
               onClick={() => {
                 if (typeof window !== 'undefined' && (window as any).dataLayer) {
                   (window as any).dataLayer.push({
-                    'event': 'phone_click',
-                    'phone_location': 'Mobile Sticky Bottom',
-                    'phone_number': '844-474-5591'
+                    'event': 'cta_click',
+                    'cta_location': 'Mobile Sticky Bottom',
+                    'cta_text': 'Order Catering'
                   });
                 }
               }}
             >
-              <Phone className="h-5 w-5" />
-              Call Now
-            </a>
+              <UtensilsCrossed className="h-5 w-5" />
+              Order
+            </Link>
           </Button>
         </div>
       </div>

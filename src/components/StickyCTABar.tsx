@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, X } from "lucide-react";
+import { Calendar, X, UtensilsCrossed } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const StickyCTABar = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -70,8 +71,31 @@ const StickyCTABar = () => {
                     }
                   }}
                 >
-                  Get Your Quote
+                  Get Quote
                 </a>
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                asChild
+                className="hidden sm:flex bg-background/10 border-background/30 text-background hover:bg-background/20"
+              >
+                <Link
+                  to="/order/drop-off"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                      (window as any).dataLayer.push({
+                        'event': 'cta_click',
+                        'cta_location': 'Sticky Bar',
+                        'cta_text': 'Order Catering'
+                      });
+                    }
+                  }}
+                  className="flex items-center gap-1"
+                >
+                  <UtensilsCrossed className="h-4 w-4" />
+                  Order Catering
+                </Link>
               </Button>
               <button
                 onClick={handleDismiss}

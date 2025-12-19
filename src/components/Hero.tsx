@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Calendar, ChevronDown } from "lucide-react";
+import { Phone, Calendar, ChevronDown, UtensilsCrossed } from "lucide-react";
 import heroImage from "@/assets/hero-grilled-cheese.jpg";
 import QuickQuoteForm from "@/components/QuickQuoteForm";
 import { motion, useScroll, useTransform } from "framer-motion";
-
+import { Link } from "react-router-dom";
 const Hero = () => {
   const { scrollY } = useScroll();
   
@@ -120,6 +120,34 @@ const Hero = () => {
                     <Calendar className="h-6 w-6 relative z-10" />
                     <span className="relative z-10">Get Your Quote</span>
                   </a>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  size="lg" 
+                  variant="secondary"
+                  className="text-lg px-10 py-7 shadow-warm hover:shadow-xl transition-all relative overflow-hidden group"
+                  asChild
+                >
+                  <Link 
+                    to="/order/drop-off" 
+                    className="flex items-center gap-2"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                        (window as any).dataLayer.push({
+                          'event': 'cta_click',
+                          'cta_location': 'Hero',
+                          'cta_text': 'Order Catering'
+                        });
+                      }
+                    }}
+                  >
+                    <UtensilsCrossed className="h-6 w-6" />
+                    <span>Order Catering</span>
+                  </Link>
                 </Button>
               </motion.div>
             </motion.div>

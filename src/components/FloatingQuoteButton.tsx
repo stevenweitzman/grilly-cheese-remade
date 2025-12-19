@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "lucide-react";
+import { Calendar, UtensilsCrossed } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FloatingQuoteButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,7 +33,7 @@ const FloatingQuoteButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="hidden md:block fixed right-6 bottom-24 z-40 animate-fade-in">
+    <div className="hidden md:flex fixed right-6 bottom-24 z-40 animate-fade-in flex-col gap-3">
       <Button
         asChild
         size="lg"
@@ -54,6 +55,29 @@ const FloatingQuoteButton = () => {
           <Calendar className="h-5 w-5" />
           Quick Quote
         </a>
+      </Button>
+      <Button
+        asChild
+        size="lg"
+        variant="secondary"
+        className="shadow-warm hover:shadow-xl transition-all hover:scale-105 rounded-full px-6 py-6"
+      >
+        <Link
+          to="/order/drop-off"
+          className="flex items-center gap-2"
+          onClick={() => {
+            if (typeof window !== 'undefined' && (window as any).dataLayer) {
+              (window as any).dataLayer.push({
+                'event': 'cta_click',
+                'cta_location': 'Floating Button',
+                'cta_text': 'Order Catering'
+              });
+            }
+          }}
+        >
+          <UtensilsCrossed className="h-5 w-5" />
+          Order Catering
+        </Link>
       </Button>
     </div>
   );
