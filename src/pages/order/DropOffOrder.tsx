@@ -4,19 +4,18 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { OrderStepper } from "@/components/order/OrderStepper";
-import { PackageSelection } from "@/components/order/PackageSelection";
+import { MenuCart } from "@/components/order/MenuCart";
 import { EventDetails } from "@/components/order/EventDetails";
-import { MenuOptions } from "@/components/order/MenuOptions";
 import { OrderSummary } from "@/components/order/OrderSummary";
 import { PaymentStep } from "@/components/order/PaymentStep";
 import { OrderConfirmation } from "@/components/order/OrderConfirmation";
-import { CateringOrderFormData, initialFormData, OrderStep } from "@/types/cateringOrder";
+import { DropoffOrderFormData, initialDropoffFormData, OrderStep } from "@/types/cateringOrder";
 import { supabase } from "@/integrations/supabase/client";
 
 const DropOffOrder = () => {
   const [currentStep, setCurrentStep] = useState<OrderStep>(1);
   const [completedSteps, setCompletedSteps] = useState<OrderStep[]>([]);
-  const [formData, setFormData] = useState<CateringOrderFormData>(initialFormData);
+  const [formData, setFormData] = useState<DropoffOrderFormData>(initialDropoffFormData);
   const [userId, setUserId] = useState<string | undefined>();
   const [orderId, setOrderId] = useState<string>('');
   const navigate = useNavigate();
@@ -46,7 +45,7 @@ const DropOffOrder = () => {
     checkAuth();
   }, []);
 
-  const updateFormData = (data: Partial<CateringOrderFormData>) => {
+  const updateFormData = (data: Partial<DropoffOrderFormData>) => {
     setFormData(prev => ({ ...prev, ...data }));
   };
 
@@ -62,17 +61,22 @@ const DropOffOrder = () => {
 
   const handleNext = (fromStep: OrderStep) => {
     completeStep(fromStep);
-    setCurrentStep((fromStep + 1) as OrderStep);
+    const nextStep = (fromStep + 1) as OrderStep;
+    if (nextStep <= 4) {
+      setCurrentStep(nextStep);
+    }
   };
 
   const handleBack = () => {
-    setCurrentStep((currentStep - 1) as OrderStep);
+    const prevStep = (currentStep - 1) as OrderStep;
+    if (prevStep >= 1) {
+      setCurrentStep(prevStep);
+    }
   };
 
   const handlePaymentSuccess = (id: string) => {
     setOrderId(id);
-    completeStep(5);
-    setCurrentStep(5);
+    completeStep(4);
   };
 
   const renderStep = () => {
@@ -82,14 +86,12 @@ const DropOffOrder = () => {
 
     switch (currentStep) {
       case 1:
-        return <PackageSelection formData={formData} onUpdate={updateFormData} onNext={() => handleNext(1)} />;
+        return <MenuCart formData={formData} onUpdate={updateFormData} onNext={() => handleNext(1)} />;
       case 2:
         return <EventDetails formData={formData} onUpdate={updateFormData} onNext={() => handleNext(2)} onBack={handleBack} />;
       case 3:
-        return <MenuOptions formData={formData} onUpdate={updateFormData} onNext={() => handleNext(3)} onBack={handleBack} />;
+        return <OrderSummary formData={formData} onNext={() => handleNext(3)} onBack={handleBack} />;
       case 4:
-        return <OrderSummary formData={formData} onNext={() => handleNext(4)} onBack={handleBack} />;
-      case 5:
         return <PaymentStep formData={formData} onSuccess={handlePaymentSuccess} onBack={handleBack} userId={userId} />;
       default:
         return null;
@@ -100,7 +102,7 @@ const DropOffOrder = () => {
     <>
       <SEOHead
         title="Order Drop-Off Catering | Grilly Cheese"
-        description="Order delicious grilled cheese catering delivered to your event. Choose your package, customize your menu, and complete your order online."
+        description="Order delicious grilled cheese catering delivered to your event. Choose your items, customize your order, and complete your order online."
       />
       <Navigation />
       <main className="min-h-screen bg-background pt-20">

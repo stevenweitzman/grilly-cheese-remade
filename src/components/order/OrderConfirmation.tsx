@@ -2,23 +2,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Calendar, MapPin, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CateringOrderFormData } from "@/types/cateringOrder";
-import { calculateFullPricing, formatCurrency } from "@/lib/pricing";
+import { DropoffOrderFormData } from "@/types/cateringOrder";
+import { calculateDropoffPricing, formatCurrency } from "@/lib/dropoff-pricing";
 import { format } from "date-fns";
 
 interface OrderConfirmationProps {
-  formData: CateringOrderFormData;
+  formData: DropoffOrderFormData;
   orderId: string;
   isLoggedIn: boolean;
 }
 
 export const OrderConfirmation = ({ formData, orderId, isLoggedIn }: OrderConfirmationProps) => {
-  const pricing = calculateFullPricing(
-    formData.packageType,
-    formData.guestCount,
-    formData.distanceMiles,
-    formData.includeDesserts
-  );
+  const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles);
 
   return (
     <div className="max-w-2xl mx-auto space-y-8 text-center">
@@ -50,9 +45,14 @@ export const OrderConfirmation = ({ formData, orderId, isLoggedIn }: OrderConfir
               <span>{formData.contactEmail}</span>
             </div>
           </div>
-          <div className="pt-4 border-t flex justify-between font-semibold">
+          <div className="pt-4 border-t">
+            <p className="text-sm text-muted-foreground mb-2">
+              {pricing.entreeCount} entrées + {formData.cart.filter(i => !i.isEntree).length} extras
+            </p>
+          </div>
+          <div className="pt-2 border-t flex justify-between font-semibold">
             <span>Total Paid</span>
-            <span className="text-primary">{formatCurrency(pricing.total)}</span>
+            <span className="text-primary">{formatCurrency(pricing.finalTotal)}</span>
           </div>
         </CardContent>
       </Card>

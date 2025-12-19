@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Lock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-import { CateringOrderFormData } from "@/types/cateringOrder";
-import { calculateFullPricing, formatCurrency, DEPOSIT_PERCENTAGE } from "@/lib/pricing";
+import { DropoffOrderFormData } from "@/types/cateringOrder";
+import { calculateDropoffPricing, formatCurrency } from "@/lib/dropoff-pricing";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface PaymentStepProps {
-  formData: CateringOrderFormData;
+  formData: DropoffOrderFormData;
   onSuccess: (orderId: string) => void;
   onBack: () => void;
   userId?: string;
@@ -19,14 +19,8 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
   const { toast } = useToast();
 
-  const pricing = calculateFullPricing(
-    formData.packageType,
-    formData.guestCount,
-    formData.distanceMiles,
-    formData.includeDesserts
-  );
-
-  const amountDue = pricing.total * DEPOSIT_PERCENTAGE;
+  const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles);
+  const amountDue = pricing.finalTotal;
 
   const handlePayPalPayment = async () => {
     setIsProcessing(true);
@@ -37,11 +31,9 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
       await new Promise(resolve => setTimeout(resolve, 2000));
       const mockTransactionId = `PAYPAL-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
+      // Build order data for new item-based model
       const orderData = {
         client_id: userId || null,
-        package_type: formData.packageType as 'simple' | 'full',
-        guest_count: formData.guestCount,
-        price_per_person: pricing.pricePerPerson || 0,
         event_name: formData.eventName,
         event_date: formData.eventDate?.toISOString().split('T')[0] || new Date().toISOString().split('T')[0],
         event_time: formData.eventTime || '12:00',
@@ -52,23 +44,35 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
         city: formData.deliveryAddress.city,
         state: formData.deliveryAddress.state,
         zip: formData.deliveryAddress.zip,
+        
+        // New item-based fields
+        cart_items: formData.cart,
+        entree_subtotal: pricing.entreeSubtotal,
+        bulk_discount_percent: pricing.bulkDiscountPercent,
+        bulk_discount_amount: pricing.bulkDiscountAmount,
+        extras_subtotal: pricing.extrasSubtotal,
+        food_subtotal: pricing.foodSubtotal,
+        delivery_fee: pricing.deliveryFee,
+        delivery_miles_over_free: pricing.deliveryMilesOver10,
+        
+        // Legacy fields (required by schema for now)
+        package_type: 'simple' as const,
+        guest_count: pricing.entreeCount,
+        price_per_person: 0,
+        selected_sandwiches: JSON.parse(JSON.stringify(formData.cart.filter(i => i.category === 'sandwich'))),
+        selected_hotdogs: JSON.parse(JSON.stringify(formData.cart.filter(i => i.category === 'hotdog'))),
+        
+        // Common fields
         travel_distance_miles: formData.distanceMiles,
-        travel_fee: pricing.travelFee,
-        selected_sandwiches: JSON.parse(JSON.stringify(formData.selectedSandwiches)),
-        selected_hotdogs: JSON.parse(JSON.stringify(formData.selectedHotDogs)),
-        gluten_free_count: formData.dietaryOptions.glutenFreeCount,
-        vegan_count: formData.dietaryOptions.veganCount,
-        include_desserts: formData.includeDesserts,
-        base_subtotal: pricing.cateringSubtotal,
-        addons_total: pricing.dessertCost,
+        travel_fee: pricing.deliveryFee,
+        base_subtotal: pricing.foodSubtotal,
         gratuity: pricing.gratuity,
-        total_amount: pricing.total,
+        total_amount: pricing.finalTotal,
         amount_charged: amountDue,
         payment_status: 'paid',
         paypal_transaction_id: mockTransactionId,
         status: 'pending_review' as const,
-        special_notes: formData.dietaryOptions.specialNotes || null,
-        minimum_charge_applied: pricing.minimumApplied,
+        special_notes: formData.specialNotes || null,
         paid_at: new Date().toISOString(),
       };
 
@@ -109,9 +113,7 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
         <CardContent>
           <div className="text-center py-4">
             <p className="text-4xl font-bold text-primary">{formatCurrency(amountDue)}</p>
-            <p className="text-sm text-muted-foreground mt-2">
-              {DEPOSIT_PERCENTAGE === 1 ? 'Full payment' : `${DEPOSIT_PERCENTAGE * 100}% deposit`}
-            </p>
+            <p className="text-sm text-muted-foreground mt-2">Full payment</p>
           </div>
         </CardContent>
       </Card>
