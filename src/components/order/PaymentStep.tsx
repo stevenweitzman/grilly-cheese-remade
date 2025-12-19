@@ -37,42 +37,44 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
       await new Promise(resolve => setTimeout(resolve, 2000));
       const mockTransactionId = `PAYPAL-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
-      // Save order to database
+      const orderData = {
+        client_id: userId || null,
+        package_type: formData.packageType as 'simple' | 'full',
+        guest_count: formData.guestCount,
+        price_per_person: pricing.pricePerPerson || 0,
+        event_name: formData.eventName,
+        event_date: formData.eventDate?.toISOString().split('T')[0] || new Date().toISOString().split('T')[0],
+        event_time: formData.eventTime || '12:00',
+        contact_name: formData.contactName,
+        contact_email: formData.contactEmail,
+        contact_phone: formData.contactPhone,
+        address: formData.deliveryAddress.street,
+        city: formData.deliveryAddress.city,
+        state: formData.deliveryAddress.state,
+        zip: formData.deliveryAddress.zip,
+        travel_distance_miles: formData.distanceMiles,
+        travel_fee: pricing.travelFee,
+        selected_sandwiches: JSON.parse(JSON.stringify(formData.selectedSandwiches)),
+        selected_hotdogs: JSON.parse(JSON.stringify(formData.selectedHotDogs)),
+        gluten_free_count: formData.dietaryOptions.glutenFreeCount,
+        vegan_count: formData.dietaryOptions.veganCount,
+        include_desserts: formData.includeDesserts,
+        base_subtotal: pricing.cateringSubtotal,
+        addons_total: pricing.dessertCost,
+        gratuity: pricing.gratuity,
+        total_amount: pricing.total,
+        amount_charged: amountDue,
+        payment_status: 'paid',
+        paypal_transaction_id: mockTransactionId,
+        status: 'pending_review' as const,
+        special_notes: formData.dietaryOptions.specialNotes || null,
+        minimum_charge_applied: pricing.minimumApplied,
+        paid_at: new Date().toISOString(),
+      };
+
       const { data: order, error } = await supabase
         .from('catering_orders')
-        .insert({
-          client_id: userId || null,
-          package_type: formData.packageType,
-          guest_count: formData.guestCount,
-          event_name: formData.eventName,
-          event_date: formData.eventDate?.toISOString().split('T')[0],
-          event_time: formData.eventTime,
-          contact_name: formData.contactName,
-          contact_email: formData.contactEmail,
-          contact_phone: formData.contactPhone,
-          delivery_street: formData.deliveryAddress.street,
-          delivery_city: formData.deliveryAddress.city,
-          delivery_state: formData.deliveryAddress.state,
-          delivery_zip: formData.deliveryAddress.zip,
-          distance_miles: formData.distanceMiles,
-          menu_selections: {
-            sandwiches: formData.selectedSandwiches,
-            hotDogs: formData.selectedHotDogs,
-            dietary: formData.dietaryOptions,
-          },
-          include_desserts: formData.includeDesserts,
-          catering_subtotal: pricing.cateringSubtotal,
-          dessert_cost: pricing.dessertCost,
-          gratuity_amount: pricing.gratuity,
-          travel_fee: pricing.travelFee,
-          total_amount: pricing.total,
-          deposit_amount: amountDue,
-          amount_paid: amountDue,
-          payment_status: 'paid',
-          paypal_transaction_id: mockTransactionId,
-          order_status: 'pending_review',
-          special_notes: formData.dietaryOptions.specialNotes || null,
-        })
+        .insert([orderData])
         .select()
         .single();
 

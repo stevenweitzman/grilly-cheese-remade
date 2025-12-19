@@ -18,6 +18,8 @@ import Messages from "./pages/portal/Messages";
 import Documents from "./pages/portal/Documents";
 import Billing from "./pages/portal/Billing";
 import Settings from "./pages/portal/Settings";
+import CateringOrders from "./pages/portal/CateringOrders";
+import CateringOrderDetail from "./pages/portal/CateringOrderDetail";
 
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -25,6 +27,8 @@ import AdminClients from "./pages/admin/AdminClients";
 import AdminClientDetail from "./pages/admin/AdminClientDetail";
 import AdminQuotes from "./pages/admin/AdminQuotes";
 import AdminQuoteEdit from "./pages/admin/AdminQuoteEdit";
+import AdminCateringOrders from "./pages/admin/AdminCateringOrders";
+import AdminCateringOrderDetail from "./pages/admin/AdminCateringOrderDetail";
 import WeddingCatering from "./pages/services/WeddingCatering";
 import CorporateCatering from "./pages/services/CorporateCatering";
 import BabyShowers from "./pages/services/BabyShowers";
@@ -71,6 +75,8 @@ const App = () => (
           <Route path="/portal/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
           <Route path="/portal/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
           <Route path="/portal/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/portal/catering-orders" element={<ProtectedRoute><CateringOrders /></ProtectedRoute>} />
+          <Route path="/portal/catering-orders/:id" element={<ProtectedRoute><CateringOrderDetail /></ProtectedRoute>} />
 
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminRoute><AdminLayout><AdminDashboard /></AdminLayout></AdminRoute>} />
@@ -78,6 +84,8 @@ const App = () => (
           <Route path="/admin/clients/:id" element={<AdminRoute><AdminLayout><AdminClientDetail /></AdminLayout></AdminRoute>} />
           <Route path="/admin/quotes" element={<AdminRoute><AdminLayout><AdminQuotes /></AdminLayout></AdminRoute>} />
           <Route path="/admin/quotes/:id" element={<AdminRoute><AdminLayout><AdminQuoteEdit /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/catering-orders" element={<AdminRoute><AdminLayout><AdminCateringOrders /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/catering-orders/:id" element={<AdminRoute><AdminLayout><AdminCateringOrderDetail /></AdminLayout></AdminRoute>} />
           
           {/* Service Type Pages */}
           <Route path="/services/food-truck-catering" element={<FoodTruckCatering />} />
