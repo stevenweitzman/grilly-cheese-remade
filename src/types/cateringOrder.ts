@@ -36,6 +36,9 @@ export interface DropoffOrderFormData {
   // Special requests
   specialNotes: string;
   
+  // Honeypot for bot detection (should remain empty)
+  website: string;
+  
   // Calculated at final step only
   pricingBreakdown: DropoffPricingBreakdown | null;
 }
@@ -60,6 +63,7 @@ export const initialDropoffFormData: DropoffOrderFormData = {
   },
   distanceMiles: 0,
   specialNotes: '',
+  website: '', // honeypot - must remain empty
   pricingBreakdown: null,
 };
 

@@ -14,6 +14,21 @@ export type Database = {
   }
   public: {
     Tables: {
+      catering_order_rate_limit: {
+        Row: {
+          created_at: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       catering_orders: {
         Row: {
           addons_total: number | null

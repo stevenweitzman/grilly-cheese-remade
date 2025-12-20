@@ -72,6 +72,20 @@ export const ContactInfoStep = ({ formData, onUpdate, onBack, onNext }: ContactI
               />
             </div>
           </div>
+          
+          {/* Honeypot field - hidden from users, visible to bots */}
+          <div className="absolute -left-[9999px]" aria-hidden="true">
+            <Label htmlFor="website">Website (leave blank)</Label>
+            <Input
+              id="website"
+              name="website"
+              type="text"
+              autoComplete="off"
+              tabIndex={-1}
+              value={formData.website}
+              onChange={(e) => onUpdate({ website: e.target.value })}
+            />
+          </div>
         </CardContent>
       </Card>
 

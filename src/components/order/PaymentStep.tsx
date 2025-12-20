@@ -23,6 +23,18 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
   const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles, formData.wantsIndividualPackaging, formData.wantsChafingDishes, formData.glutenFreeCount);
 
   const handleSubmitOrder = async () => {
+    // Check honeypot - if filled, it's likely a bot
+    if (formData.website && formData.website.trim() !== '') {
+      console.log('Bot detected via honeypot');
+      // Silently fail for bots - show success but don't actually submit
+      setStatus('success');
+      toast({ 
+        title: "Order submitted!", 
+        description: "You'll receive a confirmation email with payment details shortly." 
+      });
+      return;
+    }
+
     setIsProcessing(true);
     setStatus('processing');
 
