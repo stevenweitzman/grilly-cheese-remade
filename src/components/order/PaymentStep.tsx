@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Lock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, CheckCircle, AlertCircle, Loader2, Clock } from "lucide-react";
 import { DropoffOrderFormData } from "@/types/cateringOrder";
 import { calculateDropoffPricing, formatCurrency } from "@/lib/dropoff-pricing";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { format } from "date-fns";
 
 interface PaymentStepProps {
   formData: DropoffOrderFormData;
@@ -16,36 +17,31 @@ interface PaymentStepProps {
 
 export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStepProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
   const { toast } = useToast();
 
   const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles);
-  const amountDue = pricing.finalTotal;
 
-  const handlePayPalPayment = async () => {
+  const handleSubmitOrder = async () => {
     setIsProcessing(true);
-    setPaymentStatus('processing');
+    setStatus('processing');
 
     try {
-      // Simulate PayPal payment (placeholder)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      const mockTransactionId = `PAYPAL-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-
-      // Build order data for new item-based model
+      // Build order data
       const orderData = {
         client_id: userId || null,
-        event_name: formData.eventName,
+        event_name: formData.eventName || 'Untitled Event',
         event_date: formData.eventDate?.toISOString().split('T')[0] || new Date().toISOString().split('T')[0],
-        event_time: formData.eventTime || '12:00',
-        contact_name: formData.contactName,
-        contact_email: formData.contactEmail,
-        contact_phone: formData.contactPhone,
-        address: formData.deliveryAddress.street,
-        city: formData.deliveryAddress.city,
+        event_time: formData.eventTime || 'TBD',
+        contact_name: formData.contactName || 'Not provided',
+        contact_email: formData.contactEmail || 'Not provided',
+        contact_phone: formData.contactPhone || 'Not provided',
+        address: formData.deliveryAddress.street || 'Not provided',
+        city: formData.deliveryAddress.city || 'Not provided',
         state: formData.deliveryAddress.state,
-        zip: formData.deliveryAddress.zip,
+        zip: formData.deliveryAddress.zip || '00000',
         
-        // New item-based fields (cast to JSON for Supabase)
+        // Item-based fields
         cart_items: JSON.parse(JSON.stringify(formData.cart)),
         entree_subtotal: pricing.entreeSubtotal,
         bulk_discount_percent: pricing.bulkDiscountPercent,
@@ -55,7 +51,7 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
         delivery_fee: pricing.deliveryFee,
         delivery_miles_over_free: pricing.deliveryMilesOver10,
         
-        // Legacy fields (required by schema for now)
+        // Legacy fields
         package_type: 'simple' as const,
         guest_count: pricing.entreeCount,
         price_per_person: 0,
@@ -68,14 +64,13 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
         base_subtotal: pricing.foodSubtotal,
         gratuity: pricing.gratuity,
         total_amount: pricing.finalTotal,
-        amount_charged: amountDue,
-        payment_status: 'paid',
-        paypal_transaction_id: mockTransactionId,
-        status: 'pending_review' as const,
+        amount_charged: 0,
+        payment_status: 'pending',
+        status: 'pending_payment' as const,
         special_notes: formData.specialNotes || null,
-        paid_at: new Date().toISOString(),
       };
 
+      // Insert order
       const { data: order, error } = await supabase
         .from('catering_orders')
         .insert([orderData])
@@ -84,13 +79,52 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
 
       if (error) throw error;
 
-      setPaymentStatus('success');
-      toast({ title: "Payment successful!", description: "Your order has been placed." });
+      // Send notification email
+      const { error: emailError } = await supabase.functions.invoke('send-order-notification', {
+        body: {
+          orderId: order.id,
+          eventName: formData.eventName || 'Untitled Event',
+          eventDate: formData.eventDate ? format(formData.eventDate, 'MMMM d, yyyy') : 'TBD',
+          eventTime: formData.eventTime || 'TBD',
+          contactName: formData.contactName || 'Not provided',
+          contactEmail: formData.contactEmail || 'Not provided',
+          contactPhone: formData.contactPhone || 'Not provided',
+          address: formData.deliveryAddress.street || 'Not provided',
+          city: formData.deliveryAddress.city || 'Not provided',
+          state: formData.deliveryAddress.state,
+          zip: formData.deliveryAddress.zip || '',
+          cartItems: formData.cart,
+          entreeSubtotal: pricing.entreeSubtotal,
+          bulkDiscountPercent: pricing.bulkDiscountPercent,
+          bulkDiscountAmount: pricing.bulkDiscountAmount,
+          extrasSubtotal: pricing.extrasSubtotal,
+          foodSubtotal: pricing.foodSubtotal,
+          gratuity: pricing.gratuity,
+          deliveryFee: pricing.deliveryFee,
+          finalTotal: pricing.finalTotal,
+          specialNotes: formData.specialNotes,
+        },
+      });
+
+      if (emailError) {
+        console.error('Email notification error:', emailError);
+        // Don't fail the order, just log the error
+      }
+
+      setStatus('success');
+      toast({ 
+        title: "Order submitted!", 
+        description: "You'll receive a confirmation email with payment details shortly." 
+      });
       onSuccess(order.id);
     } catch (error) {
-      console.error('Payment error:', error);
-      setPaymentStatus('error');
-      toast({ title: "Payment failed", description: "Please try again.", variant: "destructive" });
+      console.error('Order submission error:', error);
+      setStatus('error');
+      toast({ 
+        title: "Submission failed", 
+        description: "Please try again or contact us directly.", 
+        variant: "destructive" 
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -99,61 +133,80 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Complete Payment</h2>
-        <p className="text-muted-foreground">Secure payment powered by PayPal</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Submit Your Order</h2>
+        <p className="text-muted-foreground">Review complete — ready to submit</p>
       </div>
 
       <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <CreditCard className="w-5 h-5 text-primary" />
-            Amount Due
+            <Mail className="w-5 h-5 text-primary" />
+            Order Total
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-4">
-            <p className="text-4xl font-bold text-primary">{formatCurrency(amountDue)}</p>
-            <p className="text-sm text-muted-foreground mt-2">Full payment</p>
+            <p className="text-4xl font-bold text-primary">{formatCurrency(pricing.finalTotal)}</p>
+            <p className="text-sm text-muted-foreground mt-2">Payment link will be sent via email</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="border-amber-200 bg-amber-50/50">
+        <CardContent className="pt-6">
+          <div className="flex items-start gap-4">
+            <Clock className="w-8 h-8 text-amber-600 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-amber-900">What happens next?</h3>
+              <ul className="mt-2 space-y-1 text-sm text-amber-800">
+                <li>• We'll review your order and confirm availability</li>
+                <li>• You'll receive a confirmation email within 24 hours</li>
+                <li>• The email will include a secure payment link</li>
+                <li>• Your order is confirmed once payment is received</li>
+              </ul>
+            </div>
           </div>
         </CardContent>
       </Card>
 
       <Card>
         <CardContent className="pt-6">
-          {paymentStatus === 'success' ? (
+          {status === 'success' ? (
             <div className="text-center py-8">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <p className="text-xl font-semibold text-green-700">Payment Successful!</p>
+              <p className="text-xl font-semibold text-green-700">Order Submitted!</p>
+              <p className="text-muted-foreground mt-2">Check your email for confirmation and payment details.</p>
             </div>
-          ) : paymentStatus === 'error' ? (
+          ) : status === 'error' ? (
             <div className="text-center py-8">
               <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
-              <p className="text-xl font-semibold text-destructive">Payment Failed</p>
-              <Button onClick={handlePayPalPayment} className="mt-4">Try Again</Button>
+              <p className="text-xl font-semibold text-destructive">Submission Failed</p>
+              <p className="text-muted-foreground mt-2">Please try again or call us at (856) 555-1234</p>
+              <Button onClick={handleSubmitOrder} className="mt-4">Try Again</Button>
             </div>
           ) : (
             <div className="space-y-4">
               <Button
-                onClick={handlePayPalPayment}
+                onClick={handleSubmitOrder}
                 disabled={isProcessing}
-                className="w-full h-14 text-lg bg-[#0070ba] hover:bg-[#005ea6]"
+                className="w-full h-14 text-lg"
+                size="lg"
               >
                 {isProcessing ? (
-                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Processing...</>
+                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting Order...</>
                 ) : (
-                  <>Pay with PayPal</>
+                  <>Submit Order</>
                 )}
               </Button>
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <Lock className="w-4 h-4" />
-                <span>Secure payment - Your data is protected</span>
-              </div>
+              <p className="text-center text-sm text-muted-foreground">
+                By submitting, you agree to our terms. No payment is required now.
+              </p>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {paymentStatus === 'idle' && (
+      {status === 'idle' && (
         <div className="flex justify-between">
           <Button variant="outline" onClick={onBack}>Back</Button>
         </div>
