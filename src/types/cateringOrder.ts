@@ -21,6 +21,7 @@ export interface DropoffOrderFormData {
   wantsIndividualPackaging: boolean;
   wantsPaperGoods: boolean; // plates, utensils, napkins
   wantsChafingDishes: boolean;
+  glutenFreeCount: number; // Number of sandwiches to make gluten-free (+$2 each)
   
   // Event Details
   eventName: string;
@@ -44,6 +45,7 @@ export const initialDropoffFormData: DropoffOrderFormData = {
   wantsIndividualPackaging: false,
   wantsPaperGoods: false,
   wantsChafingDishes: false,
+  glutenFreeCount: 0,
   eventName: '',
   eventDate: null,
   eventTime: '',

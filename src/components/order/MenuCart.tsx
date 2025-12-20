@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Minus, ShoppingCart, Leaf, Wheat, Info, TrendingDown, Package, UtensilsCrossed, Flame } from "lucide-react";
+import { Plus, Minus, ShoppingCart, Leaf, Info, TrendingDown, Package, UtensilsCrossed, Flame, Wheat } from "lucide-react";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
 import { allSandwiches, hotDogs, breakfast, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
 import { 
@@ -17,7 +17,8 @@ import {
   INDIVIDUAL_PACKAGING_FEE,
   TRAY_SERVINGS,
   CHAFING_DISH_FEE_PER_10_ITEMS,
-  CHAFING_DISH_FEE_PER_TRAY
+  CHAFING_DISH_FEE_PER_TRAY,
+  GLUTEN_FREE_UPCHARGE
 } from "@/lib/dropoff-pricing";
 
 // ============= CONFIGURABLE COPY =============
@@ -62,6 +63,11 @@ const COPY = {
   chafingDishTitle: "Chafing Dishes",
   chafingDishDescription: "Keep your food warm with chafing dishes and fuel",
   chafingDishPriceNote: "$15 per 10 items, $15 per tray",
+  
+  // Gluten-free option
+  glutenFreeTitle: "Gluten-Free Bread Substitution",
+  glutenFreeDescription: "Substitute gluten-free bread on any sandwich",
+  glutenFreePriceNote: "+$2.00 per sandwich",
   
   // Tier names
   tierNames: {
@@ -162,6 +168,14 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
       })()
     : 0;
 
+  // Count total sandwiches for max gluten-free
+  const totalSandwiches = formData.cart
+    .filter(item => item.category === 'sandwich')
+    .reduce((sum, item) => sum + item.quantity, 0);
+
+  // Calculate gluten-free fee for display
+  const glutenFreeFeeDisplay = formData.glutenFreeCount * GLUTEN_FREE_UPCHARGE;
+
   const renderMenuItem = (item: MenuItem) => {
     const quantity = getItemQuantity(item.id);
     
@@ -178,19 +192,14 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
               <h4 className="font-medium">{item.name}</h4>
-              {item.isVegetarian && !item.isVegan && (
-                <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
-                  <Leaf className="w-3 h-3 mr-1" />V
-                </Badge>
-              )}
               {item.isVegan && (
                 <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
                   <Leaf className="w-3 h-3 mr-1" />VG
                 </Badge>
               )}
-              {item.hasGlutenFreeOption && (
-                <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">
-                  <Wheat className="w-3 h-3 mr-1" />GF
+              {item.isVegetarian && !item.isVegan && (
+                <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                  <Leaf className="w-3 h-3 mr-1" />V
                 </Badge>
               )}
             </div>
@@ -393,6 +402,50 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
                   </p>
                 )}
               </div>
+
+              {/* Gluten-Free Option */}
+              {totalSandwiches > 0 && (
+                <div className="pt-3 border-t border-border/50">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-2">
+                      <Wheat className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <Label className="text-sm font-medium">
+                          {COPY.glutenFreeTitle}
+                        </Label>
+                        <p className="text-xs text-muted-foreground">{COPY.glutenFreeDescription}</p>
+                        <p className="text-xs text-primary/80 mt-0.5">{COPY.glutenFreePriceNote}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => onUpdate({ glutenFreeCount: Math.max(0, formData.glutenFreeCount - 1) })}
+                        disabled={formData.glutenFreeCount <= 0}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <span className="w-8 text-center font-medium">{formData.glutenFreeCount}</span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => onUpdate({ glutenFreeCount: Math.min(totalSandwiches, formData.glutenFreeCount + 1) })}
+                        disabled={formData.glutenFreeCount >= totalSandwiches}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  {formData.glutenFreeCount > 0 && (
+                    <p className="text-xs text-muted-foreground mt-2 pl-6">
+                      GF bread upcharge: {formatCurrency(glutenFreeFeeDisplay)}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </CardContent>
