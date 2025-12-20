@@ -247,8 +247,9 @@ const handler = async (req: Request): Promise<Response> => {
     
     console.log("Processing quote request:", { formType, email: validatedData.email });
 
-    // Check if user exists with this email, create profile if not
+    // Check if user exists with this email, or create guest submission
     let clientId: string | null = null;
+    let guestSubmissionId: string | null = null;
     
     // First check if auth user exists
     const { data: existingUsers } = await supabase.auth.admin.listUsers();
@@ -257,35 +258,34 @@ const handler = async (req: Request): Promise<Response> => {
     if (existingUser) {
       clientId = existingUser.id;
     } else {
-      // Create a profile for non-authenticated submissions (they can claim it later)
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .insert({
-          full_name: validatedData.name,
-          phone: validatedData.phone,
-        })
-        .select()
-        .single();
+      // Create a guest submission using SECURITY DEFINER function (proper RLS pattern)
+      const { data: guestId, error: guestError } = await supabase
+        .rpc('create_guest_quote_submission', {
+          p_full_name: validatedData.name,
+          p_email: validatedData.email,
+          p_phone: validatedData.phone || null,
+        });
       
-      if (!profileError && profile) {
-        clientId = profile.id;
+      if (!guestError && guestId) {
+        guestSubmissionId = guestId;
+        console.log("Guest submission created:", guestSubmissionId);
+      } else {
+        console.error("Error creating guest submission:", guestError);
       }
     }
 
-    // Create quote request in database if we have a client ID
+    // Create quote request in database if we have a client ID or guest submission
     let quoteId: string | null = null;
-    if (clientId) {
-      const quoteData = formType === "quick" ? {
-        client_id: clientId,
+    if (clientId || guestSubmissionId) {
+      const baseQuoteData = formType === "quick" ? {
         event_type: (validatedData as QuickQuoteRequest).eventType || "Quick Quote",
         event_date: validatedData.eventDate,
         event_time: (formData.eventStartTime as string) || null,
         guests: parseInt((validatedData as QuickQuoteRequest).guestCount) || 0,
         property_type: (formData.propertyType as string) || null,
         notes: (formData.comments as string) || null,
-        status: 'pending',
+        status: 'pending' as const,
       } : {
-        client_id: clientId,
         event_type: (validatedData as EventRequest).eventType,
         event_date: validatedData.eventDate,
         event_time: (validatedData as EventRequest).eventTime,
@@ -297,8 +297,13 @@ const handler = async (req: Request): Promise<Response> => {
         state: (validatedData as EventRequest).state,
         zip: (validatedData as EventRequest).zip,
         notes: (validatedData as EventRequest).additionalInfo || null,
-        status: 'pending',
+        status: 'pending' as const,
       };
+
+      // Add either client_id or guest_submission_id based on user type
+      const quoteData = clientId 
+        ? { ...baseQuoteData, client_id: clientId }
+        : { ...baseQuoteData, guest_submission_id: guestSubmissionId };
 
       const { data: quote, error: quoteError } = await supabase
         .from('quote_requests')
