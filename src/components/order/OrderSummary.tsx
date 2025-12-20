@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CalendarIcon, MapPin, Utensils, DollarSign, Truck, Percent, AlertTriangle, Tag } from "lucide-react";
+import { CalendarIcon, MapPin, Utensils, DollarSign, Truck, Percent, AlertTriangle, Tag, Package } from "lucide-react";
 import { format } from "date-fns";
 import { DropoffOrderFormData } from "@/types/cateringOrder";
 import { calculateDropoffPricing, formatCurrency } from "@/lib/dropoff-pricing";
@@ -15,7 +15,7 @@ interface OrderSummaryProps {
 }
 
 export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) => {
-  const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles);
+  const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles, formData.wantsIndividualPackaging);
 
   // Group cart items by category
   const entreeItems = formData.cart.filter(item => item.isEntree);
@@ -113,6 +113,16 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
             </div>
           )}
 
+          {/* Individual Packaging */}
+          {formData.wantsIndividualPackaging && (
+            <div className="pt-3 border-t">
+              <p className="text-sm font-medium mb-1 text-muted-foreground flex items-center gap-1">
+                <Package className="w-4 h-4" /> Individual Packaging
+              </p>
+              <p className="text-sm text-green-700 dark:text-green-400">Items will be individually wrapped</p>
+            </div>
+          )}
+
           {/* Special Notes */}
           {formData.specialNotes && (
             <div className="pt-3 border-t">
@@ -182,6 +192,16 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
             <span>Food Subtotal</span>
             <span>{formatCurrency(pricing.foodSubtotal)}</span>
           </div>
+
+          {/* Packaging Fee */}
+          {pricing.packagingFee > 0 && (
+            <div className="flex justify-between text-sm">
+              <span className="flex items-center gap-1 text-muted-foreground">
+                <Package className="w-4 h-4" /> Individual Packaging
+              </span>
+              <span>{formatCurrency(pricing.packagingFee)}</span>
+            </div>
+          )}
 
           {/* Gratuity */}
           <div className="flex justify-between text-sm">
