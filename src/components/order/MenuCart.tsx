@@ -22,9 +22,9 @@ const COPY = {
   cateringNoticeTitle: "You're building a catering order",
   cateringNoticeBody: "Prices shown are base prices only. Bulk discounts, gratuity, and delivery fees are applied on the final review step based on your total quantities and location.",
   
-  // Price display format - "up to" since bulk discounts reduce price
-  basePriceLabel: "Up to",
-  priceNote: "less with bulk orders",
+  // Price display format
+  basePriceLabel: "From",
+  priceNote: "final price at checkout",
   
   // Category subtitles
   standardSandwichSubtitle: "Classic favorites",

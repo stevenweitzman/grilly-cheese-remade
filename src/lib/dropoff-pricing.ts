@@ -25,9 +25,8 @@ export const BULK_DISCOUNT_TIERS = [
 
 // Delivery fee configuration
 export const ORIGIN_ZIP = '08089';
-export const BASE_DELIVERY_FEE = 50.00; // Base delivery fee
 export const FREE_DELIVERY_MILES = 10;
-export const DELIVERY_PER_MILE_RATE = 1.50; // Per mile rate after free miles
+export const DELIVERY_PER_MILE_RATE = 1.50;
 
 // Gratuity
 export const GRATUITY_RATE = 0.10; // 10%
@@ -117,12 +116,11 @@ export const calculateExtrasSubtotal = (cart: CartItem[]): number => {
 
 /**
  * Calculate delivery fee based on distance from origin zip (08089)
- * Base fee of $50 + $1.50/mile for miles over 10
+ * First 10 miles are free, then $1.50/mile for miles over 10
  */
 export const calculateDeliveryFee = (distanceMiles: number): { fee: number; milesOver10: number } => {
   const milesOver10 = Math.max(0, distanceMiles - FREE_DELIVERY_MILES);
-  const distanceFee = milesOver10 * DELIVERY_PER_MILE_RATE;
-  const fee = BASE_DELIVERY_FEE + distanceFee;
+  const fee = milesOver10 * DELIVERY_PER_MILE_RATE;
   return { fee, milesOver10 };
 };
 
