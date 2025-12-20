@@ -9,6 +9,14 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "How to Book a Grilled Cheese Food Truck for Any Event",
+      slug: "how-to-book-a-grilled-cheese-food-truck-for-any-event",
+      excerpt: "Complete guide to booking a grilled cheese food truck for weddings, corporate events, and parties. Learn about pricing, menus, and what to ask before you book.",
+      date: "December 20, 2025",
+      category: "Event Planning",
+      readTime: "10 min read"
+    },
+    {
       title: "How Much Does It Cost To Book A Food Truck? (2025 Guide)",
       slug: "how-much-does-it-cost-to-book-a-food-truck",
       excerpt: "Get clear per-person pricing, average food truck rental costs, and real examples by cuisine type for catered events. Complete breakdown of what affects food truck pricing.",
