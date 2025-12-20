@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CalendarIcon, MapPin, Utensils, DollarSign, Truck, Percent, AlertTriangle, Tag } from "lucide-react";
 import { format } from "date-fns";
 import { DropoffOrderFormData } from "@/types/cateringOrder";
-import { calculateDropoffPricing, formatCurrency } from "@/lib/dropoff-pricing";
+import { calculateDropoffPricing, formatCurrency, BASE_DELIVERY_FEE, DELIVERY_PER_MILE_RATE } from "@/lib/dropoff-pricing";
 
 interface OrderSummaryProps {
   formData: DropoffOrderFormData;
@@ -195,14 +195,14 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
           <div className="flex justify-between text-sm">
             <span className="flex items-center gap-1 text-muted-foreground">
               <Truck className="w-4 h-4" /> 
-              Delivery
+              Delivery ({formatCurrency(BASE_DELIVERY_FEE)} base
               {pricing.deliveryMilesOver10 > 0 && (
                 <span className="text-xs">
-                  ({pricing.deliveryMilesOver10.toFixed(0)} mi beyond free zone)
+                  + {pricing.deliveryMilesOver10.toFixed(0)} mi @ {formatCurrency(DELIVERY_PER_MILE_RATE)}/mi
                 </span>
-              )}
+              )})
             </span>
-            <span>{pricing.deliveryFee > 0 ? formatCurrency(pricing.deliveryFee) : 'FREE'}</span>
+            <span>{formatCurrency(pricing.deliveryFee)}</span>
           </div>
 
           <Separator />
