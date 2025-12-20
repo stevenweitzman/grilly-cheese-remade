@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Minus, ShoppingCart, Leaf, Wheat } from "lucide-react";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
-import { allSandwiches, hotDogs, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
+import { allSandwiches, hotDogs, breakfast, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
 import { formatCurrency, createCartItem, updateCartItemQuantity } from "@/lib/dropoff-pricing";
 
 interface MenuCartProps {
@@ -170,9 +170,10 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
       {/* Menu Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="sandwiches">Sandwiches</TabsTrigger>
           <TabsTrigger value="hotdogs">Hot Dogs</TabsTrigger>
+          <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
           <TabsTrigger value="sides">Sides</TabsTrigger>
           <TabsTrigger value="desserts">Desserts</TabsTrigger>
           <TabsTrigger value="beverages">Beverages</TabsTrigger>
@@ -203,6 +204,16 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
           </div>
           <div className="grid gap-3">
             {hotDogs.map(renderMenuItem)}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="breakfast" className="mt-6 space-y-4">
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Breakfast Sandwiches</h3>
+            <p className="text-sm text-muted-foreground">Morning favorites starting at {formatCurrency(8)} each</p>
+          </div>
+          <div className="grid gap-3">
+            {breakfast.map(renderMenuItem)}
           </div>
         </TabsContent>
 

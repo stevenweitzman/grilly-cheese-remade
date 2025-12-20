@@ -7,7 +7,7 @@ export interface MenuItem {
   id: string;
   name: string;
   description: string;
-  category: 'sandwich' | 'hotdog' | 'side' | 'beverage' | 'dessert';
+  category: 'sandwich' | 'hotdog' | 'side' | 'beverage' | 'dessert' | 'breakfast';
   pricingTier: PricingTier;
   unitPrice: number;
   unitLabel: string;
@@ -22,7 +22,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'just-the-cheese',
     name: 'Just the Cheese',
-    description: 'Classic American cheese on buttery grilled bread',
+    description: 'Two hearty slices of white bread buttered and grilled with white American cheese',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -34,7 +34,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'just-the-mozz',
     name: 'Just The Mozz',
-    description: 'Fresh mozzarella cheese on buttery grilled bread',
+    description: 'Two thick slices of white bread buttered and grilled with mozzarella cheese',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -46,7 +46,19 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'just-the-cheddar',
     name: 'Just The Cheddar',
-    description: 'Sharp cheddar cheese on buttery grilled bread',
+    description: 'Thick white bread buttered and grilled with cheddar cheese',
+    category: 'sandwich',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
+    isVegetarian: true,
+    hasGlutenFreeOption: true,
+  },
+  {
+    id: 'just-the-mozzarella',
+    name: 'Just The Mozzarella',
+    description: 'Thick white bread buttered and grilled with mozzarella cheese',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -57,8 +69,8 @@ export const standardSandwiches: MenuItem[] = [
   },
   {
     id: '3-cheese-please',
-    name: '3 Cheese Please',
-    description: 'American, cheddar, and mozzarella cheese blend',
+    name: 'Three Cheese Please',
+    description: 'Cheddar American and mozzarella on thick white bread buttered and grilled',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -70,19 +82,18 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'american-dream',
     name: 'The American Dream',
-    description: 'American cheese with our special seasoning blend',
+    description: 'American cheese and thick cut bacon topped with fresh tomatoes on grilled white bread',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
     unitLabel: 'each',
     isEntree: true,
-    isVegetarian: true,
     hasGlutenFreeOption: true,
   },
   {
     id: 'bacon-american-classic',
     name: 'Bacon American Classic',
-    description: 'Crispy bacon with American cheese on buttery grilled bread',
+    description: 'Thick white bread loaded with crispy bacon buttered and grilled with American cheese',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -93,7 +104,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'kids-grilled-cheese',
     name: 'Kids Grilled Cheese',
-    description: 'Smaller portion perfect for little ones',
+    description: 'Smaller grilled cheese on white bread with American cheese',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -108,20 +119,19 @@ export const standardSandwiches: MenuItem[] = [
 export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilly-cheese',
-    name: 'Grilly Cheese',
-    description: 'Our signature sandwich with a special cheese blend and secret sauce',
+    name: 'The Grilly Cheese',
+    description: 'Double decker with three slices of white bread grilled with American cheese and bacon',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
     unitLabel: 'each',
     isEntree: true,
-    isVegetarian: true,
     hasGlutenFreeOption: true,
   },
   {
     id: 'grilly-cheesesteak',
-    name: 'Grilly Cheesesteak',
-    description: 'Philly-style cheesesteak with grilled onions and melted cheese',
+    name: 'The Grilly Cheesesteak',
+    description: 'Philly cheesesteak beef cooked fresh under melted American cheese on white bread',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -131,8 +141,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'margherita',
-    name: 'Margherita',
-    description: 'Fresh mozzarella, tomato, and basil with balsamic glaze',
+    name: 'The Margherita',
+    description: 'Sourdough bread with mozzarella tomatoes and basil buttered and grilled',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -144,7 +154,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'joels-2nd-favorite',
     name: "Joel's 2nd Favorite",
-    description: 'A house favorite with bacon, tomato, and special sauce',
+    description: 'White bread grilled with yellow cheddar cheese and ham',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -154,8 +164,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'reuben-steiner',
-    name: 'Reuben Steiner',
-    description: 'Corned beef, Swiss cheese, sauerkraut, and Russian dressing',
+    name: 'The Reuben Steiner',
+    description: 'Rye bread with Swiss cheese sauerkraut Russian dressing and corned beef',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -165,8 +175,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'canoe-in-the-pines',
-    name: 'Canoe In The Pines',
-    description: 'Pine Barrens inspired with cranberry and brie',
+    name: 'The Canoe In the Pines',
+    description: 'American cheese melted on grilled white bread folded into a canoe shape',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -177,8 +187,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'chicken-pickin',
-    name: 'Chicken Pickin',
-    description: 'Grilled chicken with melted cheese and special seasoning',
+    name: "Chicken Pickin'",
+    description: 'Buffalo chicken on sourdough with bacon lettuce tomato American cheese and mayo',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -188,8 +198,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'cluck-norris',
-    name: 'Cluck Norris',
-    description: 'Spicy buffalo chicken with blue cheese crumbles',
+    name: 'The Cluck Norris',
+    description: 'Buffalo chicken mozzarella tomato hot sauce Russian dressing and basil on sourdough',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -199,8 +209,19 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'swiss-pig',
-    name: 'Swiss Pig',
-    description: 'Ham and Swiss cheese with honey mustard',
+    name: 'The Swiss Pig',
+    description: 'White bread loaded with ham and Swiss cheese topped with mustard and grilled',
+    category: 'sandwich',
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
+    hasGlutenFreeOption: true,
+  },
+  {
+    id: 'chickens-pigs-american-ranchers',
+    name: 'Chickens Pigs and American Ranchers',
+    description: 'Buffalo chicken and bacon melted under American cheese topped with ranch',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -211,7 +232,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilled-caprese',
     name: 'Grilled Caprese',
-    description: 'Fresh mozzarella, tomato, basil, and olive oil',
+    description: 'Mozzarella tomatoes basil and balsamic vinegar on grilled white bread',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -223,7 +244,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'bltmacd',
     name: 'BLTMACD',
-    description: 'Bacon, lettuce, tomato, mac and cheese all grilled together',
+    description: 'Bacon lettuce tomato mayo and American cheese on grilled white bread',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -234,7 +255,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'russian-around',
     name: 'The Russian Around',
-    description: 'Russian dressing with turkey and Swiss',
+    description: 'Philly cheesesteak with Russian dressing and American cheese on sourdough',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -244,8 +265,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'pleasin-vegan',
-    name: 'Pleasin Vegan',
-    description: 'Vegan cheese with grilled vegetables',
+    name: "Pleasin' Vegan",
+    description: 'In house dairy free cheese on vegan gluten free bread grilled in olive oil',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -264,7 +285,7 @@ export const hotDogs: MenuItem[] = [
   {
     id: 'hot-pig-dog',
     name: 'Hot Pig Dog',
-    description: 'All-beef hot dog wrapped in bacon',
+    description: 'Hot dog in a grilled bun topped with cheddar cheese and crispy bacon',
     category: 'hotdog',
     pricingTier: 'HOT_DOG',
     unitPrice: ITEM_PRICING.HOT_DOG,
@@ -274,7 +295,7 @@ export const hotDogs: MenuItem[] = [
   {
     id: 'just-the-dog',
     name: 'Just The Dog',
-    description: 'Classic all-beef hot dog',
+    description: 'Hot dog on a buttered and grilled bun',
     category: 'hotdog',
     pricingTier: 'HOT_DOG',
     unitPrice: ITEM_PRICING.HOT_DOG,
@@ -284,7 +305,7 @@ export const hotDogs: MenuItem[] = [
   {
     id: 'just-the-cheese-dog',
     name: 'Just The Cheese Dog',
-    description: 'All-beef hot dog with melted cheese',
+    description: 'Hot dog on grilled bun topped with cheddar cheese',
     category: 'hotdog',
     pricingTier: 'HOT_DOG',
     unitPrice: ITEM_PRICING.HOT_DOG,
@@ -293,13 +314,101 @@ export const hotDogs: MenuItem[] = [
   },
   {
     id: 'grilly-dog',
-    name: 'Grilly Dog',
-    description: 'Our signature hot dog with all the fixings',
+    name: 'The Grilly Dog',
+    description: 'Hot dog with American cheese and sauerkraut on a grilled bun',
     category: 'hotdog',
     pricingTier: 'HOT_DOG',
     unitPrice: ITEM_PRICING.HOT_DOG,
     unitLabel: 'each',
     isEntree: true,
+  },
+];
+
+// Breakfast Items ($10 each - using SANDWICH_STANDARD pricing for now)
+export const breakfast: MenuItem[] = [
+  {
+    id: 'grilly-morning',
+    name: 'The Grilly Morning',
+    description: 'Triple decker with eggs American cheese and crispy bacon on grilled white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
+  },
+  {
+    id: 'early-bird',
+    name: 'The Early Bird',
+    description: 'Eggs American cheese and bacon on grilled white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
+  },
+  {
+    id: 'philly-breakfast',
+    name: 'The Philly Breakfast',
+    description: 'Philly cheesesteak with scrambled eggs and American cheese on white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
+  },
+  {
+    id: 'egg-and-cheese-sammy',
+    name: 'An Egg and Cheese Sammy',
+    description: 'Eggs and American cheese on white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
+    isVegetarian: true,
+  },
+  {
+    id: 'egg-em',
+    name: "Egg 'Em",
+    description: 'Scrambled eggs on thick grilled white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
+    isVegetarian: true,
+  },
+  {
+    id: 'grilly-chomelette',
+    name: 'The Grilly Chomelette',
+    description: 'Eggs tomatoes bacon and cheddar cheese on grilled white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_PREMIUM',
+    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
+    unitLabel: 'each',
+    isEntree: true,
+  },
+  {
+    id: 'sausage-sunrise',
+    name: 'Sausage Sunrise',
+    description: 'Eggs American cheese and sausage patty on grilled white bread',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
+  },
+  {
+    id: 'vegan-sausage-sunrise',
+    name: 'Vegan Sausage Sunrise',
+    description: 'Vegan sausage and vegan cheese on grilled bread with imitation butter',
+    category: 'breakfast',
+    pricingTier: 'SANDWICH_STANDARD',
+    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
+    unitLabel: 'each',
+    isEntree: true,
+    isVegan: true,
+    hasGlutenFreeOption: true,
   },
 ];
 
@@ -444,7 +553,7 @@ export const desserts: MenuItem[] = [
   {
     id: 'chocolate-chip-cookies',
     name: 'Homemade Chocolate Chip Cookies',
-    description: 'Fresh-baked chocolate chip cookies (dozen)',
+    description: 'Baked fresh classic chocolate chip cookies',
     category: 'dessert',
     pricingTier: 'DESSERT_PER_DOZEN',
     unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
@@ -453,53 +562,9 @@ export const desserts: MenuItem[] = [
     isVegetarian: true,
   },
   {
-    id: 'mini-cherry-pie',
-    name: 'Mini Cherry Pies',
-    description: 'Individual cherry pies (dozen, seasonal)',
-    category: 'dessert',
-    pricingTier: 'DESSERT_PER_DOZEN',
-    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
-    unitLabel: 'per dozen',
-    isEntree: false,
-    isVegetarian: true,
-  },
-  {
-    id: 'mini-blueberry-pie',
-    name: 'Mini Blueberry Pies',
-    description: 'Individual blueberry pies (dozen, seasonal)',
-    category: 'dessert',
-    pricingTier: 'DESSERT_PER_DOZEN',
-    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
-    unitLabel: 'per dozen',
-    isEntree: false,
-    isVegetarian: true,
-  },
-  {
-    id: 'mini-peach-pie',
-    name: 'Mini Peach Pies',
-    description: 'Individual peach pies (dozen, seasonal)',
-    category: 'dessert',
-    pricingTier: 'DESSERT_PER_DOZEN',
-    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
-    unitLabel: 'per dozen',
-    isEntree: false,
-    isVegetarian: true,
-  },
-  {
-    id: 'mini-apple-pie',
-    name: 'Mini Apple Pies',
-    description: 'Individual apple pies (dozen, seasonal)',
-    category: 'dessert',
-    pricingTier: 'DESSERT_PER_DOZEN',
-    unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
-    unitLabel: 'per dozen',
-    isEntree: false,
-    isVegetarian: true,
-  },
-  {
-    id: 'mini-pecan-pie',
-    name: 'Mini Pecan Pies',
-    description: 'Individual pecan pies (dozen, seasonal)',
+    id: 'mini-individual-pies',
+    name: 'Mini Individual Pies',
+    description: 'Seasonal mini pies including apple cherry blueberry peach or pecan',
     category: 'dessert',
     pricingTier: 'DESSERT_PER_DOZEN',
     unitPrice: ITEM_PRICING.DESSERT_PER_DOZEN,
@@ -513,6 +578,7 @@ export const desserts: MenuItem[] = [
 export const allMenuItems = {
   sandwiches: allSandwiches,
   hotDogs,
+  breakfast,
   sides,
   beverages,
   desserts,
@@ -520,7 +586,7 @@ export const allMenuItems = {
 
 // Get all menu items as flat array
 export const getAllMenuItemsFlat = (): MenuItem[] => {
-  return [...allSandwiches, ...hotDogs, ...sides, ...beverages, ...desserts];
+  return [...allSandwiches, ...hotDogs, ...breakfast, ...sides, ...beverages, ...desserts];
 };
 
 // Find menu item by ID
