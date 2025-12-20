@@ -1,12 +1,55 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Minus, ShoppingCart, Leaf, Wheat } from "lucide-react";
+import { Plus, Minus, ShoppingCart, Leaf, Wheat, Info, TrendingDown } from "lucide-react";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
 import { allSandwiches, hotDogs, breakfast, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
-import { formatCurrency, createCartItem, updateCartItemQuantity } from "@/lib/dropoff-pricing";
+import { 
+  formatCurrency, 
+  createCartItem, 
+  updateCartItemQuantity, 
+  getBulkDiscountTier,
+  BULK_DISCOUNT_TIERS 
+} from "@/lib/dropoff-pricing";
+
+// ============= CONFIGURABLE COPY =============
+// These labels can be adjusted without changing code logic
+
+const COPY = {
+  // Global catering notice
+  cateringNoticeTitle: "You're building a catering order",
+  cateringNoticeBody: "Prices shown are base prices only. Bulk discounts, gratuity, and delivery fees are applied on the final review step based on your total quantities and location.",
+  
+  // Price display format
+  basePriceLabel: "From",
+  priceNote: "final price at checkout",
+  
+  // Category subtitles
+  standardSandwichSubtitle: "Classic favorites",
+  premiumSandwichSubtitle: "Gourmet creations",
+  hotDogSubtitle: "All-beef hot dogs",
+  breakfastSubtitle: "Morning favorites",
+  sidesSubtitle: "Party trays (serves ~15)",
+  dessertsSubtitle: "Sweet treats",
+  beveragesSubtitle: "Refreshments",
+  
+  // Cart summary
+  cartEmptyLabel: "Start adding items to build your order",
+  entreesLabel: "entrées",
+  extrasLabel: "extras",
+  bulkDiscountTierLabel: "Current catering tier",
+  bulkDiscountNote: "Exact discount calculated at checkout",
+  
+  // Tier names
+  tierNames: {
+    0: "Small (1–24)",
+    5: "Medium (25–49) – 5% off",
+    10: "Large (50–99) – 10% off",
+    15: "XL (100+) – 15% off",
+  } as Record<number, string>,
+};
 
 interface MenuCartProps {
   formData: DropoffOrderFormData;
@@ -30,14 +73,11 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
     let newCart: CartItem[];
 
     if (newQty === 0) {
-      // Remove item from cart
       newCart = formData.cart.filter(item => item.itemId !== menuItem.id);
     } else if (existingIndex >= 0) {
-      // Update existing item
       newCart = [...formData.cart];
       newCart[existingIndex] = updateCartItemQuantity(newCart[existingIndex], newQty);
     } else {
-      // Add new item
       const newItem = createCartItem(
         menuItem.id,
         menuItem.name,
@@ -52,7 +92,25 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
     onUpdate({ cart: newCart });
   };
 
-  const totalItems = formData.cart.reduce((sum, item) => sum + item.quantity, 0);
+  // Calculate cart stats
+  const entreeCount = formData.cart
+    .filter(item => item.isEntree)
+    .reduce((sum, item) => sum + item.quantity, 0);
+  const extrasCount = formData.cart
+    .filter(item => !item.isEntree)
+    .reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = entreeCount + extrasCount;
+  
+  // Get current bulk discount tier
+  const currentTier = getBulkDiscountTier(entreeCount);
+  const currentTierName = COPY.tierNames[currentTier.discountPercent] || "Small (1–24)";
+  
+  // Find next tier for encouragement
+  const currentTierIndex = BULK_DISCOUNT_TIERS.findIndex(t => t.discountPercent === currentTier.discountPercent);
+  const nextTier = currentTierIndex < BULK_DISCOUNT_TIERS.length - 1 
+    ? BULK_DISCOUNT_TIERS[currentTierIndex + 1] 
+    : null;
+  const entreesToNextTier = nextTier ? nextTier.minQty - entreeCount : 0;
 
   const renderMenuItem = (item: MenuItem) => {
     const quantity = getItemQuantity(item.id);
@@ -87,8 +145,15 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
               )}
             </div>
             <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
-            <p className="text-sm font-semibold text-primary">
-              {formatCurrency(item.unitPrice)} <span className="text-muted-foreground font-normal">{item.unitLabel}</span>
+            <p className="text-sm">
+              <span className="text-muted-foreground">{COPY.basePriceLabel}</span>{' '}
+              <span className="font-semibold text-primary">{formatCurrency(item.unitPrice)}</span>
+              <span className="text-muted-foreground"> {item.unitLabel}</span>
+              {item.isEntree && (
+                <span className="text-xs text-muted-foreground/70 ml-1">
+                  · {COPY.priceNote}
+                </span>
+              )}
             </p>
           </div>
           
@@ -132,39 +197,81 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Build Your Order</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Build Your Catering Order</h2>
         <p className="text-muted-foreground">
-          Select items from our menu. Only per-item prices are shown during selection.
+          Select items from our menu to build your catering package.
         </p>
       </div>
 
-      {/* Cart Summary */}
+      {/* Catering Pricing Notice */}
+      <Card className="border-primary/30 bg-primary/5">
+        <CardContent className="py-4">
+          <div className="flex gap-3">
+            <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-medium text-foreground mb-1">{COPY.cateringNoticeTitle}</p>
+              <p className="text-sm text-muted-foreground">{COPY.cateringNoticeBody}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cart Summary with Tier Info */}
       <Card className={`${totalItems > 0 ? 'border-primary/50 bg-primary/5' : ''}`}>
         <CardContent className="py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <ShoppingCart className="w-5 h-5 text-primary" />
-              <span className="font-medium">
-                {totalItems === 0 
-                  ? 'Your cart is empty' 
-                  : `${totalItems} item${totalItems !== 1 ? 's' : ''} in cart`}
-              </span>
+          {totalItems === 0 ? (
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <ShoppingCart className="w-5 h-5" />
+              <span>{COPY.cartEmptyLabel}</span>
             </div>
-            {totalItems > 0 && (
-              <div className="flex flex-wrap gap-1">
-                {formData.cart.slice(0, 5).map(item => (
-                  <Badge key={item.itemId} variant="secondary" className="text-xs">
-                    {item.quantity}× {item.name.split(' ').slice(0, 2).join(' ')}
-                  </Badge>
-                ))}
-                {formData.cart.length > 5 && (
-                  <Badge variant="secondary" className="text-xs">
-                    +{formData.cart.length - 5} more
-                  </Badge>
-                )}
+          ) : (
+            <div className="space-y-3">
+              {/* Items count */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <ShoppingCart className="w-5 h-5 text-primary" />
+                  <span className="font-medium">
+                    {entreeCount > 0 && `${entreeCount} ${COPY.entreesLabel}`}
+                    {entreeCount > 0 && extrasCount > 0 && ' + '}
+                    {extrasCount > 0 && `${extrasCount} ${COPY.extrasLabel}`}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1 justify-end">
+                  {formData.cart.slice(0, 4).map(item => (
+                    <Badge key={item.itemId} variant="secondary" className="text-xs">
+                      {item.quantity}× {item.name.split(' ').slice(0, 2).join(' ')}
+                    </Badge>
+                  ))}
+                  {formData.cart.length > 4 && (
+                    <Badge variant="secondary" className="text-xs">
+                      +{formData.cart.length - 4} more
+                    </Badge>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
+
+              {/* Bulk Discount Tier Info */}
+              {entreeCount > 0 && (
+                <div className="pt-2 border-t border-border/50">
+                  <div className="flex items-start gap-2">
+                    <TrendingDown className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm">
+                      <p className="text-foreground">
+                        <span className="font-medium">{COPY.bulkDiscountTierLabel}:</span>{' '}
+                        <span className="text-primary font-semibold">{currentTierName}</span>
+                      </p>
+                      <p className="text-muted-foreground text-xs">{COPY.bulkDiscountNote}</p>
+                      {nextTier && entreesToNextTier > 0 && (
+                        <p className="text-green-700 text-xs mt-1">
+                          Add {entreesToNextTier} more entrée{entreesToNextTier !== 1 ? 's' : ''} to unlock {nextTier.discountPercent}% off!
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -181,16 +288,16 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
         <TabsContent value="sandwiches" className="mt-6 space-y-4">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Classic Grilled Cheese</h3>
-            <p className="text-sm text-muted-foreground">Our signature sandwiches at {formatCurrency(8)} each</p>
+            <h3 className="text-lg font-semibold mb-1">Classic Grilled Cheese</h3>
+            <p className="text-sm text-muted-foreground">{COPY.standardSandwichSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {allSandwiches.filter(s => s.pricingTier === 'SANDWICH_STANDARD').map(renderMenuItem)}
           </div>
           
           <div className="mt-8 mb-4">
-            <h3 className="text-lg font-semibold mb-2">Premium Specialty Sandwiches</h3>
-            <p className="text-sm text-muted-foreground">Gourmet creations at {formatCurrency(12)} each</p>
+            <h3 className="text-lg font-semibold mb-1">Premium Specialty Sandwiches</h3>
+            <p className="text-sm text-muted-foreground">{COPY.premiumSandwichSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {allSandwiches.filter(s => s.pricingTier === 'SANDWICH_PREMIUM').map(renderMenuItem)}
@@ -199,8 +306,8 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
         <TabsContent value="hotdogs" className="mt-6 space-y-4">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Hot Dogs</h3>
-            <p className="text-sm text-muted-foreground">All-beef hot dogs at {formatCurrency(6)} each</p>
+            <h3 className="text-lg font-semibold mb-1">Hot Dogs</h3>
+            <p className="text-sm text-muted-foreground">{COPY.hotDogSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {hotDogs.map(renderMenuItem)}
@@ -209,8 +316,8 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
         <TabsContent value="breakfast" className="mt-6 space-y-4">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Breakfast Sandwiches</h3>
-            <p className="text-sm text-muted-foreground">Morning favorites starting at {formatCurrency(8)} each</p>
+            <h3 className="text-lg font-semibold mb-1">Breakfast Sandwiches</h3>
+            <p className="text-sm text-muted-foreground">{COPY.breakfastSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {breakfast.map(renderMenuItem)}
@@ -219,8 +326,8 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
         <TabsContent value="sides" className="mt-6 space-y-4">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Sides</h3>
-            <p className="text-sm text-muted-foreground">Party trays at {formatCurrency(45)} each (serves ~15)</p>
+            <h3 className="text-lg font-semibold mb-1">Sides</h3>
+            <p className="text-sm text-muted-foreground">{COPY.sidesSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {sides.map(renderMenuItem)}
@@ -229,8 +336,8 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
         <TabsContent value="desserts" className="mt-6 space-y-4">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Desserts</h3>
-            <p className="text-sm text-muted-foreground">Sweet treats at {formatCurrency(24)} per dozen</p>
+            <h3 className="text-lg font-semibold mb-1">Desserts</h3>
+            <p className="text-sm text-muted-foreground">{COPY.dessertsSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {desserts.map(renderMenuItem)}
@@ -239,8 +346,8 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
         <TabsContent value="beverages" className="mt-6 space-y-4">
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Beverages</h3>
-            <p className="text-sm text-muted-foreground">Drinks at {formatCurrency(2.5)} each</p>
+            <h3 className="text-lg font-semibold mb-1">Beverages</h3>
+            <p className="text-sm text-muted-foreground">{COPY.beveragesSubtitle}</p>
           </div>
           <div className="grid gap-3">
             {beverages.map(renderMenuItem)}
