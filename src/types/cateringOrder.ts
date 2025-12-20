@@ -53,14 +53,16 @@ export const initialDropoffFormData: DropoffOrderFormData = {
   pricingBreakdown: null,
 };
 
-// 4-step order flow
-export type OrderStep = 1 | 2 | 3 | 4;
+// 6-step order flow (more granular for less intimidating UX)
+export type OrderStep = 1 | 2 | 3 | 4 | 5 | 6;
 
 export const ORDER_STEPS = [
   { step: 1, label: 'Menu', description: 'Build your order' },
-  { step: 2, label: 'Event Details', description: 'Event information' },
-  { step: 3, label: 'Review', description: 'Review your order' },
-  { step: 4, label: 'Payment', description: 'Complete payment' },
+  { step: 2, label: 'Event', description: 'Date & time' },
+  { step: 3, label: 'Delivery', description: 'Address' },
+  { step: 4, label: 'Contact', description: 'Your info' },
+  { step: 5, label: 'Review', description: 'Check order' },
+  { step: 6, label: 'Confirm', description: 'Submit' },
 ] as const;
 
 // ============= LEGACY TYPES (for backward compatibility with old orders) =============
