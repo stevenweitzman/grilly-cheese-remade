@@ -111,7 +111,11 @@ export const EventInfoStep = ({ formData, onUpdate, onBack, onNext }: EventInfoS
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
-        <Button onClick={onNext} size="lg">
+        <Button 
+          onClick={onNext} 
+          size="lg"
+          disabled={!formData.eventDate || !formData.eventTime}
+        >
           Continue
         </Button>
       </div>
