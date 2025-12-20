@@ -71,7 +71,7 @@ const EnhancedClientsSection = () => {
         </motion.div>
 
         {/* Testimonial Carousel */}
-        <div className="max-w-4xl mx-auto mb-16 relative">
+        <div className="max-w-4xl mx-auto mb-16 relative overflow-x-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentTestimonial}
