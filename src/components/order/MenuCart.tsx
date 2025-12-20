@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Plus, Minus, ShoppingCart, Leaf, Wheat, Info, TrendingDown, Package } from "lucide-react";
+import { Plus, Minus, ShoppingCart, Leaf, Wheat, Info, TrendingDown, Package, UtensilsCrossed, Flame } from "lucide-react";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
 import { allSandwiches, hotDogs, breakfast, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
 import { 
@@ -15,7 +15,9 @@ import {
   getBulkDiscountTier,
   BULK_DISCOUNT_TIERS,
   INDIVIDUAL_PACKAGING_FEE,
-  TRAY_SERVINGS
+  TRAY_SERVINGS,
+  CHAFING_DISH_FEE_PER_10_ITEMS,
+  CHAFING_DISH_FEE_PER_TRAY
 } from "@/lib/dropoff-pricing";
 
 // ============= CONFIGURABLE COPY =============
@@ -50,6 +52,16 @@ const COPY = {
   packagingTitle: "Individual Packaging",
   packagingDescription: "Wrap each item separately for easy distribution",
   packagingPriceNote: "+$0.50 per item ($7.50 per tray)",
+  
+  // Paper goods option
+  paperGoodsTitle: "Paper Plates, Utensils & Napkins",
+  paperGoodsDescription: "Include disposable plates, forks, knives, and napkins",
+  paperGoodsPriceNote: "Included free",
+  
+  // Chafing dishes option
+  chafingDishTitle: "Chafing Dishes",
+  chafingDishDescription: "Keep your food warm with chafing dishes and fuel",
+  chafingDishPriceNote: "$15 per 10 items, $15 per tray",
   
   // Tier names
   tierNames: {
@@ -129,6 +141,25 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
         }
         return sum + INDIVIDUAL_PACKAGING_FEE * item.quantity;
       }, 0)
+    : 0;
+
+  // Calculate estimated chafing dish fee for display
+  const estimatedChafingFee = formData.wantsChafingDishes 
+    ? (() => {
+        let fee = 0;
+        let individualItemCount = 0;
+        for (const item of formData.cart) {
+          if (item.pricingTier === 'SIDE_PER_TRAY') {
+            fee += CHAFING_DISH_FEE_PER_TRAY * item.quantity;
+          } else if (item.isEntree) {
+            individualItemCount += item.quantity;
+          }
+        }
+        if (individualItemCount > 0) {
+          fee += Math.ceil(individualItemCount / 10) * CHAFING_DISH_FEE_PER_10_ITEMS;
+        }
+        return fee;
+      })()
     : 0;
 
   const renderMenuItem = (item: MenuItem) => {
@@ -312,6 +343,53 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
                 {formData.wantsIndividualPackaging && estimatedPackagingFee > 0 && (
                   <p className="text-xs text-muted-foreground mt-2 pl-6">
                     Est. packaging: {formatCurrency(estimatedPackagingFee)}
+                  </p>
+                )}
+              </div>
+
+              {/* Paper Goods Option */}
+              <div className="pt-3 border-t border-border/50">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-2">
+                    <UtensilsCrossed className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <Label htmlFor="paper-goods-toggle" className="text-sm font-medium cursor-pointer">
+                        {COPY.paperGoodsTitle}
+                      </Label>
+                      <p className="text-xs text-muted-foreground">{COPY.paperGoodsDescription}</p>
+                      <p className="text-xs text-green-600 mt-0.5">{COPY.paperGoodsPriceNote}</p>
+                    </div>
+                  </div>
+                  <Switch
+                    id="paper-goods-toggle"
+                    checked={formData.wantsPaperGoods}
+                    onCheckedChange={(checked) => onUpdate({ wantsPaperGoods: checked })}
+                  />
+                </div>
+              </div>
+
+              {/* Chafing Dishes Option */}
+              <div className="pt-3 border-t border-border/50">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-2">
+                    <Flame className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <Label htmlFor="chafing-toggle" className="text-sm font-medium cursor-pointer">
+                        {COPY.chafingDishTitle}
+                      </Label>
+                      <p className="text-xs text-muted-foreground">{COPY.chafingDishDescription}</p>
+                      <p className="text-xs text-primary/80 mt-0.5">{COPY.chafingDishPriceNote}</p>
+                    </div>
+                  </div>
+                  <Switch
+                    id="chafing-toggle"
+                    checked={formData.wantsChafingDishes}
+                    onCheckedChange={(checked) => onUpdate({ wantsChafingDishes: checked })}
+                  />
+                </div>
+                {formData.wantsChafingDishes && estimatedChafingFee > 0 && (
+                  <p className="text-xs text-muted-foreground mt-2 pl-6">
+                    Est. chafing dishes: {formatCurrency(estimatedChafingFee)}
                   </p>
                 )}
               </div>
