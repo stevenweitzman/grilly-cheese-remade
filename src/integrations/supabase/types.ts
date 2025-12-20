@@ -379,6 +379,30 @@ export type Database = {
           },
         ]
       }
+      guest_quote_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
       invoices: {
         Row: {
           amount: number
@@ -502,13 +526,14 @@ export type Database = {
           address: string | null
           admin_notes: string | null
           city: string | null
-          client_id: string
+          client_id: string | null
           created_at: string
           dietary_restrictions: string | null
           event_date: string
           event_time: string | null
           event_type: string
           final_amount: number | null
+          guest_submission_id: string | null
           guests: number
           id: string
           notes: string | null
@@ -523,13 +548,14 @@ export type Database = {
           address?: string | null
           admin_notes?: string | null
           city?: string | null
-          client_id: string
+          client_id?: string | null
           created_at?: string
           dietary_restrictions?: string | null
           event_date: string
           event_time?: string | null
           event_type: string
           final_amount?: number | null
+          guest_submission_id?: string | null
           guests: number
           id?: string
           notes?: string | null
@@ -544,13 +570,14 @@ export type Database = {
           address?: string | null
           admin_notes?: string | null
           city?: string | null
-          client_id?: string
+          client_id?: string | null
           created_at?: string
           dietary_restrictions?: string | null
           event_date?: string
           event_time?: string | null
           event_type?: string
           final_amount?: number | null
+          guest_submission_id?: string | null
           guests?: number
           id?: string
           notes?: string | null
@@ -567,6 +594,13 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quote_requests_guest_submission_id_fkey"
+            columns: ["guest_submission_id"]
+            isOneToOne: false
+            referencedRelation: "guest_quote_submissions"
             referencedColumns: ["id"]
           },
         ]
@@ -597,6 +631,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_guest_quote_submission: {
+        Args: { p_email: string; p_full_name: string; p_phone?: string }
+        Returns: string
+      }
       get_conversation_message_count: {
         Args: { conv_id: string }
         Returns: number
