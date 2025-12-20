@@ -45,8 +45,8 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
         state: formData.deliveryAddress.state,
         zip: formData.deliveryAddress.zip,
         
-        // New item-based fields
-        cart_items: formData.cart,
+        // New item-based fields (cast to JSON for Supabase)
+        cart_items: JSON.parse(JSON.stringify(formData.cart)),
         entree_subtotal: pricing.entreeSubtotal,
         bulk_discount_percent: pricing.bulkDiscountPercent,
         bulk_discount_amount: pricing.bulkDiscountAmount,

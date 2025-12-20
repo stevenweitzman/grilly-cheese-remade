@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, UtensilsCrossed, DollarSign, Truck, CreditCard } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Users, Phone, Mail, ShoppingCart, DollarSign, Truck, CreditCard, Percent } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { formatCurrency } from "@/lib/pricing";
@@ -17,6 +17,16 @@ import { Tables } from "@/integrations/supabase/types";
 
 type CateringOrder = Tables<'catering_orders'>;
 
+interface CartItem {
+  itemId: string;
+  name: string;
+  category: string;
+  quantity: number;
+  unitPrice: number;
+  lineTotal: number;
+  isEntree: boolean;
+}
+
 const statusColors: Record<string, string> = {
   pending_payment: "bg-yellow-100 text-yellow-800",
   pending_review: "bg-blue-100 text-blue-800",
@@ -26,6 +36,7 @@ const statusColors: Record<string, string> = {
   delivered: "bg-teal-100 text-teal-800",
   completed: "bg-gray-100 text-gray-800",
   cancelled: "bg-red-100 text-red-800",
+  refunded: "bg-red-100 text-red-800",
 };
 
 const statusLabels: Record<string, string> = {
@@ -37,6 +48,7 @@ const statusLabels: Record<string, string> = {
   delivered: "Delivered",
   completed: "Completed",
   cancelled: "Cancelled",
+  refunded: "Refunded",
 };
 
 const CateringOrderDetailContent = () => {
@@ -93,8 +105,17 @@ const CateringOrderDetailContent = () => {
     );
   }
 
+  // Detect if this is a new item-based order or legacy package-based order
+  const cartItems = (order.cart_items as unknown as CartItem[]) || [];
+  const isNewFormat = Array.isArray(cartItems) && cartItems.length > 0;
+  
+  // Legacy data for old orders
   const sandwiches = (order.selected_sandwiches as any[]) || [];
   const hotdogs = (order.selected_hotdogs as any[]) || [];
+
+  // Group cart items by category
+  const entreeItems = cartItems.filter(item => item.isEntree);
+  const extraItems = cartItems.filter(item => !item.isEntree);
 
   return (
     <div className="min-h-screen bg-background">
@@ -136,14 +157,24 @@ const CateringOrderDetailContent = () => {
                 <span className="text-muted-foreground">Time</span>
                 <span className="font-medium">{order.event_time}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Guests</span>
-                <span className="font-medium">{order.guest_count}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Package</span>
-                <Badge variant="secondary">{order.package_type === 'simple' ? 'Simple Menu' : 'Full Menu'}</Badge>
-              </div>
+              {!isNewFormat && order.guest_count && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Guests</span>
+                  <span className="font-medium">{order.guest_count}</span>
+                </div>
+              )}
+              {isNewFormat && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Total Entrées</span>
+                  <span className="font-medium">{entreeItems.reduce((sum, i) => sum + i.quantity, 0)} items</span>
+                </div>
+              )}
+              {!isNewFormat && order.package_type && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Package</span>
+                  <Badge variant="secondary">{order.package_type === 'simple' ? 'Simple Menu' : 'Full Menu'}</Badge>
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -176,46 +207,81 @@ const CateringOrderDetailContent = () => {
             </CardContent>
           </Card>
 
-          {/* Menu Selections */}
+          {/* Order Items */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <UtensilsCrossed className="w-5 h-5 text-primary" />
-                Menu Selections
+                <ShoppingCart className="w-5 h-5 text-primary" />
+                {isNewFormat ? 'Order Items' : 'Menu Selections'}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {sandwiches.length > 0 && (
-                <div>
-                  <p className="text-sm font-medium mb-2">Sandwiches</p>
-                  <div className="flex flex-wrap gap-2">
-                    {sandwiches.map((s: any, i: number) => (
-                      <Badge key={i} variant="outline">{s.name || s.itemId}</Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {hotdogs.length > 0 && (
-                <div>
-                  <p className="text-sm font-medium mb-2">Hot Dogs</p>
-                  <div className="flex flex-wrap gap-2">
-                    {hotdogs.map((h: any, i: number) => (
-                      <Badge key={i} variant="outline">{h.name || h.itemId}</Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {(order.gluten_free_count > 0 || order.vegan_count > 0) && (
-                <div className="pt-2 border-t">
-                  <p className="text-sm text-muted-foreground">
-                    Dietary: {order.gluten_free_count > 0 && `${order.gluten_free_count} GF`}
-                    {order.gluten_free_count > 0 && order.vegan_count > 0 && ', '}
-                    {order.vegan_count > 0 && `${order.vegan_count} Vegan`}
-                  </p>
-                </div>
-              )}
-              {order.include_desserts && (
-                <Badge className="bg-accent text-accent-foreground">+ Desserts</Badge>
+              {isNewFormat ? (
+                <>
+                  {/* New format: itemized cart */}
+                  {entreeItems.length > 0 && (
+                    <div>
+                      <p className="text-sm font-medium mb-2">Entrées</p>
+                      <div className="space-y-1">
+                        {entreeItems.map((item, i) => (
+                          <div key={i} className="flex justify-between text-sm">
+                            <span>{item.quantity}× {item.name}</span>
+                            <span className="text-muted-foreground">{formatCurrency(item.lineTotal)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {extraItems.length > 0 && (
+                    <div className="pt-2 border-t">
+                      <p className="text-sm font-medium mb-2">Extras</p>
+                      <div className="space-y-1">
+                        {extraItems.map((item, i) => (
+                          <div key={i} className="flex justify-between text-sm">
+                            <span>{item.quantity}× {item.name}</span>
+                            <span className="text-muted-foreground">{formatCurrency(item.lineTotal)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* Legacy format */}
+                  {sandwiches.length > 0 && (
+                    <div>
+                      <p className="text-sm font-medium mb-2">Sandwiches</p>
+                      <div className="flex flex-wrap gap-2">
+                        {sandwiches.map((s: any, i: number) => (
+                          <Badge key={i} variant="outline">{s.name || s.itemId}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {hotdogs.length > 0 && (
+                    <div>
+                      <p className="text-sm font-medium mb-2">Hot Dogs</p>
+                      <div className="flex flex-wrap gap-2">
+                        {hotdogs.map((h: any, i: number) => (
+                          <Badge key={i} variant="outline">{h.name || h.itemId}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {(order.gluten_free_count && order.gluten_free_count > 0 || order.vegan_count && order.vegan_count > 0) && (
+                    <div className="pt-2 border-t">
+                      <p className="text-sm text-muted-foreground">
+                        Dietary: {order.gluten_free_count && order.gluten_free_count > 0 && `${order.gluten_free_count} GF`}
+                        {order.gluten_free_count && order.gluten_free_count > 0 && order.vegan_count && order.vegan_count > 0 && ', '}
+                        {order.vegan_count && order.vegan_count > 0 && `${order.vegan_count} Vegan`}
+                      </p>
+                    </div>
+                  )}
+                  {order.include_desserts && (
+                    <Badge className="bg-accent text-accent-foreground">+ Desserts</Badge>
+                  )}
+                </>
               )}
               {order.special_notes && (
                 <div className="pt-2 border-t">
@@ -234,24 +300,69 @@ const CateringOrderDetailContent = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Base Subtotal</span>
-                <span>{formatCurrency(Number(order.base_subtotal))}</span>
-              </div>
-              {Number(order.addons_total) > 0 && (
-                <div className="flex justify-between text-sm">
-                  <span>Add-ons</span>
-                  <span>{formatCurrency(Number(order.addons_total))}</span>
-                </div>
+              {isNewFormat ? (
+                <>
+                  {/* New item-based pricing breakdown */}
+                  <div className="flex justify-between text-sm">
+                    <span>Entrée Subtotal</span>
+                    <span>{formatCurrency(Number(order.entree_subtotal))}</span>
+                  </div>
+                  {Number(order.bulk_discount_amount) > 0 && (
+                    <div className="flex justify-between text-sm text-green-600">
+                      <span className="flex items-center gap-1">
+                        <Percent className="w-3 h-3" />
+                        Bulk Discount ({order.bulk_discount_percent}%)
+                      </span>
+                      <span>-{formatCurrency(Number(order.bulk_discount_amount))}</span>
+                    </div>
+                  )}
+                  {Number(order.extras_subtotal) > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span>Extras</span>
+                      <span>{formatCurrency(Number(order.extras_subtotal))}</span>
+                    </div>
+                  )}
+                  <Separator />
+                  <div className="flex justify-between text-sm font-medium">
+                    <span>Food Subtotal</span>
+                    <span>{formatCurrency(Number(order.food_subtotal))}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>Gratuity (10%)</span>
+                    <span>{formatCurrency(Number(order.gratuity))}</span>
+                  </div>
+                  {Number(order.delivery_fee) > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span className="flex items-center gap-1">
+                        <Truck className="w-3 h-3" /> Delivery Fee
+                      </span>
+                      <span>{formatCurrency(Number(order.delivery_fee))}</span>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* Legacy pricing */}
+                  <div className="flex justify-between text-sm">
+                    <span>Base Subtotal</span>
+                    <span>{formatCurrency(Number(order.base_subtotal))}</span>
+                  </div>
+                  {Number(order.addons_total) > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span>Add-ons</span>
+                      <span>{formatCurrency(Number(order.addons_total))}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-sm">
+                    <span>Gratuity (10%)</span>
+                    <span>{formatCurrency(Number(order.gratuity))}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="flex items-center gap-1"><Truck className="w-3 h-3" /> Travel Fee</span>
+                    <span>{formatCurrency(Number(order.travel_fee))}</span>
+                  </div>
+                </>
               )}
-              <div className="flex justify-between text-sm">
-                <span>Gratuity (10%)</span>
-                <span>{formatCurrency(Number(order.gratuity))}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="flex items-center gap-1"><Truck className="w-3 h-3" /> Travel Fee</span>
-                <span>{formatCurrency(Number(order.travel_fee))}</span>
-              </div>
               <Separator />
               <div className="flex justify-between font-semibold text-lg">
                 <span>Total</span>

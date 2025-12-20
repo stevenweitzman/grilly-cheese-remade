@@ -19,37 +19,47 @@ export type Database = {
           addons_total: number | null
           address: string
           admin_notes: string | null
-          amount_charged: number
-          base_subtotal: number
+          amount_charged: number | null
+          base_subtotal: number | null
+          bulk_discount_amount: number | null
+          bulk_discount_percent: number | null
+          cart_items: Json | null
           city: string
           client_id: string | null
           contact_email: string
           contact_name: string
           contact_phone: string
           created_at: string
+          delivery_fee: number | null
+          delivery_miles_over_free: number | null
           deposit_percentage: number | null
           dessert_price_per_person: number | null
+          entree_subtotal: number | null
           event_date: string
           event_name: string
           event_time: string
+          extras_subtotal: number | null
+          food_subtotal: number | null
           gluten_free_count: number | null
-          gratuity: number
-          guest_count: number
+          gratuity: number | null
+          guest_count: number | null
           id: string
           include_desserts: boolean | null
           minimum_charge_applied: boolean | null
-          package_type: Database["public"]["Enums"]["catering_package_type"]
+          package_type:
+            | Database["public"]["Enums"]["catering_package_type"]
+            | null
           paid_at: string | null
           payment_status: string | null
           payment_type: string | null
           paypal_transaction_id: string | null
-          price_per_person: number
+          price_per_person: number | null
           selected_hotdogs: Json | null
           selected_sandwiches: Json
           special_notes: string | null
           state: string
           status: Database["public"]["Enums"]["catering_order_status"]
-          total_amount: number
+          total_amount: number | null
           travel_distance_miles: number | null
           travel_fee: number | null
           updated_at: string
@@ -60,37 +70,47 @@ export type Database = {
           addons_total?: number | null
           address: string
           admin_notes?: string | null
-          amount_charged: number
-          base_subtotal: number
+          amount_charged?: number | null
+          base_subtotal?: number | null
+          bulk_discount_amount?: number | null
+          bulk_discount_percent?: number | null
+          cart_items?: Json | null
           city: string
           client_id?: string | null
           contact_email: string
           contact_name: string
           contact_phone: string
           created_at?: string
+          delivery_fee?: number | null
+          delivery_miles_over_free?: number | null
           deposit_percentage?: number | null
           dessert_price_per_person?: number | null
+          entree_subtotal?: number | null
           event_date: string
           event_name: string
           event_time: string
+          extras_subtotal?: number | null
+          food_subtotal?: number | null
           gluten_free_count?: number | null
-          gratuity: number
-          guest_count: number
+          gratuity?: number | null
+          guest_count?: number | null
           id?: string
           include_desserts?: boolean | null
           minimum_charge_applied?: boolean | null
-          package_type: Database["public"]["Enums"]["catering_package_type"]
+          package_type?:
+            | Database["public"]["Enums"]["catering_package_type"]
+            | null
           paid_at?: string | null
           payment_status?: string | null
           payment_type?: string | null
           paypal_transaction_id?: string | null
-          price_per_person: number
+          price_per_person?: number | null
           selected_hotdogs?: Json | null
           selected_sandwiches?: Json
           special_notes?: string | null
           state: string
           status?: Database["public"]["Enums"]["catering_order_status"]
-          total_amount: number
+          total_amount?: number | null
           travel_distance_miles?: number | null
           travel_fee?: number | null
           updated_at?: string
@@ -101,37 +121,47 @@ export type Database = {
           addons_total?: number | null
           address?: string
           admin_notes?: string | null
-          amount_charged?: number
-          base_subtotal?: number
+          amount_charged?: number | null
+          base_subtotal?: number | null
+          bulk_discount_amount?: number | null
+          bulk_discount_percent?: number | null
+          cart_items?: Json | null
           city?: string
           client_id?: string | null
           contact_email?: string
           contact_name?: string
           contact_phone?: string
           created_at?: string
+          delivery_fee?: number | null
+          delivery_miles_over_free?: number | null
           deposit_percentage?: number | null
           dessert_price_per_person?: number | null
+          entree_subtotal?: number | null
           event_date?: string
           event_name?: string
           event_time?: string
+          extras_subtotal?: number | null
+          food_subtotal?: number | null
           gluten_free_count?: number | null
-          gratuity?: number
-          guest_count?: number
+          gratuity?: number | null
+          guest_count?: number | null
           id?: string
           include_desserts?: boolean | null
           minimum_charge_applied?: boolean | null
-          package_type?: Database["public"]["Enums"]["catering_package_type"]
+          package_type?:
+            | Database["public"]["Enums"]["catering_package_type"]
+            | null
           paid_at?: string | null
           payment_status?: string | null
           payment_type?: string | null
           paypal_transaction_id?: string | null
-          price_per_person?: number
+          price_per_person?: number | null
           selected_hotdogs?: Json | null
           selected_sandwiches?: Json
           special_notes?: string | null
           state?: string
           status?: Database["public"]["Enums"]["catering_order_status"]
-          total_amount?: number
+          total_amount?: number | null
           travel_distance_miles?: number | null
           travel_fee?: number | null
           updated_at?: string
