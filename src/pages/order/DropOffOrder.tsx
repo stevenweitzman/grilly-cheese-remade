@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { OrderStepper } from "@/components/order/OrderStepper";
 import { MenuCart } from "@/components/order/MenuCart";
-import { EventDetails } from "@/components/order/EventDetails";
+import { EventInfoStep } from "@/components/order/EventInfoStep";
+import { DeliveryAddressStep } from "@/components/order/DeliveryAddressStep";
+import { ContactInfoStep } from "@/components/order/ContactInfoStep";
 import { OrderSummary } from "@/components/order/OrderSummary";
 import { PaymentStep } from "@/components/order/PaymentStep";
 import { OrderConfirmation } from "@/components/order/OrderConfirmation";
@@ -62,7 +64,7 @@ const DropOffOrder = () => {
   const handleNext = (fromStep: OrderStep) => {
     completeStep(fromStep);
     const nextStep = (fromStep + 1) as OrderStep;
-    if (nextStep <= 4) {
+    if (nextStep <= 6) {
       setCurrentStep(nextStep);
     }
   };
@@ -76,7 +78,7 @@ const DropOffOrder = () => {
 
   const handlePaymentSuccess = (id: string) => {
     setOrderId(id);
-    completeStep(4);
+    completeStep(6);
   };
 
   const renderStep = () => {
@@ -88,10 +90,14 @@ const DropOffOrder = () => {
       case 1:
         return <MenuCart formData={formData} onUpdate={updateFormData} onNext={() => handleNext(1)} />;
       case 2:
-        return <EventDetails formData={formData} onUpdate={updateFormData} onNext={() => handleNext(2)} onBack={handleBack} />;
+        return <EventInfoStep formData={formData} onUpdate={updateFormData} onNext={() => handleNext(2)} onBack={handleBack} />;
       case 3:
-        return <OrderSummary formData={formData} onNext={() => handleNext(3)} onBack={handleBack} />;
+        return <DeliveryAddressStep formData={formData} onUpdate={updateFormData} onNext={() => handleNext(3)} onBack={handleBack} />;
       case 4:
+        return <ContactInfoStep formData={formData} onUpdate={updateFormData} onNext={() => handleNext(4)} onBack={handleBack} />;
+      case 5:
+        return <OrderSummary formData={formData} onNext={() => handleNext(5)} onBack={handleBack} />;
+      case 6:
         return <PaymentStep formData={formData} onSuccess={handlePaymentSuccess} onBack={handleBack} userId={userId} />;
       default:
         return null;

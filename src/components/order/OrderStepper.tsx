@@ -28,34 +28,34 @@ export const OrderStepper = ({
                   onClick={() => isClickable && onStepClick?.(stepInfo.step as OrderStep)}
                   disabled={!isClickable}
                   className={cn(
-                    "w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all",
+                    "w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold transition-all",
                     isCompleted && "bg-primary text-primary-foreground",
-                    isCurrent && !isCompleted && "bg-primary text-primary-foreground ring-4 ring-primary/20",
+                    isCurrent && !isCompleted && "bg-primary text-primary-foreground ring-2 sm:ring-4 ring-primary/20",
                     !isCurrent && !isCompleted && "bg-muted text-muted-foreground",
                     isClickable && "cursor-pointer hover:scale-105"
                   )}
                 >
                   {isCompleted ? (
-                    <Check className="w-5 h-5" />
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                   ) : (
                     stepInfo.step
                   )}
                 </button>
                 <div className="mt-2 text-center">
                   <p className={cn(
-                    "text-sm font-medium",
+                    "text-xs sm:text-sm font-medium",
                     isCurrent || isCompleted ? "text-foreground" : "text-muted-foreground"
                   )}>
                     {stepInfo.label}
                   </p>
-                  <p className="text-xs text-muted-foreground hidden sm:block">
+                  <p className="text-xs text-muted-foreground hidden md:block">
                     {stepInfo.description}
                   </p>
                 </div>
               </div>
               {index < ORDER_STEPS.length - 1 && (
                 <div className={cn(
-                  "h-0.5 flex-1 mx-2 mt-[-2rem]",
+                  "h-0.5 flex-1 mx-1 sm:mx-2 mt-[-2rem]",
                   isCompleted ? "bg-primary" : "bg-muted"
                 )} />
               )}
