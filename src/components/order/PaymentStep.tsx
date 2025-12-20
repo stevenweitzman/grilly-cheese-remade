@@ -32,7 +32,7 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
         client_id: userId || null,
         event_name: formData.eventName || 'Untitled Event',
         event_date: formData.eventDate?.toISOString().split('T')[0] || new Date().toISOString().split('T')[0],
-        event_time: formData.eventTime || 'TBD',
+        event_time: formData.eventTime || '12:00 PM',
         contact_name: formData.contactName || 'Not provided',
         contact_email: formData.contactEmail || 'Not provided',
         contact_phone: formData.contactPhone || 'Not provided',
@@ -179,9 +179,12 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
             </div>
           ) : status === 'error' ? (
             <div className="text-center py-8">
-              <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
+          <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
               <p className="text-xl font-semibold text-destructive">Submission Failed</p>
-              <p className="text-muted-foreground mt-2">Please try again or call us at (856) 555-1234</p>
+              <p className="text-muted-foreground mt-2">
+                Please try again or call us at{" "}
+                <a href="tel:8444745591" className="text-primary hover:underline font-medium">844-474-5591</a>
+              </p>
               <Button onClick={handleSubmitOrder} className="mt-4">Try Again</Button>
             </div>
           ) : (
