@@ -20,7 +20,7 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
   const [status, setStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
   const { toast } = useToast();
 
-  const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles);
+  const pricing = calculateDropoffPricing(formData.cart, formData.distanceMiles, formData.wantsIndividualPackaging, formData.wantsChafingDishes, formData.glutenFreeCount);
 
   const handleSubmitOrder = async () => {
     setIsProcessing(true);

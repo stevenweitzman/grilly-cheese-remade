@@ -42,6 +42,9 @@ export const TRAY_SERVINGS = 15; // Each tray serves ~15, so packaging fee is $0
 export const CHAFING_DISH_FEE_PER_10_ITEMS = 15.00; // $15 per 10 items
 export const CHAFING_DISH_FEE_PER_TRAY = 15.00; // $15 per tray
 
+// Gluten-free bread upcharge
+export const GLUTEN_FREE_UPCHARGE = 2.00; // $2 per sandwich with GF bread
+
 // ============= CART ITEM TYPE =============
 
 export interface CartItem {
@@ -67,6 +70,7 @@ export interface DropoffPricingBreakdown {
   foodSubtotal: number;
   packagingFee: number;
   chafingDishFee: number;
+  glutenFreeFee: number;
   gratuity: number;
   deliveryFee: number;
   deliveryMilesOver10: number;
@@ -186,7 +190,8 @@ export const calculateDropoffPricing = (
   cart: CartItem[],
   distanceMiles: number,
   wantsIndividualPackaging: boolean = false,
-  wantsChafingDishes: boolean = false
+  wantsChafingDishes: boolean = false,
+  glutenFreeCount: number = 0
 ): DropoffPricingBreakdown => {
   // 1. Entrée subtotal
   const { subtotal: entreeSubtotal, count: entreeCount } = calculateEntreeSubtotal(cart);
@@ -211,14 +216,17 @@ export const calculateDropoffPricing = (
   // 7. Chafing dish fee (if requested)
   const chafingDishFee = wantsChafingDishes ? calculateChafingDishFee(cart) : 0;
 
-  // 8. Gratuity (10% of food subtotal)
+  // 8. Gluten-free upcharge ($2 per GF sandwich)
+  const glutenFreeFee = glutenFreeCount * GLUTEN_FREE_UPCHARGE;
+
+  // 9. Gratuity (10% of food subtotal)
   const gratuity = foodSubtotal * GRATUITY_RATE;
 
-  // 9. Delivery fee
+  // 10. Delivery fee
   const { fee: deliveryFee, milesOver10: deliveryMilesOver10 } = calculateDeliveryFee(distanceMiles);
 
-  // 10. Final total
-  const finalTotal = foodSubtotal + packagingFee + chafingDishFee + gratuity + deliveryFee;
+  // 11. Final total
+  const finalTotal = foodSubtotal + packagingFee + chafingDishFee + glutenFreeFee + gratuity + deliveryFee;
 
   return {
     entreeSubtotal,
@@ -230,6 +238,7 @@ export const calculateDropoffPricing = (
     foodSubtotal,
     packagingFee,
     chafingDishFee,
+    glutenFreeFee,
     gratuity,
     deliveryFee,
     deliveryMilesOver10,
