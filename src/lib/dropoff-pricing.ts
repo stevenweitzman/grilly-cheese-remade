@@ -34,6 +34,10 @@ export const GRATUITY_RATE = 0.10; // 10%
 // Minimum food subtotal for drop-off orders
 export const MIN_FOOD_SUBTOTAL = 200;
 
+// Individual packaging fee
+export const INDIVIDUAL_PACKAGING_FEE = 0.50; // $0.50 per item/serving
+export const TRAY_SERVINGS = 15; // Each tray serves ~15, so packaging fee is $0.50 × 15
+
 // ============= CART ITEM TYPE =============
 
 export interface CartItem {
@@ -57,6 +61,7 @@ export interface DropoffPricingBreakdown {
   discountedEntreeSubtotal: number;
   extrasSubtotal: number;
   foodSubtotal: number;
+  packagingFee: number;
   gratuity: number;
   deliveryFee: number;
   deliveryMilesOver10: number;
@@ -125,12 +130,31 @@ export const calculateDeliveryFee = (distanceMiles: number): { fee: number; mile
 };
 
 /**
+ * Calculate individual packaging fee
+ * $0.50 per individual item, $0.50 × servings for trays
+ */
+export const calculatePackagingFee = (cart: CartItem[]): number => {
+  let fee = 0;
+  for (const item of cart) {
+    if (item.pricingTier === 'SIDE_PER_TRAY') {
+      // Trays: $0.50 × servings (15) × quantity
+      fee += INDIVIDUAL_PACKAGING_FEE * TRAY_SERVINGS * item.quantity;
+    } else {
+      // Individual items: $0.50 each
+      fee += INDIVIDUAL_PACKAGING_FEE * item.quantity;
+    }
+  }
+  return fee;
+};
+
+/**
  * Master pricing calculation function
  * Returns the complete pricing breakdown for the final step
  */
 export const calculateDropoffPricing = (
   cart: CartItem[],
-  distanceMiles: number
+  distanceMiles: number,
+  wantsIndividualPackaging: boolean = false
 ): DropoffPricingBreakdown => {
   // 1. Entrée subtotal
   const { subtotal: entreeSubtotal, count: entreeCount } = calculateEntreeSubtotal(cart);
@@ -149,14 +173,17 @@ export const calculateDropoffPricing = (
   // 5. Minimum check
   const isBelowMinimum = foodSubtotal < MIN_FOOD_SUBTOTAL;
 
-  // 6. Gratuity (10% of food subtotal)
+  // 6. Packaging fee (if requested)
+  const packagingFee = wantsIndividualPackaging ? calculatePackagingFee(cart) : 0;
+
+  // 7. Gratuity (10% of food subtotal)
   const gratuity = foodSubtotal * GRATUITY_RATE;
 
-  // 7. Delivery fee
+  // 8. Delivery fee
   const { fee: deliveryFee, milesOver10: deliveryMilesOver10 } = calculateDeliveryFee(distanceMiles);
 
-  // 8. Final total
-  const finalTotal = foodSubtotal + gratuity + deliveryFee;
+  // 9. Final total
+  const finalTotal = foodSubtotal + packagingFee + gratuity + deliveryFee;
 
   return {
     entreeSubtotal,
@@ -166,6 +193,7 @@ export const calculateDropoffPricing = (
     discountedEntreeSubtotal,
     extrasSubtotal,
     foodSubtotal,
+    packagingFee,
     gratuity,
     deliveryFee,
     deliveryMilesOver10,

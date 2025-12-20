@@ -3,7 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Minus, ShoppingCart, Leaf, Wheat, Info, TrendingDown } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Plus, Minus, ShoppingCart, Leaf, Wheat, Info, TrendingDown, Package } from "lucide-react";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
 import { allSandwiches, hotDogs, breakfast, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
 import { 
@@ -11,7 +13,9 @@ import {
   createCartItem, 
   updateCartItemQuantity, 
   getBulkDiscountTier,
-  BULK_DISCOUNT_TIERS 
+  BULK_DISCOUNT_TIERS,
+  INDIVIDUAL_PACKAGING_FEE,
+  TRAY_SERVINGS
 } from "@/lib/dropoff-pricing";
 
 // ============= CONFIGURABLE COPY =============
@@ -41,6 +45,11 @@ const COPY = {
   extrasLabel: "extras",
   bulkDiscountTierLabel: "Current catering tier",
   bulkDiscountNote: "Exact discount calculated at checkout",
+  
+  // Packaging option
+  packagingTitle: "Individual Packaging",
+  packagingDescription: "Wrap each item separately for easy distribution",
+  packagingPriceNote: "+$0.50 per item ($7.50 per tray)",
   
   // Tier names
   tierNames: {
@@ -111,6 +120,16 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
     ? BULK_DISCOUNT_TIERS[currentTierIndex + 1] 
     : null;
   const entreesToNextTier = nextTier ? nextTier.minQty - entreeCount : 0;
+
+  // Calculate estimated packaging fee for display
+  const estimatedPackagingFee = formData.wantsIndividualPackaging 
+    ? formData.cart.reduce((sum, item) => {
+        if (item.pricingTier === 'SIDE_PER_TRAY') {
+          return sum + INDIVIDUAL_PACKAGING_FEE * TRAY_SERVINGS * item.quantity;
+        }
+        return sum + INDIVIDUAL_PACKAGING_FEE * item.quantity;
+      }, 0)
+    : 0;
 
   const renderMenuItem = (item: MenuItem) => {
     const quantity = getItemQuantity(item.id);
@@ -270,6 +289,32 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
                   </div>
                 </div>
               )}
+
+              {/* Individual Packaging Option */}
+              <div className="pt-3 border-t border-border/50">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-2">
+                    <Package className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <Label htmlFor="packaging-toggle" className="text-sm font-medium cursor-pointer">
+                        {COPY.packagingTitle}
+                      </Label>
+                      <p className="text-xs text-muted-foreground">{COPY.packagingDescription}</p>
+                      <p className="text-xs text-primary/80 mt-0.5">{COPY.packagingPriceNote}</p>
+                    </div>
+                  </div>
+                  <Switch
+                    id="packaging-toggle"
+                    checked={formData.wantsIndividualPackaging}
+                    onCheckedChange={(checked) => onUpdate({ wantsIndividualPackaging: checked })}
+                  />
+                </div>
+                {formData.wantsIndividualPackaging && estimatedPackagingFee > 0 && (
+                  <p className="text-xs text-muted-foreground mt-2 pl-6">
+                    Est. packaging: {formatCurrency(estimatedPackagingFee)}
+                  </p>
+                )}
+              </div>
             </div>
           )}
         </CardContent>

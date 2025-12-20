@@ -17,6 +17,9 @@ export interface DropoffOrderFormData {
   // Cart (replaces package + menu selection)
   cart: CartItem[];
   
+  // Packaging option
+  wantsIndividualPackaging: boolean;
+  
   // Event Details
   eventName: string;
   eventDate: Date | null;
@@ -36,6 +39,7 @@ export interface DropoffOrderFormData {
 
 export const initialDropoffFormData: DropoffOrderFormData = {
   cart: [],
+  wantsIndividualPackaging: false,
   eventName: '',
   eventDate: null,
   eventTime: '',
