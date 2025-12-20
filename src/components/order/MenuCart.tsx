@@ -30,8 +30,7 @@ const COPY = {
   cateringNoticeBody: "Prices shown are base prices only. Bulk discounts, gratuity, and delivery fees are applied on the final review step based on your total quantities and location.",
   
   // Price display format
-  basePriceLabel: "From",
-  priceNote: "final price at checkout",
+  bulkDiscountBadge: "Save up to 15%",
   
   // Category subtitles
   standardSandwichSubtitle: "Classic favorites",
@@ -204,16 +203,18 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
               )}
             </div>
             <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
-            <p className="text-sm">
-              <span className="text-muted-foreground">{COPY.basePriceLabel}</span>{' '}
-              <span className="font-semibold text-primary">{formatCurrency(item.unitPrice)}</span>
-              <span className="text-muted-foreground"> {item.unitLabel}</span>
+            <div className="flex items-center gap-2 flex-wrap">
+              <p className="text-sm">
+                <span className="font-semibold text-primary">{formatCurrency(item.unitPrice)}</span>
+                <span className="text-muted-foreground"> {item.unitLabel}</span>
+              </p>
               {item.isEntree && (
-                <span className="text-xs text-muted-foreground/70 ml-1">
-                  · {COPY.priceNote}
-                </span>
+                <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+                  <TrendingDown className="w-3 h-3 mr-1" />
+                  {COPY.bulkDiscountBadge}
+                </Badge>
               )}
-            </p>
+            </div>
           </div>
           
           <div className="flex items-center gap-2">
