@@ -32,11 +32,15 @@ export const DELIVERY_PER_MILE_RATE = 1.50;
 export const GRATUITY_RATE = 0.10; // 10%
 
 // Minimum food subtotal for drop-off orders
-export const MIN_FOOD_SUBTOTAL = 200;
+export const MIN_FOOD_SUBTOTAL = 350;
 
 // Individual packaging fee
 export const INDIVIDUAL_PACKAGING_FEE = 0.50; // $0.50 per item/serving
 export const TRAY_SERVINGS = 15; // Each tray serves ~15, so packaging fee is $0.50 × 15
+
+// Chafing dish fees
+export const CHAFING_DISH_FEE_PER_10_ITEMS = 15.00; // $15 per 10 items
+export const CHAFING_DISH_FEE_PER_TRAY = 15.00; // $15 per tray
 
 // ============= CART ITEM TYPE =============
 
@@ -62,6 +66,7 @@ export interface DropoffPricingBreakdown {
   extrasSubtotal: number;
   foodSubtotal: number;
   packagingFee: number;
+  chafingDishFee: number;
   gratuity: number;
   deliveryFee: number;
   deliveryMilesOver10: number;
@@ -148,13 +153,40 @@ export const calculatePackagingFee = (cart: CartItem[]): number => {
 };
 
 /**
+ * Calculate chafing dish fee
+ * $15 per 10 individual items, $15 per tray
+ */
+export const calculateChafingDishFee = (cart: CartItem[]): number => {
+  let fee = 0;
+  let individualItemCount = 0;
+  
+  for (const item of cart) {
+    if (item.pricingTier === 'SIDE_PER_TRAY') {
+      // Trays: $15 per tray
+      fee += CHAFING_DISH_FEE_PER_TRAY * item.quantity;
+    } else if (item.isEntree) {
+      // Count individual entree items
+      individualItemCount += item.quantity;
+    }
+  }
+  
+  // Add fee for individual items: $15 per 10 items (round up)
+  if (individualItemCount > 0) {
+    fee += Math.ceil(individualItemCount / 10) * CHAFING_DISH_FEE_PER_10_ITEMS;
+  }
+  
+  return fee;
+};
+
+/**
  * Master pricing calculation function
  * Returns the complete pricing breakdown for the final step
  */
 export const calculateDropoffPricing = (
   cart: CartItem[],
   distanceMiles: number,
-  wantsIndividualPackaging: boolean = false
+  wantsIndividualPackaging: boolean = false,
+  wantsChafingDishes: boolean = false
 ): DropoffPricingBreakdown => {
   // 1. Entrée subtotal
   const { subtotal: entreeSubtotal, count: entreeCount } = calculateEntreeSubtotal(cart);
@@ -176,14 +208,17 @@ export const calculateDropoffPricing = (
   // 6. Packaging fee (if requested)
   const packagingFee = wantsIndividualPackaging ? calculatePackagingFee(cart) : 0;
 
-  // 7. Gratuity (10% of food subtotal)
+  // 7. Chafing dish fee (if requested)
+  const chafingDishFee = wantsChafingDishes ? calculateChafingDishFee(cart) : 0;
+
+  // 8. Gratuity (10% of food subtotal)
   const gratuity = foodSubtotal * GRATUITY_RATE;
 
-  // 8. Delivery fee
+  // 9. Delivery fee
   const { fee: deliveryFee, milesOver10: deliveryMilesOver10 } = calculateDeliveryFee(distanceMiles);
 
-  // 9. Final total
-  const finalTotal = foodSubtotal + packagingFee + gratuity + deliveryFee;
+  // 10. Final total
+  const finalTotal = foodSubtotal + packagingFee + chafingDishFee + gratuity + deliveryFee;
 
   return {
     entreeSubtotal,
@@ -194,6 +229,7 @@ export const calculateDropoffPricing = (
     extrasSubtotal,
     foodSubtotal,
     packagingFee,
+    chafingDishFee,
     gratuity,
     deliveryFee,
     deliveryMilesOver10,

@@ -17,8 +17,10 @@ export interface DropoffOrderFormData {
   // Cart (replaces package + menu selection)
   cart: CartItem[];
   
-  // Packaging option
+  // Add-on options
   wantsIndividualPackaging: boolean;
+  wantsPaperGoods: boolean; // plates, utensils, napkins
+  wantsChafingDishes: boolean;
   
   // Event Details
   eventName: string;
@@ -40,6 +42,8 @@ export interface DropoffOrderFormData {
 export const initialDropoffFormData: DropoffOrderFormData = {
   cart: [],
   wantsIndividualPackaging: false,
+  wantsPaperGoods: false,
+  wantsChafingDishes: false,
   eventName: '',
   eventDate: null,
   eventTime: '',
