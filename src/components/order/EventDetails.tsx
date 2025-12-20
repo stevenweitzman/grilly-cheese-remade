@@ -7,11 +7,12 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { CalendarIcon, MapPin, User, Phone, Mail, Truck } from "lucide-react";
+import { CalendarIcon, User, Phone, Mail, Truck } from "lucide-react";
 import { format } from "date-fns";
 import { DropoffOrderFormData } from "@/types/cateringOrder";
 import { calculateDeliveryFee, formatCurrency, ORIGIN_ZIP, FREE_DELIVERY_MILES, DELIVERY_PER_MILE_RATE } from "@/lib/dropoff-pricing";
 import { cn } from "@/lib/utils";
+import { AddressAutocomplete } from "./AddressAutocomplete";
 
 interface EventDetailsProps {
   formData: DropoffOrderFormData;
@@ -59,7 +60,6 @@ const estimateDistance = (zip: string): number => {
 };
 
 export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetailsProps) => {
-  const [errors, setErrors] = useState<Record<string, string>>({});
   
   const estimatedDistance = estimateDistance(formData.deliveryAddress.zip);
   const { fee: deliveryFee, milesOver10 } = calculateDeliveryFee(estimatedDistance);
@@ -71,33 +71,30 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [estimatedDistance]);
 
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-    
-    if (!formData.eventName.trim()) newErrors.eventName = 'Event name is required';
-    if (!formData.eventDate) newErrors.eventDate = 'Event date is required';
-    if (!formData.eventTime) newErrors.eventTime = 'Event time is required';
-    if (!formData.contactName.trim()) newErrors.contactName = 'Contact name is required';
-    if (!formData.contactEmail.trim()) newErrors.contactEmail = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.contactEmail)) {
-      newErrors.contactEmail = 'Please enter a valid email';
-    }
-    if (!formData.contactPhone.trim()) newErrors.contactPhone = 'Phone is required';
-    if (!formData.deliveryAddress.street.trim()) newErrors.street = 'Street address is required';
-    if (!formData.deliveryAddress.city.trim()) newErrors.city = 'City is required';
-    if (!formData.deliveryAddress.zip.trim()) newErrors.zip = 'ZIP code is required';
-    else if (!/^\d{5}(-\d{4})?$/.test(formData.deliveryAddress.zip)) {
-      newErrors.zip = 'Please enter a valid ZIP code';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  // Validation removed per request - users can proceed without filling all fields
+  const handleNext = () => {
+    onNext();
   };
 
-  const handleNext = () => {
-    if (validateForm()) {
-      onNext();
+  const handleAddressSelect = (street: string, city?: string, state?: string, zip?: string) => {
+    const updates: Partial<DropoffOrderFormData> = {
+      deliveryAddress: {
+        ...formData.deliveryAddress,
+        street,
+      },
+    };
+    
+    if (city) {
+      updates.deliveryAddress = { ...updates.deliveryAddress!, city };
     }
+    if (state && US_STATES.some(s => s.value === state)) {
+      updates.deliveryAddress = { ...updates.deliveryAddress!, state };
+    }
+    if (zip) {
+      updates.deliveryAddress = { ...updates.deliveryAddress!, zip };
+    }
+    
+    onUpdate(updates);
   };
 
   const updateAddress = (field: keyof typeof formData.deliveryAddress, value: string) => {
@@ -128,28 +125,26 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="eventName">Event Name *</Label>
+            <Label htmlFor="eventName">Event Name</Label>
             <Input
               id="eventName"
               placeholder="e.g., Company Holiday Party"
               value={formData.eventName}
               onChange={(e) => onUpdate({ eventName: e.target.value })}
-              className={cn("mt-1", errors.eventName && "border-destructive")}
+              className="mt-1"
             />
-            {errors.eventName && <p className="text-sm text-destructive mt-1">{errors.eventName}</p>}
           </div>
           
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <Label>Event Date *</Label>
+              <Label>Event Date</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
                       "w-full justify-start text-left font-normal mt-1",
-                      !formData.eventDate && "text-muted-foreground",
-                      errors.eventDate && "border-destructive"
+                      !formData.eventDate && "text-muted-foreground"
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -166,13 +161,12 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
                   />
                 </PopoverContent>
               </Popover>
-              {errors.eventDate && <p className="text-sm text-destructive mt-1">{errors.eventDate}</p>}
             </div>
             
             <div>
-              <Label>Event Time *</Label>
+              <Label>Event Time</Label>
               <Select value={formData.eventTime} onValueChange={(value) => onUpdate({ eventTime: value })}>
-                <SelectTrigger className={cn("mt-1", errors.eventTime && "border-destructive")}>
+                <SelectTrigger className="mt-1">
                   <SelectValue placeholder="Select time" />
                 </SelectTrigger>
                 <SelectContent>
@@ -181,7 +175,6 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
                   ))}
                 </SelectContent>
               </Select>
-              {errors.eventTime && <p className="text-sm text-destructive mt-1">{errors.eventTime}</p>}
             </div>
           </div>
         </CardContent>
@@ -197,20 +190,19 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="contactName">Contact Name *</Label>
+            <Label htmlFor="contactName">Contact Name</Label>
             <Input
               id="contactName"
               placeholder="Your full name"
               value={formData.contactName}
               onChange={(e) => onUpdate({ contactName: e.target.value })}
-              className={cn("mt-1", errors.contactName && "border-destructive")}
+              className="mt-1"
             />
-            {errors.contactName && <p className="text-sm text-destructive mt-1">{errors.contactName}</p>}
           </div>
           
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="contactEmail">Email *</Label>
+              <Label htmlFor="contactEmail">Email</Label>
               <div className="relative mt-1">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -219,14 +211,13 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
                   placeholder="you@example.com"
                   value={formData.contactEmail}
                   onChange={(e) => onUpdate({ contactEmail: e.target.value })}
-                  className={cn("pl-10", errors.contactEmail && "border-destructive")}
+                  className="pl-10"
                 />
               </div>
-              {errors.contactEmail && <p className="text-sm text-destructive mt-1">{errors.contactEmail}</p>}
             </div>
             
             <div>
-              <Label htmlFor="contactPhone">Phone *</Label>
+              <Label htmlFor="contactPhone">Phone</Label>
               <div className="relative mt-1">
                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -235,10 +226,9 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
                   placeholder="(555) 123-4567"
                   value={formData.contactPhone}
                   onChange={(e) => onUpdate({ contactPhone: e.target.value })}
-                  className={cn("pl-10", errors.contactPhone && "border-destructive")}
+                  className="pl-10"
                 />
               </div>
-              {errors.contactPhone && <p className="text-sm text-destructive mt-1">{errors.contactPhone}</p>}
             </div>
           </div>
         </CardContent>
@@ -248,41 +238,38 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-primary" />
+            <Truck className="w-5 h-5 text-primary" />
             Delivery Address
           </CardTitle>
           <CardDescription>
-            Where should we deliver your catering?
+            Start typing to search for an address
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="street">Street Address *</Label>
-            <Input
-              id="street"
-              placeholder="123 Main Street"
+            <Label htmlFor="street">Street Address</Label>
+            <AddressAutocomplete
               value={formData.deliveryAddress.street}
-              onChange={(e) => updateAddress('street', e.target.value)}
-              className={cn("mt-1", errors.street && "border-destructive")}
+              onChange={handleAddressSelect}
+              placeholder="Start typing an address..."
+              className="mt-1"
             />
-            {errors.street && <p className="text-sm text-destructive mt-1">{errors.street}</p>}
           </div>
           
           <div className="grid sm:grid-cols-3 gap-4">
             <div>
-              <Label htmlFor="city">City *</Label>
+              <Label htmlFor="city">City</Label>
               <Input
                 id="city"
                 placeholder="City"
                 value={formData.deliveryAddress.city}
                 onChange={(e) => updateAddress('city', e.target.value)}
-                className={cn("mt-1", errors.city && "border-destructive")}
+                className="mt-1"
               />
-              {errors.city && <p className="text-sm text-destructive mt-1">{errors.city}</p>}
             </div>
             
             <div>
-              <Label>State *</Label>
+              <Label>State</Label>
               <Select 
                 value={formData.deliveryAddress.state} 
                 onValueChange={(value) => updateAddress('state', value)}
@@ -299,15 +286,14 @@ export const EventDetails = ({ formData, onUpdate, onBack, onNext }: EventDetail
             </div>
             
             <div>
-              <Label htmlFor="zip">ZIP Code *</Label>
+              <Label htmlFor="zip">ZIP Code</Label>
               <Input
                 id="zip"
                 placeholder="08089"
                 value={formData.deliveryAddress.zip}
                 onChange={(e) => updateAddress('zip', e.target.value)}
-                className={cn("mt-1", errors.zip && "border-destructive")}
+                className="mt-1"
               />
-              {errors.zip && <p className="text-sm text-destructive mt-1">{errors.zip}</p>}
             </div>
           </div>
         </CardContent>
