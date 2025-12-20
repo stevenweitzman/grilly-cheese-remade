@@ -193,9 +193,9 @@ export const PaymentStep = ({ formData, onSuccess, onBack, userId }: PaymentStep
                 size="lg"
               >
                 {isProcessing ? (
-                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting Order...</>
+                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Confirming...</>
                 ) : (
-                  <>Submit Order</>
+                  <>Confirm Order</>
                 )}
               </Button>
               <p className="text-center text-sm text-muted-foreground">
