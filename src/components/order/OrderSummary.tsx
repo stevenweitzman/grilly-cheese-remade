@@ -130,29 +130,39 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
             <DollarSign className="w-5 h-5 text-primary" />
             Pricing Breakdown
           </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Your final catering price based on {pricing.entreeCount} entrées
+          </p>
         </CardHeader>
         <CardContent className="space-y-3">
-          {/* Entrée Subtotal */}
+          {/* Entrée Subtotal at Base Price */}
           <div className="flex justify-between">
-            <span>Entrée Subtotal ({pricing.entreeCount} items)</span>
+            <span className="text-muted-foreground">Entrées at base price ({pricing.entreeCount} items)</span>
             <span>{formatCurrency(pricing.entreeSubtotal)}</span>
           </div>
 
-          {/* Bulk Discount */}
-          {pricing.bulkDiscountPercent > 0 && (
-            <div className="flex justify-between text-green-600">
-              <span className="flex items-center gap-1">
+          {/* Bulk Discount - Highlighted */}
+          {pricing.bulkDiscountPercent > 0 ? (
+            <div className="flex justify-between items-center bg-green-50 dark:bg-green-900/20 rounded-md px-3 py-2 -mx-1">
+              <span className="flex items-center gap-2 text-green-700 dark:text-green-400 font-medium">
                 <Tag className="w-4 h-4" />
-                Bulk Discount ({pricing.bulkDiscountPercent}% off entrées)
+                Bulk Discount ({pricing.entreeCount} entrées @ {pricing.bulkDiscountPercent}% off)
               </span>
-              <span>-{formatCurrency(pricing.bulkDiscountAmount)}</span>
+              <span className="text-green-700 dark:text-green-400 font-semibold">-{formatCurrency(pricing.bulkDiscountAmount)}</span>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center bg-muted/50 rounded-md px-3 py-2 -mx-1">
+              <span className="text-muted-foreground text-sm">
+                No bulk discount (add {25 - pricing.entreeCount} more entrées to unlock 5% off)
+              </span>
+              <span className="text-muted-foreground">—</span>
             </div>
           )}
 
           {/* Adjusted Entrée Subtotal */}
           {pricing.bulkDiscountPercent > 0 && (
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Adjusted Entrée Subtotal</span>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Discounted Entrée Subtotal</span>
               <span>{formatCurrency(pricing.discountedEntreeSubtotal)}</span>
             </div>
           )}
@@ -160,7 +170,7 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
           {/* Extras Subtotal */}
           {pricing.extrasSubtotal > 0 && (
             <div className="flex justify-between">
-              <span>Sides, Desserts & Beverages</span>
+              <span className="text-muted-foreground">Sides, Desserts & Beverages</span>
               <span>{formatCurrency(pricing.extrasSubtotal)}</span>
             </div>
           )}
@@ -174,20 +184,20 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
           </div>
 
           {/* Gratuity */}
-          <div className="flex justify-between">
-            <span className="flex items-center gap-1">
+          <div className="flex justify-between text-sm">
+            <span className="flex items-center gap-1 text-muted-foreground">
               <Percent className="w-4 h-4" /> Gratuity (10%)
             </span>
             <span>{formatCurrency(pricing.gratuity)}</span>
           </div>
 
           {/* Delivery Fee */}
-          <div className="flex justify-between">
-            <span className="flex items-center gap-1">
+          <div className="flex justify-between text-sm">
+            <span className="flex items-center gap-1 text-muted-foreground">
               <Truck className="w-4 h-4" /> 
-              Delivery Fee
+              Delivery
               {pricing.deliveryMilesOver10 > 0 && (
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs">
                   ({pricing.deliveryMilesOver10.toFixed(0)} mi beyond free zone)
                 </span>
               )}
@@ -198,16 +208,18 @@ export const OrderSummary = ({ formData, onBack, onNext }: OrderSummaryProps) =>
           <Separator />
 
           {/* Final Total */}
-          <div className="flex justify-between text-xl font-bold">
-            <span>Total</span>
+          <div className="flex justify-between text-xl font-bold pt-1">
+            <span>Total Due</span>
             <span className="text-primary">{formatCurrency(pricing.finalTotal)}</span>
           </div>
 
-          {/* Bulk Discount Hint */}
-          {pricing.bulkDiscountPercent === 0 && pricing.entreeCount < 25 && pricing.entreeCount >= 15 && (
-            <p className="text-xs text-muted-foreground pt-2">
-              💡 Add {25 - pricing.entreeCount} more entrées to get 5% off!
-            </p>
+          {/* Savings Summary */}
+          {pricing.bulkDiscountAmount > 0 && (
+            <div className="text-center pt-2">
+              <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                You saved {formatCurrency(pricing.bulkDiscountAmount)} with bulk pricing!
+              </Badge>
+            </div>
           )}
         </CardContent>
       </Card>
