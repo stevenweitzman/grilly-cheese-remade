@@ -453,13 +453,13 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
 
       {/* Menu Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="sandwiches">Sandwiches</TabsTrigger>
-          <TabsTrigger value="hotdogs">Hot Dogs</TabsTrigger>
-          <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
-          <TabsTrigger value="sides">Sides</TabsTrigger>
-          <TabsTrigger value="desserts">Desserts</TabsTrigger>
-          <TabsTrigger value="beverages">Beverages</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto">
+          <TabsTrigger value="sandwiches" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Sandwiches</TabsTrigger>
+          <TabsTrigger value="hotdogs" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Hot Dogs</TabsTrigger>
+          <TabsTrigger value="breakfast" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Breakfast</TabsTrigger>
+          <TabsTrigger value="sides" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Sides</TabsTrigger>
+          <TabsTrigger value="desserts" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Desserts</TabsTrigger>
+          <TabsTrigger value="beverages" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Drinks</TabsTrigger>
         </TabsList>
 
         <TabsContent value="sandwiches" className="mt-6 space-y-4">

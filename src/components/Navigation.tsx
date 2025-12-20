@@ -24,8 +24,8 @@ const Navigation = () => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
-      <div className="container mx-auto px-4">
+    <nav className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border z-50 overflow-hidden">
+      <div className="container mx-auto px-4 max-w-full">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-2">
             <img 

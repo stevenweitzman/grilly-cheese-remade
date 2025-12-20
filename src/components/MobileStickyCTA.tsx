@@ -33,8 +33,8 @@ const MobileStickyCTA = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 animate-fade-in">
-      <div className="bg-background/95 dark:bg-background/98 backdrop-blur-md border-t-2 border-accent shadow-warm p-3">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 animate-fade-in overflow-hidden">
+      <div className="bg-background/95 dark:bg-background/98 backdrop-blur-md border-t-2 border-accent shadow-warm p-3 max-w-full">
         <div className="flex gap-2">
           <Button
             asChild
