@@ -19,8 +19,8 @@ export const OrderConfirmation = ({ formData, orderId, isLoggedIn }: OrderConfir
     <div className="max-w-2xl mx-auto space-y-8 text-center">
       <div className="py-8">
         <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-4" />
-        <h1 className="text-3xl font-bold text-foreground mb-2">Order Confirmed!</h1>
-        <p className="text-muted-foreground">Thank you for your order. We'll be in touch soon!</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">Order Submitted!</h1>
+        <p className="text-muted-foreground">Thank you! You'll receive a payment link via email shortly.</p>
         <p className="text-sm text-muted-foreground mt-2">Order ID: {orderId.slice(0, 8).toUpperCase()}</p>
       </div>
 
@@ -51,9 +51,12 @@ export const OrderConfirmation = ({ formData, orderId, isLoggedIn }: OrderConfir
             </p>
           </div>
           <div className="pt-2 border-t flex justify-between font-semibold">
-            <span>Total Paid</span>
+            <span>Order Total</span>
             <span className="text-primary">{formatCurrency(pricing.finalTotal)}</span>
           </div>
+          <p className="text-sm text-muted-foreground text-center mt-3">
+            A payment link will be sent to your email within 24 hours.
+          </p>
         </CardContent>
       </Card>
 
