@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Plus, Minus, ShoppingCart, Leaf, Info, TrendingDown, Package, UtensilsCrossed, Flame, Wheat } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
@@ -76,6 +77,92 @@ const COPY = {
     10: "Large (50–99) – 10% off",
     15: "XL (100+) – 15% off",
   } as Record<number, string>,
+};
+
+// Sandwich subcategory configuration
+const SANDWICH_SUBCATEGORIES = [
+  {
+    id: 'classics',
+    title: 'Classic Grilled Cheese',
+    subtitle: COPY.standardSandwichSubtitle,
+    filter: (s: MenuItem) => s.pricingTier === 'SANDWICH_STANDARD' && !['classic-pbj', 'the-beabea'].includes(s.id),
+  },
+  {
+    id: 'premium',
+    title: 'Premium Specialty Sandwiches',
+    subtitle: COPY.premiumSandwichSubtitle,
+    filter: (s: MenuItem) => s.pricingTier === 'SANDWICH_PREMIUM' && !['chocolate-cheesecake-pocket', 'philly-panda-pocket', 'chocolate-raspberry-dream'].includes(s.id),
+  },
+  {
+    id: 'peanut-butter',
+    title: 'Peanut Butter Sandwiches',
+    subtitle: 'Our classic peanut butter creations',
+    filter: (s: MenuItem) => ['classic-pbj', 'the-beabea'].includes(s.id),
+  },
+  {
+    id: 'dessert-sandwiches',
+    title: 'Sweet Dessert Sandwiches',
+    subtitle: 'Indulgent grilled treats for your sweet tooth',
+    filter: (s: MenuItem) => ['chocolate-cheesecake-pocket', 'philly-panda-pocket', 'chocolate-raspberry-dream'].includes(s.id),
+  },
+];
+
+// Sandwich Accordion Component
+interface SandwichAccordionProps {
+  allSandwiches: MenuItem[];
+  renderMenuItem: (item: MenuItem) => React.ReactNode;
+  getItemQuantity: (itemId: string) => number;
+  formData: DropoffOrderFormData;
+}
+
+const SandwichAccordion = ({ allSandwiches, renderMenuItem, getItemQuantity, formData }: SandwichAccordionProps) => {
+  // Calculate items in cart per subcategory
+  const subcategoryCartCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const subcat of SANDWICH_SUBCATEGORIES) {
+      const items = allSandwiches.filter(subcat.filter);
+      counts[subcat.id] = items.reduce((sum, item) => sum + getItemQuantity(item.id), 0);
+    }
+    return counts;
+  }, [allSandwiches, formData.cart]);
+
+  return (
+    <Accordion type="multiple" defaultValue={["classics"]} className="space-y-3">
+      {SANDWICH_SUBCATEGORIES.map((subcat) => {
+        const items = allSandwiches.filter(subcat.filter);
+        const cartCount = subcategoryCartCounts[subcat.id];
+        
+        return (
+          <AccordionItem 
+            key={subcat.id} 
+            value={subcat.id}
+            className="border rounded-lg px-4 bg-card"
+          >
+            <AccordionTrigger className="hover:no-underline py-4">
+              <div className="flex items-center justify-between w-full pr-2">
+                <div className="text-left">
+                  <h3 className="text-lg font-semibold">{subcat.title}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {subcat.subtitle} • {items.length} items
+                  </p>
+                </div>
+                {cartCount > 0 && (
+                  <Badge className="bg-primary text-primary-foreground ml-2">
+                    {cartCount} in cart
+                  </Badge>
+                )}
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="grid gap-3 pb-2">
+                {items.map(renderMenuItem)}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
+    </Accordion>
+  );
 };
 
 interface MenuCartProps {
@@ -485,48 +572,13 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
           <TabsTrigger value="beverages" className="text-xs sm:text-sm px-1 sm:px-3 py-2">Drinks</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="sandwiches" className="mt-6 space-y-4">
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-1">Classic Grilled Cheese</h3>
-            <p className="text-sm text-muted-foreground">{COPY.standardSandwichSubtitle}</p>
-          </div>
-          <div className="grid gap-3">
-            {allSandwiches.filter(s => 
-              s.pricingTier === 'SANDWICH_STANDARD' && 
-              !['classic-pbj', 'the-beabea'].includes(s.id)
-            ).map(renderMenuItem)}
-          </div>
-          
-          <div className="mt-8 mb-4">
-            <h3 className="text-lg font-semibold mb-1">Premium Specialty Sandwiches</h3>
-            <p className="text-sm text-muted-foreground">{COPY.premiumSandwichSubtitle}</p>
-          </div>
-          <div className="grid gap-3">
-            {allSandwiches.filter(s => 
-              s.pricingTier === 'SANDWICH_PREMIUM' && 
-              !['chocolate-cheesecake-pocket', 'philly-panda-pocket', 'chocolate-raspberry-dream'].includes(s.id)
-            ).map(renderMenuItem)}
-          </div>
-
-          <div className="mt-8 mb-4">
-            <h3 className="text-lg font-semibold mb-1">Peanut Butter Sandwiches</h3>
-            <p className="text-sm text-muted-foreground">Our classic peanut butter creations</p>
-          </div>
-          <div className="grid gap-3">
-            {allSandwiches.filter(s => 
-              ['classic-pbj', 'the-beabea'].includes(s.id)
-            ).map(renderMenuItem)}
-          </div>
-
-          <div className="mt-8 mb-4">
-            <h3 className="text-lg font-semibold mb-1">Sweet Dessert Sandwiches</h3>
-            <p className="text-sm text-muted-foreground">Indulgent grilled treats for your sweet tooth</p>
-          </div>
-          <div className="grid gap-3">
-            {allSandwiches.filter(s => 
-              ['chocolate-cheesecake-pocket', 'philly-panda-pocket', 'chocolate-raspberry-dream'].includes(s.id)
-            ).map(renderMenuItem)}
-          </div>
+        <TabsContent value="sandwiches" className="mt-6">
+          <SandwichAccordion 
+            allSandwiches={allSandwiches}
+            renderMenuItem={renderMenuItem}
+            getItemQuantity={getItemQuantity}
+            formData={formData}
+          />
         </TabsContent>
 
         <TabsContent value="hotdogs" className="mt-6 space-y-4">
