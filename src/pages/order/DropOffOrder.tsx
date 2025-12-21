@@ -52,6 +52,7 @@ const DropOffOrder = () => {
 
   const goToStep = (step: OrderStep) => {
     setCurrentStep(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const completeStep = (step: OrderStep) => {
@@ -65,6 +66,7 @@ const DropOffOrder = () => {
     const nextStep = (fromStep + 1) as OrderStep;
     if (nextStep <= 5) {
       setCurrentStep(nextStep);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -72,12 +74,14 @@ const DropOffOrder = () => {
     const prevStep = (currentStep - 1) as OrderStep;
     if (prevStep >= 1) {
       setCurrentStep(prevStep);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handleOrderSuccess = (id: string) => {
     setOrderId(id);
     completeStep(5);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const renderStep = () => {
