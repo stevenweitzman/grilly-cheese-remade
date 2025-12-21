@@ -7,6 +7,7 @@ interface AddressSuggestion {
   display_name: string;
   address: {
     house_number?: string;
+    building?: string;
     road?: string;
     city?: string;
     town?: string;
@@ -112,7 +113,41 @@ export const AddressAutocomplete = ({
 
   const handleSelectSuggestion = (suggestion: AddressSuggestion) => {
     const addr = suggestion.address;
-    const street = [addr.house_number, addr.road].filter(Boolean).join(" ");
+    
+    // Try multiple fields for house number
+    const houseNumber = addr.house_number || addr.building || "";
+    const road = addr.road || "";
+    
+    // Build street address
+    let street = "";
+    if (houseNumber && road) {
+      street = `${houseNumber} ${road}`;
+    } else if (road) {
+      // Fallback: try to extract number from display_name
+      // display_name often starts with "123, Main Street, ..."
+      const displayParts = suggestion.display_name.split(",");
+      const firstPart = displayParts[0]?.trim() || "";
+      
+      // Check if first part is a number (house number)
+      if (/^\d+$/.test(firstPart) && displayParts.length > 1) {
+        const secondPart = displayParts[1]?.trim() || "";
+        if (secondPart.toLowerCase().includes(road.toLowerCase()) || 
+            road.toLowerCase().includes(secondPart.toLowerCase())) {
+          street = `${firstPart} ${road}`;
+        } else {
+          street = `${firstPart} ${secondPart}`;
+        }
+      } else if (firstPart.match(/^\d+\s+\w/)) {
+        // First part looks like "123 Main Street"
+        street = firstPart;
+      } else {
+        street = road;
+      }
+    } else {
+      // Last resort: use first meaningful part of display_name
+      street = suggestion.display_name.split(",")[0]?.trim() || "";
+    }
+    
     const city = addr.city || addr.town || addr.village || "";
     const stateRaw = addr.state || "";
     const state = stateAbbreviations[stateRaw] || stateRaw.substring(0, 2).toUpperCase();
