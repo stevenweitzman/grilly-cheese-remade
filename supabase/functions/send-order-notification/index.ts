@@ -14,7 +14,7 @@ interface CartItem {
 }
 
 interface OrderNotificationRequest {
-  orderId: string;
+  confirmationNumber: string;
   eventName: string;
   eventDate: string;
   eventTime: string;
@@ -81,7 +81,7 @@ const handler = async (req: Request): Promise<Response> => {
       <div style="background: #f9fafb; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
         <div style="background: white; max-width: 650px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
           <h1 style="color: #ea384c; margin: 0 0 5px 0; font-size: 28px;">🧀 New Catering Order!</h1>
-          <p style="color: #6b7280; margin: 0 0 25px 0; font-size: 14px;">Order ID: ${escapeHtml(data.orderId)}</p>
+          <p style="color: #6b7280; margin: 0 0 25px 0; font-size: 14px;">Confirmation #: ${escapeHtml(data.confirmationNumber)}</p>
           
           <!-- Event Details -->
           <div style="background: #fef2f2; border-left: 4px solid #ea384c; padding: 20px; margin-bottom: 25px; border-radius: 4px;">
