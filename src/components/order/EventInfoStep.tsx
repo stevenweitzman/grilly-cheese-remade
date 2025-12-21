@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -33,6 +34,8 @@ const TIME_SLOTS = [
 ];
 
 export const EventInfoStep = ({ formData, onUpdate, onBack, onNext }: EventInfoStepProps) => {
+  const [calendarOpen, setCalendarOpen] = useState(false);
+
   return (
     <div className="space-y-6 max-w-xl mx-auto">
       <div className="text-center">
@@ -65,7 +68,7 @@ export const EventInfoStep = ({ formData, onUpdate, onBack, onNext }: EventInfoS
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
               <Label>Event Date</Label>
-              <Popover>
+              <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -82,9 +85,13 @@ export const EventInfoStep = ({ formData, onUpdate, onBack, onNext }: EventInfoS
                   <Calendar
                     mode="single"
                     selected={formData.eventDate || undefined}
-                    onSelect={(date) => onUpdate({ eventDate: date || null })}
+                    onSelect={(date) => {
+                      onUpdate({ eventDate: date || null });
+                      setCalendarOpen(false);
+                    }}
                     disabled={(date) => date < new Date()}
                     initialFocus
+                    className="pointer-events-auto"
                   />
                 </PopoverContent>
               </Popover>
