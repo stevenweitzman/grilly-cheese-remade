@@ -118,4 +118,9 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground overflow-x-hidden;
   }
+
+  /* Account for fixed navigation when scrolling to anchor links */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
 }
