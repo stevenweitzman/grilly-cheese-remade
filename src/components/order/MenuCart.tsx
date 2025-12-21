@@ -491,7 +491,10 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
             <p className="text-sm text-muted-foreground">{COPY.standardSandwichSubtitle}</p>
           </div>
           <div className="grid gap-3">
-            {allSandwiches.filter(s => s.pricingTier === 'SANDWICH_STANDARD').map(renderMenuItem)}
+            {allSandwiches.filter(s => 
+              s.pricingTier === 'SANDWICH_STANDARD' && 
+              !['classic-pbj', 'the-beabea'].includes(s.id)
+            ).map(renderMenuItem)}
           </div>
           
           <div className="mt-8 mb-4">
@@ -499,7 +502,30 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
             <p className="text-sm text-muted-foreground">{COPY.premiumSandwichSubtitle}</p>
           </div>
           <div className="grid gap-3">
-            {allSandwiches.filter(s => s.pricingTier === 'SANDWICH_PREMIUM').map(renderMenuItem)}
+            {allSandwiches.filter(s => 
+              s.pricingTier === 'SANDWICH_PREMIUM' && 
+              !['chocolate-cheesecake-pocket', 'philly-panda-pocket', 'chocolate-raspberry-dream'].includes(s.id)
+            ).map(renderMenuItem)}
+          </div>
+
+          <div className="mt-8 mb-4">
+            <h3 className="text-lg font-semibold mb-1">Peanut Butter Sandwiches</h3>
+            <p className="text-sm text-muted-foreground">Our classic peanut butter creations</p>
+          </div>
+          <div className="grid gap-3">
+            {allSandwiches.filter(s => 
+              ['classic-pbj', 'the-beabea'].includes(s.id)
+            ).map(renderMenuItem)}
+          </div>
+
+          <div className="mt-8 mb-4">
+            <h3 className="text-lg font-semibold mb-1">Sweet Dessert Sandwiches</h3>
+            <p className="text-sm text-muted-foreground">Indulgent grilled treats for your sweet tooth</p>
+          </div>
+          <div className="grid gap-3">
+            {allSandwiches.filter(s => 
+              ['chocolate-cheesecake-pocket', 'philly-panda-pocket', 'chocolate-raspberry-dream'].includes(s.id)
+            ).map(renderMenuItem)}
           </div>
         </TabsContent>
 
