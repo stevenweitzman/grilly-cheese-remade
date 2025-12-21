@@ -127,7 +127,7 @@ const SandwichAccordion = ({ allSandwiches, renderMenuItem, getItemQuantity, for
   }, [allSandwiches, formData.cart]);
 
   return (
-    <Accordion type="multiple" defaultValue={["classics"]} className="space-y-3">
+    <Accordion type="multiple" defaultValue={[]} className="space-y-3">
       {SANDWICH_SUBCATEGORIES.map((subcat) => {
         const items = allSandwiches.filter(subcat.filter);
         const cartCount = subcategoryCartCounts[subcat.id];
