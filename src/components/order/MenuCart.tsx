@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Plus, Minus, ShoppingCart, Leaf, Info, TrendingDown, Package, UtensilsCrossed, Flame, Wheat } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { DropoffOrderFormData, CartItem } from "@/types/cateringOrder";
 import { allSandwiches, hotDogs, breakfast, sides, beverages, desserts, MenuItem } from "@/data/menuItems";
 import { 
@@ -96,19 +97,26 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
     const currentQty = existingIndex >= 0 ? formData.cart[existingIndex].quantity : 0;
     const newQty = Math.max(0, currentQty + delta);
 
+    setCartQuantity(menuItem, newQty);
+  };
+
+  const setCartQuantity = (menuItem: MenuItem, newQty: number) => {
+    const existingIndex = formData.cart.findIndex(item => item.itemId === menuItem.id);
+    const safeQty = Math.max(0, Math.min(9999, newQty)); // Cap at 9999
+
     let newCart: CartItem[];
 
-    if (newQty === 0) {
+    if (safeQty === 0) {
       newCart = formData.cart.filter(item => item.itemId !== menuItem.id);
     } else if (existingIndex >= 0) {
       newCart = [...formData.cart];
-      newCart[existingIndex] = updateCartItemQuantity(newCart[existingIndex], newQty);
+      newCart[existingIndex] = updateCartItemQuantity(newCart[existingIndex], safeQty);
     } else {
       const newItem = createCartItem(
         menuItem.id,
         menuItem.name,
         menuItem.category,
-        newQty,
+        safeQty,
         menuItem.pricingTier,
         menuItem.isEntree
       );
@@ -228,7 +236,21 @@ export const MenuCart = ({ formData, onUpdate, onNext }: MenuCartProps) => {
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="w-8 text-center font-medium">{quantity}</span>
+                <Input
+                  type="number"
+                  min={0}
+                  max={9999}
+                  value={quantity}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value, 10);
+                    if (!isNaN(val)) {
+                      setCartQuantity(item, val);
+                    } else if (e.target.value === '') {
+                      setCartQuantity(item, 0);
+                    }
+                  }}
+                  className="w-16 h-8 text-center font-medium px-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
                 <Button
                   variant="outline"
                   size="icon"
