@@ -89,19 +89,20 @@ export const OrderSummary = ({ formData, onBack, onSuccess, userId }: OrderSumma
         special_notes: formData.specialNotes || null,
       };
 
-      // Insert order
-      const { data: order, error } = await supabase
+      // Insert order - don't use .select() to avoid RLS SELECT policy issues for guests
+      const { error } = await supabase
         .from('catering_orders')
-        .insert([orderData])
-        .select()
-        .single();
+        .insert([orderData]);
 
       if (error) throw error;
+
+      // Generate a client-side confirmation number
+      const confirmationNumber = `GC-${Date.now().toString(36).toUpperCase()}`;
 
       // Send notification email
       const { error: emailError } = await supabase.functions.invoke('send-order-notification', {
         body: {
-          orderId: order.id,
+          confirmationNumber,
           eventName: formData.eventName || 'Untitled Event',
           eventDate: formData.eventDate ? format(formData.eventDate, 'MMMM d, yyyy') : 'TBD',
           eventTime: formData.eventTime || 'TBD',
@@ -135,7 +136,7 @@ export const OrderSummary = ({ formData, onBack, onSuccess, userId }: OrderSumma
         title: "Order submitted!", 
         description: "You'll receive a confirmation email with payment details shortly." 
       });
-      onSuccess(order.id);
+      onSuccess(confirmationNumber);
     } catch (error) {
       console.error('Order submission error:', error);
       setStatus('error');
