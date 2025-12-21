@@ -9,7 +9,6 @@ import { EventInfoStep } from "@/components/order/EventInfoStep";
 import { DeliveryAddressStep } from "@/components/order/DeliveryAddressStep";
 import { ContactInfoStep } from "@/components/order/ContactInfoStep";
 import { OrderSummary } from "@/components/order/OrderSummary";
-import { PaymentStep } from "@/components/order/PaymentStep";
 import { OrderConfirmation } from "@/components/order/OrderConfirmation";
 import { DropoffOrderFormData, initialDropoffFormData, OrderStep } from "@/types/cateringOrder";
 import { supabase } from "@/integrations/supabase/client";
@@ -64,7 +63,7 @@ const DropOffOrder = () => {
   const handleNext = (fromStep: OrderStep) => {
     completeStep(fromStep);
     const nextStep = (fromStep + 1) as OrderStep;
-    if (nextStep <= 6) {
+    if (nextStep <= 5) {
       setCurrentStep(nextStep);
     }
   };
@@ -76,9 +75,9 @@ const DropOffOrder = () => {
     }
   };
 
-  const handlePaymentSuccess = (id: string) => {
+  const handleOrderSuccess = (id: string) => {
     setOrderId(id);
-    completeStep(6);
+    completeStep(5);
   };
 
   const renderStep = () => {
@@ -96,9 +95,7 @@ const DropOffOrder = () => {
       case 4:
         return <ContactInfoStep formData={formData} onUpdate={updateFormData} onNext={() => handleNext(4)} onBack={handleBack} />;
       case 5:
-        return <OrderSummary formData={formData} onNext={() => handleNext(5)} onBack={handleBack} />;
-      case 6:
-        return <PaymentStep formData={formData} onSuccess={handlePaymentSuccess} onBack={handleBack} userId={userId} />;
+        return <OrderSummary formData={formData} onSuccess={handleOrderSuccess} onBack={handleBack} userId={userId} />;
       default:
         return null;
     }
