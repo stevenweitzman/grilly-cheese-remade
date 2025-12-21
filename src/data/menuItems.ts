@@ -22,7 +22,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'just-the-cheese',
     name: 'Just The Cheese',
-    description: 'Two hearty slices of white bread buttered and grilled with yellow and white American cheeses',
+    description: 'Two hearty slices of white bread, buttered and grilled with white American cheeses.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -33,8 +33,8 @@ export const standardSandwiches: MenuItem[] = [
   },
   {
     id: 'just-the-mozz',
-    name: 'Just The Mozz',
-    description: 'Two thick slices of white bread buttered and grilled with mozzarella cheese',
+    name: 'Just The Mozzarella',
+    description: 'Two thick slices of white bread, buttered and grilled with mozzarella cheese.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -46,19 +46,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'just-the-cheddar',
     name: 'Just The Cheddar',
-    description: 'Thick white bread buttered and grilled with cheddar cheese',
-    category: 'sandwich',
-    pricingTier: 'SANDWICH_STANDARD',
-    unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
-    unitLabel: 'each',
-    isEntree: true,
-    isVegetarian: true,
-    hasGlutenFreeOption: true,
-  },
-  {
-    id: 'just-the-mozzarella',
-    name: 'Just The Mozzarella',
-    description: 'Thick white bread buttered and grilled with mozzarella cheese',
+    description: 'Two thick slices of white bread, buttered and grilled with cheddar cheeses.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -70,7 +58,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: '3-cheese-please',
     name: 'Three Cheese Please',
-    description: 'Cheddar American and mozzarella on thick white bread buttered and grilled',
+    description: 'A three-cheese sandwich with cheddar, American, and mozzarella on thick slices of white bread, buttered and grilled to a crisp.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -82,7 +70,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'american-dream',
     name: 'The American Dream',
-    description: 'American cheese and thick cut bacon topped with fresh tomatoes on grilled white bread',
+    description: 'Double American cheeses layered over thick-cut bacon strips, topped with fresh sliced tomatoes, grilled between two big slices of white bread.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -93,7 +81,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'bacon-american-classic',
     name: 'Bacon American Classic',
-    description: 'Thick white bread loaded with crispy bacon buttered and grilled with American cheese',
+    description: 'Two thick slices of white bread, loaded with crispy bacon, buttered and grilled with American cheese.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -104,7 +92,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'kids-grilled-cheese',
     name: 'Kids Grilled Cheese',
-    description: 'Smaller grilled cheese on white bread with American cheese',
+    description: 'Smaller grilled cheese on white bread with American cheese.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -116,7 +104,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'classic-pbj',
     name: 'Classic PBJ',
-    description: 'Peanut Butter and grape jelly on whole grain bread lightly grilled in butter',
+    description: 'Peanut butter and grape jelly on whole grain bread lightly grilled in butter.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -127,7 +115,7 @@ export const standardSandwiches: MenuItem[] = [
   {
     id: 'the-beabea',
     name: 'The BeaBea',
-    description: 'Sourdough bread lightly grilled with raspberry jam, grape jam and peanut butter',
+    description: 'Sourdough bread lightly grilled with raspberry jam, grape jam and peanut butter.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_STANDARD',
     unitPrice: ITEM_PRICING.SANDWICH_STANDARD,
@@ -142,7 +130,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilly-cheese',
     name: 'The Grilly Cheese',
-    description: 'A double decker with three thick slices of white bread, buttered then grilled with yellow and white American cheeses, topped with crisp bacon',
+    description: 'A double decker with three thick slices of white bread, buttered and grilled with American cheese, topped with crisp bacon.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -153,7 +141,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilly-cheesesteak',
     name: 'The Grilly Cheesesteak',
-    description: 'Philly cheesesteak beef cooked fresh under melted American cheese on white bread',
+    description: 'The real deal Philly cheesesteak beef cooked fresh under melted American cheeses, loaded onto thick slices of white bread.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -164,7 +152,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'margherita',
     name: 'The Margherita',
-    description: 'Sourdough bread filled with mozzarella cheese, tomatoes and basil, buttered and grilled in olive oil',
+    description: 'Sourdough bread filled with mozzarella cheese, tomatoes, and basil, buttered and grilled.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -176,7 +164,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'swiss-apple-swapple',
     name: 'Swiss Apple Swapple',
-    description: 'Two big slices of whole grain bread loaded with Swiss cheese, basil and a delicate apple spread',
+    description: 'Two big slices of whole grain bread loaded with Swiss cheese, basil and a delicate apple spread.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -188,7 +176,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'the-greek',
     name: 'The Greek',
-    description: 'A huge pita filled with sliced feta fresh from the block, cucumbers, spinach and a Greek dressing, folded and grilled to perfection',
+    description: 'A huge pita filled with sliced feta fresh from the block, cucumbers, spinach and a Greek dressing, folded and grilled to perfection.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -199,17 +187,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'the-pop-eye',
     name: 'The Pop Eye',
-    description: 'Yellow and white cheddar cheeses topped onto pumpernickel bread, buttered and grilled with spinach and bacon',
-    category: 'sandwich',
-    pricingTier: 'SANDWICH_PREMIUM',
-    unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
-    unitLabel: 'each',
-    isEntree: true,
-  },
-  {
-    id: 'blt',
-    name: 'BLT',
-    description: 'Two fat slices of white bread grilled in butter and loaded with bacon, lettuce, tomatoes and a bit of mayo',
+    description: 'Yellow and white cheddar cheeses topped onto pumpernickel bread, buttered and grilled with spinach and bacon.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -219,7 +197,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilled-caprese',
     name: 'Grilled Caprese',
-    description: 'Two slices of white bread loaded with mozzarella cheese, Roma tomatoes, basil and balsamic vinaigrette',
+    description: 'Two slices of white bread loaded with mozzarella cheese, fresh sliced tomatoes, basil, and balsamic vinaigrette.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -231,7 +209,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'chocolate-cheesecake-pocket',
     name: 'Chocolate Cheesecake Pocket',
-    description: 'Chocolate hazelnut spread and cream cheese spread onto two slices of white bread and then grilled into two triangle pockets filled with gooey goodness',
+    description: 'Chocolate hazelnut spread and cream cheese spread onto two slices of white bread and then grilled into two triangle pockets filled with gooey goodness.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -242,7 +220,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'philly-panda-pocket',
     name: 'Philly Panda Pocket',
-    description: 'Grilled bananas, chocolate hazelnut spread and cream cheese topped onto two slices of white bread and then grilled into two triangle pockets',
+    description: 'Grilled bananas, chocolate hazelnut spread and cream cheese topped onto two slices of white bread and then grilled into two triangle pockets.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -253,7 +231,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'meatless-reuben',
     name: 'The Meatless Reuben',
-    description: 'Sauerkraut and Swiss cheese melted onto rye bread and topped with a delectable Russian dressing (*Corned Beef cannot be added to this sandwich)',
+    description: 'Sauerkraut and Swiss cheese melted onto rye bread and topped with a delectable Russian dressing (*Corned Beef cannot be added to this sandwich).',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -264,7 +242,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'reuben-steiner',
     name: 'The Reuben Steiner',
-    description: 'Sauerkraut and Swiss cheese melted onto rye bread, topped with Russian dressing and corned beef slices',
+    description: 'Sauerkraut and Swiss cheese melted onto rye bread, topped with Russian dressing and corned beef slices.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -274,8 +252,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'joels-2nd-favorite',
-    name: "Joel's Second Favorite",
-    description: 'Two pieces of white bread buttered and grilled with yellow cheddar cheese and slices of ham',
+    name: "Joel's 2nd Favorite",
+    description: 'Two slices of white bread, buttered and grilled with yellow cheddar cheese and slices of ham.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -286,7 +264,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'grilly-pizza',
     name: 'The Grilly Pizza',
-    description: 'Marinara sauce, a blend of cheeses and pepperoni grilled onto white bread in butter and olive oil',
+    description: 'Marinara sauce, a blend of cheeses and pepperoni grilled onto white bread in butter and olive oil.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -296,7 +274,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'chocolate-raspberry-dream',
     name: 'Chocolate Raspberry Dream',
-    description: 'Chocolate hazelnut spread and peanut butter grilled on white bread with raspberry jam',
+    description: 'Chocolate hazelnut spread and peanut butter grilled on white bread with raspberry jam.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -307,7 +285,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'canoe-in-the-pines',
     name: 'The Canoe In the Pines',
-    description: 'American cheese melted on grilled white bread folded into a canoe shape',
+    description: 'American cheeses melted onto one thick slice of white bread, buttered and grilled, then folded into a canoe-shaped sandwich.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -319,7 +297,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'chicken-pickin',
     name: "Chicken Pickin'",
-    description: 'Buffalo chicken on sourdough with bacon lettuce tomato American cheese and mayo',
+    description: 'Thin slices of white buffalo chicken breast on buttered and grilled sourdough bread with bacon, tomatoes, lettuce, American cheese, and mayo.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -330,7 +308,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'cluck-norris',
     name: 'The Cluck Norris',
-    description: 'Buffalo chicken mozzarella tomato hot sauce Russian dressing and basil on sourdough',
+    description: 'Buffalo chicken on sourdough, loaded with mozzarella, a slice of tomato, hot sauce, Russian dressing, and basil. Buttered and grilled to a perfect crisp.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -341,7 +319,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'swiss-pig',
     name: 'The Swiss Pig',
-    description: 'White bread loaded with ham and Swiss cheese topped with mustard and grilled',
+    description: 'Two thick slices of white bread loaded with ham and Swiss cheese, topped with mustard, then buttered and grilled to a crisp.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -351,8 +329,8 @@ export const premiumSandwiches: MenuItem[] = [
   },
   {
     id: 'chickens-pigs-american-ranchers',
-    name: 'Chickens Pigs and American Ranchers',
-    description: 'Buffalo chicken and bacon melted under American cheese topped with ranch',
+    name: 'Chickens, Pigs, & American Ranchers',
+    description: 'Buffalo chicken loaded with bacon, melted under American cheese on white bread, buttered and grilled, topped with ranch dressing.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -363,7 +341,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'bltmacd',
     name: 'BLTMACD',
-    description: 'Bacon lettuce tomato mayo and American cheese on grilled white bread',
+    description: 'Two thick slices of white bread grilled in butter and loaded with bacon, lettuce, tomatoes, a bit of mayo, and American cheese.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -374,7 +352,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'russian-around',
     name: 'The Russian Around',
-    description: 'Philly cheesesteak with Russian dressing and American cheese on sourdough',
+    description: 'Russian dressing drizzled onto Philly cheesesteak meat under melted American cheeses, grilled onto large slices of sourdough bread.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
@@ -385,7 +363,7 @@ export const premiumSandwiches: MenuItem[] = [
   {
     id: 'pleasin-vegan',
     name: "Pleasin' Vegan",
-    description: 'In house dairy free cheese on vegan gluten free bread grilled in olive oil',
+    description: 'In house dairy free cheese on vegan gluten free bread grilled in olive oil.',
     category: 'sandwich',
     pricingTier: 'SANDWICH_PREMIUM',
     unitPrice: ITEM_PRICING.SANDWICH_PREMIUM,
