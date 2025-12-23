@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PackagesSection = () => {
   const simpleMenuItems = [
@@ -161,8 +162,8 @@ const PackagesSection = () => {
               size="lg"
               asChild
             >
-              <a 
-                href="#contact"
+              <Link 
+                to="/#contact"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
                     (window as any).dataLayer.push({
@@ -173,7 +174,7 @@ const PackagesSection = () => {
                 }}
               >
                 Request Simple Menu Quote
-              </a>
+              </Link>
             </Button>
           </div>
 
@@ -219,8 +220,8 @@ const PackagesSection = () => {
               size="lg"
               asChild
             >
-              <a 
-                href="#contact"
+              <Link 
+                to="/#contact"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
                     (window as any).dataLayer.push({
@@ -231,7 +232,7 @@ const PackagesSection = () => {
                 }}
               >
                 Request Full Menu Quote
-              </a>
+              </Link>
             </Button>
           </div>
 
@@ -298,8 +299,8 @@ const PackagesSection = () => {
               size="lg"
               asChild
             >
-              <a 
-                href="#contact"
+              <Link 
+                to="/#contact"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
                     (window as any).dataLayer.push({
@@ -310,7 +311,7 @@ const PackagesSection = () => {
                 }}
               >
                 Request Brunch Quote
-              </a>
+              </Link>
             </Button>
           </div>
         </div>

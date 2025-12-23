@@ -120,13 +120,13 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <a href="#contact">
+          <Link to="/#contact">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button size="lg" className="text-lg px-8 py-6">
                 Book Your Event Now
               </Button>
             </motion.div>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -59,8 +59,8 @@ const StickyCTABar = () => {
                 asChild
                 className="hidden sm:flex"
               >
-                <a
-                  href="#contact"
+                <Link
+                  to="/#contact"
                   onClick={() => {
                     if (typeof window !== 'undefined' && (window as any).dataLayer) {
                       (window as any).dataLayer.push({
@@ -72,7 +72,7 @@ const StickyCTABar = () => {
                   }}
                 >
                   Get Quote
-                </a>
+                </Link>
               </Button>
               <Button
                 size="sm"

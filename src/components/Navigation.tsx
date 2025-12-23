@@ -172,8 +172,8 @@ const Navigation = () => {
               </>
             )}
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-background">
-              <a 
-                href="#contact"
+              <Link 
+                to="/#contact"
                 className="flex items-center gap-2"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -187,7 +187,7 @@ const Navigation = () => {
               >
                 <Calendar className="h-4 w-4" />
                 Get Your Quote
-              </a>
+              </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
               <Link 
@@ -242,8 +242,8 @@ const Navigation = () => {
           <div className="md:hidden pb-4 max-h-[calc(100vh-5rem)] overflow-y-auto animate-fade-in">
             <div className="flex gap-2 mb-3">
               <Button asChild className="flex-1 bg-accent hover:bg-accent/90 text-background">
-                <a 
-                  href={isHomePage ? "#contact" : "/#contact"}
+                <Link 
+                  to="/#contact"
                   className="flex items-center justify-center gap-2"
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -258,7 +258,7 @@ const Navigation = () => {
                 >
                   <Calendar className="h-4 w-4" />
                   Get Quote
-                </a>
+                </Link>
               </Button>
               <Button asChild variant="secondary" className="flex-1">
                 <Link 

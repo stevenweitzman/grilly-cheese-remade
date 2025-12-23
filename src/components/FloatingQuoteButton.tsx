@@ -39,8 +39,8 @@ const FloatingQuoteButton = () => {
         size="lg"
         className="bg-accent hover:bg-accent/90 text-background shadow-warm hover:shadow-xl transition-all hover:scale-105 rounded-full px-6 py-6"
       >
-        <a
-          href="#contact"
+        <Link
+          to="/#contact"
           className="flex items-center gap-2"
           onClick={() => {
             if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -54,7 +54,7 @@ const FloatingQuoteButton = () => {
         >
           <Calendar className="h-5 w-5" />
           Quick Quote
-        </a>
+        </Link>
       </Button>
       <Button
         asChild
