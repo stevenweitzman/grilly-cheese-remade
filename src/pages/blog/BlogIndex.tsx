@@ -9,6 +9,14 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "Wedding Food Truck Catering in Bucks County, PA",
+      slug: "wedding-food-truck-catering-bucks-county-pa",
+      excerpt: "Wedding food truck catering in Bucks County has become an increasingly popular option for couples planning barn weddings, estate weddings, and outdoor receptions throughout the area.",
+      date: "December 23, 2025",
+      category: "Weddings",
+      readTime: "5 min read"
+    },
+    {
       title: "Wedding Food Truck Catering in Philadelphia",
       slug: "wedding-food-truck-catering-philadelphia",
       excerpt: "Wedding food truck catering in Philadelphia has become one of the most popular alternatives to traditional wedding catering. Learn about venue requirements, guest capacity, and late-night options.",
