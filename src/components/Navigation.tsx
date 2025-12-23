@@ -56,12 +56,12 @@ const Navigation = () => {
               Client Portal
             </Link>
             
-            {/* Combined Menu Dropdown */}
+            {/* Services & Events Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
-                Menu <ChevronDown className="h-4 w-4" />
+                Explore <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border border-border shadow-lg z-[60]">
+              <DropdownMenuContent className="bg-background border border-border shadow-lg z-[60] min-w-[200px]">
                 <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Services</div>
                 <DropdownMenuItem asChild>
                   <Link to="/services/food-truck-catering" className="cursor-pointer">
@@ -101,15 +101,8 @@ const Navigation = () => {
                     View All Events
                   </Link>
                 </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Locations Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors outline-none">
-                Locations <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border border-border shadow-lg z-[60]">
+                <DropdownMenuSeparator />
+                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Locations</div>
                 <DropdownMenuItem asChild>
                   <Link to="/locations/new-jersey" className="cursor-pointer">
                     New Jersey
@@ -308,10 +301,10 @@ const Navigation = () => {
             </Link>
 
             <Accordion type="single" collapsible className="w-full">
-              {/* Combined Menu Accordion */}
-              <AccordionItem value="menu">
+              {/* Services & Events Accordion */}
+              <AccordionItem value="explore">
                 <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
-                  Menu
+                  Explore
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-1 pl-4">
@@ -368,17 +361,8 @@ const Navigation = () => {
                     >
                       View All Events
                     </Link>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              {/* Locations Accordion */}
-              <AccordionItem value="locations">
-                <AccordionTrigger className="text-foreground hover:text-primary font-medium py-2">
-                  Locations
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="space-y-1 pl-4">
+                    <div className="border-t border-border my-2" />
+                    <div className="text-xs font-semibold text-muted-foreground mb-1">Locations</div>
                     <Link
                       to="/locations/new-jersey"
                       className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
