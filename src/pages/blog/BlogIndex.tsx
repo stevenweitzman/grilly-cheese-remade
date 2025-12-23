@@ -9,6 +9,14 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "Wedding Food Truck Catering in Philadelphia",
+      slug: "wedding-food-truck-catering-philadelphia",
+      excerpt: "Wedding food truck catering in Philadelphia has become one of the most popular alternatives to traditional wedding catering. Learn about venue requirements, guest capacity, and late-night options.",
+      date: "December 23, 2025",
+      category: "Weddings",
+      readTime: "8 min read"
+    },
+    {
       title: "How to Book a Grilled Cheese Food Truck for Any Event",
       slug: "how-to-book-a-grilled-cheese-food-truck-for-any-event",
       excerpt: "Complete guide to booking a grilled cheese food truck for weddings, corporate events, and parties. Learn about pricing, menus, and what to ask before you book.",
