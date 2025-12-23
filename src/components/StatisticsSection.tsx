@@ -2,10 +2,11 @@ import { motion, useInView, useMotionValue, useTransform, animate } from "framer
 import { useEffect, useRef } from "react";
 import { TrendingUp, Award, Users, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const StatisticsSection = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-background relative overflow-hidden">
+    <section id="about" className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-background relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
         className="absolute inset-0 opacity-30"
@@ -84,8 +85,8 @@ const StatisticsSection = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <a 
-            href="#contact"
+          <Link 
+            to="/#contact"
             onClick={() => {
               if (typeof window !== 'undefined' && (window as any).dataLayer) {
                 (window as any).dataLayer.push({
@@ -98,7 +99,7 @@ const StatisticsSection = () => {
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-background text-lg px-8 py-6">
               Get Your Free Quote Today
             </Button>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

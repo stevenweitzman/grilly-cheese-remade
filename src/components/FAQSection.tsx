@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const FAQSection = () => {
   const faqs = [
@@ -104,8 +105,8 @@ const FAQSection = () => {
               >
                 844-474-5591
               </a>
-              <a 
-                href="#contact"
+              <Link 
+                to="/#contact"
                 onClick={() => {
                   if (typeof window !== 'undefined' && (window as any).dataLayer) {
                     (window as any).dataLayer.push({
@@ -118,7 +119,7 @@ const FAQSection = () => {
                 <Button size="lg" className="bg-accent hover:bg-accent/90 text-background">
                   Request a Quote
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -41,8 +41,8 @@ const MobileStickyCTA = () => {
             className="flex-1 bg-accent hover:bg-accent/90 text-background"
             size="lg"
           >
-            <a
-              href="#contact"
+            <Link
+              to="/#contact"
               className="flex items-center justify-center gap-2"
               onClick={() => {
                 if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -56,7 +56,7 @@ const MobileStickyCTA = () => {
             >
               <Calendar className="h-5 w-5" />
               Get Quote
-            </a>
+            </Link>
           </Button>
           <Button
             asChild
