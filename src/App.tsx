@@ -55,6 +55,7 @@ import FoodTruckVsCatering from "./pages/blog/FoodTruckVsCatering";
 import CorporateEventAdvantages from "./pages/blog/CorporateEventAdvantages";
 import HowMuchDoesItCost from "./pages/blog/HowMuchDoesItCost";
 import HowToBookGrilledCheeseFoodTruck from "./pages/blog/HowToBookGrilledCheeseFoodTruck";
+import WeddingFoodTruckPhiladelphia from "./pages/blog/WeddingFoodTruckPhiladelphia";
 
 const queryClient = new QueryClient();
 
@@ -132,6 +133,7 @@ const App = () => (
           <Route path="/blog/corporate-event-advantages" element={<CorporateEventAdvantages />} />
           <Route path="/blog/how-much-does-it-cost-to-book-a-food-truck" element={<HowMuchDoesItCost />} />
           <Route path="/blog/how-to-book-a-grilled-cheese-food-truck-for-any-event" element={<HowToBookGrilledCheeseFoodTruck />} />
+          <Route path="/blog/wedding-food-truck-catering-philadelphia" element={<WeddingFoodTruckPhiladelphia />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
