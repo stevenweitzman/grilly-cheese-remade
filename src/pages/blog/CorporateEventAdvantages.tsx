@@ -45,7 +45,7 @@ const CorporateEventAdvantages = () => {
               <div className="prose prose-lg max-w-none">
                 <h2>Introduction</h2>
                 <p>
-                  Corporate events are more than just formal gatherings; they present valuable opportunities for businesses to create meaningful connections, promote their brand, and foster a positive work environment. To add a unique touch and elevate the overall experience, many companies are now turning to food trucks for their catering needs. In this blog post, we will explore the advantages of hiring a food truck for a corporate event and how it can leave a lasting impression on attendees.
+                  Corporate events are more than just formal gatherings; they present valuable opportunities for businesses to create meaningful connections, promote their brand, and foster a positive work environment. To add a unique touch and elevate the overall experience, many companies are now turning to food trucks for their catering needs. Learn <Link to="/blog/how-to-book-a-grilled-cheese-food-truck-for-any-event" className="text-accent hover:underline">how to book a food truck for events</Link>. In this blog post, we will explore the advantages of hiring a food truck for a corporate event and how it can leave a lasting impression on attendees.
                 </p>
 
                 <h2>
@@ -65,7 +65,7 @@ const CorporateEventAdvantages = () => {
 
                 <h2>3. Customizable Menus</h2>
                 <p>
-                  Food trucks are highly adaptable and offer the advantage of customizable menus. When hiring a food truck, companies can work closely with the vendors to curate a menu that aligns with the event's theme, objectives, and any specific dietary requirements. Whether it's a fusion menu with international flavors or a focus on local and seasonal ingredients, food truck owners are often open to collaboration and can create tailored dining experiences that perfectly reflect the company's vision and values.
+                  Food trucks are highly adaptable and offer the advantage of customizable menus. When hiring a food truck, companies can work closely with the vendors to curate a menu that aligns with the event's theme, objectives, and any specific dietary requirements. Make sure you know the <Link to="/blog/questions-to-ask" className="text-accent hover:underline">questions to ask when booking a food truck</Link>. Whether it's a fusion menu with international flavors or a focus on local and seasonal ingredients, food truck owners are often open to collaboration and can create tailored dining experiences that perfectly reflect the company's vision and values.
                 </p>
 
                 <h2>4. Efficient and Time-Saving</h2>
@@ -80,12 +80,12 @@ const CorporateEventAdvantages = () => {
 
                 <h2>6. Versatility and Convenience</h2>
                 <p>
-                  Food trucks are incredibly versatile, making them suitable for a variety of corporate events. Whether it's an outdoor company picnic, a trade show, a product launch, or an employee appreciation day, food trucks can adapt to different settings with ease. Their compact size allows them to fit into tight spaces, and they can easily be relocated if necessary. This flexibility, combined with their self-contained kitchen facilities, eliminates the need for additional logistics, making food trucks a convenient and hassle-free choice for event organizers.
+                  Food trucks are incredibly versatile, making them suitable for a variety of corporate events. Whether it's an outdoor company picnic, a trade show, a product launch, or an employee appreciation day, food trucks can adapt to different settings with ease. Explore <Link to="/events" className="text-accent hover:underline">all events we cater</Link>. Their compact size allows them to fit into tight spaces, and they can easily be relocated if necessary. This flexibility, combined with their self-contained kitchen facilities, eliminates the need for additional logistics, making food trucks a convenient and hassle-free choice for event organizers.
                 </p>
 
                 <h2>Conclusion</h2>
                 <p>
-                  When it comes to elevating corporate events, hiring a food truck offers numerous advantages. The culinary diversity, memorable experience, customizable menus, efficient service, branding and marketing opportunities, as well as the versatility and convenience of food trucks, contribute to an exceptional event. By choosing a food truck, businesses can provide their attendees with a unique and immersive dining experience that stands out from the crowd. So, the next time you plan a <Link to="/services/corporate-catering" className="text-accent hover:underline font-semibold">corporate event</Link>, consider the advantages that a food truck can bring, and watch as it transforms the occasion into a truly remarkable and unforgettable affair.
+                  When it comes to elevating corporate events, hiring a food truck offers numerous advantages. The culinary diversity, memorable experience, customizable menus, efficient service, branding and marketing opportunities, as well as the versatility and convenience of food trucks, contribute to an exceptional event. By choosing a food truck, businesses can provide their attendees with a unique and immersive dining experience that stands out from the crowd. So, the next time you plan a <Link to="/services/corporate-catering" className="text-accent hover:underline font-semibold">corporate event</Link>, consider the advantages that a food truck can bring, and <Link to="/#contact" className="text-accent hover:underline">book a wedding food truck</Link> or corporate event with us, and watch as it transforms the occasion into a truly remarkable and unforgettable affair.
                 </p>
               </div>
 

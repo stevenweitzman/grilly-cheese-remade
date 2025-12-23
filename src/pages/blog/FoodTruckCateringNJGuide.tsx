@@ -77,7 +77,7 @@ const FoodTruckCateringNJGuide = () => {
                     What is Food Truck Catering?
                   </h2>
                   <p className="text-muted-foreground mb-4">
-                    Food truck catering brings a mobile kitchen directly to your event location. Unlike traditional catering where food is prepared off-site and transported, food trucks cook everything fresh on-site, providing a unique dining experience for your guests.
+                    Food truck catering brings a mobile kitchen directly to your event location. Unlike traditional catering where food is prepared off-site and transported, food trucks cook everything fresh on-site, providing a unique dining experience for your guests. Learn <Link to="/blog/how-to-book-a-grilled-cheese-food-truck-for-any-event" className="text-accent hover:underline">how to book a food truck for events</Link>.
                   </p>
                   <p className="text-muted-foreground mb-4">
                     In New Jersey, food truck catering has exploded in popularity over the past decade. From corporate events at Johnson & Johnson to weddings at Princeton estates, food trucks offer flexibility, quality, and an Instagram-worthy experience that traditional catering can&apos;t match.
@@ -194,7 +194,7 @@ const FoodTruckCateringNJGuide = () => {
                     <div className="bg-card border-l-4 border-accent p-6 rounded-r-lg">
                       <h3 className="font-bold text-lg mb-2">Step 4: Finalize Menu & Details</h3>
                       <p className="text-muted-foreground">
-                        Work with the caterer to customize your menu, discuss dietary restrictions, and plan service logistics. Get everything in writing with a clear contract.
+                        Work with the caterer to customize your menu, discuss dietary restrictions, and plan service logistics. Review our <Link to="/blog/questions-to-ask" className="text-accent hover:underline">questions to ask when booking a food truck</Link>. Get everything in writing with a clear contract.
                       </p>
                     </div>
                   </div>
@@ -267,12 +267,12 @@ const FoodTruckCateringNJGuide = () => {
                 {/* CTA Box */}
                 <div className="bg-gradient-to-r from-accent/10 to-primary/10 border-2 border-accent/30 rounded-xl p-8 text-center mt-12">
                   <h3 className="text-2xl font-bold mb-4">Ready to Book Your NJ Event?</h3>
-                  <p className="text-muted-foreground mb-6">
-                    We&apos;ve catered over 2,500 events in New Jersey. Let us make your event unforgettable.
+                  <p className="text-muted-foreground mb-4">
+                    We&apos;ve catered over 2,500 events in New Jersey. Also serving <Link to="/blog/wedding-food-truck-catering-philadelphia" className="text-accent hover:underline">wedding food truck catering Philadelphia</Link>.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
-                      <a href="/#contact">Get Your Quote</a>
+                      <Link to="/#contact">Book a Wedding Food Truck</Link>
                     </Button>
                     <Button size="lg" variant="outline" asChild>
                       <a href="tel:8444745591">Call: 844-474-5591</a>

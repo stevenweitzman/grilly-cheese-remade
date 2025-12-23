@@ -72,7 +72,7 @@ const QuestionsToAsk = () => {
                 </div>
 
                 <p className="text-lg">
-                  These questions will help you understand the food truck's availability, services, and pricing, ensuring that you have all the information you need to make an informed decision for your event.
+                  These questions will help you understand the food truck's availability, services, and pricing, ensuring that you have all the information you need to make an informed decision for your event. For more details, see our guide on <Link to="/blog/how-to-book-a-grilled-cheese-food-truck-for-any-event" className="text-accent hover:underline">how to book a food truck for events</Link>.
                 </p>
 
                 <img 
@@ -84,7 +84,7 @@ const QuestionsToAsk = () => {
                 <div className="bg-accent/10 border-l-4 border-accent p-6 my-8">
                   <h3 className="text-xl font-bold mb-3">Pro Tip</h3>
                   <p className="mb-0">
-                    Don't hesitate to ask for references or photos from previous events. A reputable food truck vendor will be happy to share their portfolio and customer testimonials.
+                    Don't hesitate to ask for references or photos from previous events. A reputable food truck vendor will be happy to share their portfolio and customer testimonials. Planning a wedding? Check out <Link to="/blog/wedding-food-truck-catering-philadelphia" className="text-accent hover:underline">wedding food truck catering Philadelphia</Link> or explore <Link to="/blog/food-truck-catering-nj-guide" className="text-accent hover:underline">food truck catering in New Jersey</Link>.
                   </p>
                 </div>
               </div>
@@ -97,7 +97,7 @@ const QuestionsToAsk = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
-                    <a href="/#contact">Get Your Quote</a>
+                    <Link to="/#contact">Book a Wedding Food Truck</Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
                     <a href="tel:8444745591">Call: 844-474-5591</a>
