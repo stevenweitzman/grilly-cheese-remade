@@ -173,7 +173,7 @@ const HowToBookGrilledCheeseFoodTruck = () => {
                 </ul>
 
                 <p className="text-foreground">
-                  <Link to="/blog" className="text-accent hover:underline">Read more food truck catering tips</Link> in our latest guides.
+                  Learn about <Link to="/blog/food-truck-catering-nj-guide" className="text-accent hover:underline">food truck catering in New Jersey</Link> in our comprehensive guide.
                 </p>
               </section>
 
@@ -259,7 +259,7 @@ const HowToBookGrilledCheeseFoodTruck = () => {
                 </ul>
 
                 <p className="text-foreground">
-                  <Link to="/blog/how-much-does-it-cost-to-book-a-food-truck" className="text-accent hover:underline">Learn how much food you need for your event</Link> – check our event planning resources.
+                  Not sure what to ask? Check our list of <Link to="/blog/questions-to-ask" className="text-accent hover:underline">questions to ask when booking a food truck</Link>.
                 </p>
               </section>
 
@@ -335,7 +335,7 @@ const HowToBookGrilledCheeseFoodTruck = () => {
                 </div>
 
                 <p className="text-foreground">
-                  For readers searching &quot;food truck catering prices&quot; or &quot;how much is a grilled cheese truck,&quot; the fastest way to get a real number is to share guest count, location, and date in a <Link to="/" className="text-accent hover:underline">quote request form</Link>.
+                  For readers searching &quot;food truck catering prices&quot; or &quot;how much is a grilled cheese truck,&quot; the fastest way to get a real number is to <Link to="/#contact" className="text-accent hover:underline">book a wedding food truck</Link> by sharing your guest count, location, and date.
                 </p>
               </section>
 
@@ -442,7 +442,7 @@ const HowToBookGrilledCheeseFoodTruck = () => {
                 </ul>
 
                 <p className="text-foreground">
-                  <Link to="/events/wedding-catering" className="text-accent hover:underline">Discover how our food truck weddings work</Link> or get tips for <Link to="/events/corporate-catering" className="text-accent hover:underline">corporate events</Link>.
+                  Learn about <Link to="/blog/wedding-food-truck-catering-philadelphia" className="text-accent hover:underline">wedding food truck catering Philadelphia</Link> or read about <Link to="/blog/corporate-event-advantages" className="text-accent hover:underline">corporate food truck catering</Link>.
                 </p>
               </section>
 
