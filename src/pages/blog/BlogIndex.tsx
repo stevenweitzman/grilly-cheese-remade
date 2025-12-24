@@ -9,6 +9,14 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "Food Truck Catering for Post-Reception Events",
+      slug: "food-truck-catering-for-post-reception-events",
+      excerpt: "Discover why food truck catering is the ideal solution for post-reception send-off food at weddings, bar mitzvahs, corporate events, and celebrations.",
+      date: "December 24, 2025",
+      category: "Event Planning",
+      readTime: "8 min read"
+    },
+    {
       title: "Wedding Food Truck Catering in Bucks County, PA",
       slug: "wedding-food-truck-catering-bucks-county-pa",
       excerpt: "Wedding food truck catering in Bucks County has become an increasingly popular option for couples planning barn weddings, estate weddings, and outdoor receptions throughout the area.",
