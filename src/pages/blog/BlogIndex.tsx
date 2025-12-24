@@ -147,9 +147,11 @@ const BlogIndex = () => {
                         </span>
                       </div>
                       
-                      <h2 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">
-                        {post.title}
-                      </h2>
+                      <Link to={`/blog/${post.slug}`}>
+                        <h2 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors">
+                          {post.title}
+                        </h2>
+                      </Link>
                       
                       <p className="text-muted-foreground mb-4 line-clamp-3">
                         {post.excerpt}
