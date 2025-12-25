@@ -7,7 +7,7 @@ import FAQSection from "@/components/FAQSection";
 import EnhancedClientsSection from "@/components/EnhancedClientsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import { ChatAssistant } from "@/components/ChatAssistant";
+
 import StickyCTABar from "@/components/StickyCTABar";
 import SocialProofBanner from "@/components/SocialProofBanner";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
@@ -45,7 +45,7 @@ const Index = () => {
         <FAQSection />
         <ContactSection />
         <Footer />
-        <ChatAssistant />
+        
         <MobileStickyCTA />
         <FloatingQuoteButton />
         <ExitIntentPopup />
