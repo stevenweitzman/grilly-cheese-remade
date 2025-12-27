@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const WeddingFoodTruckBucksCounty = () => {
   return (
@@ -150,6 +151,10 @@ const WeddingFoodTruckBucksCounty = () => {
               
               {/* Intro */}
               <section className="mb-12">
+                <QuickAnswerBox 
+                  answer="Yes, food truck catering is allowed at many Bucks County wedding venues including barns, estates, and farms. Food trucks serve 50-200 guests, offer vegetarian/vegan options, and are perfect for late-night wedding food. Book 3-6 months ahead for peak season dates."
+                />
+
                 <p className="text-lg text-foreground mb-6">
                   Wedding food truck catering in Bucks County has become an increasingly popular option for couples planning barn weddings, estate weddings, and outdoor receptions throughout the area. Many Bucks County venues prioritize flexibility and atmosphere, making food truck catering a natural fit.
                 </p>

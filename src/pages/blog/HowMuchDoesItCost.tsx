@@ -6,6 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const HowMuchDoesItCost = () => {
   return (
@@ -105,15 +106,9 @@ const HowMuchDoesItCost = () => {
               
               {/* Quick Answer */}
               <section className="mb-12">
-                <p className="text-lg text-foreground mb-6">
-                  If you are planning an event and wondering <strong>how much it costs to book a food truck</strong>, here is the quick answer:
-                </p>
-
-                <div className="bg-gradient-to-br from-accent/10 to-primary/10 border-l-4 border-accent rounded-lg p-6 my-8 shadow-sm">
-                  <p className="text-lg font-semibold text-foreground m-0">
-                    Hiring a food truck for a catered event in the U.S. typically costs $500 to $1,500 total, or about $10–$25 per person.
-                  </p>
-                </div>
+                <QuickAnswerBox 
+                  answer="Hiring a food truck for a catered event in the U.S. typically costs $500 to $1,500 total, or about $10–$25 per person. The exact price depends on your guest count, cuisine type, location, and the truck's minimum booking fee."
+                />
 
                 <p className="text-foreground">
                   That is the fast version. Below is the full breakdown of what affects <strong>food truck rental cost</strong>, example prices by cuisine type, and simple tips to help you budget and save money.

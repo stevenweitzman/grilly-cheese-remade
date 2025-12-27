@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check, Clock, Users, MapPin, Calendar, MessageSquare, Utensils } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const HowToBookGrilledCheeseFoodTruck = () => {
   return (
@@ -134,6 +135,10 @@ const HowToBookGrilledCheeseFoodTruck = () => {
               
               {/* Intro */}
               <section className="mb-12">
+                <QuickAnswerBox 
+                  answer="To book a grilled cheese food truck, gather your event details (guest count, date, location), request a quote directly from the truck or through a marketplace, review pricing and menu options, and secure your date with a deposit. Book 2-3 months in advance for best availability."
+                />
+
                 <p className="text-lg text-foreground mb-6">
                   Grilled cheese food trucks are one of the easiest ways to turn any wedding, corporate event, or backyard party into a memorable experience your guests will talk about for weeks. This guide walks through exactly how to <strong>book a grilled cheese food truck</strong>, understand pricing, and plan a menu that works for any crowd.
                 </p>

@@ -5,6 +5,7 @@ import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const FoodTruckVsCatering = () => {
   return (
@@ -43,6 +44,10 @@ const FoodTruckVsCatering = () => {
               </div>
 
               <div className="prose prose-lg max-w-none">
+                <QuickAnswerBox 
+                  answer="Food trucks offer a unique guest experience, menu variety, customization, venue flexibility, lower costs (often 30-50% less), and faster service compared to traditional catering. They're ideal for casual events, outdoor venues, and creating memorable dining experiences."
+                />
+
                 <p className="text-lg">
                   Hiring a food truck instead of a full-service caterer has several benefits, including:
                 </p>

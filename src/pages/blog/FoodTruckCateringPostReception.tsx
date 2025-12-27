@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const FoodTruckCateringPostReception = () => {
   return (
@@ -150,6 +151,10 @@ const FoodTruckCateringPostReception = () => {
               
               {/* Intro */}
               <section className="mb-12">
+                <QuickAnswerBox 
+                  answer="Food truck catering for post-reception events involves hiring a mobile kitchen to serve fresh, made-to-order food as guests leave your celebration. It's popular for weddings, corporate events, and parties because it provides a memorable send-off experience with hot, comforting food."
+                />
+
                 <p className="text-lg text-foreground mb-6">
                   Food truck catering for post-reception events has become one of the most popular ways to end weddings, bar mitzvahs, corporate celebrations, and milestone parties. Instead of a formal sit-down meal or boxed leftovers, hosts are choosing fresh, made-to-order food served right as guests exit the event.
                 </p>

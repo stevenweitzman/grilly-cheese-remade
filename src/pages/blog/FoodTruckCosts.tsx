@@ -5,6 +5,7 @@ import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const FoodTruckCosts = () => {
   return (
@@ -43,6 +44,10 @@ const FoodTruckCosts = () => {
               </div>
 
               <div className="prose prose-lg max-w-none">
+                <QuickAnswerBox 
+                  answer="Food truck booking costs include: base food cost ($15-35/person), travel fees for distant venues, service fees for setup/cleanup, sales tax, 10% gratuity, and any add-on services. Get a detailed quote to understand your total event cost."
+                />
+
                 <h2>Costs to Consider When Booking a Food Truck</h2>
                 <p>
                   When hiring a food truck, there are several costs to consider, including:
