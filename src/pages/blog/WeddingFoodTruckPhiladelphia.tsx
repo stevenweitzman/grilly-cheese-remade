@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const WeddingFoodTruckPhiladelphia = () => {
   return (
@@ -150,6 +151,10 @@ const WeddingFoodTruckPhiladelphia = () => {
               
               {/* Intro */}
               <section className="mb-12">
+                <QuickAnswerBox 
+                  answer="Yes, wedding food truck catering is allowed at many Philadelphia venues including outdoor spaces, warehouses, and waterfront locations. Food trucks can serve 50-200 guests, accommodate dietary restrictions, and are especially popular for late-night wedding food. Book 3-6 months in advance."
+                />
+
                 <p className="text-lg text-foreground mb-6">
                   Wedding food truck catering in Philadelphia has become one of the most popular alternatives to traditional wedding catering. Couples planning weddings in the city are looking for catering that feels memorable, flexible, and guest-approved without the formality or cost of banquet-style service.
                 </p>

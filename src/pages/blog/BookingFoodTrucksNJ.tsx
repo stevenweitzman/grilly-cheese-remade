@@ -5,6 +5,7 @@ import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const BookingFoodTrucksNJ = () => {
   return (
@@ -50,6 +51,10 @@ const BookingFoodTrucksNJ = () => {
               />
 
               <div className="prose prose-lg max-w-none">
+                <QuickAnswerBox 
+                  answer="To book a food truck in New Jersey: research permits/licenses for your venue, verify the truck's health certifications, choose a truck matching your event theme, coordinate logistics (space, power, timing), and finalize the contract. Book 2-3 months ahead for best availability."
+                />
+
                 <h2>Introduction to Booking Food Trucks in New Jersey</h2>
                 <p>
                   Food trucks, especially <Link to="/" className="text-accent hover:underline">grilled cheese trucks</Link>, have become an integral part of New Jersey's culinary landscape. Offering a unique dining experience, they cater to various events, from weddings to corporate gatherings. But how do you go about booking one?

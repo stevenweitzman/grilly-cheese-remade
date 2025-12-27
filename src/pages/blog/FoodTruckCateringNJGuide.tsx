@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, DollarSign, MapPin, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import StickyCTABar from "@/components/StickyCTABar";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const FoodTruckCateringNJGuide = () => {
   return (
@@ -71,6 +72,9 @@ const FoodTruckCateringNJGuide = () => {
 
               {/* Article Content */}
               <div className="prose prose-lg max-w-none">
+                <QuickAnswerBox 
+                  answer="Food truck catering in New Jersey costs $15-35 per person, depending on menu and guest count. Book 2-3 months in advance, especially for peak wedding season. Food trucks are self-contained and work at most venues without needing kitchen access."
+                />
                 <section id="what-is" className="mb-12">
                   <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
                     <span className="bg-accent text-background w-10 h-10 rounded-full flex items-center justify-center text-xl">1</span>

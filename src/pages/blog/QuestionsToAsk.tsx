@@ -5,6 +5,7 @@ import SEOSchema from "@/components/SEOSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
 
 const QuestionsToAsk = () => {
   return (
@@ -43,6 +44,10 @@ const QuestionsToAsk = () => {
               </div>
 
               <div className="prose prose-lg max-w-none">
+                <QuickAnswerBox 
+                  answer="Ask about: menu options and pricing, minimum/maximum guest counts, availability for your date, deposit and cancellation policies, equipment requirements, dietary accommodations, and references from previous events."
+                />
+
                 <p className="text-lg">
                   When <strong>booking a food truck</strong>, here are some important <strong>questions you should ask</strong>:
                 </p>
