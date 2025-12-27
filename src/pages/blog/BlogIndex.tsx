@@ -9,6 +9,38 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "How Much Does Food Truck Catering Cost? [2025 Guide]",
+      slug: "food-truck-catering-cost",
+      excerpt: "Food truck catering costs $15-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples.",
+      date: "December 27, 2025",
+      category: "Event Planning",
+      readTime: "10 min read"
+    },
+    {
+      title: "How to Book a Food Truck for Your Event: 7-Step Guide",
+      slug: "how-to-book-a-food-truck",
+      excerpt: "Learn how to book a food truck in 7 simple steps. From finding the right vendor to finalizing your booking, this guide covers everything.",
+      date: "December 27, 2025",
+      category: "Food Truck Booking",
+      readTime: "8 min read"
+    },
+    {
+      title: "Food Truck vs Traditional Catering: Which Is Better?",
+      slug: "food-truck-vs-traditional-catering",
+      excerpt: "Compare food truck catering to traditional catering. See side-by-side differences in cost, experience, and flexibility for your event.",
+      date: "December 27, 2025",
+      category: "Event Planning",
+      readTime: "7 min read"
+    },
+    {
+      title: "10 Best Late Night Wedding Food Ideas",
+      slug: "late-night-wedding-food-ideas",
+      excerpt: "Discover the best late night wedding food ideas that guests love. From gourmet grilled cheese to tacos, find the perfect snack for your reception.",
+      date: "December 27, 2025",
+      category: "Weddings",
+      readTime: "6 min read"
+    },
+    {
       title: "Food Truck Catering for Post-Reception Events",
       slug: "food-truck-catering-for-post-reception-events",
       excerpt: "Discover why food truck catering is the ideal solution for post-reception send-off food at weddings, bar mitzvahs, corporate events, and celebrations.",
