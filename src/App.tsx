@@ -59,6 +59,10 @@ import HowToBookGrilledCheeseFoodTruck from "./pages/blog/HowToBookGrilledCheese
 import WeddingFoodTruckPhiladelphia from "./pages/blog/WeddingFoodTruckPhiladelphia";
 import WeddingFoodTruckBucksCounty from "./pages/blog/WeddingFoodTruckBucksCounty";
 import FoodTruckCateringPostReception from "./pages/blog/FoodTruckCateringPostReception";
+import HowToBookFoodTruck from "./pages/blog/HowToBookFoodTruck";
+import FoodTruckVsTraditionalCatering from "./pages/blog/FoodTruckVsTraditionalCatering";
+import LateNightWeddingFoodIdeas from "./pages/blog/LateNightWeddingFoodIdeas";
+import FoodTruckCateringCostGuide from "./pages/blog/FoodTruckCateringCostGuide";
 
 const queryClient = new QueryClient();
 
@@ -145,6 +149,10 @@ const App = () => (
           <Route path="/blog/wedding-food-truck-catering-philadelphia" element={<WeddingFoodTruckPhiladelphia />} />
           <Route path="/blog/wedding-food-truck-catering-bucks-county-pa" element={<WeddingFoodTruckBucksCounty />} />
           <Route path="/blog/food-truck-catering-for-post-reception-events" element={<FoodTruckCateringPostReception />} />
+          <Route path="/blog/how-to-book-a-food-truck" element={<HowToBookFoodTruck />} />
+          <Route path="/blog/food-truck-vs-traditional-catering" element={<FoodTruckVsTraditionalCatering />} />
+          <Route path="/blog/late-night-wedding-food-ideas" element={<LateNightWeddingFoodIdeas />} />
+          <Route path="/blog/food-truck-catering-cost" element={<FoodTruckCateringCostGuide />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

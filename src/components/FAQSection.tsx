@@ -11,40 +11,36 @@ import { Link } from "react-router-dom";
 const FAQSection = () => {
   const faqs = [
     {
-      question: "Do you cater at public events?",
-      answer: "Yes, we do! However, we don't offer vending services at this time. We focus on providing the best catering experience for your event."
+      question: "How much does food truck catering cost?",
+      answer: "Food truck catering typically costs $15-35 per person, with most events falling in the $18-25 range. Total costs depend on guest count, menu selections, and travel distance."
     },
     {
-      question: "Is there a minimum guest count required for catering?",
-      answer: "There is no minimum guest count, but there is a minimum catering charge for events with smaller guest counts. Contact us for specific details about your event."
+      question: "How far in advance should I book a food truck?",
+      answer: "Book 2-6 months ahead for weddings and large events. Popular weekend dates in spring and summer book up quickly. For smaller events, 2-4 weeks may be sufficient."
     },
     {
-      question: "How long does the truck stay on-site?",
-      answer: "The truck can stay on-site for 3.5 hours during peak season (March-November) and longer depending on the type of service. Additional time beyond 3.5 hours is available. This does not include time taken for setup or breakdown of the truck or trailer."
+      question: "Is there a minimum guest count required?",
+      answer: "No minimum guest count, but there is a minimum catering charge for smaller events. Contact us for specific details about your event size and pricing."
     },
     {
-      question: "Do you honor rain dates?",
-      answer: "Yes and no. We will hold your rain date as tentative, however, if another event is booked on that same date and our other trucks are booked elsewhere, we cannot honor the rain date. Holding a rain date prevents us from booking elsewhere, which can be challenging during rainy seasons."
+      question: "How long does the food truck stay on-site?",
+      answer: "The truck stays on-site for 3.5 hours during peak season (March-November). Additional time is available. This does not include setup or breakdown time."
     },
     {
-      question: "How does billing work for catered events?",
-      answer: "We charge on a per-person basis, not hourly. If you book for a specific number of guests, you're responsible for that count even if fewer guests attend. This is because our food is truly prepared fresh on a daily basis - we hand-cut fries, make homemade tomato soup, and cannot cross-utilize fresh ingredients."
+      question: "Do you offer gluten-free and vegan options?",
+      answer: "Yes! We offer gluten-free breads and vegan cheese options. We accommodate up to 10 gluten-free guests standard, with more available upon request."
+    },
+    {
+      question: "What types of events do you cater?",
+      answer: "We cater weddings, corporate events, birthday parties, bar/bat mitzvahs, graduation parties, film sets, and private celebrations. We have 2 food trucks and a commercial trailer."
     },
     {
       question: "Are deposits refundable?",
-      answer: "Yes! Deposits are fully refundable up to 30 days out from your event."
+      answer: "Yes! Deposits are fully refundable up to 30 days before your event date."
     },
     {
-      question: "Do you offer different types of catering?",
-      answer: "Yes! We have 2 food trucks and one full-service commercial food trailer. We also offer popup catering where we cook on-site without a truck, as well as drop-off catering where we cook the food at our kitchen and drop it off at your location."
-    },
-    {
-      question: "Do you offer gluten-free and vegan products?",
-      answer: "Absolutely! We offer both gluten-free breads and sides, as well as vegan 'cheese' and vegan sides. We always offer gluten-free options for up to 10 people and can accommodate more upon request."
-    },
-    {
-      question: "Is gratuity included in staff pay?",
-      answer: "No, gratuity is not included in staff pay. A 10% gratuity is added to parties of all sizes."
+      question: "Do you honor rain dates for outdoor events?",
+      answer: "We hold rain dates as tentative. If another event books that date and our trucks are unavailable, we cannot guarantee the rain date. We recommend booking early."
     }
   ];
 
