@@ -141,6 +141,11 @@ const Navigation = () => {
                 <DropdownMenuSeparator />
                 <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Resources</div>
                 <DropdownMenuItem asChild>
+                  <Link to="/encyclopedia" className="cursor-pointer">
+                    Grilled Cheese Encyclopedia
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/blog" className="cursor-pointer">
                     Blog
                   </Link>
