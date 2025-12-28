@@ -13,6 +13,9 @@ import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import figBasilImage from "@/assets/fig-basil-grilled-cheese.jpg";
+
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=400&fit=crop";
 
 const Recipes = () => {
   const signatureRecipes = [
@@ -77,7 +80,7 @@ const Recipes = () => {
       servings: "1",
       ingredients: ["2 slices (3/4 inch) sourdough bread", "4 oz brie cheese, sliced thinly", "1.5 tbsp fig jam", "8-10 fresh basil leaves", "1-2 tsp raw sesame seeds", "1.5 tbsp honey (or hot honey)", "1.5 tbsp unsalted butter, softened"],
       tips: "Serve warm but not molten—flavors need to be distinguished. Quality fig jam makes huge difference.",
-      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/8326282e-3f74-401e-9c26-40a5dfa65e77.png",
+      image: figBasilImage,
       popular: false,
       category: "Seasonal"
     },
@@ -329,6 +332,9 @@ const Recipes = () => {
                       width={600}
                       height={400}
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_IMAGE;
+                      }}
                     />
                     {recipe.popular && (
                       <Badge className="absolute top-3 right-3 bg-accent text-background">
