@@ -28,12 +28,22 @@ const resetSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
 
+const newPasswordSchema = z.object({
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
+
 export default function Auth() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [showResetForm, setShowResetForm] = useState(false);
+  const [isRecoveryMode, setIsRecoveryMode] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  const [newPassword, setNewPassword] = useState({ password: "", confirmPassword: "" });
   
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signupData, setSignupData] = useState({
@@ -53,13 +63,15 @@ export default function Auth() {
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+      if (event === 'PASSWORD_RECOVERY') {
+        setIsRecoveryMode(true);
+      } else if (event === 'SIGNED_IN' && session && !isRecoveryMode) {
         navigate("/portal/dashboard");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, isRecoveryMode]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,7 +121,7 @@ export default function Auth() {
         email: signupData.email,
         password: signupData.password,
         options: {
-          emailRedirectTo: 'https://grillycheese.net/portal/dashboard',
+          emailRedirectTo: `${window.location.origin}/portal/dashboard`,
           data: {
             full_name: signupData.fullName,
             phone: signupData.phone,
@@ -151,7 +163,7 @@ export default function Auth() {
       resetSchema.parse({ email: resetEmail });
 
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: 'https://grillycheese.net/auth',
+        redirectTo: `${window.location.origin}/auth`,
       });
 
       if (error) throw error;
@@ -181,6 +193,46 @@ export default function Auth() {
     }
   };
 
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      newPasswordSchema.parse(newPassword);
+
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword.password,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Password Updated!",
+        description: "Your password has been successfully changed.",
+      });
+      
+      setIsRecoveryMode(false);
+      setNewPassword({ password: "", confirmPassword: "" });
+      navigate("/portal/dashboard");
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Update Failed",
+          description: error.message || "Could not update password. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <ProtectedSEO title="Sign In" />
@@ -197,11 +249,52 @@ export default function Auth() {
           <CardHeader>
             <CardTitle>Grilly Cheese Client Portal</CardTitle>
             <CardDescription>
-              Access your quotes, documents, and communications
+              {isRecoveryMode 
+                ? "Set your new password below"
+                : "Access your quotes, documents, and communications"
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {showResetForm ? (
+            {isRecoveryMode ? (
+              <div className="space-y-4">
+                <div className="text-center">
+                  <h3 className="font-semibold text-lg">Set New Password</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Enter your new password below
+                  </p>
+                </div>
+                <form onSubmit={handleUpdatePassword} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="new-password">New Password</Label>
+                    <Input
+                      id="new-password"
+                      type="password"
+                      placeholder="Enter new password"
+                      value={newPassword.password}
+                      onChange={(e) => setNewPassword({ ...newPassword, password: e.target.value })}
+                      required
+                      minLength={6}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password">Confirm Password</Label>
+                    <Input
+                      id="confirm-password"
+                      type="password"
+                      placeholder="Confirm new password"
+                      value={newPassword.confirmPassword}
+                      onChange={(e) => setNewPassword({ ...newPassword, confirmPassword: e.target.value })}
+                      required
+                      minLength={6}
+                    />
+                  </div>
+                  <Button type="submit" className="w-full" disabled={loading}>
+                    {loading ? "Updating..." : "Update Password"}
+                  </Button>
+                </form>
+              </div>
+            ) : showResetForm ? (
               <div className="space-y-4">
                 <div className="text-center">
                   <h3 className="font-semibold text-lg">Reset Password</h3>
