@@ -71,6 +71,7 @@ import FoodTruckCateringCostGuide from "./pages/blog/FoodTruckCateringCostGuide"
 import GrilledCheeseRecipeSecrets from "./pages/blog/GrilledCheeseRecipeSecrets";
 import SignatureGrilledCheeseSandwiches from "./pages/blog/SignatureGrilledCheeseSandwiches";
 import Recipes from "./pages/Recipes";
+import RecipeDetail from "./pages/recipes/RecipeDetail";
 const queryClient = new QueryClient();
 
 const ScrollToHashWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -168,8 +169,9 @@ const App = () => (
           <Route path="/blog/grilled-cheese-recipe-secrets" element={<GrilledCheeseRecipeSecrets />} />
           <Route path="/blog/signature-grilled-cheese-sandwiches" element={<SignatureGrilledCheeseSandwiches />} />
           
-          {/* Recipe Page */}
+          {/* Recipe Pages */}
           <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipes/:slug" element={<RecipeDetail />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
