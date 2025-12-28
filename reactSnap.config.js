@@ -3,6 +3,18 @@ module.exports = {
   include: [
     "/",
     "/recipes",
+    "/recipes/the-original",
+    "/recipes/the-gourmet",
+    "/recipes/the-veggie",
+    "/recipes/the-jalapeno-popper",
+    "/recipes/the-fig-and-basil",
+    "/recipes/the-avocado-dream",
+    "/recipes/the-apple-brie",
+    "/recipes/the-caramelized-onion-and-rosemary",
+    "/recipes/the-truffle-indulgence",
+    "/recipes/the-spicy-sweet-peach",
+    "/recipes/the-bbq-bacon-and-cheddar",
+    "/recipes/the-crispy-cheddar-crust",
     "/services/food-truck-catering",
     "/services/drop-off-catering",
     "/services/pop-up-events",
@@ -43,15 +55,10 @@ module.exports = {
     "/blog/grilled-cheese-recipe-secrets",
     "/blog/signature-grilled-cheese-sandwiches"
   ],
-  // Puppeteer options
   puppeteerArgs: ["--no-sandbox", "--disable-setuid-sandbox"],
-  // Wait for all async content
   waitFor: 1000,
-  // Inline critical CSS
   inlineCss: true,
-  // Remove script tags for static content
   removeScriptTags: false,
-  // Minify HTML
   minifyHtml: {
     collapseWhitespace: true,
     removeComments: true
