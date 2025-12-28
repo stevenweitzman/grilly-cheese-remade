@@ -173,7 +173,7 @@ const LateNightWeddingFoodIdeas = () => {
                   How Much Does Late Night Wedding Food Cost?
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  <strong className="text-foreground">Late night wedding food typically costs $10-25 per person with a food truck.</strong> For a 100-guest wedding, budget $1,000-$2,500 for late night snacks. This is often less than adding a dessert course through your main caterer.
+                  <strong className="text-foreground">Late night wedding food typically costs $8-25 per person with a food truck.</strong> For a 100-guest wedding, budget $800-$2,500 for late night snacks. This is often less than adding a dessert course through your main caterer.
                 </p>
               </div>
 

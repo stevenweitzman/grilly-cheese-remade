@@ -25,10 +25,10 @@ const FoodTruckVsTraditionalCatering = () => {
   ];
 
   const pricingComparison = [
-    { feature: "50 guests", foodTruck: "$750–$1,500", traditional: "$2,000–$4,000" },
-    { feature: "100 guests", foodTruck: "$1,500–$3,000", traditional: "$4,000–$8,000" },
-    { feature: "150 guests", foodTruck: "$2,250–$4,500", traditional: "$6,000–$12,000" },
-    { feature: "200 guests", foodTruck: "$3,000–$6,000", traditional: "$8,000–$16,000" },
+    { feature: "50 guests", foodTruck: "$500–$1,500", traditional: "$2,000–$4,000" },
+    { feature: "100 guests", foodTruck: "$1,000–$3,000", traditional: "$4,000–$8,000" },
+    { feature: "150 guests", foodTruck: "$1,500–$4,500", traditional: "$6,000–$12,000" },
+    { feature: "200 guests", foodTruck: "$2,000–$6,000", traditional: "$8,000–$16,000" },
   ];
 
   return (
@@ -63,7 +63,7 @@ const FoodTruckVsTraditionalCatering = () => {
                 "name": "Is food truck catering cheaper than traditional catering?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes, food truck catering typically costs 30-50% less than traditional catering. Food trucks average $15-30 per person, while traditional caterers often charge $40-80 per person for comparable events."
+                  "text": "Yes, food truck catering typically costs 30-50% less than traditional catering. Food trucks average $10-30 per person, while traditional caterers often charge $40-80 per person for comparable events."
                 }
               },
               {
@@ -134,7 +134,7 @@ const FoodTruckVsTraditionalCatering = () => {
                   Is Food Truck Catering Cheaper Than Traditional Catering?
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  <strong className="text-foreground">Yes, food truck catering typically costs 30-50% less than traditional catering.</strong> Food trucks average $15-30 per person, while traditional caterers often charge $40-80 per person for comparable service levels.
+                  <strong className="text-foreground">Yes, food truck catering typically costs 30-50% less than traditional catering.</strong> Food trucks average $10-30 per person, while traditional caterers often charge $40-80 per person for comparable service levels.
                 </p>
 
                 <h3 className="text-xl font-bold text-foreground mt-8 mb-4">
