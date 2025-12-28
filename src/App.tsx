@@ -72,6 +72,7 @@ import GrilledCheeseRecipeSecrets from "./pages/blog/GrilledCheeseRecipeSecrets"
 import SignatureGrilledCheeseSandwiches from "./pages/blog/SignatureGrilledCheeseSandwiches";
 import Recipes from "./pages/Recipes";
 import RecipeDetail from "./pages/recipes/RecipeDetail";
+import Encyclopedia from "./pages/Encyclopedia";
 const queryClient = new QueryClient();
 
 const ScrollToHashWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -172,6 +173,9 @@ const App = () => (
           {/* Recipe Pages */}
           <Route path="/recipes" element={<Recipes />} />
           <Route path="/recipes/:slug" element={<RecipeDetail />} />
+          
+          {/* Encyclopedia */}
+          <Route path="/encyclopedia" element={<Encyclopedia />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

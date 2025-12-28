@@ -36,6 +36,7 @@ module.exports = {
     "/locations/delaware",
     "/locations/washington-dc",
     "/locations/long-island",
+    "/encyclopedia",
     "/blog",
     "/blog/booking-food-trucks-in-new-jersey",
     "/blog/corporate-event-advantages",

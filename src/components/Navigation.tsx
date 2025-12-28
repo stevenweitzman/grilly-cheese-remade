@@ -383,6 +383,22 @@ const Navigation = () => {
                       View All Events
                     </Link>
                     <div className="border-t border-border my-2" />
+                    <div className="text-xs font-semibold text-muted-foreground mb-1">Resources</div>
+                    <Link
+                      to="/encyclopedia"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Grilled Cheese Encyclopedia
+                    </Link>
+                    <Link
+                      to="/blog"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Blog
+                    </Link>
+                    <div className="border-t border-border my-2" />
                     <div className="text-xs font-semibold text-muted-foreground mb-1">Locations</div>
                     <Link
                       to="/locations/new-jersey"
