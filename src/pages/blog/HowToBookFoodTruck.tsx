@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Phone, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -50,12 +51,31 @@ const HowToBookFoodTruck = () => {
   return (
     <>
       <SEOHead
-        title="How to Book a Food Truck for Your Event: 7-Step Guide [2025]"
-        description="Learn how to book a food truck in 7 simple steps. From finding the right vendor to finalizing your booking, this guide covers everything you need to know."
+        title="How to Book a Food Truck for Your Event [2025 Step-by-Step Guide]"
+        description="Learn how to book a food truck for your wedding, corporate event, or party. Complete step-by-step guide with pricing, questions to ask, and booking tips."
         canonical="https://grillycheese.net/blog/how-to-book-a-food-truck"
-        keywords="how to book a food truck, food truck booking guide, hire food truck for event, food truck catering steps"
+        keywords="how to book a food truck, book food truck for event, food truck booking guide, hire food truck catering"
+        ogType="article"
+        articlePublishedTime="2025-12-26T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
-      <SEOSchema type="blog" title="How to Book a Food Truck for Your Event" description="Step-by-step guide to booking a food truck" url="https://grillycheese.net/blog/how-to-book-a-food-truck" />
+      <SEOSchema type="blog" title="How to Book a Food Truck" description="Step-by-step guide to booking a food truck for your event" url="https://grillycheese.net/blog/how-to-book-a-food-truck" />
+
+      <BlogArticleSchema
+        headline="How to Book a Food Truck for Your Event [2025 Step-by-Step Guide]"
+        description="Learn how to book a food truck for your wedding, corporate event, or party. Complete step-by-step guide with pricing, questions to ask, and booking tips."
+        datePublished="2025-12-26"
+        dateModified="2025-12-28"
+        url="https://grillycheese.net/blog/how-to-book-a-food-truck"
+      />
+      
+      <HowToSchema
+        name="How to Book a Food Truck for Your Event"
+        description="A complete 7-step guide to booking a food truck for weddings, corporate events, and private parties."
+        steps={schemaSteps}
+        totalTime="P14D"
+        estimatedCost={{ currency: "USD", value: "1500-4000" }}
+      />
       
       <HowToSchema
         name="How to Book a Food Truck for Your Event"

@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Phone, Calendar, Clock, Check } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -59,35 +60,19 @@ const LateNightWeddingFoodIdeas = () => {
         description="Discover the best late night wedding food ideas that guests love. From gourmet grilled cheese to tacos, find the perfect late night snack for your reception."
         canonical="https://grillycheese.net/blog/late-night-wedding-food-ideas"
         keywords="late night wedding food, wedding late night snacks, wedding after party food, best wedding food ideas"
+        ogType="article"
+        articlePublishedTime="2025-12-27T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema type="blog" title="Best Late Night Wedding Food Ideas" description="Top late night wedding food ideas for your reception" url="https://grillycheese.net/blog/late-night-wedding-food-ideas" />
-
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the best late night food for a wedding?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Gourmet grilled cheese, tacos, sliders, and pizza are the most popular late night wedding foods. These comfort foods are easy to eat, satisfying, and loved by guests of all ages."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "When should late night wedding food be served?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Late night wedding food is typically served 2-3 hours after dinner, usually between 10 PM and midnight. This gives guests a second wind of energy for dancing and celebrating."
-                }
-              }
-            ]
-          })}
-        </script>
-      </Helmet>
+      
+      <BlogArticleSchema
+        headline="10 Best Late Night Wedding Food Ideas [2025 Guide]"
+        description="Discover the best late night wedding food ideas that guests love. From gourmet grilled cheese to tacos, find the perfect late night snack for your reception."
+        datePublished="2025-12-27"
+        dateModified="2025-12-28"
+        url="https://grillycheese.net/blog/late-night-wedding-food-ideas"
+      />
 
       <div className="min-h-screen">
         <Navigation />

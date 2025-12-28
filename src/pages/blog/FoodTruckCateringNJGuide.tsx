@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { Calendar, DollarSign, MapPin, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -16,10 +17,20 @@ const FoodTruckCateringNJGuide = () => {
         description="Complete guide to booking food truck catering in NJ: costs, logistics, best practices, venue requirements, and insider tips. Learn from experts who've catered 2,500+ events."
         canonical="https://grillycheese.net/blog/food-truck-catering-nj-guide"
         keywords="food truck catering NJ, how to book food truck New Jersey, food truck catering cost, NJ event catering, mobile catering guide"
+        ogType="article"
+        articlePublishedTime="2025-01-15T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema 
         type="blog" 
         title="Ultimate Guide to Food Truck Catering in New Jersey"
+        url="https://grillycheese.net/blog/food-truck-catering-nj-guide"
+      />
+      <BlogArticleSchema
+        headline="Ultimate Guide to Food Truck Catering in New Jersey [2025]"
+        description="Complete guide to booking food truck catering in NJ: costs, logistics, best practices, venue requirements, and insider tips."
+        datePublished="2025-01-15"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/food-truck-catering-nj-guide"
       />
       

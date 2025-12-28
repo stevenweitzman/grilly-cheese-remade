@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import QuickAnswerBox from "@/components/blog/QuickAnswerBox";
@@ -18,13 +19,21 @@ const HowMuchDoesItCost = () => {
         keywords="how much does it cost to book a food truck, food truck rental cost, food truck catering prices, food truck for a party, event food truck pricing, food truck wedding cost"
         ogType="article"
         articlePublishedTime="2025-01-15T10:00:00Z"
-        articleModifiedTime="2025-01-15T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       
       <SEOSchema
         type="blog"
         title="How Much Does It Cost To Book A Food Truck? (2025 Guide)"
         description="Wondering how much it costs to book a food truck? Get clear per-person pricing, average food truck rental costs, and real examples by cuisine type for catered events in the U.S."
+        url="https://grillycheese.net/blog/how-much-does-it-cost-to-book-a-food-truck"
+      />
+
+      <BlogArticleSchema
+        headline="How Much Does It Cost To Book A Food Truck? (2025 Guide)"
+        description="Wondering how much it costs to book a food truck? Get clear per-person pricing, average food truck rental costs, and real examples by cuisine type for catered events in the U.S."
+        datePublished="2025-01-15"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/how-much-does-it-cost-to-book-a-food-truck"
       />
 
