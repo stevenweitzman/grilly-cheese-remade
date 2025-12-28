@@ -5,3 +5,18 @@ verify_jwt = false
 
 [functions.send-transcript]
 verify_jwt = false
+
+[functions.send-quote-email]
+verify_jwt = false
+
+[functions.notify-new-message]
+verify_jwt = false
+
+[functions.send-order-notification]
+verify_jwt = false
+
+[functions.send-contact-notification]
+verify_jwt = false
+
+[functions.notify-quote-status-change]
+verify_jwt = false
