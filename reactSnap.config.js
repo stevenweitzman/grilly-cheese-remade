@@ -1,8 +1,12 @@
 module.exports = {
-  // Routes to pre-render
+  // All routes to pre-render for SEO
   include: [
+    // Main pages
     "/",
     "/recipes",
+    "/encyclopedia",
+    
+    // Recipe pages
     "/recipes/the-original",
     "/recipes/the-gourmet",
     "/recipes/the-veggie",
@@ -15,15 +19,21 @@ module.exports = {
     "/recipes/the-spicy-sweet-peach",
     "/recipes/the-bbq-bacon-and-cheddar",
     "/recipes/the-crispy-cheddar-crust",
+    
+    // Services
     "/services/food-truck-catering",
     "/services/drop-off-catering",
     "/services/pop-up-events",
+    
+    // Events
     "/events",
     "/events/wedding-catering",
     "/events/corporate-catering",
     "/events/baby-showers",
     "/events/retirement-parties",
     "/events/film-set-catering",
+    
+    // Locations
     "/locations/new-jersey",
     "/locations/pennsylvania",
     "/locations/new-york-city",
@@ -36,7 +46,8 @@ module.exports = {
     "/locations/delaware",
     "/locations/washington-dc",
     "/locations/long-island",
-    "/encyclopedia",
+    
+    // Blog
     "/blog",
     "/blog/booking-food-trucks-in-new-jersey",
     "/blog/corporate-event-advantages",
@@ -56,12 +67,41 @@ module.exports = {
     "/blog/grilled-cheese-recipe-secrets",
     "/blog/signature-grilled-cheese-sandwiches"
   ],
+  
+  // Puppeteer configuration for headless Chrome
   puppeteerArgs: ["--no-sandbox", "--disable-setuid-sandbox"],
-  waitFor: 1000,
+  
+  // Wait for React to render
+  waitFor: 1500,
+  
+  // Inline critical CSS for faster FCP
   inlineCss: true,
+  
+  // Keep script tags for hydration
   removeScriptTags: false,
+  
+  // Minification for smaller HTML files
   minifyHtml: {
     collapseWhitespace: true,
-    removeComments: true
+    removeComments: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    useShortDoctype: true
+  },
+  
+  // Source directory (Vite output)
+  source: "dist",
+  
+  // Fix relative paths
+  fixInsertRule: true,
+  
+  // Skip external links
+  skipThirdPartyRequests: true,
+  
+  // Viewport for consistent rendering
+  viewport: {
+    width: 1200,
+    height: 800
   }
 };

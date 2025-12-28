@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
+import SEOSchema from "@/components/SEOSchema";
 import TableOfContents from "@/components/encyclopedia/TableOfContents";
 import SearchBar from "@/components/encyclopedia/SearchBar";
 import BackToTop from "@/components/encyclopedia/BackToTop";
@@ -57,11 +58,13 @@ const Encyclopedia = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Grilled Cheese Encyclopedia | Complete Guide to Melted Cheese Sandwiches</title>
-        <meta name="description" content="The ultimate guide to grilled cheese sandwiches. Learn about history, regional variations, cheese selection, cooking techniques, and build your own custom creation." />
-        <link rel="canonical" href="https://grillycheese.com/encyclopedia" />
-      </Helmet>
+      <SEOHead
+        title="Grilled Cheese Encyclopedia | Complete Guide to Melted Cheese Sandwiches"
+        description="The ultimate guide to grilled cheese sandwiches. Learn about history, regional variations, cheese selection, cooking techniques, and build your own custom creation."
+        canonical="https://grillycheese.net/encyclopedia"
+        keywords="grilled cheese guide, cheese sandwich types, melted cheese sandwiches, grilled cheese history, cheese selection guide, bread for grilled cheese"
+      />
+      <SEOSchema type="service" serviceName="Grilled Cheese Encyclopedia" />
 
       <Navigation />
 

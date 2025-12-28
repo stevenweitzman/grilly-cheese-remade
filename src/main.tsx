@@ -1,17 +1,25 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
 const rootElement = document.getElementById("root")!;
 
-// Hydrate for pre-rendered content, render for client-side
+// Hydrate for pre-rendered content (react-snap), render for client-side
 if (rootElement.hasChildNodes()) {
-  createRoot(rootElement).render(<App />);
+  // Pre-rendered HTML exists, hydrate instead of render
+  hydrateRoot(rootElement, <App />);
 } else {
+  // No pre-rendered content, do a full render
   createRoot(rootElement).render(<App />);
 }
 
-// Signal to react-snap that page is ready
+// Signal to react-snap that page is ready for snapshot
+declare global {
+  interface Window {
+    snapSaveState?: () => Record<string, unknown>;
+  }
+}
+
 if (typeof window !== 'undefined') {
-  (window as any).snapSaveState = () => ({});
+  window.snapSaveState = () => ({});
 }
