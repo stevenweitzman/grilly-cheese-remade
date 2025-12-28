@@ -8,6 +8,7 @@ import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const NewJersey = () => {
   const cities = [
@@ -183,6 +184,17 @@ const NewJersey = () => {
               <p className="text-center text-muted-foreground mt-8">
                 Don&apos;t see your city? <a href="tel:8444745591" className="text-accent hover:underline">Call us</a> - we serve most of New Jersey!
               </p>
+              
+              <div className="mt-8 p-6 bg-card border border-border rounded-lg">
+                <h3 className="font-bold text-lg mb-4 text-center">Explore Our NJ County Pages</h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Link to="/locations/camden-county" className="text-accent hover:underline font-medium">Camden County</Link>
+                  <span className="text-muted-foreground">•</span>
+                  <Link to="/locations/burlington-county" className="text-accent hover:underline font-medium">Burlington County</Link>
+                  <span className="text-muted-foreground">•</span>
+                  <Link to="/locations/princeton" className="text-accent hover:underline font-medium">Princeton Area</Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
