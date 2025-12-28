@@ -159,6 +159,10 @@ const Navigation = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
+            <Link to="/recipes" className="text-foreground hover:text-primary transition-colors">
+              Recipes
+            </Link>
+
             {isHomePage ? (
               <a href="#contact" className="text-foreground hover:text-primary transition-colors">
                 Contact
