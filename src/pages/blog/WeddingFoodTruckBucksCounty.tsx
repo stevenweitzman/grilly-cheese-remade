@@ -218,11 +218,11 @@ const WeddingFoodTruckBucksCounty = () => {
                 </h2>
                 
                 <p className="text-foreground mb-6">
-                  Bucks County wedding guests remember experiences. A grilled cheese food truck provides made-to-order food, visible cooking, and a relaxed gathering point that complements the scenic nature of the area.
+                  Bucks County wedding guests remember experiences. A grilled cheese food truck provides made-to-order food, visible cooking, and a relaxed gathering point that complements the scenic nature of the area. Explore Bucks County venues and attractions at <a href="https://www.visitbuckscounty.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Visit Bucks County</a>.
                 </p>
 
                 <p className="text-foreground">
-                  Food truck catering enhances the atmosphere of barn and outdoor weddings while delivering a memorable guest experience.
+                  Food truck catering enhances the atmosphere of barn and outdoor weddings while delivering a memorable guest experience. For wedding planning resources, visit <a href="https://www.theknot.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">The Knot</a>.
                 </p>
               </section>
 

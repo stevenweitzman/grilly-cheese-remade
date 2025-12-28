@@ -365,11 +365,11 @@ const Princeton = () => {
               <div className="bg-card border border-border rounded-lg p-6">
                 <h3 className="font-bold text-lg mb-3">Princeton University & Academic</h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Princeton University Campus</li>
-                  <li>• Institute for Advanced Study</li>
-                  <li>• Princeton Theological Seminary</li>
+                  <li>• <a href="https://www.princeton.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Princeton University</a> Campus</li>
+                  <li>• <a href="https://www.ias.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Institute for Advanced Study</a></li>
+                  <li>• <a href="https://www.ptsem.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Princeton Theological Seminary</a></li>
                   <li>• Westminster Choir College</li>
-                  <li>• Rider University (nearby)</li>
+                  <li>• <a href="https://www.rider.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rider University</a> (nearby)</li>
                 </ul>
               </div>
 
@@ -398,7 +398,7 @@ const Princeton = () => {
               <div className="bg-card border border-border rounded-lg p-6">
                 <h3 className="font-bold text-lg mb-3">Parks & Recreation</h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Grounds For Sculpture</li>
+                  <li>• <a href="https://www.groundsforsculpture.org/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Grounds For Sculpture</a></li>
                   <li>• Mercer County Park</li>
                   <li>• Princeton Battlefield State Park</li>
                   <li>• D&R Canal State Park</li>

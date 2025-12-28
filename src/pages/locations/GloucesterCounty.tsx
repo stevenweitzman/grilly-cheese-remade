@@ -345,7 +345,7 @@ const GloucesterCounty = () => {
                 <h3 className="font-bold text-lg mb-3">Corporate Venues</h3>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>• Deptford business parks</li>
-                  <li>• Rowan University</li>
+                  <li>• <a href="https://www.rowan.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rowan University</a></li>
                   <li>• Washington Township offices</li>
                   <li>• Industrial parks</li>
                   <li>• Tech company campuses</li>
