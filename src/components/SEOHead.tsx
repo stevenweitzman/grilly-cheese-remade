@@ -6,6 +6,9 @@ interface SEOHeadProps {
   canonical?: string;
   keywords?: string;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageType?: string;
   ogType?: "website" | "article" | "business.business";
   articleAuthor?: string;
   articlePublishedTime?: string;
@@ -18,6 +21,9 @@ const SEOHead = ({
   canonical,
   keywords,
   ogImage = "https://grillycheese.net/assets/hero-grilled-cheese.jpg",
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  ogImageType = "image/jpeg",
   ogType = "website",
   articleAuthor,
   articlePublishedTime,
@@ -42,6 +48,9 @@ const SEOHead = ({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content={String(ogImageWidth)} />
+      <meta property="og:image:height" content={String(ogImageHeight)} />
+      <meta property="og:image:type" content={ogImageType} />
       <meta property="og:image:alt" content="Grilly Cheese Food Truck Catering" />
       <meta property="og:site_name" content="Grilly Cheese" />
       <meta property="og:locale" content="en_US" />
@@ -55,6 +64,8 @@ const SEOHead = ({
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={ogImage} />
+      <meta property="twitter:image:width" content={String(ogImageWidth)} />
+      <meta property="twitter:image:height" content={String(ogImageHeight)} />
 
       {/* Additional SEO */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />

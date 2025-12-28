@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import { SEOImageGallerySchema } from "@/components/SEOImageSchema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -122,6 +123,16 @@ const Recipes = () => {
     }
   };
 
+  // Image gallery for SEO
+  const recipeImages = signatureRecipes.map(recipe => ({
+    url: recipe.image.replace('w=600&h=400', 'w=1200&h=800'),
+    width: 1200,
+    height: 800,
+    alt: `${recipe.name} grilled cheese sandwich`,
+    caption: recipe.description,
+    name: recipe.name
+  }));
+
   return (
     <>
       <SEOHead
@@ -129,12 +140,19 @@ const Recipes = () => {
         description="Discover our award-winning grilled cheese recipes! Learn how to make The Grilly Cheese, Cluck Norris, and more signature sandwiches from NJ's top-rated food truck."
         canonical="https://grillycheese.net/recipes"
         keywords="grilled cheese recipes, gourmet grilled cheese, best grilled cheese recipe, comfort food recipes, food truck recipes"
+        ogImageWidth={1200}
+        ogImageHeight={630}
       />
       <SEOSchema 
         type="service" 
         title="Grilly Cheese Recipes" 
         description="Award-winning grilled cheese recipes from NJ's top-rated food truck" 
         url="https://grillycheese.net/recipes" 
+      />
+      <SEOImageGallerySchema 
+        images={recipeImages}
+        name="Grilly Cheese Signature Recipe Gallery"
+        description="Award-winning grilled cheese sandwich recipes from NJ's top-rated food truck"
       />
 
       <Helmet>
@@ -150,6 +168,13 @@ const Recipes = () => {
               "position": index + 1,
               "name": recipe.name,
               "description": recipe.description,
+              "image": {
+                "@type": "ImageObject",
+                "url": recipe.image.replace('w=600&h=400', 'w=1200&h=800'),
+                "width": 1200,
+                "height": 800,
+                "caption": `${recipe.name} grilled cheese sandwich`
+              },
               "cookTime": `PT${recipe.cookTime.replace("-", "").replace(" min", "M")}`,
               "recipeYield": recipe.servings,
               "recipeIngredient": recipe.ingredients,
@@ -239,8 +264,10 @@ const Recipes = () => {
                   <div className="relative">
                     <img 
                       src={recipe.image} 
-                      alt={`${recipe.name} grilled cheese sandwich`}
+                      alt={`${recipe.name} grilled cheese sandwich - ${recipe.description.slice(0, 50)}`}
                       className="w-full h-48 object-cover"
+                      width={600}
+                      height={400}
                       loading="lazy"
                     />
                     {recipe.popular && (

@@ -25,6 +25,8 @@ const Hero = memo(() => {
             src={heroImage}
             alt="Golden, buttery grilled cheese sandwich with melted American cheese on thick-cut white bread - award-winning food truck catering in New Jersey"
             className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
             loading="eager"
             decoding="async"
             fetchPriority="high"

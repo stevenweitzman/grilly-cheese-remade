@@ -58,6 +58,13 @@ const GrilledCheeseRecipeSecrets = () => {
         datePublished="2025-12-28"
         dateModified="2025-12-28"
         url="https://grillycheese.net/blog/grilled-cheese-recipe-secrets"
+        image={{
+          url: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=1200&h=630&fit=crop",
+          width: 1200,
+          height: 630,
+          caption: "Golden crispy grilled cheese sandwich with melted cheese"
+        }}
+        thumbnailUrl="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop"
       />
 
       <Helmet>
@@ -168,9 +175,11 @@ const GrilledCheeseRecipeSecrets = () => {
 
               <div className="mb-10 rounded-xl overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=1200&h=600&fit=crop" 
-                  alt="Golden crispy grilled cheese sandwich with melted cheese"
+                  src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=1200&h=630&fit=crop" 
+                  alt="Golden crispy grilled cheese sandwich with melted cheese - perfect grilled cheese recipe guide"
                   className="w-full h-64 md:h-80 object-cover"
+                  width={1200}
+                  height={630}
                   loading="eager"
                 />
               </div>

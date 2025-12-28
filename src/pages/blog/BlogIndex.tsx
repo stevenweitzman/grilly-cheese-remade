@@ -1,11 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { SEOImageGallerySchema } from "@/components/SEOImageSchema";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import StickyCTABar from "@/components/StickyCTABar";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { Helmet } from "react-helmet";
 
 const BlogIndex = () => {
   const posts = [
@@ -164,6 +166,16 @@ const BlogIndex = () => {
     }
   ];
 
+  // Image gallery for SEO
+  const blogImages = posts.slice(0, 12).map(post => ({
+    url: post.image.replace('w=600&h=400', 'w=1200&h=800'),
+    width: 1200,
+    height: 800,
+    alt: post.title,
+    caption: post.excerpt,
+    name: post.title
+  }));
+
   return (
     <>
       <SEOHead
@@ -171,7 +183,48 @@ const BlogIndex = () => {
         description="Expert advice on food truck catering, event planning, menu guides, and behind-the-scenes stories. Learn from NJ's top-rated food truck catering service."
         canonical="https://grillycheese.net/blog"
         keywords="food truck catering blog, event planning tips, wedding catering advice, corporate event planning"
+        ogImageWidth={1200}
+        ogImageHeight={630}
       />
+      <SEOImageGallerySchema 
+        images={blogImages}
+        name="Grilly Cheese Blog Article Gallery"
+        description="Food truck catering tips and event planning guides from NJ's top-rated food truck"
+      />
+      
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Grilly Cheese Blog",
+            "description": "Expert advice on food truck catering, event planning, and menu guides",
+            "url": "https://grillycheese.net/blog",
+            "mainEntity": {
+              "@type": "ItemList",
+              "numberOfItems": posts.length,
+              "itemListElement": posts.map((post, index) => ({
+                "@type": "BlogPosting",
+                "position": index + 1,
+                "headline": post.title,
+                "description": post.excerpt,
+                "url": `https://grillycheese.net/blog/${post.slug}`,
+                "image": {
+                  "@type": "ImageObject",
+                  "url": post.image.replace('w=600&h=400', 'w=1200&h=800'),
+                  "width": 1200,
+                  "height": 800
+                },
+                "datePublished": post.date,
+                "author": {
+                  "@type": "Organization",
+                  "name": "Grilly Cheese"
+                }
+              }))
+            }
+          })}
+        </script>
+      </Helmet>
       
       <div className="min-h-screen">
         <Navigation />
@@ -203,8 +256,10 @@ const BlogIndex = () => {
                       <div className="h-48 overflow-hidden">
                         <img 
                           src={post.image} 
-                          alt={post.title}
+                          alt={`${post.title} - ${post.category} article`}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          width={600}
+                          height={400}
                           loading="lazy"
                         />
                       </div>
