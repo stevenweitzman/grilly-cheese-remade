@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check, Clock, Users, MapPin, Calendar, MessageSquare, Utensils } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -18,44 +18,16 @@ const HowToBookGrilledCheeseFoodTruck = () => {
         keywords="book grilled cheese food truck, grilled cheese food truck catering, hire grilled cheese food truck, food truck catering for events, wedding food truck catering"
         ogType="article"
         articlePublishedTime="2025-12-20T10:00:00Z"
-        articleModifiedTime="2025-12-20T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       
-      <SEOSchema
-        type="blog"
-        title="How to Book a Grilled Cheese Food Truck for Any Event"
+      <BlogArticleSchema
+        headline="How to Book a Grilled Cheese Food Truck for Any Event"
         description="Learn how to book a grilled cheese food truck for weddings, corporate events, and parties. Get tips on pricing, menus, and what to ask before you book."
+        datePublished="2025-12-20"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/how-to-book-a-grilled-cheese-food-truck-for-any-event"
       />
-
-      {/* Article Schema */}
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": "How to Book a Grilled Cheese Food Truck for Any Event",
-            "author": {
-              "@type": "Organization",
-              "name": "Grilly Cheese"
-            },
-            "datePublished": "2025-12-20",
-            "image": "https://www.grillycheese.net/images/grilled-cheese-truck-event.jpg",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Grilly Cheese",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.grillycheese.net/logo.png"
-              }
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://www.grillycheese.net/blog/how-to-book-a-grilled-cheese-food-truck-for-any-event"
-            }
-          })}
-        </script>
-      </Helmet>
 
       {/* FAQ Schema */}
       <Helmet>

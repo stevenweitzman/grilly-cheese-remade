@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -18,44 +18,16 @@ const FoodTruckCateringPostReception = () => {
         keywords="food truck catering for post-reception events, post-reception food truck, send-off food truck, late night wedding food truck, wedding send-off catering, bar mitzvah food truck"
         ogType="article"
         articlePublishedTime="2025-12-24T10:00:00Z"
-        articleModifiedTime="2025-12-24T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       
-      <SEOSchema
-        type="blog"
-        title="Food Truck Catering for Post-Reception Events"
+      <BlogArticleSchema
+        headline="Food Truck Catering for Post-Reception Events"
         description="Discover why food truck catering is the ideal solution for post-reception send-off food at weddings, bar mitzvahs, corporate events, and celebrations."
+        datePublished="2025-12-24"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/food-truck-catering-for-post-reception-events"
       />
-
-      {/* BlogPosting Schema */}
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": "Food Truck Catering for Post-Reception Events",
-            "author": {
-              "@type": "Organization",
-              "name": "Grilly Cheese"
-            },
-            "datePublished": "2025-12-24",
-            "image": "https://www.grillycheese.net/images/food-truck-post-reception.jpg",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Grilly Cheese",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.grillycheese.net/logo.png"
-              }
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://www.grillycheese.net/blog/food-truck-catering-for-post-reception-events"
-            }
-          })}
-        </script>
-      </Helmet>
 
       {/* FAQPage Schema */}
       <Helmet>
