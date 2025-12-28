@@ -41,6 +41,9 @@ import DropOffOrder from "./pages/order/DropOffOrder";
 import PopUpEvents from "./pages/services/PopUpEvents";
 import EventTypesOverview from "./pages/events/EventTypesOverview";
 import NewJersey from "./pages/locations/NewJersey";
+import CamdenCounty from "./pages/locations/CamdenCounty";
+import BurlingtonCounty from "./pages/locations/BurlingtonCounty";
+import Princeton from "./pages/locations/Princeton";
 import Pennsylvania from "./pages/locations/Pennsylvania";
 import NewYorkCity from "./pages/locations/NewYorkCity";
 import Maryland from "./pages/locations/Maryland";
@@ -129,6 +132,9 @@ const App = () => (
           
           {/* Location Pages */}
           <Route path="/locations/new-jersey" element={<NewJersey />} />
+          <Route path="/locations/camden-county" element={<CamdenCounty />} />
+          <Route path="/locations/burlington-county" element={<BurlingtonCounty />} />
+          <Route path="/locations/princeton" element={<Princeton />} />
           <Route path="/locations/pennsylvania" element={<Pennsylvania />} />
           <Route path="/locations/new-york-city" element={<NewYorkCity />} />
           <Route path="/locations/maryland" element={<Maryland />} />

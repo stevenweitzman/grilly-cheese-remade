@@ -101,6 +101,21 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/locations/camden-county" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Camden County
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/burlington-county" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Burlington County
+                </Link>
+              </li>
+              <li>
+                <Link to="/locations/princeton" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Princeton
+                </Link>
+              </li>
+              <li>
                 <Link to="/locations/pennsylvania" className="text-primary-foreground/70 hover:text-accent transition-colors">
                   Pennsylvania
                 </Link>
