@@ -308,6 +308,14 @@ const Navigation = () => {
               Client Portal
             </Link>
 
+            <Link
+              to="/recipes"
+              className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Recipes
+            </Link>
+
             <Accordion type="single" collapsible className="w-full">
               {/* Services & Events Accordion */}
               <AccordionItem value="explore">

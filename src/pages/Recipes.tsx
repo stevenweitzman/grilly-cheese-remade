@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet";
 import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const Recipes = () => {
   const signatureRecipes = [
@@ -305,6 +306,13 @@ const Recipes = () => {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <NewsletterSignup source="recipes" />
           </div>
         </section>
 

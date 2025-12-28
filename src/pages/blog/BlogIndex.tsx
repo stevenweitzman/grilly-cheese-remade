@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import StickyCTABar from "@/components/StickyCTABar";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const BlogIndex = () => {
   const posts = [
@@ -268,6 +269,13 @@ const BlogIndex = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <NewsletterSignup source="blog" />
           </div>
         </section>
 
