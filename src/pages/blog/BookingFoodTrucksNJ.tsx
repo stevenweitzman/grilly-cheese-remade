@@ -127,11 +127,11 @@ const BookingFoodTrucksNJ = () => {
 
                 <h2>Ensuring Food Safety and Quality</h2>
                 <p>
-                  Food safety should be a top priority. Before booking, ensure the food truck:
+                  Food safety should be a top priority. Before booking, ensure the food truck meets standards set by the <a href="https://www.fda.gov/food/buy-store-serve-safe-food" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">FDA Food Safety Guidelines</a> and has proper <a href="https://www.servsafe.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">ServSafe certification</a>:
                 </p>
 
                 <ul className="space-y-2">
-                  <li>Has up-to-date health and safety certifications.</li>
+                  <li>Has up-to-date health and safety certifications from the <a href="https://www.nj.gov/health/ceohs/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">NJ Department of Health</a>.</li>
                   <li>Maintains high hygiene standards.</li>
                   <li>Uses fresh and quality ingredients.</li>
                 </ul>

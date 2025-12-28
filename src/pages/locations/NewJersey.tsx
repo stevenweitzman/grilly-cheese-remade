@@ -182,7 +182,7 @@ const NewJersey = () => {
               </div>
               
               <p className="text-center text-muted-foreground mt-8">
-                Don&apos;t see your city? <a href="tel:8444745591" className="text-accent hover:underline">Call us</a> - we serve most of New Jersey!
+                Don&apos;t see your city? <a href="tel:8444745591" className="text-accent hover:underline">Call us</a> - we serve most of New Jersey! Discover more about the Garden State at <a href="https://www.visitnj.org/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Visit NJ</a>.
               </p>
               
               <div className="mt-8 p-6 bg-card border border-border rounded-lg">
@@ -212,10 +212,10 @@ const NewJersey = () => {
               <div className="bg-card border border-border rounded-lg p-6">
                 <h3 className="font-bold text-lg mb-3">Universities & Colleges</h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Princeton University</li>
-                  <li>• Rutgers University</li>
-                  <li>• The College of New Jersey (TCNJ)</li>
-                  <li>• Rowan University</li>
+                  <li>• <a href="https://www.princeton.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Princeton University</a></li>
+                  <li>• <a href="https://www.rutgers.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rutgers University</a></li>
+                  <li>• <a href="https://tcnj.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">The College of New Jersey (TCNJ)</a></li>
+                  <li>• <a href="https://www.rowan.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rowan University</a></li>
                 </ul>
               </div>
 
@@ -232,8 +232,8 @@ const NewJersey = () => {
               <div className="bg-card border border-border rounded-lg p-6">
                 <h3 className="font-bold text-lg mb-3">Parks & Recreation</h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Grounds For Sculpture</li>
-                  <li>• Duke Farms</li>
+                  <li>• <a href="https://www.groundsforsculpture.org/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Grounds For Sculpture</a></li>
+                  <li>• <a href="https://www.dukefarms.org/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Duke Farms</a></li>
                   <li>• Cooper River Park</li>
                   <li>• Mercer County Park</li>
                 </ul>

@@ -316,7 +316,7 @@ const BucksCounty = () => {
               </div>
               
               <p className="text-center text-muted-foreground mt-8">
-                Don&apos;t see your town? We serve all of Bucks County! <a href="tel:8444745591" className="text-accent hover:underline">Call us</a> to confirm service in your area.
+                Don&apos;t see your town? We serve all of Bucks County! <a href="tel:8444745591" className="text-accent hover:underline">Call us</a> to confirm service in your area. Plan your event at <a href="https://www.visitbuckscounty.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Visit Bucks County</a>.
               </p>
             </div>
           </div>

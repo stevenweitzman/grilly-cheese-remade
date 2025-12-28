@@ -266,7 +266,7 @@ const FoodTruckCateringNJGuide = () => {
                     <div className="bg-card border border-border rounded-lg p-6">
                       <h3 className="font-bold text-lg mb-2">Do I need permits for a food truck at my private event?</h3>
                       <p className="text-muted-foreground">
-                        For private events on private property, usually no additional permits are needed. The food truck should have all necessary health department licenses and insurance. Public events or park locations may require special permits.
+                        For private events on private property, usually no additional permits are needed. The food truck should have all necessary health department licenses from the <a href="https://www.nj.gov/health/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">New Jersey Department of Health</a> and insurance. Public events or park locations may require special permits from the <a href="https://www.njconsumeraffairs.gov/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">NJ Division of Consumer Affairs</a>.
                       </p>
                     </div>
 

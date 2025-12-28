@@ -218,11 +218,11 @@ const WeddingFoodTruckPhiladelphia = () => {
                 </h2>
                 
                 <p className="text-foreground mb-6">
-                  Philadelphia wedding guests remember experiences, not just meals. A grilled cheese food truck provides made-to-order food, visible cooking, and a natural gathering point during the reception.
+                  Philadelphia wedding guests remember experiences, not just meals. A grilled cheese food truck provides made-to-order food, visible cooking, and a natural gathering point during the reception. For more wedding planning tips, check resources from <a href="https://www.theknot.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">The Knot</a> and <a href="https://www.weddingwire.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">WeddingWire</a>.
                 </p>
 
                 <p className="text-foreground">
-                  For city weddings, the food truck becomes part of the atmosphere. Guests interact, socialize, and enjoy a relaxed dining experience that feels intentional rather than generic.
+                  For city weddings, the food truck becomes part of the atmosphere. Guests interact, socialize, and enjoy a relaxed dining experience that feels intentional rather than generic. Explore more ideas at <a href="https://www.discoverphl.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Discover PHL</a>.
                 </p>
 
                 <p className="text-foreground mt-6">

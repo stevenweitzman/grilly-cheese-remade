@@ -122,7 +122,7 @@ const WeddingCatering = () => {
                 Wedding Menu Packages
               </h2>
               <p className="text-center text-muted-foreground mb-12">
-                Choose from our curated wedding packages or create a custom menu
+                Choose from our curated wedding packages or create a custom menu. For more wedding planning inspiration, visit <a href="https://www.theknot.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">The Knot</a> or <a href="https://www.zola.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Zola</a>.
               </p>
 
               <div className="grid md:grid-cols-2 gap-8">

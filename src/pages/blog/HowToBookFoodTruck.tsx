@@ -164,6 +164,9 @@ const HowToBookFoodTruck = () => {
                 <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">
                   What Questions Should I Ask Before Booking?
                 </h2>
+                <p className="text-muted-foreground mb-4">
+                  The <a href="https://restaurant.org/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">National Restaurant Association</a> recommends asking these key questions:
+                </p>
                 <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-8">
                   <li>What is included in the per-person price?</li>
                   <li>Are there minimum guest counts or charges?</li>
@@ -171,7 +174,7 @@ const HowToBookFoodTruck = () => {
                   <li>What are your power and space requirements?</li>
                   <li>How long does setup/breakdown take?</li>
                   <li>What is your cancellation and rain date policy?</li>
-                  <li>Do you have liability insurance?</li>
+                  <li>Do you have liability insurance and <a href="https://www.fda.gov/food" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">FDA food safety</a> compliance?</li>
                   <li>What is the deposit amount and payment schedule?</li>
                 </ul>
 

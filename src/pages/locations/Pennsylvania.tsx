@@ -174,7 +174,7 @@ const Pennsylvania = () => {
               </div>
               
               <p className="text-center text-muted-foreground mt-8">
-                Not listed? <a href="tel:8444745591" className="text-accent hover:underline">Contact us</a> - we serve most of Pennsylvania!
+                Not listed? <a href="tel:8444745591" className="text-accent hover:underline">Contact us</a> - we serve most of Pennsylvania! Learn more about the Keystone State at <a href="https://visitpa.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Visit PA</a>.
               </p>
               
               <div className="mt-8 p-6 bg-card border border-border rounded-lg">
@@ -218,10 +218,10 @@ const Pennsylvania = () => {
               <div className="bg-card border border-border rounded-lg p-6">
                 <h3 className="font-bold text-lg mb-3">Universities</h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Penn State University</li>
-                  <li>• University of Pennsylvania</li>
-                  <li>• Temple University</li>
-                  <li>• Carnegie Mellon</li>
+                  <li>• <a href="https://www.psu.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Penn State University</a></li>
+                  <li>• <a href="https://www.upenn.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">University of Pennsylvania</a></li>
+                  <li>• <a href="https://www.temple.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Temple University</a></li>
+                  <li>• <a href="https://www.cmu.edu/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Carnegie Mellon</a></li>
                 </ul>
               </div>
 
