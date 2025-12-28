@@ -87,6 +87,26 @@ export default function Messages() {
 
       if (error) throw error;
 
+      // Get sender's profile for the notification
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .single();
+
+      // Send email notification to admin
+      await supabase.functions.invoke("notify-new-message", {
+        body: {
+          recipientEmail: "grillycheese@grillycheese.net",
+          recipientName: "Grilly Cheese Team",
+          senderName: profile?.full_name || "A client",
+          subject: newMessage.subject,
+          messagePreview: newMessage.message,
+          quoteId: quotes.id,
+          isAdminRecipient: true,
+        },
+      });
+
       toast({
         title: "Message Sent",
         description: "Your message has been sent to Grilly Cheese staff.",
