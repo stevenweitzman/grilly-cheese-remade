@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/grilly-cheese-logo.webp";
 import logoWhite from "@/assets/grilly-cheese-logo-white.webp";
 
@@ -29,6 +29,26 @@ const Footer = () => {
                   844-474-5591
                 </a>
               </div>
+            </div>
+            <div className="flex items-center gap-4 mt-4">
+              <a 
+                href="https://www.facebook.com/grillycheese" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary-foreground/70 hover:text-accent transition-colors"
+                aria-label="Follow us on Facebook"
+              >
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.instagram.com/grillycheese" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary-foreground/70 hover:text-accent transition-colors"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
             </div>
           </div>
 
