@@ -17,100 +17,160 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 const Recipes = () => {
   const signatureRecipes = [
     {
-      name: "The Grilly Cheese",
-      description: "Our signature double-decker masterpiece with three thick slices of white bread, buttered and grilled with American cheese, topped with crisp bacon.",
+      name: "The Original",
+      description: "A timeless favorite that elevated the classic grilled cheese to icon status. Perfect balance of creamy fresh mozzarella and sharp cheddar with the smoky richness of applewood bacon.",
+      subtitle: "Mozzarella, Cheddar, Crispy Bacon on Sourdough",
+      cookTime: "8-10 min",
+      difficulty: "Easy",
+      servings: "1",
+      ingredients: ["2 slices thick-cut sourdough bread (3/4 inch)", "3 oz fresh mozzarella, thinly sliced", "2 oz sharp aged cheddar, thinly sliced", "2 slices applewood bacon, cooked crispy", "2 tbsp unsalted butter, softened", "Salt and pepper to taste"],
+      tips: "Slice cheese thinly for faster, more even melting. Medium heat is crucial—too high burns bread before cheese melts.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/1a98da95-0e1d-480c-ada0-26929895ec92.png",
+      popular: true,
+      category: "Classic"
+    },
+    {
+      name: "The Gourmet",
+      description: "This sandwich transforms lunch into an event. Rich, buttery brie melts into velvety sweetness combined with sophisticated gruyere, while fig jam and delicate prosciutto add layers of complex flavor.",
+      subtitle: "Brie, Gruyere, Fig Jam, Prosciutto on Artisan Bread",
+      cookTime: "10-12 min",
+      difficulty: "Medium",
+      servings: "1",
+      ingredients: ["2 slices (1/2 inch) artisan bread", "3 oz brie cheese, thinly sliced", "2 oz aged gruyere cheese, thinly sliced", "2 thin slices premium prosciutto", "1.5 tbsp fig jam", "1.5 tbsp salted butter, softened"],
+      tips: "Fig jam should be spread thinly—it's concentrated and sweet. Don't rush; medium-low heat ensures even melting.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/3ad91353-1ba3-41a3-9c27-08b62587e8d8.png",
+      popular: true,
+      category: "Gourmet"
+    },
+    {
+      name: "The Veggie",
+      description: "Proof that vegetarian doesn't mean compromising on flavor. Roasted peppers provide sweetness, sautéed mushrooms add umami depth, and fresh spinach brings earthiness.",
+      subtitle: "Roasted Peppers, Spinach, Mushrooms, Mozzarella on Ciabatta",
+      cookTime: "10-12 min",
+      difficulty: "Medium",
+      servings: "1",
+      ingredients: ["2 slices (3/4 inch) ciabatta bread", "6 oz fresh mozzarella, sliced", "1/2 cup roasted red bell peppers", "1 cup fresh spinach", "4 oz mushrooms, thinly sliced", "2 tbsp olive oil, divided", "1 clove garlic, minced", "8-10 fresh basil leaves", "1.5 tbsp unsalted butter"],
+      tips: "Vegetables must be cooked down and excess moisture removed. Pat peppers dry thoroughly.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/797bdbb5-192d-4bd1-80a0-91da3e54424a.png",
+      popular: false,
+      category: "Vegetarian"
+    },
+    {
+      name: "The Jalapeño Popper",
+      description: "For those who love heat with cheese. Roasted jalapeños lose their raw bite and develop sweet, smoky undertones that pair beautifully with creamy richness and crispy bacon.",
+      subtitle: "Roasted Jalapeños, Cream Cheese, Cheddar, Bacon",
       cookTime: "8-10 min",
       difficulty: "Medium",
       servings: "1",
-      ingredients: ["3 slices thick-cut white bread", "4 slices American cheese", "4 strips crispy bacon", "2 tbsp butter"],
-      tips: "The secret is in the triple-layer technique. Butter both sides of the middle bread slice for maximum crispiness.",
-      image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=400&fit=crop",
+      ingredients: ["2 slices thick-cut bread", "4 oz sharp cheddar cheese, sliced", "3 tbsp cream cheese, softened", "3-4 fresh jalapeños (roasted)", "3 slices bacon, cooked crispy", "1.5 tbsp unsalted butter, softened", "Optional: hot honey or sriracha"],
+      tips: "Roasting mellows heat while developing flavor. Cream cheese provides moisture and richness to balance heat.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/8c3e82a1-8a35-4944-a82c-02db51598789.png",
       popular: true,
-      category: "Signature"
+      category: "Spicy"
     },
     {
-      name: "The Grilly Cheesesteak",
-      description: "The real deal Philly cheesesteak beef cooked fresh under melted American cheeses loaded onto thick slices of white bread.",
-      cookTime: "10-12 min",
-      difficulty: "Medium",
-      servings: "1",
-      ingredients: ["2 slices thick white bread", "4 oz ribeye steak, thinly sliced", "3 slices American cheese", "Butter for grilling"],
-      tips: "Use thinly sliced ribeye and cook it quickly on high heat for authentic Philly flavor.",
-      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop",
-      popular: true,
-      category: "Signature"
-    },
-    {
-      name: "The Cluck Norris",
-      description: "Buffalo chicken on sourdough, loaded with mozzarella, a slice of tomato, hot sauce, Russian dressing and basil. Buttered & grilled to a perfect crisp.",
-      cookTime: "10-12 min",
-      difficulty: "Medium",
-      servings: "1",
-      ingredients: ["2 slices sourdough bread", "4 oz buffalo chicken", "3 slices mozzarella", "1 slice tomato", "Hot sauce", "Russian dressing", "Fresh basil"],
-      tips: "Don't skimp on the Russian dressing - it balances the heat from the buffalo sauce perfectly.",
-      image: "https://images.unsplash.com/photo-1481070555726-e2fe8357571d?w=600&h=400&fit=crop",
-      popular: true,
-      category: "Signature"
-    },
-    {
-      name: "Just The Cheese",
-      description: "Two hearty slices of white bread buttered and grilled with white American cheese - pure comfort food perfection.",
-      cookTime: "5-7 min",
+      name: "The Fig & Basil",
+      description: "Sweet, elegant, and unexpectedly sophisticated. Fresh basil brings herbal brightness while hot honey adds a sophisticated spicy-sweet finish.",
+      subtitle: "Brie, Fig Jam, Fresh Basil, Hot Honey, Sesame Seeds",
+      cookTime: "7-9 min",
       difficulty: "Easy",
       servings: "1",
-      ingredients: ["2 slices thick white bread", "3 slices American cheese", "2 tbsp butter"],
-      tips: "Low and slow is the key. Keep the heat medium-low to achieve that perfect golden crust without burning.",
-      image: "https://images.unsplash.com/photo-1475090169767-40ed8d18f67d?w=600&h=400&fit=crop",
+      ingredients: ["2 slices (3/4 inch) sourdough bread", "4 oz brie cheese, sliced thinly", "1.5 tbsp fig jam", "8-10 fresh basil leaves", "1-2 tsp raw sesame seeds", "1.5 tbsp honey (or hot honey)", "1.5 tbsp unsalted butter, softened"],
+      tips: "Serve warm but not molten—flavors need to be distinguished. Quality fig jam makes huge difference.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/8326282e-3f74-401e-9c26-40a5dfa65e77.png",
+      popular: false,
+      category: "Seasonal"
+    },
+    {
+      name: "The Avocado Dream",
+      description: "Creamy meets sharp meets smoky. Perfectly ripe avocado provides luxurious richness while aged cheddar brings sharpness and smoked gouda adds depth.",
+      subtitle: "Avocado, Cheddar, Gouda, Lime Zest on Artisan Bread",
+      cookTime: "8-10 min",
+      difficulty: "Medium",
+      servings: "1",
+      ingredients: ["2 slices (3/4 inch) artisan bread", "1 perfectly ripe avocado", "2 oz sharp white cheddar, sliced", "2 oz smoked gouda, sliced", "1 lime (juiced and zested)", "2 tbsp mayonnaise"],
+      tips: "Avocado must be perfectly ripe—too firm is mealy, too soft falls apart. Lime juice prevents browning AND brightens flavor.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/52616bea-777b-49f3-a912-d02386bdbc1a.png",
       popular: false,
       category: "Classic"
     },
     {
-      name: "The Margherita",
-      description: "Sourdough bread filled with mozzarella cheese, fresh tomatoes and basil, buttered and grilled to Italian perfection.",
-      cookTime: "7-9 min",
-      difficulty: "Easy",
+      name: "The Apple Brie",
+      description: "A sophisticated autumn celebration on bread. Sweet, crispy apples contrast beautifully against creamy brie and sharp aged cheddar.",
+      subtitle: "Brie, Crisp Apples, Aged Cheddar, Hot Honey, Fresh Thyme",
+      cookTime: "8-10 min",
+      difficulty: "Medium",
       servings: "1",
-      ingredients: ["2 slices sourdough bread", "4 slices fresh mozzarella", "2 slices tomato", "Fresh basil leaves", "Balsamic glaze (optional)", "Butter"],
-      tips: "Use room temperature tomatoes and pat them dry to prevent sogginess.",
-      image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&h=400&fit=crop",
+      ingredients: ["2 slices (3/4 inch) sourdough bread", "4 oz brie cheese, sliced thinly", "2 oz aged sharp cheddar, sliced", "1/2 honeycrisp apple, thinly sliced", "1 tsp fresh thyme leaves", "1 tsp hot honey", "1.5 tbsp unsalted butter, softened"],
+      tips: "Combination of two cheeses is crucial—brie for cream, cheddar for sharpness. Apple variety matters: honeycrisp for sweetness.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/9d9074ad-b9ad-46b4-b3bd-2b8631c710ee.png",
+      popular: false,
+      category: "Seasonal"
+    },
+    {
+      name: "The Caramelized Onion & Rosemary",
+      description: "Caramelized onions are liquid gold. Combined with nuttiness of gruyere and sharpness of white cheddar, this tastes like something from a French bistro.",
+      subtitle: "Gruyere, White Cheddar, Caramelized Onions, Fresh Rosemary",
+      cookTime: "10-12 min",
+      difficulty: "Hard",
+      servings: "1",
+      ingredients: ["2 slices (3/4 inch) artisan bread", "2 oz gruyere cheese, sliced", "2 oz sharp white cheddar, sliced", "1/2 cup caramelized onions", "1 tsp fresh rosemary, chopped", "1.5 tbsp unsalted butter, softened", "1/2 tsp balsamic vinegar (optional)"],
+      tips: "Caramelizing onions takes 45 minutes to 1 hour—don't rush. Make onions in advance and store in refrigerator up to 1 week.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/f5fee0f2-1945-42f1-bcbe-751a1b4d6e3d.png",
       popular: false,
       category: "Gourmet"
     },
     {
-      name: "The Reuben Steiner",
-      description: "Sauerkraut and Swiss cheese melted onto rye bread, topped with Russian dressing and thin-shaved corned beef slices.",
+      name: "The Truffle Indulgence",
+      description: "Luxury on a plate. Creamy fontina melts into velvety richness while burrata's creamy center takes it over the top. Truffle oil adds earthy depth.",
+      subtitle: "Fontina, Burrata, Truffle Oil, Wild Arugula, Brioche",
+      cookTime: "8-10 min",
+      difficulty: "Hard",
+      servings: "1",
+      ingredients: ["2 slices (3/4 inch) brioche or challah bread", "3 oz fontina cheese, sliced", "2 oz burrata cheese", "1 tbsp premium truffle oil", "Handful of wild arugula (1.5 oz)", "1.5 tbsp unsalted butter, softened"],
+      tips: "Brioche or challah is essential—regular bread undermines elegance. Truffle oil is potent—little goes a long way.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/3e9261b7-14e1-4c8e-9cee-fbdf261b89a6.png",
+      popular: true,
+      category: "Premium"
+    },
+    {
+      name: "The Spicy Sweet Peach",
+      description: "Summer perfection. Sweet, juicy peaches provide brightness. Smoked cheddar adds savory depth while hot honey brings sophisticated spice.",
+      subtitle: "Fresh Peach, Smoked Cheddar, Fontina, Hot Honey, Arugula",
       cookTime: "8-10 min",
       difficulty: "Medium",
       servings: "1",
-      ingredients: ["2 slices rye bread", "4 oz corned beef, thinly sliced", "3 slices Swiss cheese", "1/4 cup sauerkraut, drained", "Russian dressing", "Butter"],
-      tips: "Drain the sauerkraut well and warm the corned beef before assembling for best results.",
-      image: "https://images.unsplash.com/photo-1485451456034-3f9391c6f769?w=600&h=400&fit=crop",
+      ingredients: ["2 slices (3/4 inch) sourdough bread", "2 medium fresh peaches, sliced", "2 oz smoked cheddar, sliced", "2 oz fontina cheese, sliced", "Handful of fresh arugula (1.5 oz)", "1-2 tsp hot honey", "1.5 tbsp unsalted butter, softened"],
+      tips: "Peaches must be perfectly ripe—underripe is mealy, overripe is mushy. Pat peaches dry to prevent sogginess.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/92062647-57f1-4015-8957-2650de982b11.png",
       popular: false,
-      category: "Deli"
+      category: "Seasonal"
     },
     {
-      name: "Three Cheese Please",
-      description: "A 3-cheese blend of cheddar, American, and mozzarella on thick white bread, buttered and grilled to a crisp.",
-      cookTime: "7-9 min",
-      difficulty: "Easy",
+      name: "The BBQ Bacon & Cheddar",
+      description: "Comfort food perfection. Crispy bacon meets sharp cheddar's bite. Sweet and tangy BBQ sauce adds complexity. Caramelized onions provide umami depth.",
+      subtitle: "Sharp Cheddar, Crispy Bacon, Caramelized Onions, BBQ Sauce",
+      cookTime: "10-12 min",
+      difficulty: "Medium",
       servings: "1",
-      ingredients: ["2 slices thick white bread", "2 slices cheddar cheese", "2 slices American cheese", "2 slices mozzarella", "2 tbsp butter"],
-      tips: "Layer the cheeses strategically - mozzarella in the middle for that perfect stretch.",
-      image: "https://images.unsplash.com/photo-1539024549628-6bbee66a8495?w=600&h=400&fit=crop",
-      popular: false,
+      ingredients: ["2 slices (3/4 inch) thick-cut artisan bread", "3 oz sharp aged cheddar, sliced", "4 slices bacon, cooked very crispy", "1/3 cup caramelized onions", "2 tbsp quality BBQ sauce", "1.5 tbsp unsalted butter, softened"],
+      tips: "BBQ sauce flavors vary—use one you love personally. Bacon must be crispy—floppy bacon gets lost.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/4251f341-3ca0-494d-92ba-363dd01915f0.png",
+      popular: true,
       category: "Classic"
     },
     {
-      name: "Pleasin' Vegan",
-      description: "Dairy-free 'cheese' made in-house loaded on vegan, gluten-free bread. Grilled in olive oil or imitation butter.",
-      cookTime: "7-9 min",
-      difficulty: "Easy",
+      name: "The Crispy Cheddar Crust",
+      description: "Intentionally cook cheese on the bread exterior creating a crispy, salty crust. Inside, layers of melted sharp cheeses provide creamy richness.",
+      subtitle: "Aged Cheddar, Sharp White Cheddar, Crispy Cheese Exterior",
+      cookTime: "10-12 min",
+      difficulty: "Hard",
       servings: "1",
-      ingredients: ["2 slices vegan gluten-free bread", "3 slices vegan cheese", "2 tbsp olive oil or vegan butter"],
-      tips: "Vegan cheese melts differently - use a lid to help it melt through.",
-      image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&h=400&fit=crop",
+      ingredients: ["2 slices (3/4 inch) thick-cut artisan bread", "3 oz aged sharp cheddar, sliced", "2 oz sharp white cheddar, sliced", "2 tbsp shredded sharp white cheddar (for exterior)", "2.5 tbsp unsalted butter, divided"],
+      tips: "This advanced technique requires confidence and practice. Skillet must be quite hot so cheese crisps rather than melts.",
+      image: "https://user-gen-media-assets.s3.amazonaws.com/seedream_images/8d258c37-9939-400d-ac70-404508954a6d.png",
       popular: false,
-      category: "Specialty"
+      category: "Premium"
     }
   ];
 
@@ -136,10 +196,10 @@ const Recipes = () => {
   return (
     <>
       <SEOHead
-        title="Grilly Cheese Recipes | Gourmet Grilled Cheese Sandwich Recipes"
-        description="Discover our award-winning grilled cheese recipes! Learn how to make The Grilly Cheese, Cluck Norris, and more signature sandwiches from NJ's top-rated food truck."
+        title="Gourmet Grilled Cheese Recipes | 12 Premium Recipes from Grilly Cheese"
+        description="Master 12 gourmet grilled cheese recipes from classic to premium. The Original, The Gourmet, The Truffle Indulgence, and more - complete with pro tips and ingredients."
         canonical="https://grillycheese.net/recipes"
-        keywords="grilled cheese recipes, gourmet grilled cheese, best grilled cheese recipe, comfort food recipes, food truck recipes"
+        keywords="gourmet grilled cheese recipes, best grilled cheese recipe, artisan grilled cheese, brie grilled cheese, truffle grilled cheese, food truck recipes"
         ogImageWidth={1200}
         ogImageHeight={630}
       />
@@ -204,10 +264,10 @@ const Recipes = () => {
                 Award-Winning Recipes
               </Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                Our Signature Grilled Cheese Recipes
+                Premium Gourmet Grilled Cheese Recipes
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Discover the secrets behind our award-winning grilled cheese sandwiches. From classic comfort to gourmet creations, learn to make them at home!
+                Elevating the classic comfort food to extraordinary heights. 12 artisan recipes from classic to premium - master the art of the perfect grilled cheese.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button size="lg" className="bg-accent hover:bg-accent/90 text-background" asChild>
@@ -251,10 +311,10 @@ const Recipes = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our Most Popular Recipes
+                12 Gourmet Recipes to Master
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                From our food truck to your kitchen - try making these crowd favorites at home!
+                From our food truck to your kitchen - classic, gourmet, seasonal, and premium creations to try at home!
               </p>
             </div>
 
@@ -291,6 +351,9 @@ const Recipes = () => {
                   </CardHeader>
                   
                   <CardContent>
+                    <p className="text-xs text-accent font-medium mb-2 italic">
+                      {recipe.subtitle}
+                    </p>
                     <p className="text-muted-foreground text-sm mb-4">
                       {recipe.description}
                     </p>
