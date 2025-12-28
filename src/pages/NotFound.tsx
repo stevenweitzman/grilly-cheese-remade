@@ -10,8 +10,8 @@ const NotFound = () => {
       <Helmet>
         <title>404 - Page Not Found | Grilly Cheese</title>
         <meta name="description" content="The page you're looking for doesn't exist. Browse our food truck catering services for weddings, corporate events, and parties in NJ, PA, and NYC." />
-        <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href="https://grillycheese.net/404" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="prerender-status-code" content="404" />
       </Helmet>
       
       <Navigation />

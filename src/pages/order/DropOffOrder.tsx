@@ -110,6 +110,7 @@ const DropOffOrder = () => {
       <SEOHead
         title="Order Drop-Off Catering | Grilly Cheese"
         description="Order delicious grilled cheese catering delivered to your event. Choose your items, customize your order, and complete your order online."
+        noIndex={true}
       />
       <Navigation />
       <main className="min-h-screen bg-background pt-20">
