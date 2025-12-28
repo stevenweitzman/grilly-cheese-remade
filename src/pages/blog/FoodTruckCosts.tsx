@@ -54,6 +54,15 @@ const FoodTruckCosts = () => {
                 </p>
               </div>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=600&fit=crop" 
+                  alt="Calculator and budget planning for event catering"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <div className="prose prose-lg max-w-none">
                 <QuickAnswerBox 
                   answer="Food truck booking costs include: base food cost ($15-35/person), travel fees for distant venues, service fees for setup/cleanup, sales tax, 10% gratuity, and any add-on services. Get a detailed quote to understand your total event cost."

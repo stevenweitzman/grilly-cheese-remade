@@ -102,6 +102,15 @@ const LateNightWeddingFoodIdeas = () => {
                 </div>
               </header>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=600&fit=crop" 
+                  alt="Wedding reception with guests dancing at night"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <QuickAnswerBox 
                 answer="The best late night wedding foods are gourmet grilled cheese, tacos, sliders, and pizza. Serve comfort food 2-3 hours after dinner (around 10 PM-midnight) to keep guests energized for dancing. Food trucks are the most popular way to serve late night wedding snacks."
               />

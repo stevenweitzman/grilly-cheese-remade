@@ -54,6 +54,15 @@ const CorporateEventAdvantages = () => {
                 </p>
               </div>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop" 
+                  alt="Corporate event with food truck catering"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <div className="prose prose-lg max-w-none">
                 <QuickAnswerBox 
                   answer="Food trucks elevate corporate events by offering culinary diversity, memorable interactive experiences, customizable menus, efficient service, branding opportunities, and venue flexibility. They create engagement and leave lasting impressions on attendees."

@@ -55,11 +55,14 @@ const BookingFoodTrucksNJ = () => {
                 </p>
               </div>
 
-              <img 
-                src="https://www.grillycheese.net/wp-content/uploads/2018/07/IMG_20220819_210322_723.webp"
-                alt="Grilled cheese truck serving a long line of guests at an event"
-                className="w-full rounded-lg mb-12"
-              />
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=1200&h=600&fit=crop" 
+                  alt="Food trucks lined up at a New Jersey outdoor event"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
 
               <div className="prose prose-lg max-w-none">
                 <QuickAnswerBox 

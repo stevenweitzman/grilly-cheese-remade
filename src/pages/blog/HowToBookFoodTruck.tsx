@@ -139,6 +139,15 @@ const HowToBookFoodTruck = () => {
                 </div>
               </header>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1567129937968-cdad8f07e2f8?w=1200&h=600&fit=crop" 
+                  alt="People ordering from a food truck at an event"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <QuickAnswerBox 
                 answer="To book a food truck, determine your guest count and date, research vendors, request 2-3 quotes, compare pricing and menus, confirm logistics, pay a deposit, and finalize details 1-2 weeks before your event. Start 2-6 months ahead for best availability."
               />

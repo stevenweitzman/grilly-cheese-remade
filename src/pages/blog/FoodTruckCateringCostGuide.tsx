@@ -112,6 +112,15 @@ const FoodTruckCateringCostGuide = () => {
                 </div>
               </header>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=1200&h=600&fit=crop" 
+                  alt="Food truck serving customers at an outdoor event"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <QuickAnswerBox 
                 answer="Food truck catering costs $15-35 per person on average, with total event costs ranging from $500 for small parties to $6,000+ for large weddings. Factors affecting price include guest count, cuisine type, travel distance, and event duration. Most food trucks also charge a minimum fee of $500-$1,500."
               />

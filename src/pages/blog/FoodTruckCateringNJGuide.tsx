@@ -63,9 +63,18 @@ const FoodTruckCateringNJGuide = () => {
                   Ultimate Guide to Food Truck Catering in New Jersey [2025]
                 </h1>
 
-                <p className="text-xl text-muted-foreground">
+                <p className="text-xl text-muted-foreground mb-8">
                   Everything you need to know about booking a food truck for your New Jersey event: costs, logistics, best practices, and insider tips from experts who&apos;ve catered over 2,500 events.
                 </p>
+
+                <div className="rounded-xl overflow-hidden mb-8">
+                  <img 
+                    src="https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?w=1200&h=600&fit=crop" 
+                    alt="Food truck festival in New Jersey serving guests"
+                    className="w-full h-64 md:h-80 object-cover"
+                    loading="eager"
+                  />
+                </div>
               </div>
 
               {/* Table of Contents */}

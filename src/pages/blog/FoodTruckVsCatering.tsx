@@ -54,6 +54,15 @@ const FoodTruckVsCatering = () => {
                 </p>
               </div>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=600&fit=crop" 
+                  alt="Elegant catering setup with food presentation"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <div className="prose prose-lg max-w-none">
                 <QuickAnswerBox 
                   answer="Food trucks offer a unique guest experience, menu variety, customization, venue flexibility, lower costs (often 30-50% less), and faster service compared to traditional catering. They're ideal for casual events, outdoor venues, and creating memorable dining experiences."

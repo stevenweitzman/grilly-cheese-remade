@@ -112,6 +112,15 @@ const WeddingFoodTruckBucksCounty = () => {
                   Bucks County Weddings
                 </span>
               </div>
+
+              <div className="rounded-xl overflow-hidden mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&h=600&fit=crop" 
+                  alt="Rustic barn wedding venue in Bucks County"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
             </div>
           </div>
         </section>

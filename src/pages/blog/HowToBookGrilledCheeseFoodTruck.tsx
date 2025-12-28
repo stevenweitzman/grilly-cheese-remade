@@ -96,6 +96,15 @@ const HowToBookGrilledCheeseFoodTruck = () => {
                   Event Planning
                 </span>
               </div>
+
+              <div className="rounded-xl overflow-hidden mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=1200&h=600&fit=crop" 
+                  alt="Gourmet grilled cheese sandwich being prepared"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
             </div>
           </div>
         </section>
