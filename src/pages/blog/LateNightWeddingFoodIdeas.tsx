@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
 import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
+import RelatedArticles from "@/components/blog/RelatedArticles";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Phone, Calendar, Clock, Check } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -188,6 +189,8 @@ const LateNightWeddingFoodIdeas = () => {
             </div>
           </div>
         </article>
+
+        <RelatedArticles currentSlug="late-night-wedding-food-ideas" category="Weddings" />
 
         <Footer />
       </div>
