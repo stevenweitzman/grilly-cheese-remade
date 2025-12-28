@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import cheeseHeroImage from "@/assets/encyclopedia/cheese-variety-hero.jpg";
 
 const categories = ["All", "Processed", "Alpine", "Cheddar", "Fresh", "Soft", "Smoked", "Italian", "Aged"];
 
@@ -21,7 +22,26 @@ const CheeseGuideTable = () => {
     : cheeseGuideData.filter(cheese => cheese.category === activeCategory);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Hero Image */}
+      <div className="relative rounded-xl overflow-hidden h-48 md:h-64">
+        <img
+          src={cheeseHeroImage}
+          alt="Variety of artisan cheeses on a rustic wooden board"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4">
+          <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">
+            Choose the Perfect Cheese
+          </h3>
+          <p className="text-white/90 text-sm md:text-base drop-shadow">
+            Each cheese brings unique melting properties and flavors
+          </p>
+        </div>
+      </div>
+
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => (

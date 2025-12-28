@@ -15,6 +15,12 @@ export interface BreadInfo {
   thickness: string;
 }
 
+// Image imports for encyclopedia
+export const encyclopediaImages = {
+  cheeseHero: "/src/assets/encyclopedia/cheese-variety-hero.jpg",
+  breadHero: "/src/assets/encyclopedia/bread-variety-hero.jpg",
+};
+
 export interface SandwichInfo {
   name: string;
   origin: string;
@@ -96,42 +102,48 @@ export const regionalSandwiches: SandwichInfo[] = [
     origin: "France", 
     flag: "🇫🇷",
     description: "The king of gourmet grilled cheese. Gruyère and ham with creamy béchamel sauce, topped with more cheese and broiled until golden.",
-    keyIngredients: ["Gruyère cheese", "Smoked ham", "Béchamel sauce", "Dijon mustard", "Parmesan"]
+    keyIngredients: ["Gruyère cheese", "Smoked ham", "Béchamel sauce", "Dijon mustard", "Parmesan"],
+    image: "/src/assets/encyclopedia/croque-monsieur.jpg"
   },
   { 
     name: "Croque Madame", 
     origin: "France", 
     flag: "🇫🇷",
     description: "Same as Croque Monsieur but crowned with a perfectly fried egg on top for extra decadence.",
-    keyIngredients: ["Gruyère cheese", "Ham", "Béchamel sauce", "Fried egg", "Butter"]
+    keyIngredients: ["Gruyère cheese", "Ham", "Béchamel sauce", "Fried egg", "Butter"],
+    image: "/src/assets/encyclopedia/croque-monsieur.jpg"
   },
   { 
     name: "Cheese Toastie", 
     origin: "United Kingdom", 
     flag: "🇬🇧",
     description: "British comfort food classic, often made in a toastie maker with cheddar and optional fillings like ham or chutney.",
-    keyIngredients: ["Cheddar cheese", "Butter", "White bread", "Optional: Ham, tomato, chutney"]
+    keyIngredients: ["Cheddar cheese", "Butter", "White bread", "Optional: Ham, tomato, chutney"],
+    image: "/src/assets/encyclopedia/cheese-toastie.jpg"
   },
   { 
     name: "Mozzarella in Carrozza", 
     origin: "Italy", 
     flag: "🇮🇹",
     description: "Translation: 'Mozzarella in a Carriage.' Fresh mozzarella between bread, breaded and deep-fried to golden perfection.",
-    keyIngredients: ["Fresh mozzarella", "White bread", "Egg", "Breadcrumbs", "Marinara sauce"]
+    keyIngredients: ["Fresh mozzarella", "White bread", "Egg", "Breadcrumbs", "Marinara sauce"],
+    image: "/src/assets/encyclopedia/mozzarella-carrozza.jpg"
   },
   { 
     name: "Quesadilla", 
     origin: "Mexico", 
     flag: "🇲🇽",
     description: "Melted cheese in a tortilla, griddled until crispy. Often includes meat, beans, or vegetables.",
-    keyIngredients: ["Oaxaca or Chihuahua cheese", "Flour tortilla", "Salsa", "Sour cream"]
+    keyIngredients: ["Oaxaca or Chihuahua cheese", "Flour tortilla", "Salsa", "Sour cream"],
+    image: "/src/assets/encyclopedia/quesadilla.jpg"
   },
   { 
     name: "Patty Melt", 
     origin: "United States", 
     flag: "🇺🇸",
     description: "A diner classic: ground beef patty with melted Swiss and caramelized onions on rye bread.",
-    keyIngredients: ["Ground beef patty", "Swiss cheese", "Caramelized onions", "Rye bread"]
+    keyIngredients: ["Ground beef patty", "Swiss cheese", "Caramelized onions", "Rye bread"],
+    image: "/src/assets/encyclopedia/patty-melt.jpg"
   },
   { 
     name: "Tuna Melt", 
@@ -155,14 +167,16 @@ export const internationalSandwiches: SandwichInfo[] = [
     origin: "Portugal",
     flag: "🇵🇹",
     description: "The ultimate indulgence: meat and egg sandwich smothered in melted cheese and beer-tomato gravy, served on fries.",
-    keyIngredients: ["Steak", "Sausage", "Ham", "Cheese sauce", "Beer-tomato sauce", "Fried egg"]
+    keyIngredients: ["Steak", "Sausage", "Ham", "Cheese sauce", "Beer-tomato sauce", "Fried egg"],
+    image: "/src/assets/encyclopedia/francesinha.jpg"
   },
   {
     name: "Khachapuri",
     origin: "Georgia",
     flag: "🇬🇪",
     description: "Boat-shaped bread filled with molten cheese and topped with a raw egg yolk that cooks in the residual heat.",
-    keyIngredients: ["Suluguni cheese", "Feta", "Egg yolk", "Butter", "Bread dough"]
+    keyIngredients: ["Suluguni cheese", "Feta", "Egg yolk", "Butter", "Bread dough"],
+    image: "/src/assets/encyclopedia/khachapuri.jpg"
   },
   {
     name: "Zapiekanka",
@@ -204,7 +218,8 @@ export const internationalSandwiches: SandwichInfo[] = [
     origin: "Greece",
     flag: "🇬🇷",
     description: "Pan-fried kefalotyri cheese with a crispy exterior, served with crusty bread and lemon.",
-    keyIngredients: ["Kefalotyri or Kasseri cheese", "Flour", "Olive oil", "Lemon", "Bread"]
+    keyIngredients: ["Kefalotyri or Kasseri cheese", "Flour", "Olive oil", "Lemon", "Bread"],
+    image: "/src/assets/encyclopedia/saganaki.jpg"
   },
   {
     name: "Käse-Toast",
