@@ -7,10 +7,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import breadHeroImage from "@/assets/encyclopedia/bread-variety-hero.jpg";
 
 const BreadGuideTable = () => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Hero Image */}
+      <div className="relative rounded-xl overflow-hidden h-48 md:h-64">
+        <img
+          src={breadHeroImage}
+          alt="Variety of artisan breads on a rustic table"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4">
+          <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">
+            The Foundation Matters
+          </h3>
+          <p className="text-white/90 text-sm md:text-base drop-shadow">
+            The right bread makes all the difference in texture and flavor
+          </p>
+        </div>
+      </div>
+
       {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto rounded-lg border border-border">
         <Table>
