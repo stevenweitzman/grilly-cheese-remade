@@ -18,6 +18,7 @@ import StatisticsSection from "@/components/StatisticsSection";
 import FoodTruckShowcase from "@/components/FoodTruckShowcase";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import InstagramFeed from "@/components/InstagramFeed";
 
 const Index = () => {
   return (
@@ -42,6 +43,7 @@ const Index = () => {
         <FoodTruckShowcase />
         <PackagesSection />
         <EnhancedClientsSection />
+        <InstagramFeed />
         <FAQSection />
         <ContactSection />
         <Footer />
