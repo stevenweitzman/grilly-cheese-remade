@@ -59,6 +59,8 @@ const PressSection = () => {
                 src={press.logo} 
                 alt={press.name}
                 className="max-h-16 max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           ))}

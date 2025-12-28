@@ -5,15 +5,16 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 const EnhancedClientsSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
+  // Client list - using text fallback instead of external images for faster loading
   const clients = [
-    { name: "The Children's Hospital of Philadelphia", logo: "https://logos-world.net/wp-content/uploads/2021/11/CHOP-Logo.png" },
-    { name: "Target", logo: "https://logos-world.net/wp-content/uploads/2020/04/Target-Logo.png" },
-    { name: "The College of New Jersey", logo: "https://www.tcnj.edu/wp-content/uploads/2023/09/lion-logo-header.png" },
-    { name: "Hallmark Channel", logo: "https://logos-world.net/wp-content/uploads/2022/01/Hallmark-Channel-Logo.png" },
-    { name: "Planet Fitness", logo: "https://logos-world.net/wp-content/uploads/2021/03/Planet-Fitness-Logo.png" },
-    { name: "Rutgers University", logo: "https://logos-world.net/wp-content/uploads/2022/11/Rutgers-University-Logo.png" },
-    { name: "Princeton University", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Princeton_seal.svg" },
-    { name: "Johnson & Johnson", logo: "https://logos-world.net/wp-content/uploads/2020/09/Johnson-Johnson-Logo.png" },
+    { name: "The Children's Hospital of Philadelphia" },
+    { name: "Target" },
+    { name: "The College of New Jersey" },
+    { name: "Hallmark Channel" },
+    { name: "Planet Fitness" },
+    { name: "Rutgers University" },
+    { name: "Princeton University" },
+    { name: "Johnson & Johnson" },
   ];
 
   const testimonials = [
@@ -81,10 +82,9 @@ const EnhancedClientsSection = () => {
               transition={{ duration: 0.5 }}
               className="bg-card rounded-2xl p-8 md:p-12 shadow-warm border-2 border-border relative overflow-hidden"
             >
-              <motion.div
+              {/* Static decorative element - removed animation for performance */}
+              <div
                 className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full -mr-16 -mt-16"
-                animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-                transition={{ duration: 20, repeat: Infinity }}
               />
               
               <Quote className="h-12 w-12 text-accent/30 mb-4" />
@@ -168,33 +168,16 @@ const EnhancedClientsSection = () => {
           {clients.map((client, index) => (
             <motion.div
               key={index}
-              className="flex items-center justify-center p-6 bg-background rounded-lg shadow-sm"
+              className="flex items-center justify-center p-6 bg-background rounded-lg shadow-sm hover:shadow-warm transition-shadow duration-300"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "var(--shadow-warm)"
-              }}
+              transition={{ delay: Math.min(index * 0.05, 0.3), duration: 0.4 }}
+              whileHover={{ scale: 1.05 }}
             >
-              <img
-                src={client.logo}
-                alt={`${client.name} logo`}
-                className="max-w-full h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                loading="lazy"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent) {
-                    const fallback = document.createElement('div');
-                    fallback.className = 'text-center font-semibold text-muted-foreground text-sm';
-                    fallback.textContent = client.name;
-                    parent.appendChild(fallback);
-                  }
-                }}
-              />
+              <span className="text-center font-semibold text-muted-foreground text-sm">
+                {client.name}
+              </span>
             </motion.div>
           ))}
         </div>

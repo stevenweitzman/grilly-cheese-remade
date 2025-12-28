@@ -4,18 +4,20 @@ import heroImage from "@/assets/hero-grilled-cheese.jpg";
 import QuickQuoteForm from "@/components/QuickQuoteForm";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-const Hero = () => {
+import { memo } from "react";
+
+const Hero = memo(() => {
   const { scrollY } = useScroll();
   
-  // Simplified parallax effects
+  // Simplified parallax effects with will-change for GPU acceleration
   const imageY = useTransform(scrollY, [0, 500], [0, 100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax */}
+      {/* Background Image with Parallax - Optimized */}
       <motion.div 
-        className="absolute inset-0 z-0 overflow-hidden"
+        className="absolute inset-0 z-0 overflow-hidden will-change-transform"
         style={{ y: imageY }}
       >
         <div className="absolute inset-0 scale-110">
@@ -23,6 +25,9 @@ const Hero = () => {
             src={heroImage}
             alt="Golden, buttery grilled cheese sandwich with melted American cheese on thick-cut white bread - award-winning food truck catering in New Jersey"
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
@@ -157,7 +162,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.3 }}
-              whileHover={{ scale: 1.02, borderColor: "hsl(var(--accent))" }}
+              whileHover={{ scale: 1.02 }}
             >
               <div className="flex items-center gap-3 md:gap-4">
                 <motion.div 
@@ -241,6 +246,8 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

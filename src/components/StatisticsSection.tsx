@@ -7,17 +7,9 @@ import { Link } from "react-router-dom";
 const StatisticsSection = () => {
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-background relative overflow-hidden">
-      {/* Animated background elements */}
-      <motion.div
+      {/* Static background gradient - removed animation for performance */}
+      <div
         className="absolute inset-0 opacity-30"
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%"],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
         style={{
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent) / 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, hsl(var(--primary) / 0.1) 0%, transparent 50%)",
           backgroundSize: "100% 100%"
@@ -138,16 +130,12 @@ const StatCard = ({ icon: Icon, end, prefix = "", suffix = "", label, delay, dec
   return (
     <motion.div
       ref={ref}
-      className="bg-card border-2 border-border rounded-xl p-8 text-center relative overflow-hidden group"
+      className="bg-card border-2 border-border rounded-xl p-8 text-center relative overflow-hidden group hover:border-primary hover:shadow-warm transition-all duration-300"
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      whileHover={{ 
-        scale: 1.05,
-        borderColor: color === "primary" ? "hsl(var(--primary))" : "hsl(var(--accent))",
-        boxShadow: "var(--shadow-warm)"
-      }}
+      whileHover={{ scale: 1.05 }}
     >
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100"
