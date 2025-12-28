@@ -179,12 +179,12 @@ const SEOSchema = ({
 
   const cateringServiceSchema = {
     "@context": "https://schema.org",
-    "@type": "FoodService",
+    "@type": "Service",
     "name": "Grilly Cheese Catering Services",
     "serviceType": "Food Truck Catering",
     "description": "Professional gourmet grilled cheese food truck catering for weddings, corporate events, festivals, and private parties",
     "provider": {
-      "@type": "FoodEstablishment",
+      "@type": "LocalBusiness",
       "name": "Grilly Cheese",
       "telephone": "844-474-5591",
       "url": baseUrl
@@ -197,10 +197,6 @@ const SEOSchema = ({
       { "@type": "State", "name": "Delaware" },
       { "@type": "AdministrativeArea", "name": "Washington DC" }
     ],
-    "serviceOutput": {
-      "@type": "FoodEvent",
-      "name": "Catered Event"
-    },
     "offers": [
       {
         "@type": "Offer",
