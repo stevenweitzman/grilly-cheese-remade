@@ -124,14 +124,8 @@ const HorizontalMenuGallery = () => {
               >
                 <motion.div
                   onClick={() => setSelectedItem(item)}
-                  className="bg-card border-2 border-border rounded-xl overflow-hidden cursor-pointer h-full"
-                  whileHover={{ 
-                    scale: 1.05,
-                    borderColor: "hsl(var(--accent))",
-                    boxShadow: "var(--shadow-warm)",
-                    rotateY: 5,
-                  }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="bg-card border-2 border-border rounded-xl overflow-hidden cursor-pointer h-full hover:border-accent hover:shadow-warm transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div 
@@ -232,12 +226,6 @@ const HorizontalMenuGallery = () => {
           )}
         </DialogContent>
       </Dialog>
-
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 };
