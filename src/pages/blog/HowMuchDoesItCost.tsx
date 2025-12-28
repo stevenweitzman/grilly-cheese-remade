@@ -104,6 +104,15 @@ const HowMuchDoesItCost = () => {
                   Event Planning
                 </span>
               </div>
+
+              <div className="rounded-xl overflow-hidden mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=600&fit=crop" 
+                  alt="Delicious food prepared for event catering"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
             </div>
           </div>
         </section>

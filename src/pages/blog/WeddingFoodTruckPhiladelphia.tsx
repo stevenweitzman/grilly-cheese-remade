@@ -112,6 +112,15 @@ const WeddingFoodTruckPhiladelphia = () => {
                   Philadelphia Weddings
                 </span>
               </div>
+
+              <div className="rounded-xl overflow-hidden mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=600&fit=crop" 
+                  alt="Elegant wedding reception in Philadelphia"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
             </div>
           </div>
         </section>

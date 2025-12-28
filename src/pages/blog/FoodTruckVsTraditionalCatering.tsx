@@ -106,6 +106,15 @@ const FoodTruckVsTraditionalCatering = () => {
                 </div>
               </header>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&h=600&fit=crop" 
+                  alt="Delicious food being prepared at an event"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <QuickAnswerBox 
                 answer="Food trucks are better for casual, interactive events and cost 30-50% less than traditional catering. Traditional caterers are better for formal, indoor-only events requiring plated service. Most weddings, corporate events, and parties benefit from food truck catering's unique experience and lower cost."
               />

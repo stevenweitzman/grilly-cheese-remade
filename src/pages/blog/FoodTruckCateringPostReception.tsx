@@ -112,6 +112,15 @@ const FoodTruckCateringPostReception = () => {
                   Event Planning
                 </span>
               </div>
+
+              <div className="rounded-xl overflow-hidden mb-8">
+                <img 
+                  src="https://images.unsplash.com/photo-1529543544277-750e2ea84be5?w=1200&h=600&fit=crop" 
+                  alt="Wedding guests celebrating at an evening reception"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
             </div>
           </div>
         </section>

@@ -54,6 +54,15 @@ const QuestionsToAsk = () => {
                 </p>
               </div>
 
+              <div className="mb-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=600&fit=crop" 
+                  alt="Event planners discussing vendor options"
+                  className="w-full h-64 md:h-80 object-cover"
+                  loading="eager"
+                />
+              </div>
+
               <div className="prose prose-lg max-w-none">
                 <QuickAnswerBox 
                   answer="Ask about: menu options and pricing, minimum/maximum guest counts, availability for your date, deposit and cancellation policies, equipment requirements, dietary accommodations, and references from previous events."
