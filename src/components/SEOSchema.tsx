@@ -26,7 +26,7 @@ const SEOSchema = ({
     "name": "Grilly Cheese",
     "alternateName": "Grilly Cheese Food Truck",
     "description": "Award-winning gourmet grilled cheese food truck catering for weddings, corporate events, and private parties across NJ, PA, NYC, and beyond",
-    "image": `${baseUrl}/assets/hero-grilled-cheese.jpg`,
+    "image": `${baseUrl}/assets/grilly-cheese-logo.png`,
     "@id": baseUrl,
     "url": baseUrl,
     "telephone": "844-474-5591",
@@ -179,7 +179,7 @@ const SEOSchema = ({
     "@type": "Organization",
     "name": "Grilly Cheese",
     "url": baseUrl,
-    "logo": `${baseUrl}/assets/hero-grilled-cheese.jpg`,
+    "logo": `${baseUrl}/assets/grilly-cheese-logo.png`,
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "844-474-5591",
