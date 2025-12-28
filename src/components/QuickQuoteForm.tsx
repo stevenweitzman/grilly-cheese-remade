@@ -73,7 +73,17 @@ const QuickQuoteForm = () => {
       const { error } = await supabase.functions.invoke("send-quote-email", {
         body: {
           formType: "quick",
-          ...formData,
+          formData: {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            eventDate: formData.eventDate,
+            eventStartTime: formData.eventStartTime,
+            guests: formData.guests,
+            eventType: formData.eventType,
+            propertyType: formData.propertyType,
+            comments: formData.comments,
+          },
         },
       });
 
