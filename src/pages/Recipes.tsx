@@ -225,30 +225,81 @@ const Recipes = () => {
             "@type": "ItemList",
             "name": "Grilly Cheese Signature Recipes",
             "description": "Award-winning grilled cheese recipes from Grilly Cheese food truck",
+            "url": "https://grillycheese.net/recipes",
             "numberOfItems": signatureRecipes.length,
             "itemListElement": signatureRecipes.map((recipe, index) => ({
-              "@type": "Recipe",
+              "@type": "ListItem",
               "position": index + 1,
-              "name": recipe.name,
-              "description": recipe.description,
-              "image": {
-                "@type": "ImageObject",
-                "url": recipe.image.replace('w=600&h=400', 'w=1200&h=800'),
-                "width": 1200,
-                "height": 800,
-                "caption": `${recipe.name} grilled cheese sandwich`
-              },
-              "cookTime": `PT${recipe.cookTime.replace("-", "").replace(" min", "M")}`,
-              "recipeYield": recipe.servings,
-              "recipeIngredient": recipe.ingredients,
-              "author": {
-                "@type": "Organization",
-                "name": "Grilly Cheese"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "500"
+              "item": {
+                "@type": "Recipe",
+                "@id": `https://grillycheese.net/recipes#${recipe.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`,
+                "name": `${recipe.name} Grilled Cheese`,
+                "description": recipe.description,
+                "image": [
+                  recipe.image.startsWith('http') ? recipe.image : `https://grillycheese.net${recipe.image}`
+                ],
+                "author": {
+                  "@type": "Organization",
+                  "name": "Grilly Cheese",
+                  "url": "https://grillycheese.net"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Grilly Cheese",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://grillycheese.net/assets/grilly-cheese-logo.png"
+                  }
+                },
+                "datePublished": "2024-01-15",
+                "dateModified": "2025-12-28",
+                "prepTime": "PT5M",
+                "cookTime": `PT${recipe.cookTime.split('-')[1]?.replace(' min', '') || recipe.cookTime.replace('-', '').replace(' min', '')}M`,
+                "totalTime": `PT${parseInt(recipe.cookTime.split('-')[1] || recipe.cookTime.replace(' min', '')) + 5}M`,
+                "recipeYield": `${recipe.servings} serving`,
+                "recipeCategory": "Sandwich",
+                "recipeCuisine": "American",
+                "keywords": `grilled cheese, ${recipe.name.toLowerCase()}, ${recipe.category.toLowerCase()}, gourmet sandwich, comfort food`,
+                "recipeIngredient": recipe.ingredients,
+                "recipeInstructions": [
+                  {
+                    "@type": "HowToStep",
+                    "name": "Prepare ingredients",
+                    "text": `Gather all ingredients: ${recipe.ingredients.slice(0, 3).join(', ')}, and remaining items. Slice cheese thinly for even melting.`
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Butter the bread",
+                    "text": "Spread softened butter evenly on the outside of each bread slice. This creates the golden, crispy exterior."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Layer the fillings",
+                    "text": `On the unbuttered side, layer the cheese and fillings. ${recipe.tips}`
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Cook to perfection",
+                    "text": `Heat a skillet over medium heat. Cook for ${recipe.cookTime}, flipping halfway through, until bread is golden brown and cheese is melted.`
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Serve",
+                    "text": "Let rest for 1 minute before cutting. Serve immediately while warm and gooey."
+                  }
+                ],
+                "nutrition": {
+                  "@type": "NutritionInformation",
+                  "servingSize": "1 sandwich"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "ratingCount": "500",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "suitableForDiet": recipe.category === "Vegetarian" ? "https://schema.org/VegetarianDiet" : undefined
               }
             }))
           })}
