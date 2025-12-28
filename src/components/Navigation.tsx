@@ -138,31 +138,35 @@ const Navigation = () => {
                     Long Island
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Resources</div>
+                <DropdownMenuItem asChild>
+                  <Link to="/blog" className="cursor-pointer">
+                    Blog
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  {isHomePage ? (
+                    <a href="#packages" className="cursor-pointer">
+                      Packages
+                    </a>
+                  ) : (
+                    <Link to="/#packages" className="cursor-pointer">
+                      Packages
+                    </Link>
+                  )}
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/blog" className="text-foreground hover:text-primary transition-colors">
-              Blog
-            </Link>
-
             {isHomePage ? (
-              <>
-                <a href="#packages" className="text-foreground hover:text-primary transition-colors">
-                  Packages
-                </a>
-                <a href="#contact" className="text-foreground hover:text-primary transition-colors">
-                  Contact
-                </a>
-              </>
+              <a href="#contact" className="text-foreground hover:text-primary transition-colors">
+                Contact
+              </a>
             ) : (
-              <>
-                <Link to="/#packages" className="text-foreground hover:text-primary transition-colors">
-                  Packages
-                </Link>
-                <Link to="/#contact" className="text-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </>
+              <Link to="/#contact" className="text-foreground hover:text-primary transition-colors">
+                Contact
+              </Link>
             )}
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-background">
               <Link 
@@ -412,53 +416,53 @@ const Navigation = () => {
                     >
                       Long Island
                     </Link>
+                    <div className="border-t border-border my-2" />
+                    <div className="text-xs font-semibold text-muted-foreground mb-1">Resources</div>
+                    <Link
+                      to="/blog"
+                      className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Blog
+                    </Link>
+                    {isHomePage ? (
+                      <a
+                        href="#packages"
+                        className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Packages
+                      </a>
+                    ) : (
+                      <Link
+                        to="/#packages"
+                        className="block py-2 text-foreground hover:text-primary transition-colors text-sm"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Packages
+                      </Link>
+                    )}
                   </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
 
-            <Link
-              to="/blog"
-              className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Blog
-            </Link>
-
             {isHomePage ? (
-              <>
-                <a
-                  href="#packages"
-                  className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Packages
-                </a>
-                <a
-                  href="#contact"
-                  className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact
-                </a>
-              </>
+              <a
+                href="#contact"
+                className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </a>
             ) : (
-              <>
-                <Link
-                  to="/#packages"
-                  className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Packages
-                </Link>
-                <Link
-                  to="/#contact"
-                  className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact
-                </Link>
-              </>
+              <Link
+                to="/#contact"
+                className="block py-2 text-foreground hover:text-primary transition-colors font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
             )}
 
             <Button asChild className="w-full mt-4" variant="outline">
