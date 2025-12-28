@@ -173,6 +173,11 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-3">Resources</h4>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link to="/encyclopedia" className="text-primary-foreground/70 hover:text-accent transition-colors">
+                  Grilled Cheese Encyclopedia
+                </Link>
+              </li>
+              <li>
                 <Link to="/recipes" className="text-primary-foreground/70 hover:text-accent transition-colors">
                   Recipes
                 </Link>
