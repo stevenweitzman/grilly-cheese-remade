@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
-import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -18,44 +18,16 @@ const WeddingFoodTruckPhiladelphia = () => {
         keywords="wedding food truck catering Philadelphia, food truck wedding Philadelphia, Philadelphia wedding food truck, late night wedding food truck Philadelphia, food truck catering for weddings Philadelphia"
         ogType="article"
         articlePublishedTime="2025-12-23T10:00:00Z"
-        articleModifiedTime="2025-12-23T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       
-      <SEOSchema
-        type="blog"
-        title="Wedding Food Truck Catering in Philadelphia"
+      <BlogArticleSchema
+        headline="Wedding Food Truck Catering in Philadelphia"
         description="Wedding food truck catering in Philadelphia. Grilled cheese food truck service for Philadelphia weddings, late-night receptions, and venues across the city."
+        datePublished="2025-12-23"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/wedding-food-truck-catering-philadelphia"
       />
-
-      {/* BlogPosting Schema */}
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": "Wedding Food Truck Catering in Philadelphia",
-            "author": {
-              "@type": "Organization",
-              "name": "Grilly Cheese"
-            },
-            "datePublished": "2025-12-23",
-            "image": "https://www.grillycheese.net/images/wedding-food-truck-philadelphia.jpg",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Grilly Cheese",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.grillycheese.net/logo.png"
-              }
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://www.grillycheese.net/blog/wedding-food-truck-catering-philadelphia"
-            }
-          })}
-        </script>
-      </Helmet>
 
       {/* FAQPage Schema */}
       <Helmet>

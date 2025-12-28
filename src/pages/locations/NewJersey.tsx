@@ -192,6 +192,8 @@ const NewJersey = () => {
                   <span className="text-muted-foreground">•</span>
                   <Link to="/locations/burlington-county" className="text-accent hover:underline font-medium">Burlington County</Link>
                   <span className="text-muted-foreground">•</span>
+                  <Link to="/locations/gloucester-county" className="text-accent hover:underline font-medium">Gloucester County</Link>
+                  <span className="text-muted-foreground">•</span>
                   <Link to="/locations/princeton" className="text-accent hover:underline font-medium">Princeton Area</Link>
                 </div>
               </div>

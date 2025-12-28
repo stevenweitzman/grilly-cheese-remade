@@ -8,6 +8,7 @@ import StickyCTABar from "@/components/StickyCTABar";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingQuoteButton from "@/components/FloatingQuoteButton";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const Pennsylvania = () => {
   const cities = [
@@ -175,6 +176,13 @@ const Pennsylvania = () => {
               <p className="text-center text-muted-foreground mt-8">
                 Not listed? <a href="tel:8444745591" className="text-accent hover:underline">Contact us</a> - we serve most of Pennsylvania!
               </p>
+              
+              <div className="mt-8 p-6 bg-card border border-border rounded-lg">
+                <h3 className="font-bold text-lg mb-4 text-center">Explore Our PA County Pages</h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Link to="/locations/bucks-county" className="text-accent hover:underline font-medium">Bucks County</Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
