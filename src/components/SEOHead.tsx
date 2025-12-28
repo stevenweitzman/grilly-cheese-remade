@@ -13,6 +13,7 @@ interface SEOHeadProps {
   articleAuthor?: string;
   articlePublishedTime?: string;
   articleModifiedTime?: string;
+  noIndex?: boolean;
 }
 
 const SEOHead = ({ 
@@ -27,7 +28,8 @@ const SEOHead = ({
   ogType = "website",
   articleAuthor,
   articlePublishedTime,
-  articleModifiedTime
+  articleModifiedTime,
+  noIndex = false
 }: SEOHeadProps) => {
   const baseUrl = "https://grillycheese.net";
   const fullTitle = title.includes("Grilly Cheese") ? title : `${title} | Grilly Cheese`;
@@ -68,7 +70,7 @@ const SEOHead = ({
       <meta property="twitter:image:height" content={String(ogImageHeight)} />
 
       {/* Additional SEO */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
       <meta name="author" content="Grilly Cheese" />
