@@ -91,8 +91,142 @@ const SEOSchema = ({
     "hasMenu": {
       "@type": "Menu",
       "name": "Catering Menu",
-      "description": "Gourmet grilled cheese sandwiches, hot dogs, and sides"
-    }
+      "description": "Gourmet grilled cheese sandwiches, hot dogs, and sides",
+      "hasMenuSection": [
+        {
+          "@type": "MenuSection",
+          "name": "Signature Sandwiches",
+          "description": "Our award-winning grilled cheese creations",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "The Grilly Cheese",
+              "description": "American, cheddar, and provolone on buttery grilled bread"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "The Cluck Norris",
+              "description": "Crispy chicken, bacon, ranch, and melted cheese"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "The Piggy Smalls",
+              "description": "Pulled pork, BBQ sauce, and melted cheddar"
+            }
+          ]
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Sides",
+          "description": "Perfect accompaniments",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Hand-Cut Fries",
+              "description": "Fresh-cut and seasoned"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Tomato Soup",
+              "description": "Classic creamy tomato soup"
+            }
+          ]
+        }
+      ]
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Sarah M."
+        },
+        "reviewBody": "Grilly Cheese catered our wedding and it was incredible! Guests are still talking about the food truck. Professional, delicious, and so much fun!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Mike T."
+        },
+        "reviewBody": "We hired them for a corporate event with 200 people. Fast service, amazing food, and everyone loved the grilled cheese. Highly recommend!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Jennifer L."
+        },
+        "reviewBody": "The team was so easy to work with. They handled everything and our guests were thrilled. Best decision we made for our party!"
+      }
+    ]
+  };
+
+  const cateringServiceSchema = {
+    "@context": "https://schema.org",
+    "@type": "FoodService",
+    "name": "Grilly Cheese Catering Services",
+    "serviceType": "Food Truck Catering",
+    "description": "Professional gourmet grilled cheese food truck catering for weddings, corporate events, festivals, and private parties",
+    "provider": {
+      "@type": "FoodEstablishment",
+      "name": "Grilly Cheese",
+      "telephone": "844-474-5591",
+      "url": baseUrl
+    },
+    "areaServed": [
+      { "@type": "State", "name": "New Jersey" },
+      { "@type": "State", "name": "Pennsylvania" },
+      { "@type": "State", "name": "New York" },
+      { "@type": "State", "name": "Maryland" },
+      { "@type": "State", "name": "Delaware" },
+      { "@type": "AdministrativeArea", "name": "Washington DC" }
+    ],
+    "serviceOutput": {
+      "@type": "FoodEvent",
+      "name": "Catered Event"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Simple Menu Package",
+        "description": "Classic grilled cheese sandwiches and hot dogs with hand-cut fries, beverages, and all serving equipment",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Full Menu Package",
+        "description": "Gourmet grilled cheese menu featuring The Grilly Cheese, The Cluck Norris, and specialty sandwiches with premium sides",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Brunch Package",
+        "description": "Breakfast sandwiches and bagel bar with cream cheese spreads, perfect for morning events",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Drop-Off Catering",
+        "description": "Convenient delivered catering platters for smaller events and office lunches",
+        "priceCurrency": "USD"
+      }
+    ]
   };
 
   const serviceSchema = {
@@ -255,6 +389,9 @@ const SEOSchema = ({
     <Helmet>
       <script type="application/ld+json">
         {JSON.stringify(localBusinessSchema)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(cateringServiceSchema)}
       </script>
       <script type="application/ld+json">
         {JSON.stringify(serviceSchema)}
