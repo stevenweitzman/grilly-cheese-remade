@@ -9,9 +9,27 @@ import StickyCTABar from "@/components/StickyCTABar";
 const BlogIndex = () => {
   const posts = [
     {
+      title: "Perfect Grilled Cheese Secrets: Pro Tips from Food Truck Chefs",
+      slug: "grilled-cheese-recipe-secrets",
+      excerpt: "Learn the secrets to making the perfect grilled cheese sandwich from award-winning food truck chefs. Pro tips on bread, cheese, and technique.",
+      date: "December 28, 2025",
+      category: "Recipes",
+      readTime: "8 min read",
+      image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&h=400&fit=crop"
+    },
+    {
+      title: "5 Signature Grilled Cheese Sandwiches You Need to Try",
+      slug: "signature-grilled-cheese-sandwiches",
+      excerpt: "Discover our award-winning signature sandwiches: The Grilly Cheese, The Cluck Norris, and more favorites from NJ's top-rated food truck.",
+      date: "December 28, 2025",
+      category: "Recipes",
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1475090169767-40ed8d18f67d?w=600&h=400&fit=crop"
+    },
+    {
       title: "How Much Does Food Truck Catering Cost? [2025 Guide]",
       slug: "food-truck-catering-cost",
-      excerpt: "Food truck catering costs $15-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples.",
+      excerpt: "Food truck catering costs $10-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples.",
       date: "December 27, 2025",
       category: "Event Planning",
       readTime: "10 min read",

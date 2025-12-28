@@ -68,7 +68,9 @@ import HowToBookFoodTruck from "./pages/blog/HowToBookFoodTruck";
 import FoodTruckVsTraditionalCatering from "./pages/blog/FoodTruckVsTraditionalCatering";
 import LateNightWeddingFoodIdeas from "./pages/blog/LateNightWeddingFoodIdeas";
 import FoodTruckCateringCostGuide from "./pages/blog/FoodTruckCateringCostGuide";
-
+import GrilledCheeseRecipeSecrets from "./pages/blog/GrilledCheeseRecipeSecrets";
+import SignatureGrilledCheeseSandwiches from "./pages/blog/SignatureGrilledCheeseSandwiches";
+import Recipes from "./pages/Recipes";
 const queryClient = new QueryClient();
 
 const ScrollToHashWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -163,6 +165,11 @@ const App = () => (
           <Route path="/blog/food-truck-vs-traditional-catering" element={<FoodTruckVsTraditionalCatering />} />
           <Route path="/blog/late-night-wedding-food-ideas" element={<LateNightWeddingFoodIdeas />} />
           <Route path="/blog/food-truck-catering-cost" element={<FoodTruckCateringCostGuide />} />
+          <Route path="/blog/grilled-cheese-recipe-secrets" element={<GrilledCheeseRecipeSecrets />} />
+          <Route path="/blog/signature-grilled-cheese-sandwiches" element={<SignatureGrilledCheeseSandwiches />} />
+          
+          {/* Recipe Page */}
+          <Route path="/recipes" element={<Recipes />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
