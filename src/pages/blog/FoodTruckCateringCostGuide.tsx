@@ -13,27 +13,27 @@ import PricingTable from "@/components/blog/PricingTable";
 
 const FoodTruckCateringCostGuide = () => {
   const eventTypePricing = [
-    { category: "Small Party (25-50 guests)", range: "$500–$1,500", perPerson: "$15–$30", notes: "May have minimum charge" },
-    { category: "Medium Event (50-100 guests)", range: "$1,000–$3,000", perPerson: "$15–$30", notes: "Sweet spot for value" },
-    { category: "Wedding (100-200 guests)", range: "$2,000–$6,000", perPerson: "$18–$35", notes: "Often includes extras" },
-    { category: "Corporate Event (50-150)", range: "$1,500–$4,500", perPerson: "$20–$35", notes: "May include branding" },
-    { category: "Large Festival (200+)", range: "$4,000–$10,000+", perPerson: "$15–$25", notes: "Volume discounts apply" },
+    { category: "Small Party (25-50 guests)", range: "$400–$1,500", perPerson: "$10–$30", notes: "May have minimum charge" },
+    { category: "Medium Event (50-100 guests)", range: "$750–$3,000", perPerson: "$10–$30", notes: "Sweet spot for value" },
+    { category: "Wedding (100-200 guests)", range: "$1,500–$6,000", perPerson: "$12–$35", notes: "Often includes extras" },
+    { category: "Corporate Event (50-150)", range: "$1,000–$4,500", perPerson: "$14–$35", notes: "May include branding" },
+    { category: "Large Festival (200+)", range: "$3,000–$10,000+", perPerson: "$10–$25", notes: "Volume discounts apply" },
   ];
 
   const cuisinePricing = [
-    { category: "Grilled Cheese / Comfort", range: "$15–$25", perPerson: "per person" },
-    { category: "Tacos / Mexican", range: "$12–$22", perPerson: "per person" },
-    { category: "BBQ", range: "$18–$30", perPerson: "per person" },
-    { category: "Pizza", range: "$10–$20", perPerson: "per person" },
-    { category: "Gourmet Burgers", range: "$15–$28", perPerson: "per person" },
-    { category: "Asian Fusion", range: "$18–$32", perPerson: "per person" },
+    { category: "Grilled Cheese / Comfort", range: "$10–$25", perPerson: "per person" },
+    { category: "Tacos / Mexican", range: "$8–$22", perPerson: "per person" },
+    { category: "BBQ", range: "$12–$30", perPerson: "per person" },
+    { category: "Pizza", range: "$8–$20", perPerson: "per person" },
+    { category: "Gourmet Burgers", range: "$10–$28", perPerson: "per person" },
+    { category: "Asian Fusion", range: "$12–$32", perPerson: "per person" },
   ];
 
   return (
     <>
       <SEOHead
         title="How Much Does Food Truck Catering Cost? [2025 Pricing Guide]"
-        description="Food truck catering costs $15-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples and cost-saving tips."
+        description="Food truck catering costs $10-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples and cost-saving tips."
         canonical="https://grillycheese.net/blog/food-truck-catering-cost"
         keywords="food truck catering cost, how much does food truck cost, food truck pricing, food truck rental cost"
         ogType="article"
@@ -44,7 +44,7 @@ const FoodTruckCateringCostGuide = () => {
 
       <BlogArticleSchema
         headline="How Much Does Food Truck Catering Cost? [2025 Pricing Guide]"
-        description="Food truck catering costs $15-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples and cost-saving tips."
+        description="Food truck catering costs $10-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples and cost-saving tips."
         datePublished="2025-12-26"
         dateModified="2025-12-28"
         url="https://grillycheese.net/blog/food-truck-catering-cost"
@@ -61,7 +61,7 @@ const FoodTruckCateringCostGuide = () => {
                 "name": "How much does food truck catering cost per person?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Food truck catering typically costs $15-35 per person, depending on the cuisine type, menu complexity, and event requirements. Most food trucks charge between $18-25 per person for standard menus."
+                  "text": "Food truck catering typically costs $10-35 per person, depending on the cuisine type, menu complexity, and event requirements. Most food trucks charge between $14-25 per person for standard menus."
                 }
               },
               {
@@ -69,7 +69,7 @@ const FoodTruckCateringCostGuide = () => {
                 "name": "How much does it cost to hire a food truck for a wedding?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Food truck catering for a wedding typically costs $2,000-$6,000 for 100-200 guests, which works out to $18-35 per person. This is often 30-50% less than traditional wedding catering."
+                  "text": "Food truck catering for a wedding typically costs $1,500-$6,000 for 100-200 guests, which works out to $12-35 per person. This is often 30-50% less than traditional wedding catering."
                 }
               },
               {
@@ -77,7 +77,7 @@ const FoodTruckCateringCostGuide = () => {
                 "name": "Do food trucks have minimum charges?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes, most food trucks have minimum charges ranging from $500-$1,500 depending on the market and cuisine type. This covers their base operating costs regardless of guest count."
+                  "text": "Yes, most food trucks have minimum charges ranging from $350-$1,500 depending on the market and cuisine type. This covers their base operating costs regardless of guest count."
                 }
               }
             ]
@@ -122,7 +122,7 @@ const FoodTruckCateringCostGuide = () => {
               </div>
 
               <QuickAnswerBox 
-                answer="Food truck catering costs $15-35 per person on average, with total event costs ranging from $500 for small parties to $6,000+ for large weddings. Factors affecting price include guest count, cuisine type, travel distance, and event duration. Most food trucks also charge a minimum fee of $500-$1,500."
+                answer="Food truck catering costs $10-35 per person on average, with total event costs ranging from $400 for small parties to $6,000+ for large weddings. Factors affecting price include guest count, cuisine type, travel distance, and event duration. Most food trucks also charge a minimum fee of $350-$1,500."
               />
 
               <div className="prose prose-lg max-w-none">
@@ -134,7 +134,7 @@ const FoodTruckCateringCostGuide = () => {
                   How Much Does Food Truck Catering Cost Per Person?
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  <strong className="text-foreground">Food truck catering typically costs $15-35 per person</strong>, with most falling in the $18-25 range. The exact price depends on cuisine type, menu complexity, and what's included (drinks, sides, desserts).
+                  <strong className="text-foreground">Food truck catering typically costs $10-35 per person</strong>, with most falling in the $14-25 range. The exact price depends on cuisine type, menu complexity, and what's included (drinks, sides, desserts).
                 </p>
 
                 <h2 className="text-2xl font-bold text-foreground mt-12 mb-6">
@@ -171,7 +171,7 @@ const FoodTruckCateringCostGuide = () => {
                   Do Food Trucks Have Minimum Charges?
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  <strong className="text-foreground">Yes, most food trucks have minimum charges ranging from $500-$1,500.</strong> This covers base operating costs including fuel, labor, and food prep time. For example, if the minimum is $800 and you have 30 guests at $20/person ($600), you'd pay the $800 minimum.
+                  <strong className="text-foreground">Yes, most food trucks have minimum charges ranging from $350-$1,500.</strong> This covers base operating costs including fuel, labor, and food prep time. For example, if the minimum is $500 and you have 30 guests at $15/person ($450), you'd pay the $500 minimum.
                 </p>
 
                 <h2 className="text-2xl font-bold text-foreground mt-12 mb-4">
@@ -190,7 +190,7 @@ const FoodTruckCateringCostGuide = () => {
                   Food Truck vs Traditional Catering Cost
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  <strong className="text-foreground">Food trucks are typically 30-50% cheaper than traditional catering.</strong> A traditional caterer charging $50-80 per person for a wedding would cost $5,000-$8,000 for 100 guests. A food truck serving the same 100 guests costs $1,800-$3,000.
+                  <strong className="text-foreground">Food trucks are typically 30-50% cheaper than traditional catering.</strong> A traditional caterer charging $50-80 per person for a wedding would cost $5,000-$8,000 for 100 guests. A food truck serving the same 100 guests costs $1,200-$3,000.
                 </p>
               </div>
 
