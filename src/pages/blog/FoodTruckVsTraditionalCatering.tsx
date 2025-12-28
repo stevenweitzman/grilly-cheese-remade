@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Phone, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -37,8 +38,19 @@ const FoodTruckVsTraditionalCatering = () => {
         description="Compare food truck catering to traditional catering. See side-by-side differences in cost, experience, and flexibility to choose the best option for your event."
         canonical="https://grillycheese.net/blog/food-truck-vs-traditional-catering"
         keywords="food truck vs catering, food truck or caterer, food truck catering comparison, traditional catering vs food truck"
+        ogType="article"
+        articlePublishedTime="2025-12-25T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema type="blog" title="Food Truck vs Traditional Catering" description="Complete comparison of food trucks and traditional catering" url="https://grillycheese.net/blog/food-truck-vs-traditional-catering" />
+
+      <BlogArticleSchema
+        headline="Food Truck vs Traditional Catering: Which Is Better? [2025 Comparison]"
+        description="Compare food truck catering to traditional catering. See side-by-side differences in cost, experience, and flexibility to choose the best option for your event."
+        datePublished="2025-12-25"
+        dateModified="2025-12-28"
+        url="https://grillycheese.net/blog/food-truck-vs-traditional-catering"
+      />
 
       <Helmet>
         <script type="application/ld+json">

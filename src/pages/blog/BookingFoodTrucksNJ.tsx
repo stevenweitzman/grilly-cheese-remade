@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -15,10 +16,20 @@ const BookingFoodTrucksNJ = () => {
         description="Complete guide to booking food trucks in NJ. Learn about permits, regulations, logistics, and how to choose the perfect food truck for your event."
         canonical="https://grillycheese.net/blog/booking-food-trucks-in-new-jersey"
         keywords="booking food trucks NJ, New Jersey food truck permits, food truck regulations, event planning NJ"
+        ogType="article"
+        articlePublishedTime="2023-09-13T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema 
         type="blog" 
         title="The Ultimate Guide to Booking Food Trucks in New Jersey"
+        url="https://grillycheese.net/blog/booking-food-trucks-in-new-jersey"
+      />
+      <BlogArticleSchema
+        headline="The Ultimate Guide to Booking Food Trucks in New Jersey"
+        description="Complete guide to booking food trucks in NJ. Learn about permits, regulations, logistics, and how to choose the perfect food truck for your event."
+        datePublished="2023-09-13"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/booking-food-trucks-in-new-jersey"
       />
       

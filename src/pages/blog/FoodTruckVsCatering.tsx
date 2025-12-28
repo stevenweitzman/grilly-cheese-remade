@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -15,10 +16,20 @@ const FoodTruckVsCatering = () => {
         description="Compare food trucks to traditional catering. Discover the benefits of hiring a food truck for your event and why it might be the perfect choice."
         canonical="https://grillycheese.net/blog/food-trucks-vs-catering"
         keywords="food truck vs catering, catering comparison, event catering options, food truck benefits"
+        ogType="article"
+        articlePublishedTime="2023-06-10T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema 
         type="blog" 
         title="Food Trucks vs. Full-service Catering"
+        url="https://grillycheese.net/blog/food-trucks-vs-catering"
+      />
+      <BlogArticleSchema
+        headline="Food Trucks vs. Full-service Catering"
+        description="Compare food trucks to traditional catering. Discover the benefits of hiring a food truck for your event and why it might be the perfect choice."
+        datePublished="2023-06-10"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/food-trucks-vs-catering"
       />
       

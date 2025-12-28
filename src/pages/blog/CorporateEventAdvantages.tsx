@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -15,10 +16,20 @@ const CorporateEventAdvantages = () => {
         description="Discover how food trucks can transform your corporate events. Learn about the unique benefits, branding opportunities, and memorable experiences food trucks bring."
         canonical="https://grillycheese.net/blog/corporate-event-advantages"
         keywords="corporate food truck, corporate catering, business events, food truck branding, corporate event planning"
+        ogType="article"
+        articlePublishedTime="2023-06-28T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema 
         type="blog" 
         title="Elevating Corporate Events: The Advantages of Hiring a Food Truck"
+        url="https://grillycheese.net/blog/corporate-event-advantages"
+      />
+      <BlogArticleSchema
+        headline="Elevating Corporate Events: The Advantages of Hiring a Food Truck"
+        description="Discover how food trucks can transform your corporate events. Learn about the unique benefits, branding opportunities, and memorable experiences food trucks bring."
+        datePublished="2023-06-28"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/corporate-event-advantages"
       />
       

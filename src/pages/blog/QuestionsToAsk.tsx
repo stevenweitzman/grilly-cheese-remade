@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -15,10 +16,20 @@ const QuestionsToAsk = () => {
         description="Essential questions to ask before booking a food truck for your event. Make sure you cover all bases and choose the perfect vendor."
         canonical="https://grillycheese.net/blog/questions-to-ask"
         keywords="food truck questions, booking checklist, event planning, food truck vendor questions"
+        ogType="article"
+        articlePublishedTime="2023-07-20T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema 
         type="blog" 
         title="Questions to Ask When Booking A Food Truck"
+        url="https://grillycheese.net/blog/questions-to-ask"
+      />
+      <BlogArticleSchema
+        headline="Questions to Ask When Booking A Food Truck"
+        description="Essential questions to ask before booking a food truck for your event. Make sure you cover all bases and choose the perfect vendor."
+        datePublished="2023-07-20"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/questions-to-ask"
       />
       

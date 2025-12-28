@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -15,10 +16,20 @@ const FoodTruckCosts = () => {
         description="Understand all the costs involved in booking a food truck for your event. Learn about base costs, travel fees, service charges, and more."
         canonical="https://grillycheese.net/blog/food-truck-costs"
         keywords="food truck costs, food truck pricing, catering costs, event budget, food truck fees"
+        ogType="article"
+        articlePublishedTime="2023-08-15T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema 
         type="blog" 
         title="What Are the Costs for Booking A Food Truck?"
+        url="https://grillycheese.net/blog/food-truck-costs"
+      />
+      <BlogArticleSchema
+        headline="What Are the Costs for Booking A Food Truck?"
+        description="Understand all the costs involved in booking a food truck for your event. Learn about base costs, travel fees, service charges, and more."
+        datePublished="2023-08-15"
+        dateModified="2025-12-28"
         url="https://grillycheese.net/blog/food-truck-costs"
       />
       

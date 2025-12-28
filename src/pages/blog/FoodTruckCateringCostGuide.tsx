@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import SEOSchema from "@/components/SEOSchema";
+import BlogArticleSchema from "@/components/blog/BlogArticleSchema";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Phone, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -34,8 +35,19 @@ const FoodTruckCateringCostGuide = () => {
         description="Food truck catering costs $15-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples and cost-saving tips."
         canonical="https://grillycheese.net/blog/food-truck-catering-cost"
         keywords="food truck catering cost, how much does food truck cost, food truck pricing, food truck rental cost"
+        ogType="article"
+        articlePublishedTime="2025-12-26T10:00:00Z"
+        articleModifiedTime="2025-12-28T10:00:00Z"
       />
       <SEOSchema type="blog" title="Food Truck Catering Cost Guide" description="Complete pricing guide for food truck catering" url="https://grillycheese.net/blog/food-truck-catering-cost" />
+
+      <BlogArticleSchema
+        headline="How Much Does Food Truck Catering Cost? [2025 Pricing Guide]"
+        description="Food truck catering costs $15-35 per person on average. See complete pricing by event type, guest count, and cuisine with real examples and cost-saving tips."
+        datePublished="2025-12-26"
+        dateModified="2025-12-28"
+        url="https://grillycheese.net/blog/food-truck-catering-cost"
+      />
 
       <Helmet>
         <script type="application/ld+json">
